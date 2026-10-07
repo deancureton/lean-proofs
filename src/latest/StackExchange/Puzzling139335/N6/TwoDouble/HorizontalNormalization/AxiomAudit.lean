@@ -1,4 +1,0 @@
-import StackExchange.Puzzling139335.N6.TwoDouble.HorizontalNormalization
-
-#print axioms Puzzling139335.N6.TwoDouble.exists_horizontal_ordered_owners
-#print axioms Puzzling139335.N6.TwoDouble.exists_horizontal_ordered_owners_of_protected

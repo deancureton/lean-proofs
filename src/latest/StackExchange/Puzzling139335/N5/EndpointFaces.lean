@@ -1,3 +1,0 @@
-import StackExchange.Puzzling139335.N5.PrefixFace
-import StackExchange.Puzzling139335.N5.TerminalFace.Normalized
-import StackExchange.Puzzling139335.N5.AxisFaces.Normalized

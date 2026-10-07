@@ -1,4 +1,0 @@
-import StackExchange.Puzzling139335.QuarterTurnTopology.CurveNesting
-
-#print axioms Schoenflies.IsJordanCurve.not_disjoint_image_of_image_image_eq
-#print axioms Schoenflies.IsJordanCurve.not_disjoint_image_of_fixed_mem_inside

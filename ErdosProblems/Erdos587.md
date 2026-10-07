@@ -1,5 +1,0 @@
-This is a formalized proof of [Erdős Problem 587](https://www.erdosproblems.com/forum/thread/587). See the [informal proof](../tex/erdos587/LOGLOG_RECONSTRUCTION.md).
-
-It is available for these Mathlib (and Lean) versions:
-
-* [Mathlib/Lean v4.33.0](../src/latest/ErdosProblems/Erdos587.lean) (latest stable release).

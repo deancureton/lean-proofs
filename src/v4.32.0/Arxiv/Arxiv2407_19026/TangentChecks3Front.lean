@@ -1,4 +1,0 @@
-import Arxiv.Arxiv2407_19026.TangentChecks3
-import Arxiv.Arxiv2407_19026.TangentChecks3Front.SmallCoord
-import Arxiv.Arxiv2407_19026.TangentChecks3Front.ForwardCoord
-import Arxiv.Arxiv2407_19026.TangentChecks3Front.Back2Book

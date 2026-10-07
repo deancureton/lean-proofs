@@ -1,5 +1,0 @@
-import StackExchange.Puzzling139335.N5.AllCornered
-
-#print axioms Puzzling139335.N5.not_hasProtectedCenter_of_unique_double_split
-#print axioms Puzzling139335.N5.exists_cornerless_of_double_contains_split
-#print axioms Puzzling139335.N5.exists_cornerless_of_split_support

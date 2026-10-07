@@ -1,6 +1,0 @@
-import Arxiv.Arxiv2407_19026.TangentChecks1
-import Arxiv.Arxiv2407_19026.TangentChecks1Front.ForwardCoord
-import Arxiv.Arxiv2407_19026.TangentChecks1Front.ForwardBook
-import Arxiv.Arxiv2407_19026.TangentChecks1Front.PlateauLow
-import Arxiv.Arxiv2407_19026.TangentChecks1Front.PlateauHigh
-import Arxiv.Arxiv2407_19026.TangentChecks1Front.PlateauBook

@@ -1,5 +1,0 @@
-import ErdosProblems.Erdos980.NaturalChebotarev.PrimeIdealTheorem.PrimeIdealCounting
-
-#print axioms Erdos980.NaturalChebotarev.PrimeIdealTheorem.primeIdealCount_isEquivalent
-#print axioms Erdos980.NaturalChebotarev.PrimeIdealTheorem.primeIdealCount_isEquivalent_natCast_div_log
-#print axioms Erdos980.NaturalChebotarev.PrimeIdealTheorem.primeIdealTheta_isEquivalent
