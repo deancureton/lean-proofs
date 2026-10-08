@@ -34,17 +34,6 @@ theorem basedSixSimplexChain_boundary (τ : BasedSixSimplex x) :
     ((singularComplex X).d 6 5).hom (basedSixSimplexChain τ) = 0 :=
   HigherHurewicz.correctedSimplexChain_boundary 5 x τ.val (basedSixSimplex_face τ)
 
-/-- In even degree the uncorrected based simplex has the constant face as boundary. -/
-theorem basedSixSimplex_boundary (τ : BasedSixSimplex x) :
-    ((singularComplex X).d 6 5).hom (simplexChain X 6 τ.val) =
-      simplexChain X 5 (ContinuousMap.const (Simplex 5) x) := by
-  have h := basedSixSimplexChain_boundary τ
-  rw [basedSixSimplexChain_eq, map_sub] at h
-  have hc := HigherHurewicz.boundary_constantSimplexChain_even 5 x (by decide)
-  rw [show ((singularComplex X).d 6 5).hom
-      (simplexChain X 6 (ContinuousMap.const (Simplex 6) x)) =
-      simplexChain X 5 (ContinuousMap.const (Simplex 5) x) from hc] at h
-  exact sub_eq_zero.mp h
 
 /-- The corrected cycle in the original unnormalized singular complex. -/
 def basedSixSimplexCycle (τ : BasedSixSimplex x) :

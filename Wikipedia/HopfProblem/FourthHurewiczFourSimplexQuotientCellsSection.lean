@@ -48,10 +48,5 @@ theorem simplexQuotient_cubeSimplex_refl (n : ℕ) :
   apply cubeSimplex_injective (Equiv.refl (Fin n))
   exact cubeSimplex_quotient_of_antitone _ (cubeSimplex_antitone (Equiv.refl (Fin n)) s)
 
-/-- The explicit native cube quotient is onto the whole standard simplex. -/
-theorem simplexQuotient_surjective (n : ℕ) : Function.Surjective (simplexQuotient n) := by
-  intro s
-  exact ⟨cubeSimplex (Equiv.refl (Fin n)) s,
-    ContinuousMap.congr_fun (simplexQuotient_cubeSimplex_refl n) s⟩
 
 end Wikipedia.HopfProblem.HigherHurewicz.SimplexGeometry

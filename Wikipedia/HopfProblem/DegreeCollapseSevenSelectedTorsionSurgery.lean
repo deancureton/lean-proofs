@@ -73,34 +73,5 @@ theorem exists_strict_shrunk_twist (hA : A.radius = 2) (T : TimeData A)
   · rw [he]
     exact hsmall
 
-/-- The positive reference product and all geometric twist choices are constructed.
-Only the homological vanishing, finiteness and nondivisible relation remain as premises. -/
-theorem exists_positive_reference_with_torsion_reduction (e : EuclideanEmbedding 7 M)
-    (a : SmoothRangeFrame (𝓡 7) e.normalProjection e.NormalModel)
-    (R : EuclideanEmbedding.TubularRetraction e) (f : C(Sphere 3, M))
-    (hf : ContMDiff (𝓡 3) (𝓡 7) ∞ f) (hi : Injective f)
-    (hd : ∀ s, Injective (mfderiv (𝓡 3) (𝓡 7) f s))
-    (t : M → ℝ) (ht : ContMDiff (𝓡 7) 𝓘(ℝ, ℝ) ∞ t)
-    (hreg : ∀ p, t p = 0 → Surjective (mfderiv (𝓡 7) 𝓘(ℝ, ℝ) t p))
-    (hpos : ∀ s, 0 < t (f s)) (v : Sphere 3) :
-    ∃ (A : FramedAttachingProduct e a f) (hA : A.radius = 2) (T : TimeData A),
-      T.time = t ∧
-      ∀ (_h4 : Subsingleton (SingularHomology (OldPositiveHalf A T) 4))
-        (_h3 : Finite (SingularHomology (OldPositiveHalf A T) 3))
-        (s : Sphere 3) (l p : ℤ), 0 < l → ¬ l ∣ p →
-        l • halfSectionClass A hA T v + p • halfMeridianClass A hA T s = 0 →
-        ∃ (j : ℤ) (Q : ShrunkEvenTwist A v j),
-          Finite (SingularHomology
-            (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3) ∧
-            Nat.card (SingularHomology
-              (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3) <
-                Nat.card (SingularHomology (OldPositiveHalf A T) 3) := by
-  obtain ⟨A, hA, T, hT, hfamily⟩ :=
-    exists_positive_even_twist_family e a R f hf hi hd t ht hreg hpos v
-  refine ⟨A, hA, T, hT, ?_⟩
-  intro h4 h3 s l p hl hp hrel
-  let : Subsingleton (SingularHomology (OldPositiveHalf A T) 4) := h4
-  let : Finite (SingularHomology (OldPositiveHalf A T) 3) := h3
-  exact exists_strict_shrunk_twist hA T hfamily s l p hl hp hrel
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery

@@ -77,15 +77,5 @@ theorem nonempty_smoothRangeFrame_of_continuous (P : M → F →L[ℝ] F)
   rw [heq]
   exact hSs
 
-/-- Only the endpoint of a continuous projection nullhomotopy must be smooth to obtain a frame. -/
-theorem nonempty_smoothRangeFrame_of_continuousHomotopy [CompleteSpace F]
-    {T : Type*} [TopologicalSpace T] [PreconnectedSpace T]
-    (P : T → M → F →L[ℝ] F) (hP : ∀ t x, IsIdempotentElem (P t x))
-    (hc : Continuous (fun p : T × M ↦ P p.1 p.2)) (s t : T)
-    (hs : ContMDiff I 𝓘(ℝ, F →L[ℝ] F) ∞ (P t))
-    (P₀ : F →L[ℝ] F) (hstart : P s = fun _ ↦ P₀) (q : K ≃L[ℝ] P₀.range) :
-    Nonempty (SmoothRangeFrame I (P t) K) := by
-  obtain ⟨a⟩ := nonempty_continuousRangeFrame_of_homotopy P hP hc s t P₀ hstart q
-  exact nonempty_smoothRangeFrame_of_continuous (P t) (hP t) hs a
 
 end NoExoticSixSphere

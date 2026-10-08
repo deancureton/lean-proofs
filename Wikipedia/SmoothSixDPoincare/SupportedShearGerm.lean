@@ -85,28 +85,5 @@ theorem exists_supported_shear_isotopy (L : F →L[ℝ] E)
   change A (1, p) = (p.1 - β p.1 • b p.2, p.2) at hh
   rwa [hp₁, one_smul, hp₂, sub_neg_eq_add] at hh
 
-/-- The endpoint is a supported native diffeomorphism with the exact prescribed shear germ. -/
-theorem exists_supported_shear_diffeomorph (L : F →L[ℝ] E)
-    {U : Set (E × F)} (hU : IsOpen U) (hzero : (0 : E × F) ∈ U) :
-    ∃ (D : Diffeomorph 𝓘(ℝ, E × F) 𝓘(ℝ, E × F) (E × F) (E × F) ∞) (K : Set (E × F)),
-      IsCompact K ∧ K ⊆ U ∧ IsotopicToIdentity D ∧
-      (∀ p ∉ K, D p = p) ∧ (∀ p, (D p).2 = p.2) ∧
-      (∀ x, D (x, (0 : F)) = (x, 0)) ∧
-      (D : (E × F) → (E × F)) =ᶠ[𝓝 (0 : E × F)] (fun p => (p.1 + L p.2, p.2)) := by
-  obtain ⟨A, K, hK, hKU, hA, hA₀, hdiff, hfix, hsecond, hcore, hgerm⟩ :=
-    exists_supported_shear_isotopy L hU hzero
-  obtain ⟨D, hD⟩ := hdiff 1
-  refine ⟨D, K, hK, hKU, ?_, ?_, ?_, ?_, ?_⟩
-  · exact ⟨A, hA, hA₀, fun p => (hD p).symm, fun t => by
-      obtain ⟨d, hd⟩ := hdiff t
-      exact ⟨d, fun p => (hd p).symm⟩⟩
-  · intro p hp
-    exact (hD p).trans (hfix 1 p hp)
-  · intro p
-    rw [hD, hsecond]
-  · intro x
-    rw [hD, hcore]
-  · filter_upwards [hgerm] with p hp
-    exact (hD p).trans hp
 
 end Wikipedia.SmoothSixDPoincare.SupportedDiffeomorph

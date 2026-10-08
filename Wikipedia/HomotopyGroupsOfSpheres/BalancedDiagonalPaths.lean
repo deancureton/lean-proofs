@@ -88,9 +88,5 @@ theorem diagonalPhase_add (n : ℕ) (θ φ : ℝ) :
   rw [diagonalPhase_eq]
   simp
 
-theorem diagonalPhase_half_pi (n : ℕ) :
-    diagonalPhase n (Real.pi / 2) = Complex.I • complexification (standardMatrix n) := by
-  rw [diagonalPhase_eq]
-  simp
 
 end Wikipedia.HomotopyGroupsOfSpheres.BalancedRealInvolutions

@@ -97,20 +97,6 @@ theorem capSourceNormalizedFrameMap_cap (f : Sphere 3 → M)
   exact e.sphereFrameOperator_comp_cancel ν f u (ρ x.val)
     (hf.mdifferentiableAt (by simp)) (hu x)
 
-theorem capSourceNormalizedFrameMap_parity :
-    Monomorphism.sphereParityOfDimension ((e.ambientDimension - 6) + 1)
-      (by have h := e.dimension_le_ambient (K (Stiefel.pole 3)); omega) (by omega)
-      (e.capSourceNormalizedFrameMap ν K hK hKi u ρ hu) =
-      e.sphereDerivativeParity ν K hK hKi := by
-  unfold sphereDerivativeParity
-  exact Monomorphism.sphereParityOfDimension_hemisphereRecoordinateAlong
-    (fun _ ↦ ContinuousLinearEquiv.refl ℝ (Vector e.ambientDimension))
-    (inverseJacobian (e.ambientDimension - 6) u ρ hu) continuous_const
-    (continuous_inverseJacobian (e.ambientDimension - 6) u ρ hu)
-    ((e.ambientDimension - 6) + 1) ((e.ambientDimension - 6) + 1)
-    (by have h := e.dimension_le_ambient (K (Stiefel.pole 3)); omega) (by omega)
-    (by have h := e.dimension_le_ambient (K (Stiefel.pole 3)); omega) (by omega)
-    ρ (e.sphereFrameOperatorMap ν K hK hKi)
 
 theorem capSourceNormalizedFrameMap_agrees (f : C(Sphere 3, M))
     (hf : ContMDiff (𝓡 3) (𝓡 6) ∞ f)

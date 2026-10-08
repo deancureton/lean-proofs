@@ -53,15 +53,5 @@ theorem nonempty_zero_sphere_diffeomorph (S : LowCollaredSevenState B)
   obtain ⟨F⟩ := V.toCollaredSevenState.nonempty_zero_sphere_diffeomorph eBoundary
   exact ⟨D.trans (V.promotionZeroDiffeomorph.trans F)⟩
 
-theorem nonempty_zero_sphere_diffeomorph_of_ambient_simpleConnectivity
-    (S : LowCollaredSevenState B) (eBoundary : B ≃ₜ Sphere 6)
-    [SimplyConnectedSpace S.Space] [SimplyConnectedSpace S.PositiveHalf] :
-    letI := S.zeroAtlas
-    Nonempty (S.Zero ≃ₘ⟮𝓡 6, 𝓡 6⟯ Sphere 6) := by
-  let : SimplyConnectedSpace B := eBoundary.toHomotopyEquiv.simplyConnectedSpace
-  let : LocallyPathConnectedSpace S.Space :=
-    ChartedSpace.locallyPathConnectedSpace (Vector 7) S.Space
-  let : SimplyConnectedSpace S.NegativeHalf := S.collar.negativeHalf_simplyConnected
-  exact S.nonempty_zero_sphere_diffeomorph eBoundary
 
 end Wikipedia.HopfProblem.DegreeCollapse.LowCollaredSevenState

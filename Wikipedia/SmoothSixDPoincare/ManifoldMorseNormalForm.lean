@@ -70,12 +70,5 @@ theorem nonempty_signedMorseChart {f : M → ℝ}
 
 variable (E M) [T2Space M] [IsManifold 𝓘(ℝ, E) ∞ M] [CompactSpace M]
 
-/-- Construct a global Morse function, its finite native critical set, and its normal forms. -/
-theorem exists_morse_function_with_normalForms :
-    ∃ f : M → ℝ, ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f ∧ IsMorse E f ∧
-      (criticalPoints E f).Finite ∧
-      ∀ x ∈ criticalPoints E f, Nonempty (SignedMorseChart (E := E) f x) := by
-  obtain ⟨f, hf, hm⟩ := exists_morse_function E M
-  exact ⟨f, hf, hm, finite_criticalPoints hf hm, fun x hx => nonempty_signedMorseChart hf hm x hx⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse

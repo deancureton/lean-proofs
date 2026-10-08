@@ -62,19 +62,5 @@ theorem collapse_homology_equiv_compare (k : ℕ) (a : SingularHomology X (k + 2
         D.cellConnectingMap (k + 1) a :=
   D.collapse_connecting_compare (k + 1) a
 
-/-- The collapse kills exactly the homology classes coming from the actual old space. -/
-theorem collapse_homology_kernel (k : ℕ) :
-    LinearMap.ker (singularHomologyMap D.collapseMap (k + 1)) =
-      LinearMap.range (D.oldHomologyMap (k + 1)) := by
-  rw [D.cell_exact_at_ambient]
-  ext a
-  change singularHomologyMap D.collapseMap (k + 1) a = 0 ↔ D.cellConnectingMap k a = 0
-  rw [← D.collapse_connecting_compare]
-  constructor
-  · intro h
-    rw [h, map_zero]
-  · intro h
-    exact (OnePointCover.sphereConnecting_injective (N := N) OnePointCover.overlapRadius
-      OnePointCover.overlapRadius_pos k) (h.trans (map_zero _).symm)
 
 end Wikipedia.SmoothSixDPoincare.EmbeddedCellAttachment

@@ -23,23 +23,6 @@ open Wikipedia.SmoothSixDPoincare
 
 namespace Wikipedia.HopfProblem.DegreeCollapse.FlowTimeChange
 
-/-- Whole-orbit equality and preservation of both limits retain uniqueness
-of a selected connection, with the same actual reference orbit. -/
-theorem unique_connection_of_orbit_data {X : Type*} [TopologicalSpace X]
-    (F G : Flow ℝ X) {S : Set X} {p q z : X}
-    (horbits : ∀ x, range (fun t => G t x) = range (fun t => F t x))
-    (htop : ∀ x y, Tendsto (fun t => G t x) atTop (𝓝 y) →
-      Tendsto (fun t => F t x) atTop (𝓝 y))
-    (hbot : ∀ x y, Tendsto (fun t => G t x) atBot (𝓝 y) →
-      Tendsto (fun t => F t x) atBot (𝓝 y))
-    (hunique : ∀ x ∉ S, Tendsto (fun t => F t x) atBot (𝓝 p) →
-      Tendsto (fun t => F t x) atTop (𝓝 q) → ∃ t, F t z = x) :
-    ∀ x ∉ S, Tendsto (fun t => G t x) atBot (𝓝 p) →
-      Tendsto (fun t => G t x) atTop (𝓝 q) → ∃ t, G t z = x := by
-  intro x hx hp hq
-  have hh : x ∈ range (fun t => F t z) := hunique x hx (hbot x p hp) (htop x q hq)
-  rw [← horbits z] at hh
-  exact hh
 
 variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]
   [TopologicalSpace M] [ChartedSpace E M] [IsManifold 𝓘(ℝ, E) ∞ M]

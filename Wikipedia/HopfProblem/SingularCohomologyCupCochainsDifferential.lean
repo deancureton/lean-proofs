@@ -96,10 +96,5 @@ theorem coboundary_cup_cast {p q : ℕ} (α : Cochain X p) (β : Cochain X q) :
       (-1 : ℤ) ^ p • cup α (coboundary β) := by
   rw [coboundary_cup, cupInDegree_eq_cast]
 
-theorem cup_cocycle {p q : ℕ} (α : Cochain X p) (β : Cochain X q)
-    (hα : coboundary α = 0) (hβ : coboundary β = 0) :
-    coboundary (cup α β) = 0 := by
-  rw [coboundary_cup_cast, hα, hβ, cup_zero_left, cup_zero_right,
-    castCochain_zero, smul_zero, add_zero]
 
 end Wikipedia.HopfProblem.SingularCohomologyCup

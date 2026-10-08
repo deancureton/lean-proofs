@@ -89,34 +89,5 @@ theorem backwardInvariant_superlevel_of_boundary {X : Type*} [TopologicalSpace X
 
 variable [IsManifold 𝓘(ℝ, E) ∞ M]
 
-/-- Agreement outside a band and strict boundary derivatives preserve both
-complete exterior tails of the original native flow. -/
-theorem native_exterior_flow_tails {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hV : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) 1
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    (hW : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-      (fun x => (⟨x, W x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    (F G : Flow ℝ M) (hF : ∀ x, IsMIntegralCurve (fun t => F t x) V)
-    (hG : ∀ x, IsMIntegralCurve (fun t => G t x) W)
-    {a b : ℝ} (hagrees : ∀ x, f x ≤ a ∨ b ≤ f x → W x = V x)
-    (hboundary : ∀ x, f x = a ∨ f x = b → mvfderiv 𝓘(ℝ, E) f x (W x) < 0) :
-    (∀ x, f x ≤ a → ∀ t : ℝ, 0 ≤ t → G t x = F t x) ∧
-    (∀ x, b ≤ f x → ∀ t : ℝ, t ≤ 0 → G t x = F t x) := by
-  have hD := (MorseCancellation.contMDiff_directionalDerivative hf hW).continuous
-  have hder (x : M) (t : ℝ) := FlowConstruction.hasDerivAt_comp_integralCurve hf (hG x) t
-  constructor
-  · intro x hx
-    apply native_flow_eq_on_positive_halfline hV F G hF hG
-    intro t ht
-    apply hagrees
-    exact Or.inl (forwardInvariant_sublevel_of_boundary G hf.continuous hD hder
-      (fun y hy => hboundary y (Or.inl hy)) x hx t ht)
-  · intro x hx
-    apply native_flow_eq_on_negative_halfline hV F G hF hG
-    intro t ht
-    apply hagrees
-    exact Or.inr (backwardInvariant_superlevel_of_boundary G hf.continuous hD hder
-      (fun y hy => hboundary y (Or.inr hy)) x hx t ht)
 
 end Wikipedia.HopfProblem.DegreeCollapse.FlowCancellation

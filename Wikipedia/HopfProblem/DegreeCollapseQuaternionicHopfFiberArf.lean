@@ -52,10 +52,6 @@ theorem actualGeometricArf_one :
     (Arf.plane_nondegenerate 1 1) (quadraticIsometry a r x)).trans
       Arf.invariant_anisotropicPlane
 
-theorem actualGeometricArf_ne_zero :
-    SurgeryDetector.actualGeometricArf embedding (framing a) r x ≠ 0 := by
-  rw [actualGeometricArf_one]
-  exact one_ne_zero
 
 def tubularRetraction (a : Sphere 16) : EuclideanEmbedding.TubularRetraction embedding :=
   Classical.choice (embedding.nonempty_tubularRetraction (framing a))

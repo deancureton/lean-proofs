@@ -37,10 +37,6 @@ theorem source_equatorial (q : Sphere 3) :
 def finitePoint (q : Sphere 3) : V 7 :=
   sphereProjection 7 (QuaternionicHopfSouthFiber.fiberPoint q)
 
-theorem finitePoint_formula (q : Sphere 3) :
-    finitePoint q = (2 : ℝ) • linearPart (-spherePole 7) (inclusion q) := by
-  rw [finitePoint, sphereProjection_ambientChart]
-  exact ambientChart_equatorial _ _ (source_equatorial q)
 
 theorem polynomial_inclusion (q : Sphere 3) :
     polynomial (inclusion q) = QuaternionicHopfSouthFiber.point.val := by

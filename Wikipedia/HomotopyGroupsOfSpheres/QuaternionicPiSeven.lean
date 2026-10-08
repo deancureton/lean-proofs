@@ -58,13 +58,6 @@ theorem piSevenSpTwoGenerator_zpow_coordinates (a : π_ 7 QuaternionicFibration.
     piSevenSpTwoMulEquiv a
   simp
 
-theorem piSevenSpTwoGenerator_zpow_injective :
-    Function.Injective (fun k : ℤ ↦ piSevenSpTwoGenerator ^ k) := by
-  intro k l h
-  have he := congrArg piSevenSpTwoMulEquiv h
-  rw [map_zpow, map_zpow, piSevenSpTwoMulEquiv_generator] at he
-  change Multiplicative.ofAdd (k • (1 : ℤ)) = Multiplicative.ofAdd (l • (1 : ℤ)) at he
-  simpa using he
 
 end QuaternionicColumns
 end Wikipedia.HomotopyGroupsOfSpheres

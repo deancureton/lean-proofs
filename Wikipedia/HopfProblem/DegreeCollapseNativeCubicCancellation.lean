@@ -131,23 +131,5 @@ theorem exists_cutoff {V : Set (Model m)} (hV : IsOpen V) (h0 : (0 : Model m) �
   · intro p hp
     exact φ.one_of_mem_closedBall (Metric.ball_subset_closedBall hp)
 
-/-- Apart from an actual cubic coordinate expression for `f`, all the local
-cancellation data are constructed from the chart and the transverse signs. -/
-theorem exists_cancellation_at_chart_origin
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) I (Model m) M ∞)
-    (hσ : ∀ i, σ i ≠ 0) (h0 : (0 : Model m) ∈ Φ.source) :
-    ∃ (φ : Model m → ℝ) (a : ℝ), 0 < a ∧
-      ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧ tsupport φ ⊆ Φ.source ∧
-      (a, (0 : Fin m → ℝ)) ∈ Φ.source ∧ (-a, (0 : Fin m → ℝ)) ∈ Φ.source ∧
-      ∀ f : M → ℝ, ContMDiff I 𝓘(ℝ, ℝ) ∞ f →
-        (∀ x ∈ Φ.source, f (Φ x) = localized σ φ (-(a ^ 2)) x) →
-        ∃ g : M → ℝ, ContMDiff I 𝓘(ℝ, ℝ) ∞ g ∧
-          (∀ y, mfderiv I 𝓘(ℝ, ℝ) g y = 0 ↔
-            mfderiv I 𝓘(ℝ, ℝ) f y = 0 ∧ y ≠ Φ (a, 0) ∧ y ≠ Φ (-a, 0)) ∧
-          (∀ y, y ∉ Φ '' tsupport φ → g =ᶠ[𝓝 y] f) := by
-  obtain ⟨φ, hφ, hc, hs, U, hU, hU0, hφU⟩ := exists_cutoff Φ.open_source h0
-  obtain ⟨a, ha, hp, hq, hreplace⟩ :=
-    exists_native_cubic_cancellation σ Φ hσ hφ hc hs hU hU0 hφU
-  exact ⟨φ, a, ha, hφ, hc, hs, hp, hq, hreplace⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.NativeCubicCancellation

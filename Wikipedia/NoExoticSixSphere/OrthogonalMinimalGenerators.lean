@@ -53,14 +53,6 @@ noncomputable def minimumHomeomorph (n : ℕ) : Space n ≃ₜ minimumLocus n wh
   continuous_toFun := (continuous_subtype_val.const_smul Real.pi).subtype_mk _
   continuous_invFun := (continuous_subtype_val.const_smul Real.pi⁻¹).subtype_mk _
 
-theorem exp_of_minimum (K : minimumLocus n) :
-    (exp K.1).1.1 = -(1 : Vector n →L[ℝ] Vector n) := by
-  have he := exp_pi (ofMinimum K)
-  have hscale : Real.pi • (ofMinimum K).1 = K.1 := by
-    change Real.pi • (Real.pi⁻¹ • K.1) = K.1
-    rw [smul_smul, mul_inv_cancel₀ Real.pi_ne_zero, one_smul]
-  rw [hscale] at he
-  exact he
 
 theorem gram_minimum_iff (K : SkewOperators n) :
     gram K = Real.pi ^ 2 • (1 : Vector n →L[ℝ] Vector n) ↔

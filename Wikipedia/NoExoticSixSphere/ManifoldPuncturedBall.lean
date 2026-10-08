@@ -78,21 +78,5 @@ theorem puncturedSphereEquiv_apply (y : B.puncturedOpenRegion) :
 theorem puncturedSphereEquiv_symm_apply (s : Sphere 3) :
     (B.puncturedSphereEquiv.symm s).val = B.chart ((1 / 2 : ℝ) • s.val) := rfl
 
-theorem push_puncturedSphereEquiv_symm (s : Sphere 3) :
-    B.push (B.puncturedSphereEquiv.symm s).val = B.boundaryMap s := by
-  have hy := (B.puncturedSphereEquiv.symm s).property
-  rw [push, if_pos (B.openRegion_subset_closedRegion hy.1)]
-  have hs : ‖s.val‖ = 1 := by simpa only [mem_sphere, dist_zero_right] using s.property
-  have hn : ‖(1 / 2 : ℝ) • s.val‖ = 1 / 2 := by
-    rw [norm_smul, Real.norm_eq_abs, abs_of_pos (by norm_num : (0 : ℝ) < 1 / 2), hs]
-    simp
-  have hb : (1 / 2 : ℝ) • s.val ∈ closedBall (0 : Vector 4) 1 := by
-    simpa only [mem_closedBall, dist_zero_right, hn] using (by norm_num : (1 / 2 : ℝ) ≤ 1)
-  have he : B.chart.symm (B.chart ((1 / 2 : ℝ) • s.val)) = (1 / 2 : ℝ) • s.val :=
-    B.chart.left_inv (B.ball_source hb)
-  change B.chart (‖B.chart.symm (B.chart ((1 / 2 : ℝ) • s.val))‖⁻¹ •
-    B.chart.symm (B.chart ((1 / 2 : ℝ) • s.val))) = B.chart s.val
-  rw [he, hn, smul_smul]
-  norm_num
 
 end NoExoticSixSphere.SphereFamily.ParityBall

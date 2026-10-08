@@ -64,10 +64,6 @@ theorem fderiv_ambientChart (z : Sphere n) (x : V (n + 1))
     fderiv ℝ (ambientChart z) x = differential z x :=
   (hasFDerivAt_ambientChart z x hx).fderiv
 
-theorem differential_equatorial (z : Sphere n) (x v : V (n + 1))
-    (hv : inner ℝ z.val v = 0) :
-    differential z x v = (2 : ℝ) • linearPart z v := by
-  rw [differential_apply, hv, mul_zero, zero_smul, sub_zero]
 
 theorem linearPart_inner (z : Sphere n) (u v : V (n + 1)) :
     inner ℝ (linearPart z u) (linearPart z v) =

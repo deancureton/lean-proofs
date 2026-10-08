@@ -37,10 +37,5 @@ theorem pairing_self (v : N → ℂ) :
     hermitianPairing v v = ((∑ r, Complex.normSq (v r) : ℝ) : ℂ) := by
   simp [hermitianPairing, dotProduct, ← Complex.normSq_eq_conj_mul_self]
 
-theorem sum_normSq_mulVec (U : unitary (Matrix N N ℂ)) (v : N → ℂ) :
-    ∑ r, Complex.normSq ((U.val *ᵥ v) r) = ∑ r, Complex.normSq (v r) := by
-  have h := pairing_mulVec U v v
-  rw [pairing_self, pairing_self] at h
-  exact_mod_cast h
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexUnitaryEntryNorm

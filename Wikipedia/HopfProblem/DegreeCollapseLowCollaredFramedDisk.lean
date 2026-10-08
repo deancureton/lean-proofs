@@ -96,17 +96,6 @@ theorem exists_collared_upgrade (hf : ContMDiff (𝓡 d) (𝓡 N) ∞ f)
 
 end FramedDisk
 
-theorem nonempty_collaredFramedDisk {d N k : ℕ} (hd : 0 < d) (hN : k + 2 * d + 1 ≤ N)
-    (b : NoExoticSixSphere.Sphere d) (f : NoExoticSixSphere.Sphere d → Vector N)
-    (hf : ContMDiff (𝓡 d) (𝓡 N) ∞ f) (hi : Injective f)
-    (hdf : ∀ s, Injective (mfderiv (𝓡 d) (𝓡 N) f s))
-    (a : NoExoticSixSphere.Sphere d → Space N k)
-    (has : ContMDiff (𝓡 d) 𝓘(ℝ, Vector k →L[ℝ] Vector N) ∞ (fun s => (a s).val))
-    (ha : ∀ s, (a s).val.range ≤ (mfderiv (𝓡 d) (𝓡 N) f s).rangeᗮ) :
-    Nonempty (CollaredFramedDisk b f a) := by
-  obtain ⟨D⟩ := nonempty_framedDisk hd hN b f hf hi hdf a has ha
-  obtain ⟨C, _⟩ := D.exists_collared_upgrade hf has ha
-  exact ⟨C⟩
 
 theorem nonempty_native_collaredFramedDisk {d : ℕ} (hd : 0 < d) (hsmall : d ≤ 3)
     {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 7) M]

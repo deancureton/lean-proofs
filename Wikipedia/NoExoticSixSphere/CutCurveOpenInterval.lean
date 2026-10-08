@@ -81,20 +81,5 @@ theorem IntervalMarking.closure_component_eq :
     · exact hy.symm ▸ m.leftPoint.property
     · exact hy.symm ▸ m.rightPoint.property
 
-theorem IntervalMarking.frontier_component_eq :
-    frontier (cutComponent S x) = {m.leftPoint.val, m.rightPoint.val} := by
-  rw [frontier, (isOpen_cutComponent hS x).interior_eq]
-  ext y
-  constructor
-  · rintro ⟨hy, hn⟩
-    rw [m.closure_component_eq hS x hzero] at hy
-    exact hy.resolve_left hn
-  · intro hy
-    rcases hy with hy | hy
-    · subst y
-      exact ⟨m.leftPoint.property, m.leftPoint_not_mem_component hS x hzero⟩
-    · have he := mem_singleton_iff.mp hy
-      subst y
-      exact ⟨m.rightPoint.property, m.rightPoint_not_mem_component hS x⟩
 
 end NoExoticSixSphere.CurveDecomposition

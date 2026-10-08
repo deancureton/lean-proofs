@@ -70,16 +70,6 @@ theorem intersectionToLeft_f_injective (U V : Set X) (n : ℕ) :
       congrArg (inducedChain (subtypeInclusion U) n) hab
     _ = _ := intersectionToLeft_ambient_apply U V n b
 
-theorem intersectionToRight_f_injective (U V : Set X) (n : ℕ) :
-    Function.Injective ((intersectionToRight U V).f n).hom := by
-  intro a b hab
-  apply subtypeInclusion_chain_injective (U ∩ V) n
-  calc
-    _ = inducedChain (subtypeInclusion V) n (((intersectionToRight U V).f n).hom a) :=
-      (intersectionToRight_ambient_apply U V n a).symm
-    _ = inducedChain (subtypeInclusion V) n (((intersectionToRight U V).f n).hom b) :=
-      congrArg (inducedChain (subtypeInclusion V) n) hab
-    _ = _ := intersectionToRight_ambient_apply U V n b
 
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

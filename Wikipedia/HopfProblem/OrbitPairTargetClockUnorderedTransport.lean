@@ -69,12 +69,6 @@ def unorderedCollisionEquiv {F : ℝ × M → N} {e : M → ℝ ≃ ℝ} {β : N
     unorderedDoublePoints (family F e) ≃ unorderedDoublePoints F :=
   (unorderedEquiv e).symm.subtypeEquiv (mem_unordered_iff hclock)
 
-theorem unordered_pairing {F : ℝ × M → N} {e : M → ℝ ≃ ℝ} {β : N → ℝ}
-    (hclock : ∀ t x, e x t = t + β (F (t, x)))
-    (hpair : ∃ k : ℕ, Nonempty ((Fin k × Fin 2) ≃ unorderedDoublePoints F)) :
-    ∃ k : ℕ, Nonempty ((Fin k × Fin 2) ≃ unorderedDoublePoints (family F e)) := by
-  obtain ⟨k, ⟨P⟩⟩ := hpair
-  exact ⟨k, ⟨P.trans (unorderedCollisionEquiv hclock).symm⟩⟩
 
 theorem spatial_sources_injective {F : ℝ × M → N} {e : M → ℝ ≃ ℝ} {β : N → ℝ}
     (hclock : ∀ t x, e x t = t + β (F (t, x)))

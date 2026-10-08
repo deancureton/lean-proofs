@@ -50,10 +50,5 @@ theorem invariant_eq_zero_of_middle_subsingleton [Subsingleton (ModHomology 2 M 
   exact Arf.invariant_subsingleton (e.modTwoHomologyQuadraticForm a r m)
     (e.modTwoHomologyQuadraticForm_nondegenerate a r m)
 
-/-- A candidate six-sphere has zero Arf invariant for its original geometric quadratic form. -/
-theorem invariant_eq_zero_of_homeomorph_sixSphere (h : M ≃ₜ Sphere 6) :
-    invariant e a r m = 0 := by
-  let : Subsingleton (ModHomology 2 M 3) := sixSphere_middleModTwoHomology_subsingleton h
-  exact invariant_eq_zero_of_middle_subsingleton e a r m
 
 end NoExoticSixSphere.GeometricArf

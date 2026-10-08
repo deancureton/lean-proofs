@@ -107,15 +107,6 @@ def pole (n : ℕ) : Target n :=
     rw [mem_sphere_zero_iff_norm, WithLp.norm_toLp_fst]
     exact norm_one⟩
 
-theorem sphereMap_pole_fiber (f : C(UnitSphere E, OrthogonalOperators n))
-    (x : Source E n) (hx : x.val.snd = 0) : sphereMap f x = pole n := by
-  apply Subtype.ext
-  rw [sphereMap_val, hx]
-  have h := source_norms x
-  rw [hx, norm_zero, zero_pow (by decide : 2 ≠ 0), add_zero] at h
-  rw [h, norm_zero, zero_pow (by decide : 2 ≠ 0), sub_zero,
-    RadialSphereAction.value_zero_right _ (fun _ a b ↦ (f a).property b), smul_zero]
-  rfl
 
 def mapHomotopy {f g : C(UnitSphere E, OrthogonalOperators n)} (H : f.Homotopy g) :
     (sphereMap f).Homotopy (sphereMap g) where

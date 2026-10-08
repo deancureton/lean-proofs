@@ -63,12 +63,6 @@ def glueFaceHomotopies (F : Fin (n + 2) → C(I × Simplex n, X))
     ((simplexFaceCover_isQuotientMap n).lift_comp (faceFamilyMap F)
       (faceFamilyMap_factorsThrough F hF))
 
-theorem glueFaceHomotopies_comp_faceCylinder
-    (F : Fin (n + 2) → C(I × Simplex n, X)) (hF : FaceCompatible F)
-    (i : Fin (n + 2)) :
-    (glueFaceHomotopies F hF).comp (simplexFaceCylinder n i) = F i := by
-  ext u
-  exact glueFaceHomotopies_face F hF i u.1 u.2
 
 /-- A common value on all faces at one time is the value of the pasted map. -/
 theorem glueFaceHomotopies_time

@@ -58,11 +58,5 @@ theorem homotopyDescent_point (r s t : I) (z : UnitSphere n) :
   rw [toSphereMap_point]
   rfl
 
-theorem homotopyDescent_outer_zero (r : I) (w : UnitSphere (n + 1)) :
-    homotopyDescent F G H houter0 houter1 hinner0 hinner1
-      (r, Latitude.point (n + 1) 0 w) = x := by
-  obtain ⟨⟨t, z⟩, rfl⟩ := Latitude.point_surjective n w
-  rw [homotopyDescent_point]
-  exact houter0 r t z
 
 end Wikipedia.HomotopyGroupsOfSpheres.LatitudeDescent.DoubleFamily

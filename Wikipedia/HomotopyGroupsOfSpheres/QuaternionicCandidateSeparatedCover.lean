@@ -36,11 +36,6 @@ theorem candidateNeighborhoods_open_cover :
       (⋃ x : sphereCandidateTargetPreimage, candidateNeighborhoods.neighborhood x) = univ :=
   candidateNeighborhoods.open_cover
 
-theorem compactifiedCandidate_maps_old :
-    MapsTo compactifiedCandidate sphereCandidateTargetPreimageᶜ (OnePointCover.oldPatch) := by
-  intro x hx
-  change compactifiedCandidate x ≠ ((0 : Parameters) : OnePoint Parameters)
-  exact fun h ↦ hx ((compactifiedCandidate_zero_iff x).mp h)
 
 theorem compactifiedCandidate_maps_domain :
     MapsTo compactifiedCandidate candidateTargetDomain OnePointCover.finitePatch := by
@@ -54,10 +49,5 @@ theorem compactifiedCandidate_maps_neighborhood (x : sphereCandidateTargetPreima
       OnePointCover.finitePatch :=
   fun _ hy ↦ compactifiedCandidate_maps_domain (candidateNeighborhoods.neighborhood_subset x hy)
 
-theorem normalizedCandidateCoordinates_zero_iff_on_domain (x : Sphere 7)
-    (hx : x ∈ candidateTargetDomain) :
-    normalizedCandidateCoordinates x = 0 ↔ x ∈ sphereCandidateTargetPreimage := by
-  rw [← compactifiedCandidate_zero_iff, compactifiedCandidate_eq_coe x hx]
-  exact OnePoint.coe_injective.eq_iff.symm
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary.MidpointSeed

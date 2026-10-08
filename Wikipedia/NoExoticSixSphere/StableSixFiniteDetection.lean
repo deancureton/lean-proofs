@@ -94,10 +94,5 @@ theorem stableClass_eq_one_iff_suspension_nullhomotopic :
   (stableClass_eq_one_iff h).trans
     (SphereMapSuspension.finite_nullhomotopic_iff_map (by decide) (sphereMap h))
 
-theorem stableClass_eq_one_iff_suspendedNativeClass :
-    stableClass h = 1 ↔ suspendedNativeClass h = 1 := by
-  rw [stableClass_eq_one_iff_suspension_nullhomotopic]
-  exact (SmoothCube.sphereClass_eq_one_iff_nullhomotopic (by decide)
-    (SphereMapSuspension.basedMap (sphereMap h))).symm
 
 end NoExoticSixSphere.SixSphereThirteen

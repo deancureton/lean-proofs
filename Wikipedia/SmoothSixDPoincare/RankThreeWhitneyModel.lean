@@ -33,11 +33,7 @@ def secondSheet (h : ℝ) (p : UpperSheet) : Space := ((p.1, h * (1 - p.1 ^ 2)),
 theorem finrank_space : Module.finrank ℝ Space = 5 := by
   simp [Space, Lower, Upper, Module.finrank_prod]
 
-theorem finrank_lowerSheet : Module.finrank ℝ LowerSheet = 2 := by
-  simp [LowerSheet, Lower, Module.finrank_prod]
 
-theorem finrank_upperSheet : Module.finrank ℝ UpperSheet = 3 := by
-  simp [UpperSheet, Upper, Module.finrank_prod]
 
 theorem contDiff_firstSheet : ContDiff ℝ ∞ firstSheet := by
   unfold firstSheet

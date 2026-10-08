@@ -125,12 +125,6 @@ def concatenateIntersectionEquiv :
   Equiv.ofBijective (concatenateSumPair f g k hm)
     ⟨concatenateSumPair_injective f g k hm, concatenateSumPair_surjective f g k hm⟩
 
-theorem finite_concatenate_pairs (hf : (pairs f.val k).Finite) (hg : (pairs g.val k).Finite) :
-    (pairs (concatenate f g).val k).Finite := by
-  let := hf.to_subtype
-  let := hg.to_subtype
-  exact finite_coe_iff.mp (Finite.of_equiv (pairs f.val k ⊕ pairs g.val k)
-    (concatenateIntersectionEquiv f g k hm))
 
 theorem concatenate_pairs_ncard (hf : (pairs f.val k).Finite) (hg : (pairs g.val k).Finite) :
     (pairs (concatenate f g).val k).ncard = (pairs f.val k).ncard + (pairs g.val k).ncard := by

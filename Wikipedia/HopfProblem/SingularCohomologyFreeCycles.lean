@@ -103,12 +103,6 @@ theorem cocycleClass_zero_eq_zero_iff (c : Cocycle K 0) :
   · intro hc
     exact ⟨0, hc.symm⟩
 
-theorem cocycleClass_zero_injective : Function.Injective (cocycleClass K 0) := by
-  intro c d hcd
-  have hzero : cocycleClass K 0 (c - d) = 0 := by rw [map_sub, hcd, sub_self]
-  have hc := (cocycleClass_zero_eq_zero_iff K (c - d)).mp hzero
-  apply Subtype.ext
-  exact sub_eq_zero.mp hc
 
 variable {K L : CochainComplex (ModuleCat.{0} ℤ) ℕ} (f : L ⟶ K)
 

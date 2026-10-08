@@ -101,20 +101,6 @@ abbrev modMap (p : ℕ) {U : Set X} {V : Set Y} (f : C(X, Y)) (hf : Set.MapsTo f
     (n : ℕ) : ModHomology p U n →ₗ[ℤ] ModHomology p V n :=
   homologyLinearMap (mapChain (ModuleCat.of ℤ (ZMod p)) f hf) n
 
-theorem reductionMap_naturality (p : ℕ) {U : Set X} {V : Set Y}
-    (f : C(X, Y)) (hf : Set.MapsTo f U V) (n : ℕ) :
-    (modMap p f hf n).comp (reductionMap p U n) =
-      (reductionMap p V n).comp (RelativeSingularHomology.map f hf n) := by
-  have h := congrArg (fun k => homologyLinearMap k n)
-    (change_mapChain (reductionCoefficient p) f hf)
-  simp only [homologyLinearMap_comp] at h
-  exact h
 
-theorem bockstein_naturality (p : ℕ) (hp : p ≠ 0) {U : Set X} {V : Set Y}
-    (f : C(X, Y)) (hf : Set.MapsTo f U V) (n : ℕ) :
-    (RelativeSingularHomology.map f hf n).comp (bockstein p hp U n) =
-      (bockstein p hp V n).comp (modMap p f hf (n + 1)) := by
-  exact connectingMap_naturality (coefficientSequence_shortExact p hp U)
-    (coefficientSequenceMap p f hf) (coefficientSequence_shortExact p hp V) n
 
 end NoExoticSixSphere.RelativeCoefficients

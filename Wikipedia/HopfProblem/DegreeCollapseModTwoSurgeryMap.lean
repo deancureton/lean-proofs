@@ -120,10 +120,5 @@ theorem modTwoSurgeryQuotientEquiv_mk (x : LinearMap.ker (orthogonalFunctional e
       (Submodule.Quotient.mk x)) = _
   rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
-theorem modTwoSurgeryQuotientEquiv_reduction (x : LinearMap.ker (detector f A hR)) :
-    modTwoSurgeryQuotientEquiv e a r m f A hR d hd
-      (Submodule.Quotient.mk (kernelReduction e a r m f A hR x)) =
-        reductionHomologyMap 2 (UnitSurgery.Target A hR) 3 (nativeLift f A hR d hd x) := by
-  rw [modTwoSurgeryQuotientEquiv_mk, modTwoSurgeryMap_reduction]
 
 end Wikipedia.HopfProblem.DegreeCollapse.SurgeryDetector

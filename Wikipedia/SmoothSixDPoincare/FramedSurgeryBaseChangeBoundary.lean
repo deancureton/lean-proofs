@@ -78,20 +78,10 @@ theorem baseChangeBoundary_closedNewMap (p : ClosedNewFace E F) :
       ((baseChangeBoundary_old A A' n e hface _).trans
         ((congrArg (oldMap A' n) hc).trans (closedNewMap_corner A' n u p.2).symm))
 
-theorem baseChangeBoundary_refl :
-    baseChangeBoundary A A n (Homeomorph.refl X) (fun _ => rfl) = Homeomorph.refl _ := by
-  ext z
-  rcases cover A n z with ⟨x, rfl⟩ | ⟨y, rfl⟩ <;> rfl
 
 variable {X'' : Type*} [TopologicalSpace X''] [T2Space X''] [ChartedSpace H X'']
   (A'' : SmoothClosedFace (𝓡 m) J (UnitSphere E) F X'')
   (f : X' ≃ₜ X'') (hface' : ∀ z, f (A'.map z) = A''.map z)
 
-theorem baseChangeBoundary_trans :
-    (baseChangeBoundary A A' n e hface).trans (baseChangeBoundary A' A'' n f hface') =
-      baseChangeBoundary A A'' n (e.trans f)
-        (fun z => (congrArg f (hface z)).trans (hface' z)) := by
-  ext z
-  rcases cover A n z with ⟨x, rfl⟩ | ⟨y, rfl⟩ <;> rfl
 
 end Wikipedia.SmoothSixDPoincare.FramedSurgery

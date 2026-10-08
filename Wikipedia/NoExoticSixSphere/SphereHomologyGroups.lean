@@ -63,14 +63,6 @@ theorem sixSphere_middleModTwoHomology_subsingleton (h : M ≃ₜ Sphere 6) :
   subsingleton_modHomology_of_homeomorph_sphere 2 (by decide) (by decide)
     (by decide) (by decide) h
 
-theorem sixSphere_middleHomology_isZero (h : M ≃ₜ Sphere 6) :
-    IsZero (SingularHomology M 3) := by
-  let := sixSphere_middleHomology_subsingleton h
-  exact ModuleCat.isZero_of_subsingleton _
 
-theorem sixSphere_middleModTwoHomology_isZero (h : M ≃ₜ Sphere 6) :
-    IsZero (ModHomology 2 M 3) := by
-  let := sixSphere_middleModTwoHomology_subsingleton h
-  exact ModuleCat.isZero_of_subsingleton _
 
 end NoExoticSixSphere

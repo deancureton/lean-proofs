@@ -79,12 +79,5 @@ theorem signCoordinateMap_fderiv_eq_comp (x y : Bool) :
   signProjection_postcompose_fderiv fixedTargetCoordinates
     ((contDiffAt_fixedTargetCoordinates (n := 1)).differentiableAt (by decide)) x y
 
-theorem signCoordinateMap_determinant_one_comparison (x y : Bool) :
-    ∃ K : ParameterSpace rotatedInput →L[ℝ] ParameterSpace rotatedInput,
-      K.det = 1 ∧ fderiv ℝ (signCoordinateMap x y) 0 =
-        (fderiv ℝ (signCoordinateMap true true) 0).comp K := by
-  refine ⟨(signParameterComparison x y).toContinuousLinearMap, ?_,
-    signCoordinateMap_fderiv_eq_comp x y⟩
-  exact signParameterComparison_det x y
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary.MidpointSeed

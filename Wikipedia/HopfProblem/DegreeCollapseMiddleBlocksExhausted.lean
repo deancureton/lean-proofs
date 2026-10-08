@@ -80,21 +80,5 @@ theorem middle_blocks_complete_of_no_four_five
     (by omega) le_rfl hidx
   omega
 
-theorem ordered_no_middle_indices_count_two
-    (S : SurgeryWindows E f) (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hdim : Module.finrank ℝ E = 6) (e : M ≃ₕ SixSphere)
-    (horder : ∀ x y : criticalPoints E f, f x < f y →
-      nativeMorseIndex E f x ≤ nativeMorseIndex E f y)
-    (hzero : nativeMorseCount E f 0 = 1) (hsix : nativeMorseCount E f 6 = 1)
-    (hone : nativeMorseCount E f 1 = 0) (htwo : nativeMorseCount E f 2 = 0)
-    (hfour : nativeMorseCount E f 4 = 0) (hfive : nativeMorseCount E f 5 = 0) :
-    nativeMorseCount E f 3 = 0 ∧ S.count = 2 := by
-  obtain ⟨r, n, hprefix, hrc, hblock, -, hafter⟩ :=
-    exists_middle_index_blocks S hf hdim horder hzero hone
-  obtain ⟨hr, hn⟩ := native_middle_block_counts S hf r n hprefix hrc hblock hafter
-  have hcount := middle_blocks_complete_of_no_four_five S hf hdim r n hprefix hrc hblock
-    hafter hsix hfour hfive
-  have heq := S.middle_counts_equal hf hdim e r n hprefix hrc hblock hcount
-  omega
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

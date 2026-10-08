@@ -41,10 +41,6 @@ def time (s : ℝ) : I :=
     have h := abs_lt.mp (abs_height_lt_one s)
     constructor <;> linarith⟩
 
-theorem time_interior (s : ℝ) : 0 < (time s : ℝ) ∧ (time s : ℝ) < 1 := by
-  have h := abs_lt.mp (abs_height_lt_one s)
-  change 0 < (1 + height s) / 2 ∧ (1 + height s) / 2 < 1
-  constructor <;> linarith
 
 @[simp] theorem latitude_height_time (s : ℝ) : Latitude.height (time s) = height s := by
   dsimp [Latitude.height, time]

@@ -75,38 +75,7 @@ def retainedAttachmentCoordinates :
   let _ := P.charted
   exact FaceAttachment.congrFaceMap (P.retainClosedDisjointFace_bodyFaceMap i hi C hC)
 
-theorem retainedAttachmentCoordinates_old (x : AttachedBody A i) :
-    letI := P.charted
-    P.retainedAttachmentCoordinates i hi C hC
-      (FaceAttachment.oldMap
-        (bodyFaceMap (P.retainClosedDisjointFace C hC) (boundaryBodyMap A i n hi)) x) =
-      FaceAttachment.oldMap
-        ((FaceAttachment.oldMap (bodyFaceMap A i)).comp (bodyFaceMap C i)) x := by
-  let _ := P.charted
-  exact FaceAttachment.congrFaceMap_old (P.retainClosedDisjointFace_bodyFaceMap i hi C hC) x
 
-theorem retainedAttachmentCoordinates_handle (k : WholeHandle E₂ F₂) :
-    letI := P.charted
-    P.retainedAttachmentCoordinates i hi C hC
-      (FaceAttachment.handleMap
-        (bodyFaceMap (P.retainClosedDisjointFace C hC) (boundaryBodyMap A i n hi)) k) =
-      FaceAttachment.handleMap
-        ((FaceAttachment.oldMap (bodyFaceMap A i)).comp (bodyFaceMap C i)) k := by
-  let _ := P.charted
-  exact FaceAttachment.congrFaceMap_handle (P.retainClosedDisjointFace_bodyFaceMap i hi C hC) k
 
-theorem retainedAttachmentCoordinates_boundary :
-    letI := P.charted
-    P.retainedAttachmentCoordinates i hi C hC ''
-      bodyBoundarySet (P.retainClosedDisjointFace C hC) (boundaryBodyMap A i n hi) =
-        FaceAttachment.updateBoundary
-          ((FaceAttachment.oldMap (bodyFaceMap A i)).comp (bodyFaceMap C i))
-          (bodyBoundarySet A i) ((FaceAttachment.oldMap (bodyFaceMap A i) ∘ i) '' C.interiorImage)
-          (range (wholeNewFace E₂ F₂)) := by
-  let _ := P.charted
-  rw [bodyBoundarySet_eq_updateBoundary _ _ (boundaryBodyMap_isClosedEmbedding A i n hi).injective]
-  change FaceAttachment.congrFaceMap (P.retainClosedDisjointFace_bodyFaceMap i hi C hC) '' _ = _
-  rw [FaceAttachment.congrFaceMap_updateBoundary, boundaryBodyMap_range,
-    P.retainClosedDisjointFace_interior_bodyImage i hi C hC]
 
 end Wikipedia.SmoothSixDPoincare.FramedSurgery.SmoothBoundaryData

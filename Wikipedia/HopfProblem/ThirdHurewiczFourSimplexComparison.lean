@@ -71,15 +71,6 @@ def fourSimplexFillingsHomotopy (τ : BasedFourSimplex x) :
     (τ.property _ (fourSimplexFill_blend_boundary t u hu)).trans
       ((fourSimplexLoopA τ).property u hu).symm
 
-/-- The equality is in Mathlib's original third homotopy group. -/
-theorem fourSimplexFillings_class (τ : BasedFourSimplex x) :
-    (⟦fourSimplexLoopA τ⟧ : π_ 3 X x) =
-      (Inv.inv : π_ 3 X x → π_ 3 X x) ⟦fourSimplexLoopB τ⟧ := by
-  have h : (⟦fourSimplexLoopA τ⟧ : π_ 3 X x) =
-      ⟦GenLoop.symmAt (0 : Fin 3) (fourSimplexLoopB τ)⟧ :=
-    Quotient.sound (show GenLoop.Homotopic (fourSimplexLoopA τ)
-      (GenLoop.symmAt 0 (fourSimplexLoopB τ)) from ⟨fourSimplexFillingsHomotopy τ⟩)
-  exact h.trans (HomotopyGroup.inv_spec (i := (0 : Fin 3))).symm
 
 /-- The oriented filling comparison in additive native `π₃`. -/
 theorem fourSimplexFillings_additiveClass (τ : BasedFourSimplex x) :

@@ -54,22 +54,6 @@ theorem sum_sphere_boundaryCoefficient_zero (a : SingularHomology (Sphere 3) 3) 
   simpa only [regularSphereInclusion, singularHomologyMap_comp, LinearMap.comp_apply] using
     P.sum_regularSphere_boundaryCoefficient_zero a
 
-/-- The signed sum of the actual induced boundary maps is zero as a linear map. -/
-theorem sum_sphere_boundaryCoefficient_map_zero :
-    ∑ i, P.boundaryCoefficient i • singularHomologyMap (P.sphereInclusion i) 3 = 0 := by
-  apply LinearMap.ext
-  intro a
-  let evaluation :
-      (SingularHomology (Sphere 3) 3 →ₗ[ℤ] SingularHomology P.puncturedCylinder 3) →+
-        SingularHomology P.puncturedCylinder 3 :=
-    { toFun := fun f ↦ f a
-      map_zero' := rfl
-      map_add' := fun _ _ ↦ rfl }
-  change evaluation (∑ i, P.boundaryCoefficient i •
-    singularHomologyMap (P.sphereInclusion i) 3) = 0
-  rw [map_sum]
-  simp only [map_zsmul]
-  exact P.sum_sphere_boundaryCoefficient_zero a
 
 /-- Every actual boundary component occurs, with coefficient one or minus one. -/
 theorem exists_signed_sphere_relation : ∃ ε : BoundaryIndex g → ℤ,

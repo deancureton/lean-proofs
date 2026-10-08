@@ -83,10 +83,5 @@ theorem map_of_nonpos (x : Hemisphere.Sphere n)
   exact (congrArg (map A B h) (Hemisphere.point_disk_of_nonpos x hx).symm).trans
     (map_false A B h (Hemisphere.disk x))
 
-theorem map_of_nonneg (x : Hemisphere.Sphere n)
-    (hx : 0 ≤ (x : Hemisphere.Ambient (n + 1)) 0) :
-    map A B h x = B (Hemisphere.disk x) := by
-  exact (congrArg (map A B h) (Hemisphere.point_disk_of_nonneg x hx).symm).trans
-    (map_true A B h (Hemisphere.disk x))
 
 end Wikipedia.HopfProblem.DegreeCollapse.SphereDiskGluing

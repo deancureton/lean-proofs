@@ -29,9 +29,6 @@ def balancedPaddingHomotopy : balancedSourceMap.HomotopyRel balancedSphereMap {a
   phasePaddingHomotopy.compContinuousMap
     (normalizationHomeomorph : C(Space (Fin 6 ⊕ Fin 6), Space (Fin 6 ⊕ Fin 6)))
 
-theorem balancedSourceMap_axis : balancedSourceMap axis = identity := by
-  change normalizationHomeomorph (paddedSource axis) = identity
-  rw [paddedSource_axis, normalizationHomeomorph_identity]
 
 theorem balancedSphereMap_axis : balancedSphereMap axis = identity := by
   change normalizationHomeomorph (paddedTarget axis) = identity
@@ -45,10 +42,5 @@ theorem balancedSphereMap_latitude (θ : ℝ) (v : UnitSphere) (h0 : 0 ≤ θ) (
   exact BalancedRealInvolutions.symmetricCongruenceHomeomorph_rotation poleFrame⁻¹
     (rawBalanced v) θ
 
-theorem balancedSphereMap_reference (θ : ℝ) (h0 : 0 ≤ θ) (hπ : θ ≤ Real.pi) :
-    balancedSphereMap (latitudePoint θ pole) =
-      (BalancedRealInvolutions.diagonalSpecial 6 θ).val := by
-  rw [balancedSphereMap_latitude θ pole h0 hπ, balancedMap_pole,
-    BalancedRealInvolutions.rotation_standard]
 
 end Wikipedia.HomotopyGroupsOfSpheres.CliffordFiveHermitian

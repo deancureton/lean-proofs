@@ -65,10 +65,5 @@ theorem transition_map_eq_one (f : Based 6 3)
     basedLift_composition]
   exact composition_eq_one_of_twelfth_power (iterate f 2) g (twice_suspended_pow_twelve f)
 
-theorem stable_map_eq_one (f : Based 6 3) (c : π_ 9 (Sphere 6) (spherePole 6)) :
-    CubicalStableSix.ofNative (k := 1) (mapHom f 9 c) = 1 := by
-  have h := CubicalStableSix.ofNative_transition (by decide : 1 ≤ 8) (mapHom f 9 c)
-  rw [transition_map_eq_one, CubicalStableSix.ofNative_one] at h
-  exact h.symm
 
 end Wikipedia.HopfProblem.DegreeCollapse.ThirdTorsionComposition

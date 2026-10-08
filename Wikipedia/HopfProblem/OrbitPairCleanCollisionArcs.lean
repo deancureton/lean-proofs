@@ -135,28 +135,5 @@ theorem nonempty_collisionArcPair {F : ℝ × M → N}
     rw [mfderiv_comp s (hslice.mdifferentiableAt (by simp)) (hg.mdifferentiableAt (by simp))]
     exact (hi t (g s)).comp (hig s hs)
 
-theorem nonempty_collisionArcPair_of_unordered_events {F : ℝ × M → N}
-    (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    (hi : ∀ t x, Injective (mfderiv I J (fun z => F (t, z)) x))
-    (hfinite : (doublePoints F).Finite)
-    (hglobal : ∀ p ∈ doublePoints F, HasGlobalProjectedCollisionFiber F p)
-    (hdim : 2 ≤ Module.finrank ℝ E)
-    {t : ℝ} {u v : unorderedDoublePoints F}
-    (hu : u.val.1 = t) (hv : v.val.1 = t) (hne : u ≠ v) :
-    ∃ x₀ x₁ y₀ y₁ : M,
-      u.val = (t, s(x₀, y₀)) ∧ v.val = (t, s(x₁, y₁)) ∧
-      Nonempty (CollisionArcPair (I := I) (J := J) F t x₀ x₁ y₀ y₁) := by
-  obtain ⟨⟨r, x₀, y₀⟩, hp, hpu⟩ := u.property
-  obtain ⟨⟨s, x₁, y₁⟩, hq, hqv⟩ := v.property
-  have hrt : r = t := (congrArg (fun z : ℝ × Sym2 M => z.1) hpu).trans hu
-  have hst : s = t := (congrArg (fun z : ℝ × Sym2 M => z.1) hqv).trans hv
-  subst r
-  subst s
-  have hvalue : F (t, x₀) ≠ F (t, x₁) := by
-    intro heq
-    have hproj := unorderedProjection_eq_of_projected_value_eq hglobal hp hq heq.symm
-    exact hne (Subtype.ext (hpu.symm.trans (hproj.symm.trans hqv)))
-  exact ⟨x₀, x₁, y₀, y₁, hpu.symm, hqv.symm,
-    nonempty_collisionArcPair hF hi hfinite hglobal hdim hp hq hvalue⟩
 
 end Wikipedia.HopfProblem.OrbitPair.NativeFamily

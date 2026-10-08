@@ -38,12 +38,6 @@ def formalSubdivisionHomotopy (center : FormalCenter V) :
           formalSubdivisionHomotopy center n (formalBoundary n (formalSimplex v))) :=
   formalLift_simplex _ _
 
-/-- The augmented degree-zero homotopy identity. -/
-theorem formalSubdivisionHomotopy_boundary_zero (center : FormalCenter V)
-    (c : FormalChains V 0) :
-    formalBoundary 0 (formalSubdivisionHomotopy center 0 c) =
-      c - formalSubdivision center 0 c := by
-  simp
 
 /-- The explicit chain homotopy identity `d H + H d = id - sd`. -/
 theorem formalSubdivisionHomotopy_boundary (center : FormalCenter V) :

@@ -185,17 +185,5 @@ theorem nativeBeltMeridianDisk_immersive (S : AdaptedSurgeryWindows E f)
   exact (PartialChart.bijective_mfderiv (S.data q).chart.splitChart.symm ht).injective.comp
     (nativeBeltDiskCoordinates_derivative_injective S q v hs0 x)
 
-theorem nativeBeltMeridianDisk_isClosedEmbedding (S : AdaptedSurgeryWindows E f)
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (q : criticalPoints E f)
-    (v : sphere (0 : (S.data q).chart.PositiveCoordinates) 1)
-    (s : unitInterval) (hs : (s : ℝ) ≤ 1 / 2) (hs0 : 0 < (s : ℝ)) :
-    Topology.IsClosedEmbedding (fun x : closedBall (0 : (S.data q).chart.NegativeCoordinates) 1 =>
-      nativeBeltMeridianDisk S q v s hs x.val) := by
-  let _ := RegularLevel.chartedSpace hf (S.data q).upper_regular
-  have hcont : Continuous (fun x : closedBall (0 : (S.data q).chart.NegativeCoordinates) 1 =>
-      nativeBeltMeridianDisk S q v s hs x.val) :=
-    (nativeBeltMeridianDisk_smooth S hf q v s hs).continuous.comp continuous_subtype_val
-  exact hcont.isClosedEmbedding
-    ((nativeBeltMeridianDisk_injective S q v s hs hs0).comp Subtype.val_injective)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

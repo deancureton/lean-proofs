@@ -92,19 +92,5 @@ theorem exists_curve_immersion_patch_with_property_within_target (f : C(ℝ, N))
     rw [heq.fderiv_eq]
     exact hderiv t
 
-/-- The original local immersion theorem follows by forgetting the controlled target. -/
-theorem exists_curve_immersion_patch_with_property (f : C(ℝ, N))
-    (hf : ContMDiff 𝓘(ℝ, ℝ) J ∞ f) {β χ : ℝ → ℝ}
-    (hβ : ContDiff ℝ ∞ β) (hχ : ContDiff ℝ ∞ χ) (hcompact : HasCompactSupport β)
-    (hχsupport : tsupport χ ⊆ f ⁻¹' c.source) (hχone : ∀ t ∈ tsupport β, χ t = 1)
-    (hdim : 3 ≤ Module.finrank ℝ F) (Q : (ℝ → N) → Prop)
-    (hQ : ∀ᶠ a : F in 𝓝 0, Q (ChartMapPerturbation.perturb c f (CurveImmersion.weight β) a)) :
-    ∃ g : C(ℝ, N), ContMDiff 𝓘(ℝ, ℝ) J ∞ g ∧ Q g ∧
-      Nonempty (f.HomotopyRel g {t | β t = 0}) ∧
-      ∀ t ∈ interior {t | β t = 1}, Function.Injective (mfderiv 𝓘(ℝ, ℝ) J g t) := by
-  obtain ⟨g, hg, hQg, hrel, hi⟩ :=
-    exists_curve_immersion_patch_with_property_within_target c f hf hβ hχ hcompact
-      hχsupport hχone hdim Q hQ (subset_univ _) (mapsTo_univ f univ)
-  exact ⟨g, hg, hQg, hrel.homotopicRel, hi⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

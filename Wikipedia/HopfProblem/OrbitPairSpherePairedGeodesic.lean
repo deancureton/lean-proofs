@@ -92,9 +92,6 @@ theorem segment_end (hx : ‖x‖ = 1) {a b : Vector n} (hb : ‖b‖ = 1)
   rw [segment, d.segmentTo_end hx ((norm_backward x a b).trans hb) hp.2.2 hlu,
     forward_backward]
 
-theorem segment_diagonal (hx : ‖x‖ = 1) {a : Vector n} (ha : ‖a‖ = 1) (l u t : ℝ) :
-    segment d a a l u t = a := by
-  rw [segment, backward_base hx ha, d.segmentTo_base, forward_base hx ha]
 
 theorem norm_segment (hx : ‖x‖ = 1) (a b : Vector n) (l u t : ℝ) :
     ‖segment d a b l u t‖ = 1 := by

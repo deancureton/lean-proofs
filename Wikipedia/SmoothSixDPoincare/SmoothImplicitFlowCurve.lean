@@ -50,11 +50,6 @@ def implicitFlowCurve (v : C(E, E)) (hv : ContDiff ℝ ∞ v) (x : E)
     (p : E × ℝ) : C(I, E) :=
   ((flowGraphChart v hv x).symm (0, p)).2
 
-theorem implicitFlowCurve_base (v : C(E, E)) (hv : ContDiff ℝ ∞ v) (x : E) :
-    implicitFlowCurve v hv x (x, 0) = ContinuousMap.const I x := by
-  have h := (flowGraphChart v hv x).left_inv (flowGraphChart_base_source v hv x)
-  rw [flowGraphChart_base] at h
-  exact congrArg Prod.snd h
 
 theorem implicitFlowCurve_of_source (v : C(E, E)) (hv : ContDiff ℝ ∞ v) (x : E)
     {p : E × ℝ} {a : C(I, E)} (ha : (p, a) ∈ (flowGraphChart v hv x).source)

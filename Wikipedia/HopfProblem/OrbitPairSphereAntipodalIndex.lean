@@ -82,27 +82,5 @@ theorem exists_negative_family {x y : Vector n}
   exists_negative_fieldFamily hx hy hxy w
     (speed_ge_three_pi_of_nonminimal hx hy hxy hend habove)
 
-theorem realized_family {x y : Vector n}
-    (hx : ‖x‖ = 1) (hy : ‖y‖ = 1) (hxy : inner ℝ x y = 0)
-    {w : ℝ} (hend : curve x y w 1 = -x) (p : Parameters x y) :
-    let A := SphereNormalVariation.family (curve x y w) (fieldLinear x y p)
-    ContDiff ℝ ∞ A ∧ (∀ q, ‖A q‖ = 1) ∧
-      (∀ s, A (s, 0) = x ∧ A (s, 1) = -x) ∧
-      (∀ t, A (0, t) = curve x y w t) ∧
-      (∀ t, NoExoticSixSphere.TwoParameterCalculus.first A (0, t) = fieldLinear x y p t) := by
-  have hn := norm_curve hx hy hxy w
-  have ho := field_orthogonal x y p w
-  refine ⟨SphereNormalVariation.contDiff_family (contDiff_curve x y w)
-    (SphereSineModes.contDiff_field _ _) hn ho,
-    SphereNormalVariation.norm_family hn ho, ?_, SphereNormalVariation.family_zero hn,
-    SphereNormalVariation.first_family_zero (contDiff_curve x y w)
-      (SphereSineModes.contDiff_field _ _) hn ho⟩
-  intro s
-  constructor
-  · exact (SphereNormalVariation.family_of_field_zero hn
-      (show fieldLinear x y p 0 = 0 from SphereSineModes.field_zero _ _) s).trans
-      (curve_zero x y w)
-  · exact (SphereNormalVariation.family_of_field_zero hn
-      (show fieldLinear x y p 1 = 0 from SphereSineModes.field_one _ _) s).trans hend
 
 end Wikipedia.HopfProblem.OrbitPair.SphereAntipodalIndex

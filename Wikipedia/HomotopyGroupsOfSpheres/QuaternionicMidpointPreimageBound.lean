@@ -63,13 +63,5 @@ theorem midpointTargetPreimage_finite : midpointTargetPreimage.Finite := by
   rw [midpointTargetPreimage_eq_union]
   exact Set.finite_iUnion fun r ↦ midpointPhaseSet_finite _ (midpointPhases_cube r)
 
-theorem midpointTargetPreimage_ncard_le_twelve : midpointTargetPreimage.ncard ≤ 12 := by
-  rw [midpointTargetPreimage_eq_union]
-  calc
-    _ ≤ ∑ r : Fin 3, (midpointPhaseSet (midpointPhases r)).ncard :=
-      Set.ncard_iUnion_le_of_fintype _
-    _ ≤ ∑ _r : Fin 3, 4 := Finset.sum_le_sum fun r _ ↦
-      midpointPhaseSet_ncard_le_four _ (midpointPhases_cube r)
-    _ = 12 := by norm_num
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

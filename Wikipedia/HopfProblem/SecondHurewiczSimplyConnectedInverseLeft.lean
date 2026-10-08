@@ -62,15 +62,5 @@ theorem hurewiczMap_injective (x : X) : Function.Injective (hurewiczMap x) :=
 theorem hurewiczMap_bijective (x : X) : Function.Bijective (hurewiczMap x) :=
   ⟨hurewiczMap_injective x, hurewiczMap_surjective x⟩
 
-/-- Bijectivity of the original multiplicatively written native `π₂` map. -/
-theorem hurewiczPi2_bijective (x : X) : Function.Bijective (hurewiczPi2 x) := by
-  constructor
-  · intro a b h
-    have h' : hurewiczMap x (Additive.ofMul a) = hurewiczMap x (Additive.ofMul b) :=
-      congrArg Multiplicative.toAdd h
-    exact congrArg Additive.toMul (hurewiczMap_injective x h')
-  · intro c
-    obtain ⟨a, ha⟩ := hurewiczMap_surjective x (Multiplicative.toAdd c)
-    exact ⟨Additive.toMul a, congrArg Multiplicative.ofAdd ha⟩
 
 end Wikipedia.HopfProblem.SecondHurewicz.SimplyConnected

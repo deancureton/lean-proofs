@@ -68,12 +68,5 @@ def boundaryToInteriorRelativeEquiv (p : ℕ) :
           (collarRegion C δ : Set (NonnegativeHalf t))) p :=
   (collarRelativeEquiv C δ hδ hδw p).symm.trans (interiorExcisionEquiv C δ hδ p)
 
-theorem boundaryToInteriorRelativeEquiv_collar (p : ℕ)
-    (c : RelativeModTwoCochains.Cohomology (collarRegion C δ : Set (NonnegativeHalf t)) p) :
-    boundaryToInteriorRelativeEquiv C δ hδ hδw p (collarRelativeEquiv C δ hδ hδw p c) =
-      interiorExcisionEquiv C δ hδ p c := by
-  change interiorExcisionEquiv C δ hδ p
-    ((collarRelativeEquiv C δ hδ hδw p).symm (collarRelativeEquiv C δ hδ hδw p c)) = _
-  rw [LinearEquiv.symm_apply_apply]
 
 end NoExoticSixSphere.TimeCollarDuality

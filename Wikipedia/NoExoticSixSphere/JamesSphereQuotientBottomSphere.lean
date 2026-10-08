@@ -64,13 +64,6 @@ theorem hopfMap_bottomSphere_comp (n : ℕ) :
   apply ContinuousMap.ext
   exact hopfMap_bottomSphere n
 
-theorem isEmbedding_bottomSphere (n : ℕ) : IsEmbedding (bottomSphere n) := by
-  have hc : IsEmbedding ((hopfMap n) ∘ (bottomSphere n)) := by
-    change IsEmbedding ((hopfMap n).comp (bottomSphere n))
-    rw [hopfMap_bottomSphere_comp]
-    exact (isClosedEmbedding_inclusion (n + n)).isEmbedding
-  exact ⟨IsInducing.of_comp (bottomSphere n).continuous (hopfMap n).continuous hc.isInducing,
-    bottomSphere_injective n⟩
 
 end FirstStageQuotient
 

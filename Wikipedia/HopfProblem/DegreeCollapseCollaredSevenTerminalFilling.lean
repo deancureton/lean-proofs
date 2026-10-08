@@ -52,21 +52,5 @@ theorem half_fourth_homology (S : CollaredSevenState B)
     IntegralSevenDuality.fourth_homology_subsingleton (E := EuclideanSpace ℝ (Fin 7)) S.Space
   exact S.collar.half_homology_subsingleton 4
 
-theorem exists_cleared_framedFilling (S : CollaredSevenState B)
-    [Subsingleton (SingularHomology B 2)] [Subsingleton (SingularHomology B 3)]
-    [Subsingleton (SingularHomology B 4)] [Finite (SingularHomology S.Space 3)] :
-    letI := S.zeroAtlas;
-    ∃ (U : CollaredSevenState B) (h : S.Reachable U),
-      Finite (SingularHomology U.Space 3) ∧
-      (let F := h.framedFilling; letI := F.topology;
-        SimplyConnectedSpace F.W ∧ Subsingleton (SingularHomology F.W 2) ∧
-        Subsingleton (SingularHomology F.W 3) ∧ Subsingleton (SingularHomology F.W 4)) := by
-  let := S.zeroAtlas
-  obtain ⟨U, h, hfinite, hzero⟩ := S.exists_cleared
-  let : Finite (SingularHomology U.Space 3) := hfinite
-  refine ⟨U, h, hfinite, ?_⟩
-  change SimplyConnectedSpace U.Half ∧ Subsingleton (SingularHomology U.Half 2) ∧
-    Subsingleton (SingularHomology U.Half 3) ∧ Subsingleton (SingularHomology U.Half 4)
-  exact ⟨U.halfSimplyConnected, U.half_second_homology, hzero, U.half_fourth_homology⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

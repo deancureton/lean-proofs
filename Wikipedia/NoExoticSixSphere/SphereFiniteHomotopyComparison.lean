@@ -110,12 +110,5 @@ theorem sphere_homotopicRel_finite_of_homotopic
     exact sphere_homotopicRel_insert_of_homotopyRel hS.isClosed p hp
       (hbase (mem_insert p S)) K
 
-theorem sphere_homotopicRel_finite_iff
-    {f g : C(X, UnitSphere (Vector n))} (S : Set X) (hS : S.Finite)
-    (hbase : EqOn f g S) : f.HomotopicRel g S ↔ f.Homotopic g := by
-  constructor
-  · exact ContinuousMap.HomotopicRel.homotopic
-  · rintro ⟨H⟩
-    exact sphere_homotopicRel_finite_of_homotopic S hS hbase H
 
 end NoExoticSixSphere

@@ -105,20 +105,7 @@ omit [Fintype ι] in
 @[simp] theorem sigmaElimMap_comp_inclusion (f : ∀ i, C(X i, Z)) (i : ι) :
     (sigmaElimMap f).comp (sigmaInclusion X i) = f i := rfl
 
-/-- Descent from actual continuous component maps gives their finite sum in homology. -/
-theorem sigmaHomologyEquiv_sigmaElim_symm (f : ∀ i, C(X i, Z)) (n : ℕ)
-    (a : ∀ i, SingularHomology (X i) n) :
-    singularHomologyMap (sigmaElimMap f) n ((sigmaHomologyEquiv X n).symm a) =
-      ∑ i, singularHomologyMap (f i) n (a i) := by
-  simpa only [sigmaElimMap_comp_inclusion] using
-    sigmaHomologyEquiv_map_out_symm (sigmaElimMap f) n a
 
-theorem sigmaHomologyEquiv_sigmaElim (f : ∀ i, C(X i, Z)) (n : ℕ)
-    (a : SingularHomology (Σ i, X i) n) :
-    singularHomologyMap (sigmaElimMap f) n a =
-      ∑ i, singularHomologyMap (f i) n (sigmaHomologyEquiv X n a i) := by
-  simpa only [sigmaElimMap_comp_inclusion] using
-    sigmaHomologyEquiv_map_out (sigmaElimMap f) n a
 
 variable {Y : ι → Type} [∀ i, TopologicalSpace (Y i)]
 

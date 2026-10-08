@@ -141,34 +141,5 @@ theorem finite_singular_of_chart_jets (e : EuclideanEmbedding 7 M) (g : Vector 4
     exact hx.2 ((injective_embedded_derivative_iff e g x
       ((hg x hx.1).mdifferentiableAt (by simp))).mp (hi x hx.1 hn))))
 
-theorem exists_relative_finite_singularities [IsManifold (𝓡 7) ∞ M]
-    (e : EuclideanEmbedding 7 M) (f : Vector 4 → M)
-    (hf : ∀ x ∈ closedBall 0 1, ContMDiffAt (𝓡 4) (𝓡 7) ∞ f x)
-    (hi : ∀ q : Sphere 3, Injective (fderiv ℝ (e.toFun ∘ f) q.val))
-    (V : Set M) (hV : IsOpen V) (hfV : ∀ x ∈ ball 0 1, f x ∈ V) :
-    ∃ ρ : ℝ, 3 / 4 < ρ ∧ ρ < 1 ∧ ∃ g : Vector 4 → M,
-      (∀ x ∈ closedBall 0 1, ContMDiffAt (𝓡 4) (𝓡 7) ∞ g x) ∧
-      (∀ x ∈ closedBall 0 1, ρ ≤ ‖x‖ → g x = f x) ∧
-      (∀ x ∈ closedBall 0 1, ρ ≤ ‖x‖ →
-        fderiv ℝ (e.toFun ∘ g) x = fderiv ℝ (e.toFun ∘ f) x) ∧
-      (∀ x ∈ ball 0 1, g x ∈ V) ∧
-      (∀ x ∈ closedBall 0 1, ρ ≤ ‖x‖ → Injective (fderiv ℝ (e.toFun ∘ g) x)) ∧
-      (closedBall (0 : Vector 4) 1 ∩
-        {x | ¬ Injective (mfderiv (𝓡 4) (𝓡 7) g x)}).Finite ∧
-      ∃ C : Set (PartialDiffeomorph (𝓡 7) (𝓡 7) M (Vector 7) ∞),
-        C.Countable ∧ (∀ y : M, ∃ c ∈ C, y ∈ c.source) ∧
-        (∀ c ∈ C, OperatorRank.RegularFourSevenOn
-          (fun x ↦ fderiv ℝ (c ∘ g) x) {x | ‖x‖ < ρ ∧ g x ∈ c.source}) ∧
-        CompactRetractionAffineFamily.RegularDoublePointsOn g (ball 0 1) (ball 0 ρ) C := by
-  obtain ⟨ρ, hρ, hρ1, hfi⟩ := exists_immersive_outer_annulus e f hf hi
-  obtain ⟨g, hgs, hgeq, hgD, hgV, C, hC, hcov, hgen⟩ :=
-    exists_relative e f hf ρ (by linarith) hρ1 V hV hfV
-  have hgi : ∀ x ∈ closedBall 0 1, ρ ≤ ‖x‖ →
-      Injective (fderiv ℝ (e.toFun ∘ g) x) := by
-    intro x hx hxρ
-    rw [hgD x hx hxρ]
-    exact hfi x hx hxρ
-  exact ⟨ρ, hρ, hρ1, g, hgs, hgeq, hgD, hgV, hgi,
-    finite_singular_of_chart_jets e g hgs ρ hρ1 hgi C hcov hgen.1, C, hC, hcov, hgen⟩
 
 end NoExoticSixSphere.GenericFourDisk

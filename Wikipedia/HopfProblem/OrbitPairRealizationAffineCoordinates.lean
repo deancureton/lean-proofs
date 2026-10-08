@@ -125,16 +125,5 @@ theorem nerveInterpolation_vertex (p : P) :
     (stdSimplex.vertex (S := ℝ) (0 : Fin 1))).trans
       (weighted_vertex (fun i ↦ a ((CategoryTheory.ComposableArrows.mk₀ p).obj i)) 0)
 
-theorem nerveInterpolation_naturality {Q : Type u} [Category.{v} Q] (F : P ⥤ Q)
-    (b : Q → stdSimplex ℝ B) :
-    (nerveInterpolation Q b).comp (SSet.toTop.map (nerveMap F)).hom =
-      nerveInterpolation P (fun p ↦ b (F.obj p)) := by
-  apply continuousMap_ext_characteristic
-  intro n x t
-  change nerveInterpolation Q b
-    ((SSet.toTop.map (nerveMap F)) (characteristic (nerve P) n x t)) = _
-  rw [realizedMap_characteristic, nerveInterpolation_characteristic,
-    nerveInterpolation_characteristic]
-  rfl
 
 end Wikipedia.HopfProblem.OrbitPair.AffineCoordinates

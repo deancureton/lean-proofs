@@ -96,35 +96,6 @@ theorem critical_energy_eq_criticalLevel (a b : Sphere n)
   stationary_energy_eq_criticalLevel a b τ hτ hzero hone hanti v hv
     (isStationary_of_mfderiv_eq_zero a b τ v hv hcrit)
 
-theorem noncritical_of_energy_mem_gap (a b : Sphere n)
-    (τ : Fin (m + 2) → ℝ) (hτ : StrictMono τ)
-    (hzero : τ 0 = 0) (hone : τ (Fin.last (m + 1)) = 1)
-    (hanti : b.val = -a.val) (v : Space n m)
-    (hv : v ∈ admissible (costDomain n) a b m) (q : ℕ)
-    (hlow : criticalLevel q < energy a b τ v)
-    (hhigh : energy a b τ v < criticalLevel (q + 1)) :
-    mfderiv 𝓘(ℝ, Model n m) 𝓘(ℝ, ℝ) (energy a b τ) v ≠ 0 := by
-  intro hcrit
-  obtain ⟨r, hr⟩ := critical_energy_eq_criticalLevel a b τ hτ hzero hone hanti v hv hcrit
-  rw [hr] at hlow hhigh
-  rcases le_or_gt r q with h | h
-  · exact (not_lt_of_ge (strictMono_criticalLevel.monotone h)) hlow
-  · exact (not_lt_of_ge (strictMono_criticalLevel.monotone (Nat.succ_le_of_lt h))) hhigh
 
-theorem bounded_critical_labels (a b : Sphere n)
-    (τ : Fin (m + 2) → ℝ) (hτ : StrictMono τ)
-    (hzero : τ 0 = 0) (hone : τ (Fin.last (m + 1)) = 1)
-    (hanti : b.val = -a.val) (c : ℝ) :
-    ∃ N : ℕ, ∀ v : Space n m, v ∈ admissible (costDomain n) a b m →
-      mfderiv 𝓘(ℝ, Model n m) 𝓘(ℝ, ℝ) (energy a b τ) v = 0 →
-      energy a b τ v ≤ c → ∃ q < N, energy a b τ v = criticalLevel q := by
-  obtain ⟨N, hN⟩ := exists_criticalLevel_above c
-  refine ⟨N, fun v hv hcrit hcap => ?_⟩
-  obtain ⟨q, hq⟩ := critical_energy_eq_criticalLevel a b τ hτ hzero hone hanti v hv hcrit
-  refine ⟨q, ?_, hq⟩
-  by_contra h
-  have hle := strictMono_criticalLevel.monotone (le_of_not_gt h)
-  rw [← hq] at hle
-  exact (not_lt_of_ge (hle.trans hcap)) hN
 
 end Wikipedia.HopfProblem.OrbitPair.SpherePolygonEnergy

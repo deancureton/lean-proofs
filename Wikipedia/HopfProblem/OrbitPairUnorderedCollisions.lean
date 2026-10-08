@@ -66,26 +66,6 @@ theorem unordered_ncard_add_one {F G : ℝ × M → N} (hF : (doublePoints F).Fi
     hnew ((mem_unordered_iff F t x y).mp h)
   exact ncard_insert_of_notMem hnot (finite_unordered hF)
 
-theorem even_unordered_of_not_even_after_one_pair {F G : ℝ × M → N}
-    (hF : (doublePoints F).Finite) (t : ℝ) (x y : M)
-    (hnew : (t, (x, y)) ∉ doublePoints F)
-    (hD : doublePoints G = doublePoints F ∪ {(t, (x, y)), (t, (y, x))})
-    (hodd : ¬ Even (unorderedDoublePoints F).ncard) :
-    Even (unorderedDoublePoints G).ncard := by
-  rw [unordered_ncard_add_one hF t x y hnew hD, Nat.even_add_one]
-  exact hodd
 
-/-- A finite even collision set can be partitioned into two-slot blocks.
-This is a pairing of unordered source pairs, not yet a choice of geometric
-Whitney disks or compatible intersection signs. -/
-theorem exists_unordered_pair_enumeration {F : ℝ × M → N}
-    (hF : (doublePoints F).Finite) (heven : Even (unorderedDoublePoints F).ncard) :
-    ∃ k : ℕ, Nonempty ((Fin k × Fin 2) ≃ unorderedDoublePoints F) := by
-  obtain ⟨k, hk⟩ := heven
-  letI : Fintype (unorderedDoublePoints F) := (finite_unordered hF).fintype
-  have hcard : Fintype.card (Fin k × Fin 2) = Fintype.card (unorderedDoublePoints F) := by
-    rw [Fintype.card_prod, Fintype.card_fin, Fintype.card_fin, fintypeCard_eq_ncard, hk]
-    omega
-  exact ⟨k, ⟨Fintype.equivOfCardEq hcard⟩⟩
 
 end Wikipedia.HopfProblem.OrbitPair.FamilyDoublePoints

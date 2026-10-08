@@ -86,11 +86,6 @@ theorem detector_modTwo_eq_intersection (c : SingularHomology M 3) :
   rw [TraceBody.unitFace_coreMap_eq f A hR] at h
   exact h
 
-theorem detector_kernel_orthogonal (x : LinearMap.ker (detector f A hR)) :
-    e.integralHomologyIntersection r m (integralSphereClass f) x = 0 := by
-  rw [← detector_modTwo_eq_intersection e a r m f A hR]
-  change ((detector f A hR x.val : ℤ) : ZMod 2) = 0
-  rw [show detector f A hR x.val = 0 from x.property, Int.cast_zero]
 
 end SurgeryDetector
 end Wikipedia.HopfProblem.DegreeCollapse

@@ -68,21 +68,5 @@ theorem exists_tubular_connecting_arc_avoiding_finite_with_global_zero
       hO hfO
   exact ⟨f, hf, hf0, hf1, hemb, hi, havoid, ε, hε, Φ, hsource, hzero, htarget⟩
 
-/-- The interval-restricted API follows from the stronger globally exact zero section. -/
-theorem exists_tubular_connecting_arc_avoiding_finite {x y : N} (γ : Path x y) (hxy : x ≠ y)
-    (hdim : 2 ≤ Module.finrank ℝ G) (n : ℕ) (hcodim : 1 + n = Module.finrank ℝ G)
-    {S : Set N} (hS : S.Finite) :
-    ∃ f : C(ℝ, N), ContMDiff 𝓘(ℝ, ℝ) 𝓘(ℝ, G) ∞ f ∧ f 0 = x ∧ f 1 = y ∧
-      Topology.IsClosedEmbedding (fun t : unitInterval => f t) ∧
-      (∀ t ∈ Icc (0 : ℝ) 1, Injective (mfderiv 𝓘(ℝ, ℝ) 𝓘(ℝ, G) f t)) ∧
-      (∀ t ∈ Ioo (0 : ℝ) 1, f t ∉ S) ∧
-      ∃ ε : ℝ, 0 < ε ∧
-        ∃ Φ : PartialDiffeomorph 𝓘(ℝ, ℝ × EuclideanSpace ℝ (Fin n)) 𝓘(ℝ, G)
-            (ℝ × EuclideanSpace ℝ (Fin n)) N ∞,
-          Icc (0 : ℝ) 1 ×ˢ Metric.closedBall 0 ε ⊆ Φ.source ∧
-          (∀ t ∈ Icc (0 : ℝ) 1, Φ (t, 0) = f t) ∧ Φ.target ⊆ (S \ {x, y})ᶜ := by
-  obtain ⟨f, hf, hf0, hf1, hemb, hi, havoid, ε, hε, Φ, hsource, hzero, htarget⟩ :=
-    exists_tubular_connecting_arc_avoiding_finite_with_global_zero γ hxy hdim n hcodim hS
-  exact ⟨f, hf, hf0, hf1, hemb, hi, havoid, ε, hε, Φ, hsource, fun t _ => hzero t, htarget⟩
 
 end Wikipedia.SmoothSixDPoincare

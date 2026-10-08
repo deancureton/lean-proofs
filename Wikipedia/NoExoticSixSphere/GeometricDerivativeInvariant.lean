@@ -45,17 +45,6 @@ theorem sphereDerivativeInvariant_eq_representative (f g : C(Sphere 3, M))
   exact e.derivativeCorrectedParity_homotopic a R.choose g R.choose_spec.1 hg
     R.choose_spec.2.2.1 hd R.choose_spec.2.2.2 ht (R.choose_spec.2.1.symm.trans H)
 
-theorem sphereDerivativeInvariant_homotopic (f g : C(Sphere 3, M)) (H : f.Homotopic g) :
-    e.sphereDerivativeInvariant a r f = e.sphereDerivativeInvariant a r g := by
-  let R := e.exists_selfTransverse_immersed_homotopic r g
-  exact e.sphereDerivativeInvariant_eq_representative a r f R.choose
-    R.choose_spec.1 R.choose_spec.2.2.1 R.choose_spec.2.2.2 (H.trans R.choose_spec.2.1)
 
-theorem sphereDerivativeInvariant_retraction_independent (r' : TubularRetraction e)
-    (f : C(Sphere 3, M)) :
-    e.sphereDerivativeInvariant a r f = e.sphereDerivativeInvariant a r' f := by
-  let R := e.exists_selfTransverse_immersed_homotopic r' f
-  exact e.sphereDerivativeInvariant_eq_representative a r f R.choose
-    R.choose_spec.1 R.choose_spec.2.2.1 R.choose_spec.2.2.2 R.choose_spec.2.1
 
 end NoExoticSixSphere.EuclideanEmbedding

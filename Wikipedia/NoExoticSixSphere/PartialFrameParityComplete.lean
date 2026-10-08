@@ -54,11 +54,6 @@ theorem normalize_homotopic_iff {X : Type*} [TopologicalSpace X] {N n : ℕ}
   · rintro ⟨H⟩
     exact ⟨(ContinuousMap.Homotopy.refl (normalize N n)).comp H⟩
 
-theorem sphereParity_eq_iff_homotopic (r : ℕ)
-    (f g : C(Sphere 3, Space (3 + (r + 2)) (r + 2))) :
-    sphereParity r f = sphereParity r g ↔ f.Homotopic g := by
-  exact (sphereThirdObstruction_eq_iff_homotopic r
-    ((normalize _ _).comp f) ((normalize _ _).comp g)).trans (normalize_homotopic_iff f g)
 
 end Monomorphism
 end NoExoticSixSphere.Stiefel

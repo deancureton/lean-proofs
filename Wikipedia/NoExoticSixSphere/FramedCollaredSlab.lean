@@ -92,18 +92,6 @@ theorem slabNormalFrame_ambient (a : Sphere m) (p : CylinderFiberSlab.slab d.map
   intro v
   rfl
 
-theorem slabNormalFrame_ambient_eq_full (a : Sphere m)
-    (p : CylinderFiberSlab.slab d.map b s t) :
-    letI := (d.openCover k (by simpa using hd) Φ hsource).chartedSpace;
-    letI := regularFiberAtlas d.map d.smooth_map b d.regular_map (k + 1)
-      (CylinderFiberNormalFrame.dimension_eq hd);
-    (d.slabNormalFrame k hd Φ hsource a).ambient p =
-      (CylinderFiberNormalFrame.normalFrame d.map d.smooth_map b
-        d.regular_map k hd a).ambient p.val := by
-  let := (d.openCover k (by simpa using hd) Φ hsource).chartedSpace
-  let := regularFiberAtlas d.map d.smooth_map b d.regular_map (k + 1)
-    (CylinderFiberNormalFrame.dimension_eq hd)
-  rw [d.slabNormalFrame_ambient, CylinderFiberNormalFrame.normalFrame_ambient]
 
 theorem slabNormalFrame_left (a : Sphere m) (x : {x : Sphere m // d.leftMap x = b}) :
     letI := (d.openCover k (by simpa using hd) Φ hsource).chartedSpace;

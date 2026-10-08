@@ -72,13 +72,6 @@ theorem fundamentalGroupMap_ker (r : HalfExterior A hR T) (u : Sphere 1)
       Subgroup.normalClosure (range (markedAttachingHom A hR T r u p)) :=
   SurgeryPairBody.fundamentalGroupMap_kernel_normalClosure (halfBoundaryPair A hR T) r u p
 
-theorem fundamentalGroupMap_attaching (r : HalfExterior A hR T) (u : Sphere 1)
-    (p : Path ((halfBoundaryPair A hR T).attachingSphere u)
-      ((halfBoundaryPair A hR T).oldExterior r)) (g : FundamentalGroup (Sphere 1) u) :
-    fundamentalGroupMap A hR T r (markedAttachingHom A hR T r u p g) = 1 := by
-  change markedAttachingHom A hR T r u p g ∈ (fundamentalGroupMap A hR T r).ker
-  rw [fundamentalGroupMap_ker A hR T r u p]
-  exact Subgroup.subset_normalClosure ⟨g, rfl⟩
 
 omit [T2Space M] in
 theorem exists_fundamentalGroupQuotient (r : HalfExterior A hR T) (u : Sphere 1)

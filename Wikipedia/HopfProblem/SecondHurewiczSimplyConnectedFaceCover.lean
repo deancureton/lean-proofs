@@ -41,11 +41,6 @@ theorem isClosed_boundaryFace (n : ℕ) (i : Fin (n + 2)) :
     ((continuous_apply i).comp (continuous_subtype_val.comp continuous_subtype_val))
     continuous_const
 
-theorem iUnion_boundaryFace (n : ℕ) :
-    (⋃ i : Fin (n + 2), boundaryFace n i) = Set.univ := by
-  ext s
-  simp only [Set.mem_iUnion, Set.mem_univ, iff_true]
-  exact s.property
 
 /-- Every boundary point lies on an actual face with its own simplex coordinates. -/
 theorem simplexBoundary_exists_face (n : ℕ) (s : SimplexBoundary (n + 1)) :
@@ -57,18 +52,6 @@ theorem simplexBoundary_exists_face (n : ℕ) (s : SimplexBoundary (n + 1)) :
   obtain ⟨t, ht⟩ := hmem
   exact ⟨i, t, Subtype.ext ht⟩
 
-theorem simplexFaceBoundary_range (n : ℕ) (i : Fin (n + 2)) :
-    Set.range (simplexFaceBoundary n i) = boundaryFace n i := by
-  ext s
-  constructor
-  · rintro ⟨t, rfl⟩
-    exact simplexFace_apply_self n i t
-  · intro hs
-    have hmem : s.val ∈ Set.range (simplexFace n i) := by
-      rw [simplexFace_range]
-      exact hs
-    obtain ⟨t, ht⟩ := hmem
-    exact ⟨t, Subtype.ext ht⟩
 
 /-- Inclusion of one actual face cylinder into the whole boundary cylinder. -/
 def simplexFaceCylinder (n : ℕ) (i : Fin (n + 2)) :

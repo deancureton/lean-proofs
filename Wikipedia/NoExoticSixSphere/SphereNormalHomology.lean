@@ -62,10 +62,6 @@ theorem marking_zeroSectionClass : marking E (zeroSectionClass E) = 1 := by
   rw [LinearEquiv.apply_symm_apply]
   exact unitSphereModHomologyTopEquiv_topClass 2 (by decide) 2
 
-theorem zeroSectionClass_ne_zero : zeroSectionClass E ≠ 0 := by
-  intro he
-  exact one_ne_zero ((marking_zeroSectionClass E).symm.trans
-    ((congrArg (marking E) he).trans (marking E).map_zero))
 
 /-- In this actual product homology, the zero-section class is the only nonzero element. -/
 theorem eq_zeroSectionClass_of_ne_zero (a : ModHomology 2 (Sphere 3 × E) 3) (ha : a ≠ 0) :

@@ -98,7 +98,5 @@ theorem simpleFrame_parity : sphereThirdObstruction 1 simpleFrameMap = 1 := by
   rw [simpleFrameMap_eq_reconstruction, SplitReconstruction.sphere_parity,
     residualTwoFrame_parity]
 
-theorem gauss_parity : sphereThirdObstruction 1 gaussMap = 1 := by
-  rw [gauss_parity_eq_simple, simpleFrame_parity]
 
 end NoExoticSixSphere.WhitneyCusp

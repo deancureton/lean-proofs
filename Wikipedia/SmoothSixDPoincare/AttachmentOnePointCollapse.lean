@@ -68,21 +68,6 @@ theorem collapseMap_infty_iff (x : ↥(A ∪ range h)) :
   · change collapseMap A h hA hh hface (handleInclusion A h z) = ∞ ↔ h z ∈ A
     rw [collapseMap_handle, DiskOnePointCollapse.collapse_eq_infty_iff, hface]
 
-/-- The finite zero fiber is exactly the original cocore disk. -/
-theorem collapseMap_zero_iff (x : ↥(A ∪ range h)) :
-    collapseMap A h hA hh hface x = ((0 : N) : OnePoint N) ↔
-      ∃ v : UnitDisk P, h (⟨0, by simp⟩, v) = x.val := by
-  constructor
-  · intro hx
-    rcases x with ⟨x, hxA | ⟨z, rfl⟩⟩
-    · have hinf := collapseMap_old A h hA hh hface ⟨x, hxA⟩
-      exact (OnePoint.infty_ne_coe (0 : N) (hinf.symm.trans hx)).elim
-    · change collapseMap A h hA hh hface (handleInclusion A h z) = _ at hx
-      rw [collapseMap_handle, DiskOnePointCollapse.collapse_eq_zero_iff] at hx
-      refine ⟨z.2, congrArg h (Prod.ext (Subtype.ext hx.symm) rfl)⟩
-  · rintro ⟨v, hv⟩
-    have heq : handleInclusion A h (⟨0, by simp⟩, v) = x := Subtype.ext hv
-    rw [← heq, collapseMap_handle, DiskOnePointCollapse.collapse_eq_zero_iff]
 
 end ClosedHandleCore
 

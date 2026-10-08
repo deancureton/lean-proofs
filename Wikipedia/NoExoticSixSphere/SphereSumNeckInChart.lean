@@ -96,60 +96,12 @@ theorem chartNeck_injective : Injective (chartNeck Φ ε) := by
   exact scaledPair_injective hε.ne' (Φ.injOn
     (scaledPair_mem_source Φ hε hprod q) (scaledPair_mem_source Φ hε hprod w) he)
 
-theorem injective_mfderiv_chartNeck (q : Parameter) :
-    Injective (mfderiv Model (𝓡 6) (chartNeck Φ ε) q) := by
-  have hlocal : IsLocalDiffeomorphAt 𝓘(ℝ, Vector 3 × Vector 3) (𝓡 6) ∞ Φ
-      (scaledPair ε q) := ⟨Φ, scaledPair_mem_source Φ hε hprod q, fun _ _ ↦ rfl⟩
-  have hinj := (hlocal.mfderivToContinuousLinearEquiv (by simp)).injective
-  change Injective (mfderiv 𝓘(ℝ, Vector 3 × Vector 3) (𝓡 6) Φ (scaledPair ε q)) at hinj
-  change Injective (mfderiv Model (𝓡 6) (Φ ∘ scaledPair ε) q)
-  rw [mfderiv_comp q (hlocal.mdifferentiableAt (by simp))
-    ((contMDiff_scaledPair ε).mdifferentiableAt (by simp))]
-  exact hinj.comp (injective_mfderiv_scaledPair hε.ne' q)
 
 theorem chartNeck_mem_target (q : Parameter) : chartNeck Φ ε q ∈ Φ.target :=
   Φ.map_source (scaledPair_mem_source Φ hε hprod q)
 
-theorem chartNeck_closedCylinder_embedded [T2Space M] (u v : ℝ) :
-    IsClosedEmbedding (fun q : Icc u v × Sphere 2 ↦ chartNeck Φ ε (q.1.val, q.2)) := by
-  have hc : Continuous (fun q : Icc u v × Sphere 2 ↦ chartNeck Φ ε (q.1.val, q.2)) :=
-    (contMDiff_chartNeck Φ hε hprod).continuous.comp
-      ((continuous_subtype_val.comp continuous_fst).prodMk continuous_snd)
-  apply hc.isClosedEmbedding
-  intro q w he
-  have h := chartNeck_injective Φ hε hprod he
-  have hs := congrArg Prod.snd h
-  exact Prod.ext (Subtype.ext (congrArg Prod.fst h)) hs
 
-theorem chartNeck_right_collar {f : Vector 3 → M}
-    (haxis : ∀ x, (x, 0) ∈ Φ.source → Φ (x, 0) = f x)
-    (t : ℝ) (s : Sphere 2) (ht : 1 ≤ t) :
-    chartNeck Φ ε (t, s) = f ((ε * profile t) • s.val) := by
-  have he : scaledPair ε (t, s) = ((ε * profile t) • s.val, 0) := by
-    rw [scaledPair, pairMap_right_collar t s ht]
-    simp [smul_smul]
-  have hsource := scaledPair_mem_source Φ hε hprod (t, s)
-  rw [he] at hsource
-  exact (congrArg Φ he).trans (haxis _ hsource)
 
-theorem chartNeck_left_collar {g : Vector 3 → M}
-    (haxis : ∀ x, (0, x) ∈ Φ.source → Φ (0, x) = g x)
-    (t : ℝ) (s : Sphere 2) (ht : t ≤ -1) :
-    chartNeck Φ ε (t, s) = g ((ε * profile (-t)) • s.val) := by
-  have he : scaledPair ε (t, s) = (0, (ε * profile (-t)) • s.val) := by
-    rw [scaledPair, pairMap_left_collar t s ht]
-    simp [smul_smul]
-  have hsource := scaledPair_mem_source Φ hε hprod (t, s)
-  rw [he] at hsource
-  exact (congrArg Φ he).trans (haxis _ hsource)
 
-theorem chartNeck_mem_sheet_iff {f g : Vector 3 → M} {U V : Set (Vector 3)}
-    (hclean : ∀ z ∈ Φ.source,
-      (Φ z ∈ f '' U ↔ z.2 = 0) ∧ (Φ z ∈ g '' V ↔ z.1 = 0)) (q : Parameter) :
-    (chartNeck Φ ε q ∈ f '' U ↔ 1 ≤ q.1) ∧
-      (chartNeck Φ ε q ∈ g '' V ↔ q.1 ≤ -1) := by
-  obtain ⟨hf, hg⟩ := hclean _ (scaledPair_mem_source Φ hε hprod q)
-  exact ⟨hf.trans (scaledPair_snd_eq_zero_iff hε.ne' q),
-    hg.trans (scaledPair_fst_eq_zero_iff hε.ne' q)⟩
 
 end NoExoticSixSphere.SphereSumNeck

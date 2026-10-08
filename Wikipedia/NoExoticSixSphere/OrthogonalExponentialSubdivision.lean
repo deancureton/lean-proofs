@@ -81,34 +81,5 @@ theorem logarithmicIncrement_eq_zero (H : C(I × X, OrthogonalOperators n)) (s t
   change logarithmChart n ((H (s, x))⁻¹ * H (t, x)) = 0
   rw [hx, inv_mul_cancel, logarithmChart_one]
 
-/-- Endpoints of compact homotopies differ by finitely many continuous exponential factors.
-The factors vanish at every stationary parameter. -/
-theorem exists_exponentialFactorization [CompactSpace X] (H : C(I × X, OrthogonalOperators n)) :
-    ∃ N : ℕ, ∃ K : ℕ → C(X, SkewOperators n),
-      (∀ x, H (1, x) = H (0, x) * ((List.range N).map (fun i ↦ exp (K i x))).prod) ∧
-      (∀ i ≥ N, ∀ x, K i x = 0) ∧
-      ∀ x, (∀ t, H (t, x) = H (0, x)) → ∀ i, K i x = 0 := by
-  obtain ⟨t, ht0, hmono, ⟨N, hN⟩, hsmall⟩ := exists_logarithmSubdivision H
-  let hstep (i : ℕ) (x : X) :=
-    hsmall i (t (i + 1)) ⟨hmono i.le_succ, le_rfl⟩ x
-  let K (i : ℕ) := logarithmicIncrement H (t i) (t (i + 1)) (hstep i)
-  have he (i : ℕ) (x : X) : exp (K i x) = (H (t i, x))⁻¹ * H (t (i + 1), x) :=
-    exp_logarithmicIncrement H (t i) (t (i + 1)) (hstep i) x
-  have hp (i : ℕ) (x : X) :
-      H (t i, x) = H (0, x) * ((List.range i).map (fun j ↦ exp (K j x))).prod := by
-    induction i with
-    | zero => simp only [ht0, List.range_zero, List.map_nil, List.prod_nil, mul_one]
-    | succ i ih =>
-      rw [List.prod_range_succ, ← mul_assoc, ← ih, he]
-      rw [← mul_assoc, mul_inv_cancel, one_mul]
-  refine ⟨N, K, ?_, ?_, ?_⟩
-  · intro x
-    simpa only [hN N le_rfl] using hp N x
-  · intro i hi x
-    apply logarithmicIncrement_eq_zero
-    rw [hN i hi, hN (i + 1) (hi.trans i.le_succ)]
-  · intro x hx i
-    apply logarithmicIncrement_eq_zero
-    exact (hx (t i)).trans (hx (t (i + 1))).symm
 
 end NoExoticSixSphere.OrthogonalExponential

@@ -28,11 +28,6 @@ open HopfFirstStemComposition
 def threeSphereGenerator : π_ 7 (Sphere 3) (spherePole 3) :=
   QuaternionicSeven.sphereEquiv (FirstStemGroup.generator 4)
 
-theorem threeSphereGenerator_ne_one : threeSphereGenerator ≠ 1 := by
-  intro h
-  apply FirstStemGroup.generator_ne_one 4
-  exact QuaternionicSeven.sphereEquiv.injective
-    (h.trans (map_one QuaternionicSeven.sphereEquiv).symm)
 
 theorem threeSphere_eq_one_or_generator (a : π_ 7 (Sphere 3) (spherePole 3)) :
     a = 1 ∨ a = threeSphereGenerator := by

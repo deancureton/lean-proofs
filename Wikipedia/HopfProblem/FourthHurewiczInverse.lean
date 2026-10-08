@@ -72,13 +72,5 @@ theorem hurewiczMap_injective : Function.Injective (hurewiczMap x) :=
 theorem hurewiczMap_bijective : Function.Bijective (hurewiczMap x) :=
   ⟨hurewiczMap_injective x, hurewiczMap_surjective x⟩
 
-/-- Bijectivity in Mathlib's original native multiplicative homotopy notation. -/
-theorem hurewiczPi4_bijective : Function.Bijective (hurewiczPi4 x) := by
-  constructor
-  · intro a b h
-    have h' : hurewiczMap x (Additive.ofMul a) = hurewiczMap x (Additive.ofMul b) :=
-      congrArg Multiplicative.toAdd h
-    exact congrArg Additive.toMul (hurewiczMap_injective x h')
-  · exact hurewiczPi4_surjective x
 
 end Wikipedia.HopfProblem.FourthHurewicz

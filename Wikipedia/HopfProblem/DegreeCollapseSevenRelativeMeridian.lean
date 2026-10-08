@@ -98,23 +98,7 @@ theorem exists_relative_meridian_cycle (s : Sphere 3) :
     rw [hz] at he
     exact he
 
-theorem relativeMeridianClass_ne_zero (s : Sphere 3) : relativeMeridianClass A hA T s ≠ 0 := by
-  obtain ⟨w, hw, _⟩ := exists_relative_meridian_cycle A hA T s
-  intro h
-  rw [h, map_zero, LinearMap.zero_apply] at hw
-  exact zero_ne_one hw
 
-theorem relativeMeridianClass_primitive (s : Sphere 3) (k : ℤ)
-    (c : RelativeIntegralCap.Cohomology (halfExteriorRange A hA T) 4)
-    (h : relativeMeridianClass A hA T s = k • c) : IsUnit k := by
-  obtain ⟨w, hw, _⟩ := exists_relative_meridian_cycle A hA T s
-  rw [h, map_zsmul] at hw
-  change k • cohomologyEvaluation
-    (RelativeSingularHomology.complex (halfExteriorRange A hA T)) 4 c
-    (ModuleHomology.cycleClass
-      (RelativeSingularHomology.complex (halfExteriorRange A hA T)) 4 w) = 1 at hw
-  rw [zsmul_eq_mul] at hw
-  exact isUnit_iff_dvd_one.mpr ⟨_, hw.symm⟩
 
 end FramedAttachingProduct.UnitSurgery.ExteriorTwist
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery

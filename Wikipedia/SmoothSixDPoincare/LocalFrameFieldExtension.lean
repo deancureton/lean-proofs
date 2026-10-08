@@ -78,27 +78,5 @@ open PlaneImmersion (Plane)
 variable {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F]
   [FiniteDimensional ℝ F]
 
-/-- Extend the prescribed two columns and construct complementary columns near a
-compact star-convex planar region in a four-dimensional normal model. Only the
-original two columns, not the newly chosen complement, have prescribed germs. -/
-theorem exists_completed_frame_of_local_field {L : Plane → (Plane →L[ℝ] F)}
-    {U C K : Set Plane} (hU : IsOpen U) (hL : ContDiffOn ℝ ∞ L U)
-    (hC : IsClosed C) (hCU : C ⊆ U) (hK : IsCompact K)
-    (hstar : StarConvex ℝ (0 : Plane) K) (h0 : (0 : Plane) ∈ K)
-    (hi : ∀ x ∈ K ∩ C, Injective (L x)) (hdim : Module.finrank ℝ F = 4) :
-    ∃ L' : Plane → (Plane →L[ℝ] F), ContDiff ℝ ∞ L' ∧ L' =ᶠ[𝓝ˢ C] L ∧
-      ∃ V : Set Plane, IsOpen V ∧ K ⊆ V ∧
-        ∃ B : Plane → (EuclideanSpace ℝ (Fin 2) →L[ℝ] F),
-          ContDiffOn ℝ ∞ B V ∧
-          (∀ x ∈ K, (B x).range = (L' x).rangeᗮ) ∧
-          ∀ x ∈ V, Bijective ((L' x).coprod (B x)) := by
-  obtain ⟨L', hL', heq, hi'⟩ :=
-    exists_fullRank_extension_of_local_field hU hL hC hCU hK hi hdim.ge
-  have hcodim : Module.finrank ℝ Plane + 2 = Module.finrank ℝ F := by
-    change Module.finrank ℝ (ℝ × ℝ) + 2 = Module.finrank ℝ F
-    rw [Module.finrank_prod, Module.finrank_self, hdim]
-  obtain ⟨V, hV, hKV, B, hB, hr, hb⟩ :=
-    exists_smooth_complement_near_starConvex hL' hK hstar h0 hi' 2 hcodim
-  exact ⟨L', hL', heq, V, hV, hKV, B, hB, hr, hb⟩
 
 end Wikipedia.SmoothSixDPoincare.FrameField

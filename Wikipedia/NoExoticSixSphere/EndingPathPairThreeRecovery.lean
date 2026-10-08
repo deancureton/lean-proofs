@@ -87,16 +87,5 @@ theorem projection_homologyThree_bijective :
   exact HomotopyFiberConnectivity.projection_homologyThree_bijective
     (subtypeInclusion (subspace U a)) (basepoint U a)
 
-theorem homologyMap_transgression_three
-    (z : SingularHomology (Fiber (subspace U a) (basepoint U a)) 3) :
-    (threeNormalizationData U a).fiberHomologyMap
-      (transgression (subspace U a) (basepoint U a) 3 z) = z := by
-  apply (projection_homologyThree_bijective U a).injective
-  have h := LinearMap.congr_fun (threeNormalizationData U a).projection_fiberHomologyMap
-    (transgression (subspace U a) (basepoint U a) 3 z)
-  have ht := connecting_transgression (subspace U a) (basepoint U a) 3 z
-  rw [CuspCentralHomology.singularHomologyMap_const_eq_zero _ _ 3 (by decide),
-    LinearMap.zero_apply, sub_zero] at ht
-  exact h.trans ht
 
 end NoExoticSixSphere.EndingPathPair

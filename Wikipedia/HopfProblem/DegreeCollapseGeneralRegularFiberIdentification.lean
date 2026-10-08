@@ -65,15 +65,6 @@ noncomputable def diffeomorphToFiber (e : P → M)
   rw [hc]
   exact congrArg (mfderiv (𝓡 k) I (Subtype.val : {x : M // f x = b} → M) (q x)) hvw
 
-theorem diffeomorphToFiber_val (e : P → M)
-    (he : ContMDiff L I ∞ e) (hei : Function.Injective e)
-    (heimm : ∀ x, Function.Injective (mfderiv L I e x))
-    (hfiber : ∀ y, f y = b ↔ ∃ x, e x = y) (x : P) :
-    letI := regularFiberAtlas f hf b hreg k hd;
-    (diffeomorphToFiber f hf b hreg k hd hP e he hei heimm hfiber x).val = e x := by
-  unfold diffeomorphToFiber diffeomorphOfBijectiveImmersion
-    IsLocalDiffeomorph.diffeomorphOfBijective
-  rfl
 
 end Wikipedia.HopfProblem.DegreeCollapse.GeneralRegularFiberIdentification
 

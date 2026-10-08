@@ -53,12 +53,6 @@ theorem hasDerivAt_matrix_entry (z : ℝ → Vector) (v : Vector) (x : ℝ)
     (v r * z x s + z x r * v s + crossMatrix (fun k ↦ star (v k)) r s) x
   exact ((hz r).mul (hz s)).add hc
 
-theorem hasDerivAt_matrix (z : ℝ → Vector) (v : Vector) (x : ℝ)
-    (hz : ∀ r, HasDerivAt (fun t ↦ z t r) (v r) x) :
-    HasDerivAt (fun t ↦ matrix (z t)) (matrixVariation (z x) v) x := by
-  apply hasDerivAt_pi.mpr
-  intro r
-  exact hasDerivAt_pi.mpr (fun s ↦ hasDerivAt_matrix_entry z v x hz r s)
 
 theorem hasDerivAt_symmetricMatrix_entry (z : ℝ → Vector) (v : Vector) (x : ℝ)
     (hz : ∀ r, HasDerivAt (fun t ↦ z t r) (v r) x) (r s : Fin 3) :
@@ -73,27 +67,7 @@ theorem hasDerivAt_symmetricMatrix_entry (z : ℝ → Vector) (v : Vector) (x : 
   rw [hd]
   exact he
 
-theorem hasDerivAt_symmetricMatrix (z : ℝ → Vector) (v : Vector) (x : ℝ)
-    (hz : ∀ r, HasDerivAt (fun t ↦ z t r) (v r) x) :
-    HasDerivAt (fun t ↦ symmetricMatrix (z t)) (symmetricVariation (z x) v) x := by
-  apply hasDerivAt_pi.mpr
-  intro r
-  exact hasDerivAt_pi.mpr (fun s ↦ hasDerivAt_symmetricMatrix_entry z v x hz r s)
 
-theorem hasDerivAt_squareSum (z : ℝ → Vector) (v : Vector) (x : ℝ)
-    (hz : ∀ r, HasDerivAt (fun t ↦ z t r) (v r) x) :
-    HasDerivAt (fun t ↦ squareSum (z t)) (squareSumVariation (z x) v) x := by
-  have he := HasDerivAt.fun_sum (u := Finset.univ) (fun r (_ : r ∈ Finset.univ) ↦
-    (hz r).mul (hz r))
-  have hd : squareSumVariation (z x) v = ∑ r, (v r * z x r + z x r * v r) := by
-    unfold squareSumVariation
-    apply Finset.sum_congr rfl
-    intro r hr
-    ring
-  rw [hd]
-  convert he using 1 <;> try rfl
-  funext t
-  simp only [squareSum, pow_two, Pi.mul_apply]
 
 theorem symmetricVariation_trace (z v : Vector) :
     (symmetricVariation z v).trace =

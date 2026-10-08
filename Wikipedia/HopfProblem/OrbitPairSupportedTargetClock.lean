@@ -103,49 +103,5 @@ def HasSupportedCollisionRelocation (F : ℝ × M → N) (a b : ℝ)
       doublePoints F' = relocateCollision F p δ '' doublePoints F ∧
       (p.1 + δ, p.2) ∈ doublePoints F'
 
-theorem exists_supported_target_clock_relocation
-    {F : ℝ × M → N} (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    (hi : ∀ t x, Injective (mfderiv I J (fun y => F (t, y)) x))
-    (hreg : RegularOn (I := I) (J := J) F {p | p.2.1 ≠ p.2.2})
-    (hfinite : (doublePoints F).Finite) (hno : triplePoints F = ∅)
-    (hfull : ∀ q ∈ collisionSources F, Injective (mfderiv (𝓘(ℝ, ℝ).prod I) J F q))
-    (hglobal : ∀ p ∈ doublePoints F, HasGlobalProjectedCollisionFiber F p)
-    (hspace : InjOn Prod.snd (collisionSources F))
-    {a b : ℝ} (hab : a ≤ b)
-    (hlo : ∀ t x, t ≤ a → F (t, x) = F (a, x))
-    (hhi : ∀ t x, b ≤ t → F (t, x) = F (b, x))
-    {p : ℝ × (M × M)} (hp : p ∈ doublePoints F) (hptime : p.1 ∈ Ioo a b)
-    {U : Set M} (hU : IsOpen U) (hxU : p.2.1 ∈ U) (hyU : p.2.2 ∈ U) :
-    HasSupportedCollisionRelocation (I := I) (J := J) F a b p U := by
-  classical
-  obtain ⟨β, hβ, -, hone, hfixed, hvalues, ε, hε, hretime⟩ :=
-    exists_supported_target_clock_at_collision hF hi hreg hfinite hab hlo hhi
-      (hglobal p hp) hptime hU hxU hyU
-  refine ⟨ε, hε, ?_⟩
-  intro δ hδ
-  obtain ⟨e, Ψ, hclock, -, -, hnew, hi', hr', hfin', hD, hzero, -, hno', hfull', hglobal'⟩ :=
-    hretime δ hδ
-  have hmap : ∀ q ∈ doublePoints F, pairEquiv e q = relocateCollision F p δ q := by
-    intro q hq
-    apply Prod.ext
-    · change e q.2.1 q.1 = if F (first q) = F (first p) then q.1 + δ else q.1
-      rw [hclock]
-      change q.1 + δ * β (F (first q)) =
-        if F (first q) = F (first p) then q.1 + δ else q.1
-      by_cases heq : F (first q) = F (first p)
-      · rw [if_pos heq, heq, hone, mul_one]
-      · rw [if_neg heq, hvalues q hq heq, mul_zero, add_zero]
-    · rfl
-  have hD' : doublePoints (family F e) = relocateCollision F p δ '' doublePoints F := by
-    rw [hD]
-    exact image_congr hmap
-  refine ⟨family F e, hnew, hi', hr', hfin', hno' hno, hfull' hfull, hglobal' hglobal,
-    spatial_sources_injective (β := fun z => δ * β z) hclock hspace,
-    ⟨unorderedCollisionEquiv (β := fun z => δ * β z) hclock⟩,
-    (fun q hq => hzero q (by change δ * β (F q) = 0; rw [hfixed q hq, mul_zero])),
-    hD', ?_⟩
-  rw [hD']
-  refine ⟨p, hp, ?_⟩
-  simp [relocateCollision]
 
 end Wikipedia.HopfProblem.OrbitPair.TargetClock

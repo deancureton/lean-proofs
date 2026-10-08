@@ -87,9 +87,6 @@ def torsionParity : ZMod 2 := residueParity relation.2.toAdd
 theorem integerLift_twelfth_power_iff_parity : integerLift ^ 12 = 1 ↔ torsionParity = 0 :=
   integerLift_pow_twelve_iff.trans (six_zsmul_eq_zero_iff_parity relation.2.toAdd)
 
-theorem halfOrder_square : (integerLift ^ 12) ^ 2 = 1 := by
-  rw [← pow_mul]
-  exact pow_twentyFour integerLift
 
 end NoExoticSixSphere.SphereFiveEighth
 

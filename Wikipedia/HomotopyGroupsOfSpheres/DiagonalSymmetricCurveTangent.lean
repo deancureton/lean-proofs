@@ -120,13 +120,5 @@ theorem diagonal_curve_reconstruction (q : Fin 3 → unitary ℂ)
   rw [hleft] at hc
   exact hc
 
-theorem diagonal_curve_coordinates_kernel (q : Fin 3 → unitary ℂ)
-    (B : ℝ → Space (Fin 3)) (D : Matrix (Fin 3) (Fin 3) ℂ) (x : ℝ)
-    (hB : ∀ r s, HasDerivAt (fun t ↦ (B t).val.val r s) (D r s) x)
-    (hBx : (B x).val.val = Matrix.diagonal (fun r ↦ (q r).val ^ 2))
-    (hD : diagonalTangentCoordinates q D = 0) : D = 0 := by
-  ext r s
-  rw [diagonal_curve_reconstruction q B D x hB hBx r s, hD]
-  simp
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicSymmetricMatrices

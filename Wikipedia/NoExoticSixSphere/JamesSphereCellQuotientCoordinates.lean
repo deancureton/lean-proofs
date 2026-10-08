@@ -62,15 +62,6 @@ theorem quotientGenLoop_apply (n : ℕ) (hn : 0 < n) {d : ℕ}
         (DiskBoundary.segment (cornerDisk n)
           (u 0, DiskCylinder.boundaryToDisk (p.val (Fin.tail u))))) := rfl
 
-theorem quotientGenLoop_pairing (n : ℕ) (hn : 0 < n) {d : ℕ}
-    (p : GenLoop (Fin d) (Boundary n) (corner n hn)) (u : Fin (d + 1) → unitInterval) :
-    (quotientGenLoop n hn p).val u =
-      pairing n
-        (Cell.array n 2 (DiskBoundary.segment (cornerDisk n)
-          (u 0, DiskCylinder.boundaryToDisk (p.val (Fin.tail u)))).val 0,
-        Cell.array n 2 (DiskBoundary.segment (cornerDisk n)
-          (u 0, DiskCylinder.boundaryToDisk (p.val (Fin.tail u)))).val 1) := by
-  rw [quotientGenLoop_apply, collapse_characteristic]
 
 theorem quotientHom_mk (n : ℕ) (hn : 0 < n) (d : ℕ) [NeZero d]
     (p : GenLoop (Fin d) (Boundary n) (corner n hn)) :
@@ -83,15 +74,5 @@ theorem quotientHom_eq_currying (n : ℕ) (hn : 0 < n) (d : ℕ) [NeZero d]
   refine Quotient.inductionOn c fun p ↦ ?_
   rfl
 
-theorem connecting_quotientGenLoop (n d : ℕ) [NeZero d]
-    (hn : 2 ≤ n) (hdn : d + 3 ≤ 3 * n)
-    (p : GenLoop (Fin d) (Boundary n) (corner n (by omega))) :
-    EHP.connectingHomMetastable n d hn hdn
-      (CubicalSphereSuspension.hom (d + 1) (n + n)
-        (Quotient.mk _ (quotientGenLoop n (by omega) p))) =
-      Quotient.mk _ (HigherHomotopy.genLoopMap (attaching n)
-        (attaching_corner n (by omega)) p) := by
-  rw [← quotientHom_mk n (by omega) d p]
-  exact connecting_quotientHom n d hn hdn (Quotient.mk _ p)
 
 end NoExoticSixSphere.JamesSphere.CellBoundary

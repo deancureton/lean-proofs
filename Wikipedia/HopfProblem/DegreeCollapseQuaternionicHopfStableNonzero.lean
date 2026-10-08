@@ -57,10 +57,6 @@ theorem polynomial_square_stable_ne_one :
   exact squareMap_not_finitely_stably_nullhomotopic
     ((StableSixSphereMaps.ofMap_eq_nullClass_iff _).mp hmap)
 
-theorem suspendedSmashClass_ne_one : suspendedSmashClass ≠ 1 := by
-  intro h
-  apply polynomial_square_stable_ne_one
-  rw [h, CubicalStableSix.ofNative_one]
 
 theorem stableSquare_ne_one : StableThirdComposition.stableSquare ≠ 1 := by
   rw [← SixthStemTwoValues.polynomial_square_stable]

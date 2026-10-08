@@ -50,10 +50,6 @@ def sphereCandidate : C(Sphere 7, SpGroup (Fin 2)) := sphereCandidateFamily.toSp
 def sphereSourcePoint (s t : I) (z : UnitSphere) : Sphere 7 :=
   Latitude.point 6 s (Latitude.point 5 t (sphereFiveHomeomorph.symm z))
 
-theorem continuous_sphereSourcePoint :
-    Continuous (fun p : I × (I × UnitSphere) ↦ sphereSourcePoint p.1 p.2.1 p.2.2) := by
-  unfold sphereSourcePoint
-  fun_prop
 
 theorem sphereSourcePoint_surjective :
     Function.Surjective (fun p : I × (I × UnitSphere) ↦ sphereSourcePoint p.1 p.2.1 p.2.2) := by
@@ -81,11 +77,6 @@ theorem sphereCandidate_outer_zero (v : Sphere 6) :
   rw [sphereCandidate, LatitudeDescent.DoubleFamily.toSphereMap_point]
   exact sphereCandidateFamily.outer_zero t z
 
-theorem sphereCandidate_outer_one (v : Sphere 6) :
-    sphereCandidate (Latitude.point 6 1 v) = 1 := by
-  obtain ⟨⟨t, z⟩, rfl⟩ := Latitude.point_surjective 5 v
-  rw [sphereCandidate, LatitudeDescent.DoubleFamily.toSphereMap_point]
-  exact sphereCandidateFamily.outer_one t z
 
 def sphereCandidateProjection : C(Sphere 7, UnitColumn (Fin 2)) := (column 0).comp sphereCandidate
 

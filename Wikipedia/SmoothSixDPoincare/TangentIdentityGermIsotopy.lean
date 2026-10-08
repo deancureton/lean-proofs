@@ -87,28 +87,5 @@ theorem exists_supported_tangent_identity_isotopy {f : E → E} {U : Set E}
     change x + (f x - x) = f x
     abel
 
-/-- The germ is realized by a compactly supported diffeomorphism isotopic to the identity. -/
-theorem exists_supported_tangent_identity_diffeomorph {f : E → E} {U : Set E}
-    (hU : IsOpen U) (hzero : (0 : E) ∈ U) (hf : ContDiffOn ℝ ∞ f U)
-    (hf₀ : f 0 = 0) (hdf : fderiv ℝ f 0 = ContinuousLinearMap.id ℝ E) :
-    ∃ (D : Diffeomorph 𝓘(ℝ, E) 𝓘(ℝ, E) E E ∞) (K : Set E),
-      IsCompact K ∧ K ⊆ U ∧ SupportedDiffeomorph.IsotopicToIdentity D ∧
-      (∀ x ∉ K, D x = x) ∧
-      (∀ x, ∃ c ∈ Icc (0 : ℝ) 1, D x = x + c • (f x - x)) ∧
-      (D : E → E) =ᶠ[𝓝 (0 : E)] f := by
-  obtain ⟨A, K, hK, hKU, hA, hA₀, hdiff, hfix, hscalar, hgerm⟩ :=
-    exists_supported_tangent_identity_isotopy hU hzero hf hf₀ hdf
-  obtain ⟨D, hD⟩ := hdiff 1
-  have hiso : SupportedDiffeomorph.IsotopicToIdentity D := by
-    refine ⟨A, hA, hA₀, fun x => (hD x).symm, ?_⟩
-    intro t
-    obtain ⟨e, he⟩ := hdiff t
-    exact ⟨e, fun x => (he x).symm⟩
-  refine ⟨D, K, hK, hKU, hiso, fun x hx => (hD x).trans (hfix 1 x hx), ?_, ?_⟩
-  · intro x
-    rw [hD]
-    exact hscalar 1 x
-  · filter_upwards [hgerm] with x hx
-    exact (hD x).trans hx
 
 end Wikipedia.SmoothSixDPoincare.SmallPerturbation

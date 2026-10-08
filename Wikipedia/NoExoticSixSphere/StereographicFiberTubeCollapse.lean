@@ -37,43 +37,10 @@ def tubeCollapseData :
   letI := RegularSphereFiber.fiber_compact f b
   exact (embedding f hf b hreg a ha).framedCollapseData (frame f hf b hreg a ha)
 
-theorem iterate_tubeCollapse_nullhomotopic_iff (r : ℕ) :
-    letI := regularFiberAtlas f hf b hreg k (by simp only [finrank_euclideanSpace_fin]);
-    (SphereMapSuspension.iterate (tubeCollapseData f hf b hreg a ha).sphereMap r).Nullhomotopic ↔
-      (SphereMapSuspension.iterate f r).Nullhomotopic := by
-  let := regularFiberAtlas f hf b hreg k (by simp only [finrank_euclideanSpace_fin])
-  let := regularFiber_isManifold f hf b hreg k (by simp only [finrank_euclideanSpace_fin])
-  let := RegularSphereFiber.fiber_compact f b
-  exact ((tubeCollapseData f hf b hreg a ha).iterate_sphereMap_nullhomotopic_iff
-    (collapseData f hf b hreg a ha) r).trans
-      (iterate_collapse_nullhomotopic_iff f hf b hreg a ha r)
 
 end NoExoticSixSphere.StereographicFiber
 
 namespace NoExoticSixSphere.StableSixSphereMaps
 
-theorem exists_nonzero_canonical_tube_representative (c : Class) (hc : c ≠ nullClass) :
-    ∃ (k : ℕ) (g : StageMap k),
-      ∃ hg : ContMDiff (𝓡 (k + 8)) (𝓡 (k + 2)) ∞ g,
-        ∃ (b : Sphere (k + 2))
-          (hreg : ∀ x, g x = b → Surjective (mfderiv (𝓡 (k + 8)) (𝓡 (k + 2)) g x))
-          (a : Sphere (k + 8)) (ha : g a = -b),
-          ofMap g = c ∧ ∃ hne : Nonempty {x : Sphere (k + 8) // g x = b},
-          letI := hne;
-          letI := regularFiberAtlas g hg b hreg 6 (by simp only [finrank_euclideanSpace_fin]);
-          (StereographicFiber.tubeCollapseData (k := 6) g hg b hreg a ha).sixthStableClass
-            (by change 8 ≤ k + 8; omega) ≠ nullClass := by
-  obtain ⟨k, g, hg, b, hreg, a, ha, he, hne, hn⟩ :=
-    exists_nonzero_framed_collapse_representative c hc
-  refine ⟨k, g, hg, b, hreg, a, ha, he, hne, ?_⟩
-  let := hne
-  let := regularFiberAtlas g hg b hreg 6 (by simp only [finrank_euclideanSpace_fin])
-  let := regularFiber_isManifold g hg b hreg 6 (by simp only [finrank_euclideanSpace_fin])
-  let := RegularSphereFiber.fiber_compact g b
-  have he := EuclideanEmbedding.FramedCollapseData.sixthStableClass_eq_of_same_frame
-    (StereographicFiber.tubeCollapseData (k := 6) g hg b hreg a ha)
-    (StereographicFiber.collapseData (k := 6) g hg b hreg a ha)
-    (by change 8 ≤ k + 8; omega)
-  exact fun hz ↦ hn (he.symm.trans hz)
 
 end NoExoticSixSphere.StableSixSphereMaps

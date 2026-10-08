@@ -84,15 +84,6 @@ theorem collision_time_between_collars {F : ℝ × M → N} {L R : M → N}
       _ = F (p.1, p.2.2) := hp.2
       _ = R p.2.2 := hhi _ _ ht
 
-theorem collisionSources_time_between_collars {F : ℝ × M → N} {L R : M → N}
-    (hL : Injective L) (hR : Injective R) {a b : ℝ}
-    (hlo : ∀ t x, t ≤ a → F (t, x) = L x)
-    (hhi : ∀ t x, b ≤ t → F (t, x) = R x) :
-    ∀ p ∈ collisionSources F, p.1 ∈ Ioo a b := by
-  intro p hp
-  rcases hp with ⟨q, hq, rfl⟩ | ⟨q, hq, rfl⟩
-  · exact collision_time_between_collars hL hR hlo hhi hq
-  · exact collision_time_between_collars hL hR hlo hhi hq
 
 theorem collisionSources_eq_of_doublePoints_eq {F G : ℝ × M → N}
     (hD : doublePoints F = doublePoints G) : collisionSources F = collisionSources G := by

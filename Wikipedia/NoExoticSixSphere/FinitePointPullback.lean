@@ -76,14 +76,5 @@ theorem value_point_pullback_eq_card (f : C(Sphere 3, Y)) (y : Y) (s : Finset (S
   exact pointPieces_pullback_ne_zero f y s hs 3 a ha x hx
     (hf.mono (singleton_subset_iff.mpr (hs.symm.subset hx)))
 
-/-- The count uses the literal inverse-image support, independent of its finite presentation. -/
-theorem value_point_pullback_eq_ncard (f : C(Sphere 3, Y)) (y : Y)
-    (hfinite : (f ⁻¹' ({y} : Set Y)).Finite)
-    (a : Cohomology ({y} : Set Y) 3) (ha : a ≠ 0)
-    (hf : IsLocalHomeomorphOn f (f ⁻¹' ({y} : Set Y))) :
-    value (f ⁻¹' ({y} : Set Y)) 3 (unitSphereTopClass 2) (pullback f ({y} : Set Y) 3 a) =
-      ((f ⁻¹' ({y} : Set Y)).ncard : ZMod 2) := by
-  rw [Set.ncard_eq_toFinset_card _ hfinite]
-  exact value_point_pullback_eq_card f y hfinite.toFinset hfinite.coe_toFinset.symm a ha hf
 
 end NoExoticSixSphere.SpherePointEvaluation

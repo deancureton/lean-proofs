@@ -89,12 +89,5 @@ theorem localProjection_fderiv_kernel (z : UnitSphere)
   apply Subtype.ext
   exact congrArg (WithLp.toLp 2) hc
 
-theorem localProjection_fderiv_injective (z : UnitSphere)
-    (hz : firstColumnFormula (Real.pi / 2) (Real.pi / 2) (symmetricMap z) = targetColumn) :
-    Function.Injective (fderiv ℝ (localProjection z) 0) := by
-  intro v w h
-  have he : fderiv ℝ (localProjection z) 0 (v - w) = 0 := by
-    rw [map_sub, h, sub_self]
-  exact sub_eq_zero.mp (localProjection_fderiv_kernel z hz (v - w) he)
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

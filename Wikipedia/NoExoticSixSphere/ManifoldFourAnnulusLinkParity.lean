@@ -31,14 +31,6 @@ variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 7) M]
   (hg : ∀ x ∈ domain 3, ContMDiffAt (𝓡 4) (𝓡 7) ∞ g x)
   (P : GenericFourAnnulus.ParityBallSystem g)
 
-theorem puncturedFourAnnulusOperatorMap_link (x : AnnulusDoublePoints.singularSet g) :
-    (e.puncturedFourAnnulusOperatorMap a g hg P).comp (P.linkingSphere x) =
-      (P.ball x).localGlobalOperatorLink e a
-        (fun y hy ↦ hg y (openDomain_subset_domain 3
-          ((P.ball x).closedRegion_subset_interior hy))) := by
-  apply ContinuousMap.ext
-  intro q
-  rfl
 
 theorem puncturedFourAnnulusFrameMap_link (x : AnnulusDoublePoints.singularSet g) :
     (e.puncturedFourAnnulusFrameMap a g hg P).comp (P.linkingSphere x) =

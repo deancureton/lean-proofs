@@ -52,25 +52,6 @@ theorem continuous_sourceBlockJacobianEquiv (k : ℕ) (u : Sphere 3 → Sphere 3
   exact continuous_identityBlockOperator k (fun x : U ↦ sourceJacobian u x.val)
     (continuous_sourceJacobianEquiv u U hu)
 
-theorem continuous_inverse_sourceBlockJacobianEquiv (k : ℕ) (u : Sphere 3 → Sphere 3)
-    (U : Set (Sphere 3)) (hu : ∀ x : U, IsLocalDiffeomorphAt (𝓡 3) (𝓡 3) ∞ u x.val) :
-    Continuous (fun x : U ↦
-      (sourceBlockJacobianEquiv k u x.val (hu x)).symm.toContinuousLinearMap) := by
-  have he (x : U) : (sourceBlockJacobianEquiv k u x.val (hu x)).symm.toContinuousLinearMap =
-      (sourceBlockJacobian k u x.val).inverse := by
-    rw [← sourceBlockJacobianEquiv_toContinuousLinearMap k u x.val (hu x)]
-    exact (ContinuousLinearMap.inverse_equiv (sourceBlockJacobianEquiv k u x.val (hu x))).symm
-  simp_rw [he]
-  rw [continuous_iff_continuousAt]
-  intro x
-  have hi : (sourceBlockJacobian k u x.val).IsInvertible :=
-    ⟨sourceBlockJacobianEquiv k u x.val (hu x),
-      sourceBlockJacobianEquiv_toContinuousLinearMap k u x.val (hu x)⟩
-  have hc : ContinuousAt (fun y : U ↦ sourceBlockJacobian k u y.val) x := by
-    simpa only [sourceBlockJacobianEquiv_toContinuousLinearMap] using
-      (continuous_sourceBlockJacobianEquiv k u U hu).continuousAt (x := x)
-  exact (hi.contDiffAt_map_inverse (n := ∞)).continuousAt.comp
-    (f := fun y : U ↦ sourceBlockJacobian k u y.val) hc
 
 end SphereThreeTangentFrame
 

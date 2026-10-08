@@ -63,17 +63,6 @@ theorem equalLevelDiffeomorph_val
     (hgr : ∀ y, g y = a → y ∉ criticalPoints E g) (heq : ∀ y, g y = a ↔ f y = a)
     (y : {z : M // f z = a}) : (equalLevelDiffeomorph hf hg hfr hgr heq y).val = y.val := rfl
 
-theorem equalLevelDiffeomorph_symm_val
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (hg : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ g)
-    (hfr : ∀ y, f y = a → y ∉ criticalPoints E f)
-    (hgr : ∀ y, g y = a → y ∉ criticalPoints E g) (heq : ∀ y, g y = a ↔ f y = a)
-    (y : {z : M // g z = a}) :
-    let _ := RegularLevel.chartedSpace hf hfr
-    let _ := RegularLevel.chartedSpace hg hgr
-    ((equalLevelDiffeomorph hf hg hfr hgr heq).symm y).val = y.val := by
-  let _ := RegularLevel.chartedSpace hf hfr
-  let _ := RegularLevel.chartedSpace hg hgr
-  rfl
 
 theorem regular_level_of_retained_critical_germs
     (hfr : ∀ y, f y = a → y ∉ criticalPoints E f)

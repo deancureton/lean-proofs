@@ -43,17 +43,6 @@ def differentialChange (c : PartialDiffeomorph J 𝓘(ℝ, F) N F ∞)
     (hb : b ∈ c.source) (hb' : b ∈ c'.source) : F ≃L[ℝ] G :=
   (chartDifferential c b hb).symm.trans (chartDifferential c' b hb')
 
-theorem differentialChange_comp (c : PartialDiffeomorph J 𝓘(ℝ, F) N F ∞)
-    (c' : PartialDiffeomorph J 𝓘(ℝ, G) N G ∞) (b : N)
-    (hb : b ∈ c.source) (hb' : b ∈ c'.source) :
-    (differentialChange c c' b hb hb').toContinuousLinearMap.comp
-        (chartDifferential c b hb).toContinuousLinearMap =
-      (chartDifferential c' b hb').toContinuousLinearMap := by
-  apply ContinuousLinearMap.ext
-  intro v
-  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearEquiv.coe_coe,
-    differentialChange, ContinuousLinearEquiv.trans_apply,
-    ContinuousLinearEquiv.symm_apply_apply]
 
 theorem mfderiv_coordinates_at_fiber (f : M → N)
     (c : PartialDiffeomorph J 𝓘(ℝ, F) N F ∞) (b : N) (hb : b ∈ c.source)

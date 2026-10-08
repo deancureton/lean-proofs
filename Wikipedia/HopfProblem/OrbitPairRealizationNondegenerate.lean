@@ -26,18 +26,6 @@ open FirstHurewicz SecondHurewicz.SimplyConnected
 
 variable (S : SSet)
 
-theorem continuous_iff_nonDegenerate {Y : Type*} [TopologicalSpace Y]
-    (f : SSet.toTop.obj S → Y) :
-    Continuous f ↔ ∀ (n : ℕ) (x : S.nonDegenerate n),
-      Continuous (f ∘ characteristic S n x.val) := by
-  rw [continuous_iff_characteristic]
-  constructor
-  · intro hf n x
-    exact hf n x.val
-  · intro hf n x
-    obtain ⟨m, g, _, y, rfl⟩ := S.exists_nonDegenerate x
-    rw [characteristic_map]
-    exact (hf m y).comp (simplexMap g).continuous
 
 theorem isOpen_iff_nonDegenerate (U : Set (SSet.toTop.obj S)) :
     IsOpen U ↔ ∀ (n : ℕ) (x : S.nonDegenerate n),
@@ -51,10 +39,6 @@ theorem isOpen_iff_nonDegenerate (U : Set (SSet.toTop.obj S)) :
     rw [characteristic_map]
     exact (hU m y).preimage (simplexMap g).continuous
 
-theorem isClosed_iff_nonDegenerate (U : Set (SSet.toTop.obj S)) :
-    IsClosed U ↔ ∀ (n : ℕ) (x : S.nonDegenerate n),
-      IsClosed (characteristic S n x.val ⁻¹' U) := by
-  simp only [← isOpen_compl_iff, isOpen_iff_nonDegenerate, Set.preimage_compl]
 
 theorem exists_positive_nonDegenerate_representative (n : ℕ) (x : S _⦋n⦌)
     (t : Simplex n) :

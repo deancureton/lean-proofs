@@ -73,11 +73,6 @@ def squareCoordinates : C(I × I, Fin 2 → I) where
     squareCoordinates z 1 = z.2 := by
   simp [squareCoordinates, Cube.insertAt, Homeomorph.funSplitAt_symm_apply]
 
-theorem squareCoordinates_surjective : Function.Surjective squareCoordinates := by
-  intro z
-  refine ⟨(z 0, z 1), ?_⟩
-  funext i
-  fin_cases i <;> simp
 
 /-- The original generalized loop written on the ordinary product square. -/
 def squareMap {x : X} (p : GenLoop (Fin 2) X x) : C(I × I, X) :=

@@ -45,18 +45,6 @@ theorem dualityMap_apply (p q : ℕ) (h : p + q = n + 3) (a : Cohomology M p) :
     dualityMap (E := E) n M p q h a =
       capProductInDegree M h a (ManifoldFundamentalClass.fundamentalClass (E := E) n M) := rfl
 
-/-- Every actual fundamental cycle gives the original front/back representative formula. -/
-theorem dualityMap_cocycle_cycle (p q : ℕ) (h : p + q = n + 3) (α : Cocycle M p)
-    (c : ModuleHomology.Cycle (modComplex 2 M) (n + 3))
-    (hc : ModuleHomology.cycleClass (modComplex 2 M) (n + 3) c =
-      ManifoldFundamentalClass.fundamentalClass (E := E) n M) :
-    dualityMap (E := E) n M p q h
-        (SingularCohomologyFree.cocycleClass (cochainComplex M) p α) =
-      ModuleHomology.cycleClass (modComplex 2 M) q
-        (capCyclesInDegree h α.val (cocycle_coboundary_zero M p α) c) := by
-  exact (congrArg (capProductInDegree M h
-    (SingularCohomologyFree.cocycleClass (cochainComplex M) p α)) hc).symm.trans
-      (capProductInDegree_cocycle_cycle h α c)
 
 /-- The genuine cohomology unit maps to the constructed fundamental class. -/
 theorem dualityMap_unit :

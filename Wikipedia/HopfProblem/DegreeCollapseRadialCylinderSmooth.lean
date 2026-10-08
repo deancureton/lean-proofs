@@ -100,11 +100,6 @@ def radialCylinderChart (n : ℕ) [Fact (Module.finrank ℝ E = n + 1)]
   exact (radialCylinderDiffeomorph E n).toPartialDiffeomorph.trans
     (PartialChart.openInclusion (I := 𝓘(ℝ, E)) (puncturedVectorSpace E))
 
-theorem radialCylinderChart_apply (n : ℕ) [Fact (Module.finrank ℝ E = n + 1)]
-    (u : sphere (0 : E) 1) (p : ℝ × sphere (0 : E) 1) :
-    radialCylinderChart E n u p = Real.exp p.1 • p.2.val := by
-  unfold radialCylinderChart Diffeomorph.toPartialDiffeomorph
-  rfl
 
 theorem radialCylinderChart_mem_source (n : ℕ) [Fact (Module.finrank ℝ E = n + 1)]
     (u : sphere (0 : E) 1) (p : ℝ × sphere (0 : E) 1) :

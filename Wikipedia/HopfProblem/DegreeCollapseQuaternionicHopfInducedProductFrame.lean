@@ -97,11 +97,6 @@ theorem normalFrame_ambient (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
     (normalFrame a).ambient p =
       orthogonalRightInverse (fderiv ℝ (equations a) (ambientInclusion p)) := rfl
 
-theorem normalFrame_rightInverse (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
-    (fderiv ℝ (equations a) (ambientInclusion p)).comp ((normalFrame a).ambient p) =
-      ContinuousLinearMap.id ℝ Normal := by
-  rw [normalFrame_ambient]
-  exact comp_orthogonalRightInverse _ (equations_fderiv_surjective a p)
 
 theorem normalFrame_range (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
     ((normalFrame a).ambient p).range =

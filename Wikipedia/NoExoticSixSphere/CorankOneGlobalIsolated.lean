@@ -79,16 +79,5 @@ theorem isDiscrete_of_regular_cover (D : X → V →L[ℝ] W) (hD : ContDiff ℝ
     rcases mem_singleton_iff.mp hy with rfl
     exact ⟨⟨hNx, hxc⟩, hx⟩
 
-theorem ae_corank_one_isDiscrete [MeasurableSpace (V →L[ℝ] W)]
-    [BorelSpace (V →L[ℝ] W)] (μ : Measure (V →L[ℝ] W)) [IsAddHaarMeasure μ]
-    (D : X → V →L[ℝ] W) (hD : ContDiff ℝ ∞ D)
-    (hv : finrank ℝ V = finrank ℝ E + 1)
-    (hw : finrank ℝ W = finrank ℝ E + finrank ℝ F)
-    (hd : finrank ℝ X = finrank ℝ F) :
-    ∀ᵐ A ∂μ, IsDiscrete {x | finrank ℝ (D x + A).range = finrank ℝ E} := by
-  obtain ⟨C, hC, hcov⟩ := exists_countable_cover hv hw
-  apply (ae_regular_countable_coordinates μ C hC D hD).mono
-  intro A hA
-  exact isDiscrete_of_regular_cover (fun x ↦ D x + A) (hD.add contDiff_const) hv hd C hcov hA
 
 end NoExoticSixSphere.CorankOneCoordinates

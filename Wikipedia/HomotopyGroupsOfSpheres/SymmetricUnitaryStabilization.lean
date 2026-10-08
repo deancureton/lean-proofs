@@ -44,10 +44,6 @@ def specialStabilization (n : ℕ) : C(SpecialSpace (Fin n), SpecialSpace (Fin (
     exact B.property⟩
   continuous_toFun := ((stabilization n).continuous.comp continuous_subtype_val).subtype_mk _
 
-theorem specialStabilization_identity (n : ℕ) :
-    specialStabilization n specialIdentity = specialIdentity := by
-  apply Subtype.ext
-  exact stabilization_identity n
 
 def stabilizationIterate (n : ℕ) : (r : ℕ) → C(Space (Fin n), Space (Fin (n + r)))
   | 0 => ContinuousMap.id _

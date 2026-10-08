@@ -53,12 +53,5 @@ def liftToSmall {K : ChainComplex (ModuleCat ℤ) ℕ} (f : K ⟶ singularComple
   apply ModuleCat.hom_ext
   rfl
 
-theorem liftToSmall_unique {K : ChainComplex (ModuleCat ℤ) ℕ}
-    (f : K ⟶ singularComplex X)
-    (hf : ∀ n (c : K.X n), (f.f n).hom c ∈ smallChainSubmodule U V n)
-    (g : K ⟶ smallComplex U V) (hg : g ≫ smallInclusion U V = f) :
-    g = liftToSmall U V f hf := by
-  apply (cancel_mono (smallInclusion U V)).mp
-  rw [hg, liftToSmall_inclusion]
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

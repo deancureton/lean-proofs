@@ -78,18 +78,6 @@ theorem exists_negativeFamily (K : SkewOperators n)
   change 16 * Real.pi ^ 2 * squareNorm (T c : Vector n →L[ℝ] Vector n) ≤ _ at hb
   linarith
 
-/-- The negative family is realized by actual fixed-endpoint exponential
-variations, with a negative second energy derivative for every nonzero parameter. -/
-theorem exists_negative_energy_family (b : OrthogonalOperators n) (K : SkewOperators n)
-    (hexp : (exp K).1.1 = -(1 : Vector n →L[ℝ] Vector n))
-    (hnot : gram K ≠ Real.pi ^ 2 • (1 : Vector n →L[ℝ] Vector n)) :
-    ∃ (m : ℕ) (T : (Fin m → ℝ) →ₗ[ℝ] SkewOperators n),
-      m + 2 = n ∧ Function.Injective T ∧ ∀ c, c ≠ 0 →
-        deriv (deriv (fun s ↦ OrthogonalPathEnergy.energy
-          (fun t ↦ (OrthogonalExponentialVariation.family
-            (fun r ↦ b * exp (r • K)) (field K (T c)) (s, t)).1.1) 0 1)) 0 < 0 := by
-  obtain ⟨m, T, hm, hT, hneg⟩ := exists_negativeFamily K hexp hnot
-  exact ⟨m, T, hm, hT, fun c hc ↦ negative_secondDerivative b K (T c) (hneg c hc)⟩
 
 /-- The estimate holds on a genuine linear space of independent smooth,
 endpoint-zero variation fields, not just on independent operator labels. -/

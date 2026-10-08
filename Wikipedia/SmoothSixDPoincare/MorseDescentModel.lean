@@ -44,10 +44,6 @@ theorem fderiv_quadratic_descent (z : N × P) :
     inner_neg_right, real_inner_self_eq_norm_sq, two_smul]
   ring
 
-theorem fderiv_quadratic_descent_nonpos (z : N × P) :
-    fderiv ℝ quadratic z (descent z) ≤ 0 := by
-  rw [fderiv_quadratic_descent]
-  nlinarith [sq_nonneg ‖z.1‖, sq_nonneg ‖z.2‖]
 
 theorem fderiv_quadratic_descent_neg {z : N × P} (hz : z ≠ 0) :
     fderiv ℝ quadratic z (descent z) < 0 := by

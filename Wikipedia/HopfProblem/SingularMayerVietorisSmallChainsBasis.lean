@@ -77,11 +77,7 @@ def chainBasis : Module.Basis (SingularSimplex X n) ℤ (Chains X n) :=
 theorem chainBasis_coe : ⇑(chainBasis X n) = simplexChain X n :=
   funext (chainBasis_apply X n)
 
-theorem simplexChain_injective : Function.Injective (simplexChain X n) := by
-  simpa only [chainBasis_coe] using (chainBasis X n).injective
 
-theorem simplexChain_linearIndependent : LinearIndependent ℤ (simplexChain X n) := by
-  simpa only [chainBasis_coe] using (chainBasis X n).linearIndependent
 
 theorem simplexChain_span : Submodule.span ℤ (Set.range (simplexChain X n)) = ⊤ := by
   simpa only [chainBasis_coe] using (chainBasis X n).span_eq
@@ -99,11 +95,6 @@ theorem simplex_span_inter (S T : Set (SingularSimplex X n)) :
   ext c
   simp only [Submodule.mem_inf, mem_simplex_span_iff, Set.subset_inter_iff]
 
-theorem simplex_span_union (S T : Set (SingularSimplex X n)) :
-    Submodule.span ℤ (simplexChain X n '' S) ⊔
-      Submodule.span ℤ (simplexChain X n '' T) =
-        Submodule.span ℤ (simplexChain X n '' (S ∪ T)) := by
-  rw [Set.image_union, Submodule.span_union]
 
 
 end Wikipedia.HopfProblem.FirstHurewicz

@@ -27,9 +27,6 @@ def negative {n : ℕ} (J : Space n) : Space n :=
     rw [map_neg, neg_neg]
     exact square_apply J x⟩
 
-theorem negative_negative {n : ℕ} (J : Space n) : negative (negative J) = J := by
-  apply Subtype.ext
-  exact neg_neg J.val
 
 end ComplexStructures
 

@@ -41,9 +41,5 @@ theorem negativeHalf_simplyConnected_of_sphere (eBoundary : B ≃ₜ Sphere 6) :
   let : SimplyConnectedSpace B := eBoundary.toHomotopyEquiv.simplyConnectedSpace
   exact S.negativeHalf_simplyConnected
 
-theorem negativeHalfInclusion_homology_zero_bijective (eBoundary : B ≃ₜ Sphere 6) :
-    Bijective (singularHomologyMap S.negativeHalfInclusion 0) := by
-  let : SimplyConnectedSpace S.NegativeHalf := S.negativeHalf_simplyConnected_of_sphere eBoundary
-  exact SphereHomology.singularHomologyMap_zero_bijective S.negativeHalfInclusion
 
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

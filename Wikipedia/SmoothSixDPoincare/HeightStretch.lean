@@ -29,15 +29,6 @@ theorem stretchHeight_of_ge {c k r : ℝ} (hr : c ≤ r) :
   rw [stretchHeight, max_eq_right (sub_nonneg.mpr hr)]
   ring
 
-theorem stretchHeight_le_center_iff {c k r : ℝ} (hk : 0 < k) :
-    stretchHeight c k r ≤ c ↔ r ≤ c := by
-  by_cases hr : r ≤ c
-  · rw [stretchHeight_of_le hr]
-  · have hcr : c < r := lt_of_not_ge hr
-    have hs : c < stretchHeight c k r := by
-      rw [stretchHeight_of_ge hcr.le]
-      exact lt_add_of_pos_right c (mul_pos hk (sub_pos.mpr hcr))
-    exact iff_of_false (not_le_of_gt hs) hr
 
 theorem stretchHeight_inverse {c k : ℝ} (hk : 0 < k) (r : ℝ) :
     stretchHeight c k⁻¹ (stretchHeight c k r) = r := by

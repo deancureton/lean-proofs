@@ -24,32 +24,13 @@ def traceVariation (t v : ℂ) : ℂ := 2 * t * v + 2 * star v
 def traceVariationMatrix (t : ℂ) : Matrix (Fin 2) (Fin 2) ℝ :=
   !![2 * (t.re + 1), -2 * t.im; 2 * t.im, 2 * (t.re - 1)]
 
-theorem hasDerivAt_tracePolynomial (w : ℝ → ℂ) (v : ℂ) (x : ℝ)
-    (hw : HasDerivAt w v x) :
-    HasDerivAt (fun t ↦ w t ^ 2 + 2 * star (w t)) (traceVariation (w x) v) x := by
-  convert (hw.mul hw).add (hw.star.const_mul 2) using 1 <;> try rfl
-  · funext t
-    simp only [pow_two, Pi.add_apply, Pi.mul_apply]
-  · unfold traceVariation
-    ring
 
-theorem traceVariation_coordinates (t v : ℂ) :
-    ![(traceVariation t v).re, (traceVariation t v).im] =
-      traceVariationMatrix t *ᵥ ![v.re, v.im] := by
-  funext r
-  fin_cases r <;>
-    simp [traceVariation, traceVariationMatrix, Matrix.mulVec, dotProduct,
-      Fin.sum_univ_two, Complex.mul_re, Complex.mul_im] <;> ring
 
 theorem traceVariationMatrix_det (t : ℂ) :
     (traceVariationMatrix t).det = 4 * (Complex.normSq t - 1) := by
   simp [traceVariationMatrix, Matrix.det_fin_two, Complex.normSq_apply]
   ring
 
-theorem traceVariationMatrix_det_neg (t : ℂ) (ht : Complex.normSq t < 1) :
-    (traceVariationMatrix t).det < 0 := by
-  rw [traceVariationMatrix_det]
-  linarith
 
 theorem traceVariation_eq_zero (t v : ℂ) (ht : Complex.normSq t < 1)
     (hv : traceVariation t v = 0) : v = 0 := by

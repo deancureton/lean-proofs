@@ -85,18 +85,5 @@ theorem lower_circle_nullhomotopies_of_three_four_prefix
     (S.upper_circle_nullhomotopies_of_three_four_prefix hf hdim ⟨j.val - 1, hprev⟩
       (fun i hi hij => hindex i hi (by dsimp at hij; omega)))
 
-theorem three_four_block_upper_circle_nullhomotopies
-    (S : SurgeryWindows E f) (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hdim : Module.finrank ℝ E = 7) (r n : ℕ)
-    (hthree : S.HasIndexThreeBlock 0 r)
-    (hfour : ThreeFourPresentation.HasIndexFourBlock S r n)
-    (j : Fin S.count) (hj : j.val ≤ r + n) :
-    ∀ g : C(Hemisphere.Sphere 1, (S.data (S.point j)).UpperLevel),
-      ∃ q, g.Homotopic (ContinuousMap.const _ q) := by
-  apply S.upper_circle_nullhomotopies_of_three_four_prefix hf hdim j
-  intro i hi hij
-  by_cases hir : i.val ≤ r
-  · exact Or.inl (hthree i hi (by simpa only [zero_add] using hir))
-  · exact Or.inr (hfour i (by omega) (by omega))
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse.SurgeryWindows

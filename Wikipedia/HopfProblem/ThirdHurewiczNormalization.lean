@@ -52,15 +52,6 @@ def normalizedThreeSimplex (smp : SingularSimplex X 3) : BasedThreeSimplex x :=
   rw [triangleThreeSimplexHomotopy_const]
   rfl
 
-/-- For already based vertices, the first stage has literally no effect. -/
-theorem normalizedThreeSimplex_val_of_verticesBased (smp : SingularSimplex X 3)
-    (h : VerticesBased x 3 smp) :
-    (normalizedThreeSimplex x smp).val =
-      timeSlice (triangleThreeSimplexHomotopy x
-        (timeSlice (tetrahedronEdgeStraighteningHomotopy x smp) 1)) 1 := by
-  rw [normalizedThreeSimplex_val]
-  unfold normalizedTetrahedronMap
-  rw [vertexNormalizedSimplex_of_verticesBased x 3 smp h]
 
 /-- The genuine four-simplex endpoint under the same three stages. -/
 def normalizedFourSimplexMap (smp : SingularSimplex X 4) : SingularSimplex X 4 :=

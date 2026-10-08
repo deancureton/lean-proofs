@@ -62,11 +62,5 @@ theorem unorderedProjection_eq_of_eventProjection_eq {F : ℝ × M → N}
   have huv := hq.1
   aesop
 
-theorem unordered_times_injective_of_event_times
-    {F : ℝ × M → N} (hno : triplePoints F = ∅)
-    (hsep : InjOn Prod.fst (collisionEvents F)) : InjOn Prod.fst (unorderedDoublePoints F) := by
-  rintro _ ⟨p, hp, rfl⟩ _ ⟨q, hq, rfl⟩ ht
-  apply unorderedProjection_eq_of_eventProjection_eq hno hp hq
-  exact hsep (eventProjection_mem hp) (eventProjection_mem hq) ht
 
 end Wikipedia.HopfProblem.OrbitPair.FamilyDoublePoints

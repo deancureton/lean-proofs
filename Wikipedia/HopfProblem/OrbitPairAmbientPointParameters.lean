@@ -135,38 +135,6 @@ theorem coincidence_imp_old_and_equal_weight {a : V}
 
 variable [FiniteDimensional ℝ E] [IsManifold I ∞ M] [LindelofSpace (ℝ × M)]
 
-theorem exists_small_clock_no_new_point_coincidences
-    (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    (hβ : ContDiff ℝ ∞ β) (hcompact : HasCompactSupport β)
-    (hsupport : tsupport β ⊆ Φ.source)
-    (hκ : ContDiff ℝ ∞ κ) (hbound : ∀ t, ‖κ t‖ ≤ 1)
-    (q : ℝ × M) (hq : F q ∈ Φ.target)
-    (hdim : Module.finrank ℝ (ℝ × E) < Module.finrank ℝ V)
-    {R : V → Prop} (hR : ∀ᶠ a in 𝓝 (0 : V), R a) {ε : ℝ} (hε : 0 < ε) :
-    ∃ a : V, ‖a‖ < ε ∧ R a ∧
-      ∀ p : ℝ × M, family Φ F β κ a q = family Φ F β κ a p →
-        F q = F p ∧ weight Φ F β κ q = weight Φ F β κ p := by
-  have hdense := GeneralPosition.dense_compl_manifold_image
-    (badDomain_isOpen Φ F β κ hF hβ hκ q)
-    (smooth_badParameter Φ F β κ hF hβ hκ q) hdim
-  obtain ⟨η, hη, -, -, hmap⟩ :=
-    SupportedDiffeomorph.exists_radius_ambient_bumpFamily Φ hβ hcompact hsupport
-  obtain ⟨δ, hδ, hδR⟩ := Metric.eventually_nhds_iff.mp hR
-  obtain ⟨a, hgood, hnorm⟩ := hdense.exists_dist_lt 0 (lt_min hε (lt_min hη hδ))
-  have ha : ‖a‖ < min ε (min η δ) := by simpa only [dist_zero_left] using hnorm
-  have haη : ‖a‖ < η := ha.trans_le ((min_le_right _ _).trans (min_le_left _ _))
-  have haδ : ‖a‖ < δ := ha.trans_le ((min_le_right _ _).trans (min_le_right _ _))
-  have hm : ∀ t : ℝ, MapsTo (fun z => z + β z • (κ t • a)) Φ.source Φ.source := by
-    intro t
-    apply hmap (κ t • a)
-    calc
-      ‖κ t • a‖ = ‖κ t‖ * ‖a‖ := norm_smul _ _
-      _ ≤ 1 * ‖a‖ := mul_le_mul_of_nonneg_right (hbound t) (norm_nonneg a)
-      _ = ‖a‖ := one_mul _
-      _ < η := haη
-  refine ⟨a, ha.trans_le (min_le_left _ _), ?_, ?_⟩
-  · exact hδR (by simpa only [dist_zero_right] using haδ)
-  · exact fun p hp => coincidence_imp_old_and_equal_weight Φ F β κ hm hq hgood p hp
 
 theorem exists_small_clock_no_new_finite_point_coincidences
     (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)

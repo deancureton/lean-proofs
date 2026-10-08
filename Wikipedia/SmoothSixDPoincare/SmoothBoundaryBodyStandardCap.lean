@@ -100,12 +100,5 @@ def capSmoothDisk (hs : U.HasStandardCapSphere j hopen) : SmoothBoundaryDisk J N
   boundary_point _ := rfl
   boundarySphere := hs
 
-theorem capSmoothDisk_inclusion (hs : U.HasStandardCapSphere j hopen)
-    (u : PuncturedHandle.UnitSphere N) :
-    ((U.capSmoothDisk j hopen hj hs).space.inclusion (U.capSphereCoordinates j hj hopen u)).val =
-      u.val := by
-  change (((U.capSphereCoordinates j hj hopen).symm
-    (U.capSphereCoordinates j hj hopen u)).val) = u.val
-  rw [Homeomorph.symm_apply_apply]
 
 end Wikipedia.SmoothSixDPoincare.SmoothBoundaryBody

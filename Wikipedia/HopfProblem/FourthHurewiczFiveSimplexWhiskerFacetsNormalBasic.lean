@@ -46,13 +46,5 @@ theorem whiskerFacetNormal_arm_based (F : BasedCubicalCell (n + 2) x)
     · simpa only [Fin.cons_zero] using ha
     · simpa [Fin.init] using hε
 
-/-- On the middle rectangle edge, the original facet has exactly its original
-ordered coordinates, with the independent path coordinate prepended. -/
-theorem cubicalFace_succ_cons (F : BasedCubicalCell (n + 2) x)
-    (i : Fin (n + 1)) (ε : I) (hε : ε = 0 ∨ ε = 1)
-    (u : Fin n → I) (s : I) :
-    cubicalFace F i.succ ε hε (Fin.cons s u) =
-      F.val (Fin.cons s (cubeFacet n i ε u)) := by
-  rw [cubicalFace_apply, cubeFacet_succ_cons]
 
 end Wikipedia.HopfProblem.HigherHurewicz.CubicalBoundary

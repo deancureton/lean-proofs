@@ -54,29 +54,5 @@ theorem native_transverse_sheets_of_level_maps
   exact (native_transversality_partial_diffeomorph_iff C hF hG hcross hsource).mp
     (native_transversality_time_lifts hf hg hv hw hxy htrans s t)
 
-theorem native_transverse_sheet_germs_of_level_maps
-    (C : PartialDiffeomorph (J.prod 𝓘(ℝ, ℝ)) J' (N × ℝ) M ∞)
-    {f : X → N} {g : Y → N} {v : X → ℝ} {w : Y → ℝ} {x : X} {y : Y}
-    (hf : MDifferentiableAt I J f x) (hg : MDifferentiableAt I' J g y)
-    (hv : MDifferentiableAt I 𝓘(ℝ, ℝ) v x)
-    (hw : MDifferentiableAt I' 𝓘(ℝ, ℝ) w y)
-    (hxy : g y = f x) (htrans : NativeTransversality.At I I' J f g x y)
-    {s t : ℝ} (hphase : t + w y = s + v x) (hsource : (f x, s + v x) ∈ C.source)
-    {F : X × ℝ → M} {G : Y × ℝ → M}
-    (hF : F =ᶠ[𝓝 (x, s)] (fun p : X × ℝ => C (f p.1, p.2 + v p.1)))
-    (hG : G =ᶠ[𝓝 (y, t)] (fun p : Y × ℝ => C (g p.1, p.2 + w p.1))) :
-    NativeTransversality.At (I.prod 𝓘(ℝ, ℝ)) (I'.prod 𝓘(ℝ, ℝ)) J' F G (x, s) (y, t) := by
-  have ht := native_transverse_sheets_of_level_maps C hf hg hv hw hxy htrans hphase hsource
-  have hcross : C (g y, t + w y) = C (f x, s + v x) :=
-    congrArg C (Prod.ext hxy hphase)
-  have hFd : (mfderiv (I.prod 𝓘(ℝ, ℝ)) J' F (x, s) : (A × ℝ) →L[ℝ] E) =
-      mfderiv (I.prod 𝓘(ℝ, ℝ)) J'
-        (fun p : X × ℝ => C (f p.1, p.2 + v p.1)) (x, s) := hF.mfderiv_eq
-  have hGd : (mfderiv (I'.prod 𝓘(ℝ, ℝ)) J' G (y, t) : (B × ℝ) →L[ℝ] E) =
-      mfderiv (I'.prod 𝓘(ℝ, ℝ)) J'
-        (fun p : Y × ℝ => C (g p.1, p.2 + w p.1)) (y, t) := hG.mfderiv_eq
-  intro _
-  rw [hFd, hGd]
-  exact ht hcross
 
 end Wikipedia.HopfProblem.DegreeCollapse.TransverseGerms

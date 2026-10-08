@@ -24,8 +24,6 @@ namespace Wikipedia.SmoothSixDPoincare.WhitneyPairModel
 theorem finrank_space : Module.finrank ℝ Space = 6 := by
   simp [Space, Plane, Module.finrank_prod]
 
-theorem finrank_sheet : Module.finrank ℝ Sheet = 3 := by
-  simp [Sheet, Plane, Module.finrank_prod]
 
 theorem contDiff_firstSheet : ContDiff ℝ ∞ firstSheet := by
   unfold firstSheet
@@ -107,20 +105,6 @@ theorem surjective_tangentSum {h : ℝ} (hh : h ≠ 0) (p q : Sheet) (hq : q.1 �
   rw [mul_div_cancel₀ _ hc]
   simp
 
-/-- Both actual intersection points are transverse. -/
-theorem transverse_at_intersection {h : ℝ} (hh : 0 < h) (p q : Sheet)
-    (heq : firstSheet p = secondSheet h q) :
-    Surjective (fun v : Sheet × Sheet =>
-      fderiv ℝ firstSheet p v.1 + fderiv ℝ (secondSheet h) q v.2) := by
-  apply surjective_tangentSum hh.ne' p q
-  rcases ((firstSheet_eq_secondSheet_iff hh p q).mp heq).2.2.2 with hq | hq
-  · rw [hq]
-    norm_num
-  · rw [hq]
-    norm_num
 
-theorem opposite_crossing_slopes {h : ℝ} (hh : 0 < h) :
-    0 < -2 * h * (-1) ∧ -2 * h * 1 < 0 := by
-  constructor <;> nlinarith
 
 end Wikipedia.SmoothSixDPoincare.WhitneyPairModel

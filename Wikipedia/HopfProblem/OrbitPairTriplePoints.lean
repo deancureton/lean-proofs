@@ -42,31 +42,6 @@ theorem triplePoints_eq_of_doublePoints_eq {F G : ℝ × M → N}
   ext q
   simp only [mem_triplePoints_iff, h]
 
-theorem triplePoints_eq_of_one_pair_at_injective_slice {F G : ℝ × M → N}
-    {t : ℝ} {x y : M} (hxy : x ≠ y) (hi : Injective (fun w => F (t, w)))
-    (hD : doublePoints G = doublePoints F ∪ {(t, (x, y)), (t, (y, x))}) :
-    triplePoints G = triplePoints F := by
-  have hpair (u v : M) (h : (t, (u, v)) ∈ doublePoints G) :
-      (u = x ∧ v = y) ∨ (u = y ∧ v = x) := by
-    rw [hD] at h
-    rcases h with h | h
-    · exact False.elim (h.1 (hi h.2))
-    · simpa only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq, true_and] using h
-  have hnot (u v w : M) : (t, (u, (v, w))) ∉ triplePoints G := by
-    intro h
-    have huv := hpair u v ⟨h.1, h.2.2.2.1⟩
-    have huw := hpair u w ⟨h.2.1, h.2.2.2.2⟩
-    have hvw := h.2.2.1
-    aesop
-  ext q
-  rcases q with ⟨s, u, v, w⟩
-  by_cases ht : s = t
-  · subst s
-    have hnotF : (t, (u, (v, w))) ∉ triplePoints F :=
-      fun h => h.1 (hi h.2.2.2.1)
-    exact iff_of_false (hnot u v w) hnotF
-  · simp only [mem_triplePoints_iff, hD, mem_union, mem_insert_iff, mem_singleton_iff,
-      Prod.mk.injEq, ht, false_and, or_false]
 
 theorem finite_triplePoints {F : ℝ × M → N} (hF : (doublePoints F).Finite) :
     (triplePoints F).Finite := by
@@ -123,18 +98,5 @@ theorem triplePoints_eq_outside_modified_patch {F G : ℝ × M → N} {S : Set (
     · exact (hfixed (t, x) hx).trans (h.2.2.2.1.trans (hfixed (t, y) hy).symm)
     · exact (hfixed (t, x) hx).trans (h.2.2.2.2.trans (hfixed (t, z) hz).symm)
 
-theorem triple_ncard_decreases {F G : ℝ × M → N} {S : Set (ℝ × M)}
-    (hfinite : (doublePoints F).Finite)
-    (hfixed : ∀ p ∉ S, G p = F p)
-    (hinj : InjOn (fun p : ℝ × M => (p.1, G p)) S)
-    (havoid : ∀ q ∈ S, ∀ p ∈ doublePoints F, p.1 = q.1 → G q ≠ F (p.1, p.2.1))
-    {t : ℝ} {x y z : M} (h : (t, (x, (y, z))) ∈ triplePoints F) (hx : (t, x) ∈ S) :
-    (triplePoints G).ncard < (triplePoints F).ncard := by
-  have heq := triplePoints_eq_outside_modified_patch hfixed hinj havoid
-  have hsub : triplePoints G ⊆ triplePoints F := by rw [heq]; exact fun _ h => h.1
-  have hnot : (t, (x, (y, z))) ∉ triplePoints G :=
-    fun hg => triple_first_outside_modified_patch hfixed hinj havoid hg hx
-  apply ncard_lt_ncard _ (finite_triplePoints hfinite)
-  exact ⟨hsub, fun hrev => hnot (hrev h)⟩
 
 end Wikipedia.HopfProblem.OrbitPair.FamilyDoublePoints

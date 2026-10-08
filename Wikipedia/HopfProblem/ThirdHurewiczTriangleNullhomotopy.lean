@@ -74,12 +74,5 @@ theorem triangleNullHomotopy_boundary (τ : BasedTriangle x) (t : I) (s : Simple
   rw [triangleNullHomotopy_constant]
   rfl
 
-/-- Equality of the underlying triangle with the constant map also gives
-literal stationarity; proof fields do not affect the construction. -/
-theorem triangleNullHomotopy_stationary_of_val_eq_const (τ : BasedTriangle x)
-    (hτ : τ.val = ContinuousMap.const (Simplex 2) x) :
-    (triangleNullHomotopy τ).toContinuousMap = ContinuousMap.const (I × Simplex 2) x := by
-  have h : τ = constantBasedTriangle x := Subtype.ext hτ
-  rw [h, triangleNullHomotopy_constant_toContinuousMap]
 
 end Wikipedia.HopfProblem.ThirdHurewicz

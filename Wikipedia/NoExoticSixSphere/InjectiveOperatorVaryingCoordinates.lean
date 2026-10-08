@@ -46,23 +46,5 @@ theorem sphereParity_diskCoordinates (r : ℕ)
     change H (DiskCylinder.boundaryToDisk s) (F (DiskCylinder.boundaryToDisk s)) = g s
     rw [hF, hfg]
 
-theorem sphereParity_extending_linearCoordinates (r : ℕ)
-    (U : DiskCylinder.Disk (E := Vector 4) →
-      (Vector (3 + (r + 2)) ≃L[ℝ] Vector (3 + (r + 2))))
-    (V : DiskCylinder.Disk (E := Vector 4) → (Vector (r + 2) ≃L[ℝ] Vector (r + 2)))
-    (hU : Continuous (fun x ↦ (U x).toContinuousLinearMap))
-    (hUinv : Continuous (fun x ↦ (U x).symm.toContinuousLinearMap))
-    (hV : Continuous (fun x ↦ (V x).toContinuousLinearMap))
-    (hVinv : Continuous (fun x ↦ (V x).symm.toContinuousLinearMap))
-    (f g : C(Sphere 3, Space (3 + (r + 2)) (r + 2)))
-    (hfg : ∀ s, g s = linearChange (U (DiskCylinder.boundaryToDisk s))
-      (V (DiskCylinder.boundaryToDisk s)) (f s)) : sphereParity r g = sphereParity r f := by
-  apply sphereParity_diskCoordinates r (fun x ↦ linearHomeomorph (U x) (V x)) ?_ ?_ f g hfg
-  · apply IsInducing.subtypeVal.continuous_iff.mpr
-    exact (hU.comp continuous_fst).clm_comp
-      ((continuous_subtype_val.comp continuous_snd).clm_comp (hV.comp continuous_fst))
-  · apply IsInducing.subtypeVal.continuous_iff.mpr
-    exact (hUinv.comp continuous_fst).clm_comp
-      ((continuous_subtype_val.comp continuous_snd).clm_comp (hVinv.comp continuous_fst))
 
 end NoExoticSixSphere.Stiefel.Monomorphism

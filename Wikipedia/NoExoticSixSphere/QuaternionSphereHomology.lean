@@ -62,8 +62,5 @@ def homologyEquiv : SingularHomology Space 3 ≃ₗ[ℤ] ℤ :=
   (homeomorphHomologyEquiv sphereHomeomorph 3).trans
     (Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2)
 
-theorem homologyEquiv_square (a : SingularHomology Space 3) :
-    homologyEquiv (singularHomologyMap square 3 a) = 2 * homologyEquiv a := by
-  rw [square_homology, map_add, two_mul]
 
 end NoExoticSixSphere.QuaternionSphere

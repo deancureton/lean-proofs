@@ -137,12 +137,5 @@ theorem exists_extended_contraction (n : ℕ) :
     rw [hLC']
     exact Set.mem_range_self (K (t, d))
 
-theorem collapse_homotopyEquivalence (n : ℕ) :
-    ∃ e : ContinuousMap.HomotopyEquiv (Space n) (SecondStage.QuotientSpace n),
-      e.toFun = collapse n := by
-  let : T2Space (SecondStage.QuotientSpace n) := (SecondStage.quotientHomeomorph n).symm.t2Space
-  obtain ⟨a, g, H, hg, hH⟩ := exists_extended_contraction n
-  exact ⟨ContractedQuotient.homotopyEquiv (collapse n) (collapse_isQuotientMap n)
-    (Set.range (cone n)) (collapse_eq_iff n) a hg H hH, rfl⟩
 
 end NoExoticSixSphere.JamesSphere.SecondStageCone

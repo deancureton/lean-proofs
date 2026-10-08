@@ -167,14 +167,6 @@ theorem smallRightHomologyMap_zero_surjective (U V : Set X) :
     Function.Surjective (smallRightHomologyMap U V 0) :=
   biprodSequence_second_zero_surjective (chainSequence_shortExact U V)
 
-theorem smallConnectingMap_comp_left (U V : Set X) (n : ℕ) :
-    (smallLeftHomologyMap U V n).comp (smallConnectingMap U V n) = 0 := by
-  apply LinearMap.ext
-  intro a
-  have ha : smallConnectingMap U V n a ∈ LinearMap.range (smallConnectingMap U V n) :=
-    ⟨a, rfl⟩
-  rw [small_exact_at_intersection] at ha
-  exact ha
 
 theorem smallLeftHomologyMap_comp_right (U V : Set X) (n : ℕ) :
     (smallRightHomologyMap U V n).comp (smallLeftHomologyMap U V n) = 0 := by
@@ -185,14 +177,6 @@ theorem smallLeftHomologyMap_comp_right (U V : Set X) (n : ℕ) :
   rw [small_exact_at_pair] at ha
   exact ha
 
-theorem smallRightHomologyMap_comp_connecting (U V : Set X) (n : ℕ) :
-    (smallConnectingMap U V n).comp (smallRightHomologyMap U V (n + 1)) = 0 := by
-  apply LinearMap.ext
-  intro a
-  have ha : smallRightHomologyMap U V (n + 1) a ∈
-      LinearMap.range (smallRightHomologyMap U V (n + 1)) := ⟨a, rfl⟩
-  rw [small_exact_at_smallHomology] at ha
-  exact ha
 
 /-- The three successive exactness statements together give the long exact
 sequence of the actual small singular chains in all degrees. -/

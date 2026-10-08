@@ -131,21 +131,5 @@ theorem exists_affine_embedding_patch_with_property (f : C(Plane, N))
     rw [heq.fderiv_eq]
     exact hderiv x
 
-/-- An actual smooth map becomes an embedded immersion on a compact new patch through a
-homotopy fixing every zero of the cutoff. -/
-theorem exists_affine_embedding_patch (f : C(Plane, N))
-    (hf : ContMDiff 𝓘(ℝ, Plane) J ∞ f) {β χ : Plane → ℝ}
-    (hβ : ContDiff ℝ ∞ β) (hχ : ContDiff ℝ ∞ χ) (hcompact : HasCompactSupport β)
-    (hχsupport : tsupport χ ⊆ f ⁻¹' c.source) (hχone : ∀ x ∈ tsupport β, χ x = 1)
-    (hdim : 5 ≤ Module.finrank ℝ F) {K : Set Plane} (hK : IsCompact K)
-    (hKsub : K ⊆ interior {x | β x = 1}) :
-    ∃ g : C(Plane, N), ContMDiff 𝓘(ℝ, Plane) J ∞ g ∧
-      Nonempty (f.HomotopyRel g {x | β x = 0}) ∧
-      Topology.IsClosedEmbedding (fun x : K => g x) ∧
-      ∀ x ∈ interior {x | β x = 1}, Function.Injective (mfderiv 𝓘(ℝ, Plane) J g x) := by
-  obtain ⟨g, hg, -, hhom, hemb, hderiv⟩ := exists_affine_embedding_patch_with_property c f hf
-    hβ hχ hcompact hχsupport hχone hdim (fun _ => True) (Eventually.of_forall (fun _ => trivial))
-    hK hKsub
-  exact ⟨g, hg, hhom, hemb, hderiv⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

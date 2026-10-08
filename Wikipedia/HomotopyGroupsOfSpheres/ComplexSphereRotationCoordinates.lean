@@ -68,11 +68,6 @@ def rotationTangentEquiv (z : UnitSphere) :
   rw [rotation_sphereIsometry] at e
   exact e
 
-theorem rotationTangentEquiv_val (z : UnitSphere)
-    (v : SphereCenteredCoordinates.Tangent z) :
-    (rotationTangentEquiv z v).val = rotationRealIsometry v.val := by
-  unfold rotationTangentEquiv
-  rfl
 
 theorem inverse_rotationTangentEquiv (z : UnitSphere)
     (v : SphereCenteredCoordinates.Tangent z) :
@@ -82,22 +77,6 @@ theorem inverse_rotationTangentEquiv (z : UnitSphere)
   simp only [rotation_sphereIsometry] at he
   exact he
 
-theorem rotation_outwardFrame_orientation (z : UnitSphere)
-    (b : Module.Basis (Fin 5) ℝ (SphereCenteredCoordinates.Tangent z)) :
-    (SphereCenteredCoordinates.outwardFrame (rotationSphere z)
-      (b.map (rotationTangentEquiv z).toLinearEquiv)).orientation =
-        (SphereCenteredCoordinates.outwardFrame z b).orientation := by
-  have he := SphereCenteredCoordinates.outwardFrame_orientation_map
-    rotationRealIsometry rotationRealIsometry_det_pos z b
-  exact he
 
-theorem sign_outwardFrame_orientation (x y : Bool) (z : UnitSphere)
-    (b : Module.Basis (Fin 5) ℝ (SphereCenteredCoordinates.Tangent z)) :
-    (SphereCenteredCoordinates.outwardFrame (signSphere x y z)
-      (b.map (signTangentEquiv x y z).toLinearEquiv)).orientation =
-        (SphereCenteredCoordinates.outwardFrame z b).orientation := by
-  have he := SphereCenteredCoordinates.outwardFrame_orientation_map
-    (signRealIsometry x y) (signRealIsometry_det_pos x y) z b
-  exact he
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

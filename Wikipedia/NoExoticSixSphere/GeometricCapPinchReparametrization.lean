@@ -61,22 +61,7 @@ variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 6) M]
   (e : EuclideanEmbedding 6 M)
   (a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel) (r : TubularRetraction e)
 
-theorem geometricSphereParity_northPinchInput (F : C(Sphere 3, M)) {ε : ℝ} (hε : 0 < ε) :
-    e.geometricSphereParity a r (northPinchInput F ε hε.ne') = e.geometricSphereParity a r F := by
-  have h := e.geometricSphereParity_homotopic a r (northPinchInput F ε hε.ne')
-    (northPinchInput F 2 (by norm_num))
-    ⟨(northPinchScaleHomotopy F hε (by norm_num)).toHomotopy⟩
-  rw [northPinchInput_two] at h
-  exact h.trans (e.geometricSphereParity_precomp_linear a r capComparisonLinearEquiv F)
 
-theorem geometricSphereParity_southPinchInput (G : C(Sphere 3, M)) {ε : ℝ} (hε : 0 < ε) :
-    e.geometricSphereParity a r (southPinchInput G ε hε.ne') = e.geometricSphereParity a r G := by
-  have h := e.geometricSphereParity_homotopic a r (southPinchInput G ε hε.ne')
-    (southPinchInput G 2 (by norm_num))
-    ⟨(southPinchScaleHomotopy G hε (by norm_num)).toHomotopy⟩
-  rw [southPinchInput_two] at h
-  exact h.trans (e.geometricSphereParity_precomp_linear a r
-    (tailReflectionLinearEquiv.trans capComparisonLinearEquiv) G)
 
 end EuclideanEmbedding
 end NoExoticSixSphere

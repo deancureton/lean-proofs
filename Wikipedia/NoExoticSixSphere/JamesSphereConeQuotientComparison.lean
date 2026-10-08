@@ -95,12 +95,6 @@ theorem finiteToLoops_map_factor (d : ℕ) :
   intro z
   exact ContinuousMap.congr_fun (coneToLoops_comp_map n a) (p.val z)
 
-theorem finiteToLoops_map_surjective (d : ℕ) [NeZero d] (hn : 2 ≤ n)
-    (hdn : d ≤ 3 * n - 2) :
-    Function.Surjective (HigherHomotopy.map (N := Fin d) (finiteToLoops n a)
-      (finiteToLoops_basepoint n a)) := by
-  have hb := (coneToLoops_map_bijective n a d).surjective.comp (map_surjective n a d hn hdn)
-  rwa [finiteToLoops_map_factor] at hb
 
 theorem finiteToLoops_map_bijective (d : ℕ) [NeZero d] (hn : 2 ≤ n)
     (hdn : d ≤ 3 * n - 3) :

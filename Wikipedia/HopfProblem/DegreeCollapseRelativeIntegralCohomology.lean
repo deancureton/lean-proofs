@@ -58,13 +58,5 @@ theorem relative_cohomology_succ_subsingleton (n : ℕ)
   let (k : ℕ) : Module.Free ℤ ((complex U).X k) := chains_free U k
   exact cohomology_succ_subsingleton (complex U) n
 
-/-- Only the two stated boundary degrees are needed for this integral vanishing. -/
-theorem relative_third_cohomology_subsingleton
-    [Subsingleton (SingularHomology U 1)] [Subsingleton (SingularHomology U 2)]
-    [Subsingleton (SingularHomology X 2)] [Finite (SingularHomology X 3)] :
-    Subsingleton (Cohomology (complex U) 3) := by
-  let : Subsingleton (Homology U 2) := (toRelative_surjective U 1).subsingleton
-  let : Finite (Homology U 3) := Finite.of_surjective _ (toRelative_surjective U 2)
-  exact relative_cohomology_succ_subsingleton U 2
 
 end Wikipedia.HopfProblem.DegreeCollapse.RelativeIntegralCohomology

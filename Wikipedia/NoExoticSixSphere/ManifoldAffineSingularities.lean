@@ -128,23 +128,6 @@ theorem singularParameters_time_mem_Ioo
   · by_contra ht
     exact hq (injective_mfderiv_map_outside e r f p hext (Or.inr (le_of_not_gt ht)) q.2)
 
-theorem isDiscrete_singularParameters
-    (hg : ContMDiff (𝓘(ℝ, ℝ).prod (𝓡 3)) (𝓡 n) ∞ (uncurry (map e r f p)))
-    (S : Set SourceChart) (C : Set (TargetChart n M))
-    (hS : ∀ x : Sphere 3, ∃ s ∈ S, x ∈ s.source)
-    (hC : ∀ x : M, ∃ c ∈ C, x ∈ c.source)
-    (hp : ∀ t x, ambient e f p t x ∈ r.domain)
-    (hgen : GenericInCharts e r f hf S C p)
-    (hext : ∀ t, t ≤ 0 ∨ 1 ≤ t → ∀ x : Sphere 3,
-      Injective (mfderiv (𝓡 3) (𝓡 n) (f t) x)) :
-    IsDiscrete (singularParameters (n := n) (map e r f p)) := by
-  have he : {q : ℝ × Sphere 3 | q.1 ∈ Ioo (0 : ℝ) 1} ∩
-      singularParameters (n := n) (map e r f p) = singularParameters (n := n) (map e r f p) := by
-    ext q
-    exact ⟨fun hq ↦ hq.2, fun hq ↦
-      ⟨singularParameters_time_mem_Ioo e r f p hext hq, hq⟩⟩
-  rw [← he]
-  exact isDiscrete_interior_singularParameters e r f hf p hg S C hS hC hp hgen
 
 end ManifoldAffineSphereFamily
 end NoExoticSixSphere

@@ -43,13 +43,5 @@ theorem canonicalPrismDiscrepancy_mem_badPrism (q : ℕ) :
         exact formalEdgeCrossProduct_mem_badPrism_of_omit i.succ (Fin.succ_ne_zero i) _
           (formalSimplex_mem_supported fun j => Fin.succAbove_ne i.succ j)
 
-/-- Arbitrary vertex-labelled discrepancies are images of universally
-boundary-supported chains. -/
-theorem prismDiscrepancy_mem_map_badPrism {V W : Type*} (q : ℕ)
-    (v : Fin 2 → V) (w : Fin (q + 1) → W) :
-    prismDiscrepancy q v w ∈
-      (badPrism q (q + 2)).map (formalMap (Prod.map v w) (q + 2)) := by
-  exact Submodule.mem_map.mpr ⟨canonicalPrismDiscrepancy q,
-    canonicalPrismDiscrepancy_mem_badPrism q, (prismDiscrepancy_eq_map_canonical q v w).symm⟩
 
 end Wikipedia.HopfProblem.FourthHurewicz.CubeSubdivision

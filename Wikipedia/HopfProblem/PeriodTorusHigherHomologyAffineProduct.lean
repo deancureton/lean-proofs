@@ -61,18 +61,6 @@ theorem productAffineSimplex_face {n p q : ℕ}
   · exact congrArg (fun f : C(Simplex n, Simplex q) => f t)
       (affineSimplex_face (fun j => (v j).2) i)
 
-/-- Affine interpolation in the domain interpolates the image vertex pairs. -/
-theorem productAffineSimplex_comp {m n p q : ℕ}
-    (v : Fin (n + 1) → Simplex p × Simplex q) (w : Fin (m + 1) → Simplex n) :
-    (productAffineSimplex v).comp (affineSimplex w) =
-      productAffineSimplex (fun j => productAffineSimplex v (w j)) := by
-  apply ContinuousMap.ext
-  intro t
-  apply Prod.ext
-  · exact congrArg (fun f : C(Simplex m, Simplex p) => f t)
-      (affineSimplex_comp (fun j => (v j).1) w)
-  · exact congrArg (fun f : C(Simplex m, Simplex q) => f t)
-      (affineSimplex_comp (fun j => (v j).2) w)
 
 /-- Products of affine maps carry affine simplices to the image vertex simplex. -/
 theorem prodMap_productAffineSimplex {m p q r s : ℕ}
@@ -123,37 +111,7 @@ theorem productAffineChainMap_boundary (p q n : ℕ)
     rfl
   exact LinearMap.congr_fun h c
 
-/-- Projection to the first factor realizes the first-coordinate vertex chain. -/
-theorem fst_productAffineChainMap (p q n : ℕ)
-    (c : FormalChains (Simplex p × Simplex q) (n + 1)) :
-    inducedChain (ContinuousMap.fst : C(Simplex p × Simplex q, Simplex p)) n
-        (productAffineChainMap p q n c) =
-      affineChainMap p n (formalMap Prod.fst (n + 1) c) := by
-  have h : (inducedChain (ContinuousMap.fst : C(Simplex p × Simplex q, Simplex p)) n).comp
-      (productAffineChainMap p q n) =
-        (affineChainMap p n).comp (formalMap Prod.fst (n + 1)) := by
-    apply formalChains_ext
-    intro z
-    simp only [LinearMap.comp_apply, productAffineChainMap_simplex, inducedChain_simplex,
-      formalMap_simplex, affineChainMap_simplex]
-    rfl
-  exact LinearMap.congr_fun h c
 
-/-- Projection to the second factor realizes the second-coordinate vertex chain. -/
-theorem snd_productAffineChainMap (p q n : ℕ)
-    (c : FormalChains (Simplex p × Simplex q) (n + 1)) :
-    inducedChain (ContinuousMap.snd : C(Simplex p × Simplex q, Simplex q)) n
-        (productAffineChainMap p q n c) =
-      affineChainMap q n (formalMap Prod.snd (n + 1) c) := by
-  have h : (inducedChain (ContinuousMap.snd : C(Simplex p × Simplex q, Simplex q)) n).comp
-      (productAffineChainMap p q n) =
-        (affineChainMap q n).comp (formalMap Prod.snd (n + 1)) := by
-    apply formalChains_ext
-    intro z
-    simp only [LinearMap.comp_apply, productAffineChainMap_simplex, inducedChain_simplex,
-      formalMap_simplex, affineChainMap_simplex]
-    rfl
-  exact LinearMap.congr_fun h c
 
 /-- Affine maps in the two factors commute with actual chain realization. -/
 theorem inducedChain_productAffineChainMap {m p q r s : ℕ}

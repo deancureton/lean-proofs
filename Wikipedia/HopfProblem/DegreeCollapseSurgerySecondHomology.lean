@@ -66,15 +66,6 @@ theorem topMap_homology_bijective_two : Bijective (singularHomologyMap (topMap A
     refine ⟨(TraceCoreAttachment.originalEndHomologyEquiv f A 2).symm x, ?_⟩
     rw [TraceCoreAttachment.topMap_homology_compare, LinearEquiv.apply_symm_apply, hx]
 
-theorem nativeTarget_homology_surjective_two :
-    Surjective (singularHomologyMap (nativeTargetInclusion A hR) 2) := by
-  let : Subsingleton (SingularHomology (Sphere 2) 1) :=
-    unitSphere_homology_subsingleton 1 1 (by decide) (by decide)
-  apply LinearMap.range_eq_top.mp
-  rw [native_end_exact_at_trace A hR 1]
-  apply top_unique
-  intro u hu
-  exact Subsingleton.elim _ _
 
 def nativeBeltClass : SingularHomology (UnitSurgery.Target A hR) 2 :=
   singularHomologyMap (nativeBeltMap A hR) 2 (unitSphereTopClass 1)

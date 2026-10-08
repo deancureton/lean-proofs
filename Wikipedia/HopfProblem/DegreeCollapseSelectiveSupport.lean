@@ -57,23 +57,5 @@ variable {E F H H' : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   {I : ModelWithCorners ℝ E H} {J : ModelWithCorners ℝ F H'}
   [ChartedSpace H X] [ChartedSpace H' Y] [T2Space X] [T2Space Y]
 
-theorem exists_selective_endpoint_of_two_source_patches (f : C(X, Y))
-    {A : ℝ × Y → Y} {U V : Set X} {K : Set Y}
-    (hU : IsOpen U) (hUc : IsCompact (closure U)) (hV : IsOpen V)
-    (hUV : Disjoint U V) (hK : IsCompact K) (hpre : f ⁻¹' K ⊆ U ∪ V)
-    (hf : ContMDiff I J ∞ f) (hi : ∀ x, Injective (mfderiv I J f x))
-    (hA : ContMDiff (𝓘(ℝ, ℝ).prod J) J ∞ A) (hA0 : ∀ y, A (0, y) = y)
-    (hslice : ∀ t, ∃ D : Diffeomorph J J Y Y ∞, ∀ y, A (t, y) = D y)
-    (hfix : ∀ t y, y ∉ K → A (t, y) = y) :
-    ∃ L : Set X, IsCompact L ∧ L ⊆ U ∧ ∃ g : C(X, Y),
-      ContMDiff I J ∞ g ∧ f.Homotopic g ∧
-      (∀ x, Injective (mfderiv I J g x)) ∧
-      (∀ x, g x = family f A U (1, x)) ∧ (∀ x ∉ L, g x = f x) := by
-  let L : Set X := closure U ∩ f ⁻¹' K
-  obtain ⟨hL, hLU⟩ := selected_support_isCompact f.continuous hUc hV hUV hK hpre
-  refine ⟨L, hL, hLU, ?_⟩
-  apply exists_immersed_endpoint_homotopic f hU hL.isClosed hLU hf hi hA hA0 hslice
-  intro t x hx hxL
-  exact hfix t (f x) (fun hxK => hxL ⟨subset_closure hx, hxK⟩)
 
 end Wikipedia.HopfProblem.DegreeCollapse.SelectiveSheet

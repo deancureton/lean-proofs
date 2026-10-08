@@ -84,10 +84,6 @@ theorem product_eq_one_of_twelfth_power_eq_one_left (x y : Source) (hx : x ^ 12 
   rw [product_coordinates, pow_eq_mod_two _ SixthStemSmashSquare.nativeClass_pow_two,
     Nat.mul_mod, (twelfth_power_eq_one_iff x).mp hx, zero_mul, Nat.zero_mod, pow_zero]
 
-theorem product_eq_one_of_twelfth_power_eq_one_right (x y : Source) (hy : y ^ 12 = 1) :
-    product x y = 1 := by
-  rw [product_coordinates, pow_eq_mod_two _ SixthStemSmashSquare.nativeClass_pow_two,
-    Nat.mul_mod, (twelfth_power_eq_one_iff y).mp hy, mul_zero, Nat.zero_mod, pow_zero]
 
 theorem original_lift_product (b c : ZMod 12) :
     product (SphereFiveEighth.projection (Multiplicative.ofAdd 1, Multiplicative.ofAdd b))
@@ -105,11 +101,5 @@ theorem sphereClass_square_eq_of_twelfth_power_ne_one (f : Based 8 5)
   rw [← product_sphereClass_square]
   exact product_eq_of_twelfth_powers_ne_one _ _ hf hf
 
-theorem sphereClass_square_eq_of_original_lift (f : Based 8 5) (b : ZMod 12)
-    (hf : sphereClass f =
-      SphereFiveEighth.projection (Multiplicative.ofAdd 1, Multiplicative.ofAdd b)) :
-    sphereClass (SphereSmash.basedSquare f) = SixthStemSmashSquare.nativeClass := by
-  rw [← product_sphereClass_square, hf]
-  exact original_lift_product b b
 
 end NoExoticSixSphere.SphereSmashNative

@@ -85,10 +85,6 @@ theorem rotatedInput_coordinate_ne_zero (r : Fin 3) : rotatedInput.val r ≠ 0 :
   · exact rootB_ne_zero
   · exact rootC_ne_zero
 
-theorem input_rotated_coordinate_ne_zero (r : Fin 3) : (rotationSphere input).val r ≠ 0 := by
-  change (rotationSphere (rotationSphere rotatedInput)).val r ≠ 0
-  rw [rotationSphere_involutive rotatedInput]
-  exact rotatedInput_coordinate_ne_zero r
 
 theorem midpointTargetPreimage_nonempty : midpointTargetPreimage.Nonempty :=
   ⟨input, input_hits_target⟩

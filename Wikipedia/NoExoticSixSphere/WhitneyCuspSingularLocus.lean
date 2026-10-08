@@ -25,9 +25,6 @@ theorem axis_injective : Injective axis := by
   intro z w h
   exact congrArg (fun x : Vector 3 ↦ x 2) h
 
-theorem axis_zero : axis 0 = 0 := by
-  ext i
-  fin_cases i <;> rfl
 
 theorem differential_kernel_iff (t : ℝ) (x v : Vector 3) :
     differential t x v = 0 ↔ v 0 = 0 ∧ v 1 = 0 ∧ (v 2 = 0 ∨ t = 0 ∧ x = 0) := by

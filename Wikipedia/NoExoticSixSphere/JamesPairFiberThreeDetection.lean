@@ -48,34 +48,7 @@ theorem fiber_piThree_subsingleton (n : ℕ) (a : sourceImage (n + 2))
   let := fiber_homologyThree_subsingleton n a
   exact (ThirdHurewicz.hurewiczPi3Equiv p).injective.subsingleton
 
-theorem inclusion_piFour_surjective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Surjective
-      (HigherHomotopy.map (N := Fin 4) (subtypeInclusion (sourceImage (n + 2)))
-        (y := a) rfl) := by
-  let : Subsingleton (π_ 3
-      (HomotopyFiber.Space (subtypeInclusion (sourceImage (n + 2)))
-        ((subtypeInclusion (sourceImage (n + 2))) a))
-      (HomotopyFiber.basepoint (subtypeInclusion (sourceImage (n + 2))) a)) :=
-    fiber_piThree_subsingleton n a (sourceFiberBasepoint (n + 2) a)
-  intro z
-  exact (HomotopyFiber.boundary_eq_const_iff_exists_source_class 3
-    (subtypeInclusion (sourceImage (n + 2))) a z).mp (Subsingleton.elim _ _)
 
-theorem inclusion_piThree_bijective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Bijective
-      (HigherHomotopy.map (N := Fin 3) (subtypeInclusion (sourceImage (n + 2)))
-        (y := a) rfl) := by
-  let : Subsingleton (π_ 3
-      (HomotopyFiber.Space (subtypeInclusion (sourceImage (n + 2)))
-        ((subtypeInclusion (sourceImage (n + 2))) a))
-      (HomotopyFiber.basepoint (subtypeInclusion (sourceImage (n + 2))) a)) :=
-    fiber_piThree_subsingleton n a (sourceFiberBasepoint (n + 2) a)
-  exact ⟨HomotopyFiberConnectivity.map_injective_of_fiber_subsingleton 3
-    (subtypeInclusion (sourceImage (n + 2))) a, PairNormalization.inclusion_piThree_surjective n a⟩
 
-theorem transgression_three_injective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Injective (RelativeFiberHomology.transgression (sourceImage (n + 2)) a 3) := by
-  let := fiber_homologyThree_subsingleton n a
-  exact Function.injective_of_subsingleton _
 
 end NoExoticSixSphere.JamesSphere.ThreeSkeletonNormalization

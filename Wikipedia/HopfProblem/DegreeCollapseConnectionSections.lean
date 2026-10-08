@@ -75,25 +75,5 @@ theorem exists_connection_section_segment (F G : Flow ℝ X) {f D : X → ℝ}
     filter_upwards [eventually_ge_atTop (0 : ℝ)] with t ht
     exact hlo (G ta x) hta t ht
 
-/-- Uniqueness of the finite transition intersection proves uniqueness of
-the actual complete connecting orbit after the band perturbation. -/
-theorem unique_connection_of_section_intersections (F G : Flow ℝ X) {f D : X → ℝ}
-    (hf : Continuous f) (hD : Continuous D)
-    (hder : ∀ x t, HasDerivAt (fun s => f (G s x)) (D (G t x)) t)
-    {a b : ℝ} (hab : a < b) (hboundary : ∀ x, f x = a → D x < 0)
-    (hlo : ∀ x, f x = a → ∀ t : ℝ, 0 ≤ t → G t x = F t x)
-    (hhi : ∀ x, f x = b → ∀ t : ℝ, t ≤ 0 → G t x = F t x)
-    {p q z : X} (hpb : b < f p) (hqa : f q < a)
-    (hsection : ∀ u, f u = b → Tendsto (fun t => F t u) atBot (𝓝 p) →
-      ∀ T : ℝ, 0 < T → f (G T u) = a →
-        Tendsto (fun t => F t (G T u)) atTop (𝓝 q) → u = z) :
-    ∀ x, Tendsto (fun t => G t x) atBot (𝓝 p) →
-      Tendsto (fun t => G t x) atTop (𝓝 q) → ∃ s, G s z = x := by
-  intro x hp hq
-  obtain ⟨u, v, T, s, hu, hv, hT, hTv, hs, hup, hvq⟩ :=
-    exists_connection_section_segment F G hf hD hder hab hboundary hlo hhi hpb hqa hp hq
-  have hfirst : u = z := hsection u hu hup T hT ((congrArg f hTv).trans hv)
-    (by rw [hTv]; exact hvq)
-  exact ⟨s, hfirst ▸ hs⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.FlowCancellation

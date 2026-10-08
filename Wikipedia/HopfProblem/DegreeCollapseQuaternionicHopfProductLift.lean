@@ -67,10 +67,6 @@ theorem smoothMap_finite_fiber (p : Sphere 3 × Sphere 3) :
 def fullRightInverse (p : Sphere 3 × Sphere 3) : Normal →L[ℝ] V 17 :=
   SphereFiniteEquationLift.lift (squarePoint p) (squareRightInverse p)
 
-theorem fullRightInverse_apply (p : Sphere 3 × Sphere 3) (w : Normal) :
-    fullRightInverse p w = ((1 / 2 : ℝ) * w.fst) • ambientInclusion p +
-      fderiv ℝ (ambientPoint 16) (squarePoint p) (squareRightInverse p w.snd) := by
-  rw [fullRightInverse, SphereFiniteEquationLift.lift_apply, ambientPoint_squarePoint]
 
 theorem contMDiff_fullRightInverse :
     ContMDiff ((𝓡 3).prod (𝓡 3)) 𝓘(ℝ, Normal →L[ℝ] V 17) ∞ fullRightInverse :=
@@ -100,24 +96,7 @@ theorem equationDerivative_original (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
     QuaternionicHopfProductFiber.point a (fiberInclusion p)
     (smoothMap_eventuallyEq_square (fiberInclusion p) (smoothMap_fiberInclusion p))
 
-theorem original_equations_fullRightInverse
-    (a : Sphere 16) (p : Sphere 3 × Sphere 3) (w : Normal) :
-    fderiv ℝ (SphereFiberNormalFrame.equations (SphereSmash.squareMap suspendedMap)
-      QuaternionicHopfProductFiber.point a) (ambientInclusion p) (fullRightInverse p w) = w := by
-  rw [← equationDerivative_original]
-  exact equations_fullRightInverse a p w
 
-theorem projected_fullRightInverse (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
-    (NormalFrameOfEquations.ambientDifferential
-      ((𝓡 3).prod (𝓡 3)) ambientInclusion p).rangeᗮ.starProjection.comp (fullRightInverse p) =
-        (normalFrame a).ambient p := by
-  have hproj : (NormalFrameOfEquations.ambientDifferential
-      ((𝓡 3).prod (𝓡 3)) ambientInclusion p).rangeᗮ.starProjection =
-        (equationDerivative a p).kerᗮ.starProjection :=
-    congrArg (fun S : Submodule ℝ (V 17) ↦ Sᗮ.starProjection) (tangent_range_eq_kernel a p)
-  rw [hproj, normalFrame_ambient]
-  exact RightInverseFrameHomotopy.projection_rightInverse
-    (equationDerivative a p) (fullRightInverse p) (equations_fullRightInverse a p)
 
 def normalization (a : Sphere 16) : ℝ × (Sphere 3 × Sphere 3) → Normal →L[ℝ] V 17 :=
   RightInverseFrameHomotopy.normalize (equationDerivative a) fullRightInverse
@@ -143,38 +122,7 @@ theorem normalization_rightInverse (a : Sphere 16) (p : ℝ × (Sphere 3 × Sphe
   RightInverseFrameHomotopy.normalize_rightInverse (equationDerivative a) fullRightInverse
     (equations_fullRightInverse a) p w
 
-theorem normalization_original_rightInverse
-    (a : Sphere 16) (p : ℝ × (Sphere 3 × Sphere 3)) (w : Normal) :
-    fderiv ℝ (SphereFiberNormalFrame.equations (SphereSmash.squareMap suspendedMap)
-      QuaternionicHopfProductFiber.point a) (ambientInclusion p.2) (normalization a p w) = w := by
-  rw [← equationDerivative_original]
-  exact normalization_rightInverse a p w
 
-theorem normalization_with_tangent_injective
-    (a : Sphere 16) (t : ℝ) (p : Sphere 3 × Sphere 3) :
-    Function.Injective ((normalization a (t, p)).coprod
-      (NormalFrameOfEquations.ambientDifferential
-        ((𝓡 3).prod (𝓡 3)) ambientInclusion p)) := by
-  have hA : ∀ v : V 3 × V 3, equationDerivative a p
-      (NormalFrameOfEquations.ambientDifferential
-        ((𝓡 3).prod (𝓡 3)) ambientInclusion p v) = 0 := by
-    intro v
-    change NormalFrameOfEquations.ambientDifferential
-      ((𝓡 3).prod (𝓡 3)) ambientInclusion p v ∈
-        (fderiv ℝ (equations a) (ambientInclusion p)).ker
-    rw [← tangent_range_eq_kernel a p]
-    exact ⟨v, rfl⟩
-  have hS : ∀ w : Normal,
-      equationDerivative a p (orthogonalRightInverse (equationDerivative a p) w) = w :=
-    apply_orthogonalRightInverse (equationDerivative a p) (equations_fderiv_surjective a p)
-  have h := RightInverseFrameHomotopy.blend_coprod_injective
-    (E := V 17) (F := Normal) (K := V 3 × V 3) (equationDerivative a p)
-    (fullRightInverse p) (orthogonalRightInverse (equationDerivative a p))
-    (equations_fullRightInverse a p) hS
-    (NormalFrameOfEquations.ambientDifferential
-      ((𝓡 3).prod (𝓡 3)) ambientInclusion p) hA
-    (ambientDifferential_injective p) t
-  simpa only [normalization, RightInverseFrameHomotopy.normalize] using h
 
 theorem normalization_one_original_frame (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
     normalization a (1, p) = orthogonalRightInverse
@@ -182,14 +130,5 @@ theorem normalization_one_original_frame (a : Sphere 16) (p : Sphere 3 × Sphere
         QuaternionicHopfProductFiber.point a) (ambientInclusion p)) :=
   (normalization_one a p).trans (normalFrame_original_equations a p)
 
-theorem normalization_one_fiberDiffeomorph (a : Sphere 16) (p : Sphere 3 × Sphere 3) :
-    letI := fiberAtlas;
-    normalization a (1, p) =
-      (SphereFiberNormalFrame.normalFrame smoothMap smoothMap_contMDiff
-        QuaternionicHopfProductFiber.point smoothMap_regular 6 (by decide) a).ambient
-          (fiberDiffeomorph p) := by
-  let := fiberAtlas
-  rw [normalization_one]
-  exact normalFrame_fiberDiffeomorph a p
 
 end Wikipedia.HopfProblem.DegreeCollapse.QuaternionicHopfProductLift

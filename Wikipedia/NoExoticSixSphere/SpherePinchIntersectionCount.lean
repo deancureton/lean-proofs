@@ -130,12 +130,6 @@ def intersectionEquiv : (pairs f k ⊕ pairs g k) ≃ pairs (pinch v f g hbase) 
   Equiv.ofBijective (sumPair v f g hbase k hm)
     ⟨sumPair_injective v f g hbase k hm, sumPair_surjective v f g hbase k hm⟩
 
-theorem finite_pinch_pairs (hf : (pairs f k).Finite) (hg : (pairs g k).Finite) :
-    (pairs (pinch v f g hbase) k).Finite := by
-  let := hf.to_subtype
-  let := hg.to_subtype
-  exact finite_coe_iff.mp (Finite.of_equiv (pairs f k ⊕ pairs g k)
-    (intersectionEquiv v f g hbase k hm))
 
 theorem pinch_pairs_ncard (hf : (pairs f k).Finite) (hg : (pairs g k).Finite) :
     (pairs (pinch v f g hbase) k).ncard = (pairs f k).ncard + (pairs g k).ncard := by

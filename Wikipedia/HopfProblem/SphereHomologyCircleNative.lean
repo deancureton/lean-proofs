@@ -90,10 +90,6 @@ theorem unitCircle_homology_subsingleton (n : ℕ) :
   let := circle_homology_subsingleton n
   exact (unitCircleHomologyEquiv (n + 2)).injective.subsingleton
 
-theorem unitCircle_homology_isZero (n : ℕ) :
-    IsZero (SingularHomology _root_.Circle (n + 2)) := by
-  let := unitCircle_homology_subsingleton n
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- Higher actual homology is equivalent to the zero free module. -/
 def unitCircleHomologyHigherEquivZero (n : ℕ) :

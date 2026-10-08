@@ -84,13 +84,6 @@ def height : Suspension X → unitInterval :=
     Continuous (fun p : Suspension X => (height p : ℝ)) :=
   continuous_subtype_val.comp continuous_height
 
-theorem mk_injective_of_interior (t : unitInterval) (ht0 : t ≠ 0) (ht1 : t ≠ 1) :
-    Function.Injective (mk t : X → Suspension X) := by
-  intro x y h
-  rcases (mk_eq_mk_iff t t x y).mp h with ⟨_, h | h | h⟩
-  · exact (ht0 h).elim
-  · exact (ht1 h).elim
-  · exact h
 
 theorem mk_zero_eq (x y : X) : mk 0 x = mk 0 y :=
   Quotient.sound ⟨rfl, Or.inl rfl⟩
@@ -151,11 +144,7 @@ theorem north_mem_northOpen : (north : Suspension X) ∈ northOpen := by
 theorem south_mem_southOpen : (south : Suspension X) ∈ southOpen := by
   norm_num [southOpen]
 
-theorem north_not_mem_southOpen : (north : Suspension X) ∉ southOpen := by
-  simp [southOpen]
 
-theorem south_not_mem_northOpen : (south : Suspension X) ∉ northOpen := by
-  norm_num [northOpen]
 
 instance : Nonempty (Suspension X) := ⟨north⟩
 

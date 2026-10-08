@@ -139,18 +139,6 @@ theorem connecting_projectedLoop_pairing (p q : GenLoop (Fin 3) UnitQuaternions 
 def fundamentalProjectedLoop : GenLoop (Fin 7) BaseSphere north :=
   projectedLoop QuaternionSamelson.fundamentalLoop QuaternionSamelson.fundamentalLoop
 
-theorem fundamental_endpoint (u : Fin 6 → I) :
-    (cubeLift QuaternionSamelson.fundamentalLoop QuaternionSamelson.fundamentalLoop).endpoint u =
-      northFiberMulEquiv (QuaternionSamelson.nuLoop u) := by
-  rw [endpoint_eq_fiberLoop]
-  rfl
 
-theorem connecting_fundamentalProjectedLoop :
-    connecting 6 (⟦fundamentalProjectedLoop⟧ : π_ 7 BaseSphere north) =
-      fiberEquiv QuaternionSamelson.nu := by
-  exact (connecting_projectedLoop_pairing
-    QuaternionSamelson.fundamentalLoop QuaternionSamelson.fundamentalLoop).trans
-      (congrArg (fun a ↦ fiberEquiv (QuaternionSamelson.pairing a a))
-        QuaternionSamelson.fundamentalLoop_class)
 
 end NoExoticSixSphere.QuaternionCommutatorBoundaryLift

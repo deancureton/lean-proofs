@@ -81,11 +81,5 @@ def homeomorph [T2Space X] [CompactSpace B] : B ≃ₜ A :=
   Continuous.homeoOfEquivCompactToT2
     (f := Equiv.ofBijective d.innerMap d.innerMap_bijective) d.innerMap.continuous
 
-/-- The constructed homeomorphism fixes every point in the inner core. -/
-theorem homeomorph_fixed_on_core [T2Space X] [CompactSpace B]
-    (x : B) (hx : x.1 ∈ d.core) : (d.homeomorph x).1 = x.1 := by
-  change (d.rescale x).1 = x.1
-  have ht : d.duration x = 0 := entryTime_eq_zero F hx
-  exact congrArg Subtype.val (d.rescale_eq_self_of_duration_eq_zero x ht)
 
 end Wikipedia.SmoothSixDPoincare.FlowConstruction.FlowCollarData

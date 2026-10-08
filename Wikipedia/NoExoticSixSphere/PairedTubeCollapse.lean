@@ -93,15 +93,5 @@ theorem pairedTube_collapseOnePoint (p : OnePoint (Y × Z)) :
         collapseOnePoint_coe_of_not_mem (pairedTube τ σ) hnot,
         OnePointProduct.map_infty_left]
 
-theorem pairedTube_collapseMap :
-    (⟨collapseOnePoint (pairedTube τ σ), continuous_collapseOnePoint (pairedTube τ σ)
-      (pairedTube_isOpenEmbedding τ σ hτ hσ)⟩ :
-        C(OnePoint (Y × Z), OnePoint (K × L))) =
-      OnePointProduct.productMap
-        ⟨collapseOnePoint τ, continuous_collapseOnePoint τ hτ⟩
-        ⟨collapseOnePoint σ, continuous_collapseOnePoint σ hσ⟩
-        (collapseOnePoint_infty τ) (collapseOnePoint_infty σ) := by
-  ext p
-  exact pairedTube_collapseOnePoint τ σ hτ hσ p
 
 end NoExoticSixSphere.OpenFiberCollapse

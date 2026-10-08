@@ -74,26 +74,5 @@ theorem exists_minimum_partition (n : ℕ) (E : ℝ) (lower : ℕ) :
     intro i
     exact (mul_le_mul_of_nonneg_right hC (hδpos i).le).trans (hmesh i).le
 
-theorem exists_minimum_retraction_partition (n : ℕ) (E : ℝ) (lower : ℕ) :
-    ∃ m : ℕ, lower ≤ m ∧
-      IsOpen (minimumRetractionDomain n (time m)) ∧
-      minimumSet n (time m) ⊆ minimumRetractionDomain n (time m) ∧
-      ∃ R : C(minimumRetractionDomain n (time m), minimumSet n (time m)),
-        (∀ v : minimumSet n (time m), ∀ hv : v.val ∈ minimumRetractionDomain n (time m),
-          R ⟨v.val, hv⟩ = v) ∧
-        ∀ C : ℝ, C ≤ E →
-          IsCompact (energySublevel specialIdentity (antipode n) (time m) C) := by
-  obtain ⟨m, hm, hsmall, hcompact⟩ := exists_minimum_partition n E lower
-  have hminimum := hcompact ((4 * n : ℝ) * Real.pi ^ 2) (le_max_right _ _)
-  let R := minimumNeighborhoodRetraction n (time m) (strictMono_time m)
-    (time_zero m) (time_last m) hsmall
-  refine ⟨m, hm, isOpen_minimumRetractionDomain n (time m),
-    minimumSet_subset_retractionDomain n (time m) (strictMono_time m)
-      (time_zero m) (time_last m) hsmall hminimum, R, ?_, ?_⟩
-  · intro v hv
-    exact minimumNeighborhoodRetraction_eq_self n (time m) (strictMono_time m)
-      (time_zero m) (time_last m) hsmall hminimum v
-  · intro C hC
-    exact hcompact C (hC.trans (le_max_left _ _))
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicSymmetricMatrices.Polygon

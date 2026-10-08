@@ -58,30 +58,8 @@ def firstCorrection : C(I × DoublePunctured n p hp q hq, secondPunctured n q hq
       (continuous_fst.prodMk ((toFirstPunctured n p hp q hq).continuous.comp
         continuous_snd)))).subtype_mk _⟩
 
-theorem firstCorrection_zero (x : DoublePunctured n p hp q hq) :
-    firstCorrection n p hp q hq hn (0, x) = toSecondPunctured n p hp q hq x := by
-  apply Subtype.ext
-  change (firstPunctureDeformation n hn p hp
-    (0, toFirstPunctured n p hp q hq x)).val = x.val
-  exact congrArg (fun y : firstPunctured n p hp ↦ y.val)
-    ((firstPunctureDeformation n hn p hp).map_zero_left (toFirstPunctured n p hp q hq x))
 
-theorem firstCorrection_one_mem_cone (x : DoublePunctured n p hp q hq) :
-    (firstCorrection n p hp q hq hn (1, x)).val ∈ Set.range (cone n) := by
-  change (firstPunctureDeformation n hn p hp
-    (1, toFirstPunctured n p hp q hq x)).val ∈ Set.range (cone n)
-  exact ⟨firstPunctureRetraction n hn p hp (toFirstPunctured n p hp q hq x),
-    (congrArg (fun y : firstPunctured n p hp ↦ y.val)
-      ((firstPunctureDeformation n hn p hp).map_one_left
-        (toFirstPunctured n p hp q hq x))).symm⟩
 
-theorem firstCorrection_fixed (t : I) (x : DoublePunctured n p hp q hq)
-    (hx : x.val ∈ Set.range (cone n)) :
-    firstCorrection n p hp q hq hn (t, x) = toSecondPunctured n p hp q hq x := by
-  apply Subtype.ext
-  exact congrArg (fun y : firstPunctured n p hp ↦ y.val)
-    (PuncturedCellAttachment.deformation_fixed_of_mem_base (first_isPushout n hn) p hp t
-      (toFirstPunctured n p hp q hq x) hx)
 
 omit p hp q hq hn in
 theorem secondDeformation_mem_cone (q : ConeCoordinates n) (hq : ‖q‖ < 1)

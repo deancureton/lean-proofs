@@ -32,10 +32,6 @@ theorem map_eq_of_zero (f : E → F) (β : E → ℝ) {x : E} (hx : β x = 0) :
     map f β x = (f x, 0) := by
   simp [map, hx]
 
-theorem map_ne_oldAmbient (f : E → F) (β : E → ℝ) {x : E} (hx : β x ≠ 0)
-    (y : F) : map f β x ≠ (y, 0) := by
-  intro h
-  exact hx (congrArg (fun z : F × (ℝ × E) ↦ z.2.1) h)
 
 /-- The only possible collisions lie entirely in the original zero-weight locus. -/
 theorem injOn_map (f : E → F) (β : E → ℝ) {K : Set E}

@@ -80,11 +80,6 @@ theorem unitSphereModHomology_subsingleton (p : ℕ) (hp : p ≠ 0) (n k : ℕ)
   let := unitSphere_homology_subsingleton n k hk hkn
   exact modHomology_subsingleton p hp (UnitSphere (n + 1)) k
 
-theorem unitSphereModHomology_isZero (p : ℕ) (hp : p ≠ 0) (n k : ℕ)
-    (hk : k ≠ 0) (hkn : k ≠ n + 1) :
-    IsZero (ModHomology p (UnitSphere (n + 1)) k) := by
-  let := unitSphereModHomology_subsingleton p hp n k hk hkn
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- The actual off-degree group is linearly equivalent to the literal zero coefficient module. -/
 def unitSphereModHomologyEquivZero (p : ℕ) (hp : p ≠ 0) (n k : ℕ)

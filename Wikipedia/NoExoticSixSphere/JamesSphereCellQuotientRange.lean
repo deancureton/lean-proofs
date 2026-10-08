@@ -46,17 +46,6 @@ theorem targetHomeomorph_pole (n : ℕ) (hn : 0 < n) :
   RoundDiskCubicalSuspension.homeomorph_pole (quotient n hn) (spherePole (n + n))
     (quotient_base n hn) (quotient_fiber n hn) (quotient_surjective n hn) (parameterHomeomorph n hn)
 
-theorem quotientHom_eq_suspension (n : ℕ) (hn : 0 < n) (d : ℕ) [NeZero d]
-    (c : π_ d (Sphere (sphereDimension n)) (spherePole (sphereDimension n))) :
-    CellBoundary.quotientHom n hn d (boundaryPiEquiv n hn d c) =
-      HigherHomotopy.map (N := Fin (d + 1))
-        (targetHomeomorph n hn : C(Sphere (sphereDimension n + 1), Sphere (n + n)))
-        (targetHomeomorph_pole n hn) (CubicalSphereSuspension.hom d (sphereDimension n) c) := by
-  rw [boundaryPiEquiv_apply]
-  exact (quotientHom_comparison n hn d c).trans
-    (RoundDiskCubicalSuspension.hom_eq_postcompose (quotient n hn) (spherePole (n + n))
-      (quotient_base n hn) (parameterHomeomorph n hn) (quotient_fiber n hn)
-      (quotient_surjective n hn) d c)
 
 theorem quotientHom_bijective (n : ℕ) (hn : 0 < n) (d : ℕ) [NeZero d]
     (hd : d + 3 < 4 * n) : Function.Bijective (CellBoundary.quotientHom n hn d) := by

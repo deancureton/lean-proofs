@@ -67,18 +67,5 @@ theorem simplexFlatHomeomorph_symm_mem_boundary_iff (n : ℕ)
   simpa only [Homeomorph.apply_symm_apply] using
     (simplexFlatHomeomorph_mem_frontier_iff n ((simplexFlatHomeomorph n).symm v)).symm
 
-/-- The image of the full face-boundary is the actual ambient frontier,
-viewed in the flattened simplex. -/
-theorem simplexFlatHomeomorph_image_boundary (n : ℕ) :
-    simplexFlatHomeomorph n '' SecondHurewicz.SimplyConnected.simplexBoundary n =
-      {v : ↥(flatSimplexSet n) | v.val ∈ frontier (flatSimplexSet n)} := by
-  ext v
-  constructor
-  · rintro ⟨s, hs, rfl⟩
-    exact (simplexFlatHomeomorph_mem_frontier_iff n s).2 hs
-  · intro hv
-    exact ⟨(simplexFlatHomeomorph n).symm v,
-      (simplexFlatHomeomorph_symm_mem_boundary_iff n v).2 hv,
-      (simplexFlatHomeomorph n).apply_symm_apply v⟩
 
 end Wikipedia.HopfProblem.HigherHurewicz

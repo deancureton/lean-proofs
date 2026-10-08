@@ -27,12 +27,6 @@ theorem pullbackMap_comp {U : Set X} {V : Set Y} {W : Set Z}
   unfold pullbackMap
   rw [RelativeCoefficients.mapChain_comp, ModTwoDualComplex.map_comp]
 
-theorem cohomologyPullback_id (U : Set X) (p : ℕ) :
-    cohomologyPullback (ContinuousMap.id X) (show Set.MapsTo (ContinuousMap.id X) U U from
-      fun _ hx ↦ hx) p = LinearMap.id := by
-  unfold cohomologyPullback
-  rw [pullbackMap_id, HomologicalComplex.homologyMap_id]
-  rfl
 
 theorem cohomologyPullback_comp {U : Set X} {V : Set Y} {W : Set Z}
     (f : C(X, Y)) (hf : Set.MapsTo f U V) (g : C(Y, Z)) (hg : Set.MapsTo g V W) (p : ℕ) :
@@ -42,10 +36,5 @@ theorem cohomologyPullback_comp {U : Set X} {V : Set Y} {W : Set Z}
   rw [pullbackMap_comp, HomologicalComplex.homologyMap_comp]
   rfl
 
-theorem cohomologyPullback_congr {U : Set X} {V : Set Y} {f g : C(X, Y)}
-    (hf : Set.MapsTo f U V) (hg : Set.MapsTo g U V) (he : f = g) (p : ℕ) :
-    cohomologyPullback f hf p = cohomologyPullback g hg p := by
-  subst g
-  rfl
 
 end NoExoticSixSphere.RelativeModTwoCochains

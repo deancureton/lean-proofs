@@ -58,24 +58,5 @@ abbrev modHomologyModule (p : ℕ) (X : Type) [TopologicalSpace X] (n : ℕ) :
     Module (ZMod p) (ModHomology p X n) :=
   AddCommGroup.zmodModule (modHomology_nsmul_eq_zero p X n)
 
-/-- The resulting scalar action is precisely the map induced by multiplying
-the original coefficients, not an action chosen from a homology computation. -/
-theorem modHomologyModule_smul_eq_coefficientMap (p : ℕ)
-    (X : Type) [TopologicalSpace X] (n : ℕ) (a : ZMod p) (x : ModHomology p X n) :
-    letI := modHomologyModule p X n
-    a • x = ((coefficientHomologyFunctor X n).map
-      (ModuleCat.ofHom (a • (LinearMap.id : ZMod p →ₗ[ℤ] ZMod p)))) x := by
-  let := modHomologyModule p X n
-  obtain ⟨z, rfl⟩ := ZMod.intCast_surjective a
-  have hc : ModuleCat.ofHom ((z : ZMod p) • (LinearMap.id : ZMod p →ₗ[ℤ] ZMod p)) =
-      z • 𝟙 (ModuleCat.of ℤ (ZMod p)) := by
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro y
-    change (z : ZMod p) * y = z • y
-    simp [zsmul_eq_mul]
-  rw [hc, CategoryTheory.Functor.map_zsmul, CategoryTheory.Functor.map_id]
-  change (z : ZMod p) • x = z • x
-  simp only [Int.cast_smul_eq_zsmul]
 
 end NoExoticSixSphere

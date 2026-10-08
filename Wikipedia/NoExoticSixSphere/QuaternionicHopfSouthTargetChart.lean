@@ -27,12 +27,6 @@ theorem contMDiff_tailCoordinates : ContMDiff (𝓡 4) 𝓘(ℝ, ℍ) ∞ tailCo
   let : Fact (Module.finrank ℝ (V 5) = 4 + 1) := ⟨finrank_euclideanSpace_fin⟩
   exact tailQuaternion.contDiff.contMDiff.comp contMDiff_coe_sphere
 
-theorem tailCoordinates_south : tailCoordinates south = 0 := by
-  change tailQuaternion south.val = 0
-  rw [← south_join]
-  change Quaternion.linearIsometryEquivTuple.symm
-    (SphereCylinder.tail 3 (SphereCylinder.join 3 (-1, 0))) = 0
-  rw [SphereCylinder.tail_join, map_zero]
 
 def tailDerivative : V 4 →L[ℝ] ℍ := mfderiv (𝓡 4) 𝓘(ℝ, ℍ) tailCoordinates south
 
@@ -71,29 +65,7 @@ theorem tailCoordinates_derivative_bijective :
   exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hd).mpr
     tailCoordinates_derivative_surjective
 
-theorem isLocalDiffeomorphAt_tailCoordinates :
-    IsLocalDiffeomorphAt (𝓡 4) 𝓘(ℝ, ℍ) ∞ tailCoordinates south := by
-  apply isLocalDiffeomorphAt_of_invertible_mvfderiv contMDiff_tailCoordinates
-  let e : V 4 ≃L[ℝ] ℍ := (LinearEquiv.ofBijective tailDerivative.toLinearMap
-    tailCoordinates_derivative_bijective).toContinuousLinearEquiv
-  refine ⟨(tangentModelEquiv (I := 𝓡 4) south).trans e, ?_⟩
-  apply ContinuousLinearMap.ext
-  intro v
-  rfl
 
-theorem southNormalEquations_onSphere (x : Sphere 7) :
-    southNormalEquations x.val = WithLp.toLp 2 (0, tailCoordinates (sphereMap x)) := by
-  change WithLp.toLp 2 (‖x.val‖ ^ 2 - 1, tailQuaternion (polynomial x.val)) = _
-  rw [mem_sphere_zero_iff_norm.mp x.property, one_pow, sub_self]
-  rfl
 
-theorem southNormalFrame_differential (q : Sphere 3) :
-    (fderiv ℝ southNormalEquations (southFiberAmbient q)).comp (southNormalFrame.ambient q) =
-      ContinuousLinearMap.id ℝ SouthNormalModel := by
-  apply ContinuousLinearMap.ext
-  intro p
-  change fderiv ℝ southNormalEquations (southFiberPoint q).val (southNormalFrame.ambient q p) = p
-  rw [southNormalFrame_ambient]
-  exact southNormalLift_right_inverse _ (first_southFiberPoint q) p
 
 end NoExoticSixSphere.QuaternionicHopf

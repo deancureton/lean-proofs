@@ -74,15 +74,6 @@ theorem beltCrossingTrack_eq_belt_iff (β : ((ℝ × A) × B) → ℝ) {a : ℝ}
     rw [hscalar]
     ext <;> simp [beltCrossingSheet, beltCrossingDisplacement, beltCrossingBelt] <;> ring
 
-theorem beltCrossingTrack_endpoints_avoid (β : ((ℝ × A) × B) → ℝ) {a : ℝ} (ha : 0 < a)
-    (hβ : β (beltCrossingSheet a (0 : A)) = 1) (w : A) (y : B) :
-    beltCrossingTrack β a (0, w) ≠ beltCrossingBelt y ∧
-      beltCrossingTrack β a (1, w) ≠ beltCrossingBelt y := by
-  constructor <;> intro h
-  · have hh := ((beltCrossingTrack_eq_belt_iff β ha hβ 0 w y).mp h).1
-    norm_num at hh
-  · have hh := ((beltCrossingTrack_eq_belt_iff β ha hβ 1 w y).mp h).1
-    norm_num at hh
 
 theorem beltCrossingTrack_transverse (β : ((ℝ × A) × B) → ℝ) {a : ℝ} (ha : 0 < a)
     (hβ : β =ᶠ[𝓝 (beltCrossingSheet a (0 : A))] (fun _ => (1 : ℝ))) :

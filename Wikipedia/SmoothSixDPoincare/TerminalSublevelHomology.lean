@@ -65,17 +65,5 @@ theorem lastLower_homology_subsingleton (hdim : Module.finrank ℝ E = 6)
 
 end SurgeryWindows
 
-/-- The original smooth homotopy-six-sphere data constructs a finite surgery system whose
-actual final lower sublevel has the required low-degree homology vanishing. -/
-theorem exists_surgeryWindows_with_terminal_homology (hdim : Module.finrank ℝ E = 6)
-    (hM : M ≃ₕ SixSphere) :
-    ∃ f : M → ℝ, ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f ∧ IsMorse E f ∧
-      ∃ S : SurgeryWindows E f, ∃ h : 0 < S.count,
-        ∀ k : ℕ, 0 < k → k < 5 →
-          Subsingleton (SingularHomology {x : M // f x ≤ S.lower (S.last h)} k) := by
-  let : Nonempty M := ⟨hM.invFun (basePoint 6)⟩
-  obtain ⟨f, hf, hm, ⟨S⟩⟩ := exists_morse_function_with_surgeryWindows E M
-  refine ⟨f, hf, hm, S, S.count_pos hf, ?_⟩
-  exact S.lastLower_homology_subsingleton hf hdim hM (S.count_pos hf)
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse

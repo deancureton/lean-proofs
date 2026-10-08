@@ -48,13 +48,6 @@ theorem stableSpecialInput_axis (r : ℕ) : stableSpecialInput r axis = specialI
 def stableSphereCandidate (r : ℕ) : C(Sphere 7, SpGroup (Fin (3 + r))) :=
   (stabilizationIterateMap 3 r).comp unreducedSphereCandidate
 
-theorem stableSphereCandidate_sourcePoint (r : ℕ) (s t : I) (z : UnitSphere) :
-    stableSphereCandidate r (sphereSourcePoint s t z) =
-      twoCubeMap (stableSymmetricInput r z) ![s, t] := by
-  change QuaternionicColumns.stabilizationIterate 3 r
-    (unreducedSphereCandidate (sphereSourcePoint s t z)) = _
-  rw [unreducedSphereCandidate_sourcePoint]
-  exact (twoCubeMap_stabilizationIterate (symmetricMap z) r ![s, t]).symm
 
 theorem stableSphereCandidate_basepoint (r : ℕ) :
     stableSphereCandidate r sphereCandidateBasepoint = 1 := by

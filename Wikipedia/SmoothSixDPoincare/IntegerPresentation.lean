@@ -42,11 +42,6 @@ def ofEquiv (e : (Fin r → ℤ) ≃ₗ[ℤ] B) : IntegerPresentation B r 0 wher
 
 variable (P : IntegerPresentation B r c)
 
-theorem map_column (i : Fin c) : P.map (P.columns i) = 0 := by
-  have h : P.columns i ∈ Submodule.span ℤ (range P.columns) :=
-    Submodule.subset_span ⟨i, rfl⟩
-  rw [← P.kernel_eq] at h
-  exact h
 
 def transport (e : B ≃ₗ[ℤ] C) : IntegerPresentation C r c where
   map := e.toLinearMap.comp P.map

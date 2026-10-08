@@ -68,33 +68,5 @@ noncomputable def restrict (Q : C(Circle × X, Y)) : C(unitInterval × X, Y) :=
   Q.comp ⟨fun p ↦ (semicircle p.1, p.2),
     (semicircle.continuous.comp continuous_fst).prodMk continuous_snd⟩
 
-theorem homotopy_in_subset_of_fixed_extension {f g : C(X, Y)} {S : Set X}
-    (F : ContinuousMap.HomotopyRel f g S) (K : Set Y)
-    (hf : ∀ x, f x ∈ K) (hg : ∀ x, g x ∈ K)
-    (Q : C(Circle × X, Y)) (hQ : ∀ p, Q p ∈ K)
-    (hfixed : ∀ p, extend F.toContinuousMap p ∈ K → Q p = extend F.toContinuousMap p) :
-    ∃ G : ContinuousMap.HomotopyRel f g S, ∀ t x, G (t, x) ∈ K := by
-  let G : ContinuousMap.HomotopyRel f g S :=
-    { toContinuousMap := restrict Q
-      map_zero_left := by
-        intro x
-        change Q (semicircle 0, x) = f x
-        rw [semicircle_zero]
-        have he : extend F.toContinuousMap (1, x) = f x :=
-          (extend_one F.toContinuousMap x).trans (F.apply_zero x)
-        exact (hfixed (1, x) (he.symm ▸ hf x)).trans he
-      map_one_left := by
-        intro x
-        change Q (semicircle 1, x) = g x
-        rw [semicircle_one]
-        have he : extend F.toContinuousMap (-1, x) = g x :=
-          (extend_neg_one F.toContinuousMap x).trans (F.apply_one x)
-        exact (hfixed (-1, x) (he.symm ▸ hg x)).trans he
-      prop' := by
-        intro t x hx
-        change Q (semicircle t, x) = f x
-        have he : extend F.toContinuousMap (semicircle t, x) = f x := F.eq_fst _ hx
-        exact (hfixed (semicircle t, x) (he.symm ▸ hf x)).trans he }
-  exact ⟨G, fun t x ↦ hQ (semicircle t, x)⟩
 
 end NoExoticSixSphere.CircleHomotopyParameter

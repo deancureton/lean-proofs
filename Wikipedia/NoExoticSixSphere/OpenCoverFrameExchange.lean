@@ -41,19 +41,6 @@ namespace Monomorphism
 
 variable {N n : ℕ} (r : ℕ) (hN : N = 3 + (r + 2)) (hn : n = r + 2)
 
-theorem sphereParityOfDimension_exchange (f₀₀ f₀₁ f₁₀ f₁₁ : C(Sphere 3, Space N n))
-    (U V : Set (Sphere 3)) (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = univ)
-    (hU₀ : EqOn f₀₀ f₀₁ U) (hU₁ : EqOn f₁₀ f₁₁ U)
-    (hV₀ : EqOn f₀₀ f₁₀ V) (hV₁ : EqOn f₀₁ f₁₁ V) :
-    sphereParityOfDimension r hN hn f₀₀ + sphereParityOfDimension r hN hn f₁₁ =
-      sphereParityOfDimension r hN hn f₀₁ + sphereParityOfDimension r hN hn f₁₀ := by
-  let T : C(Space N n, Stiefel.Space (3 + (r + 2)) (r + 2)) :=
-    (Stiefel.dimensionHomeomorph hN hn :
-      C(Stiefel.Space N n, Stiefel.Space (3 + (r + 2)) (r + 2))).comp (normalize N n)
-  exact sphereThirdObstruction_exchange r (T.comp f₀₀) (T.comp f₀₁)
-    (T.comp f₁₀) (T.comp f₁₁) U V hU hV hcover
-    (fun _ hx ↦ congrArg T (hU₀ hx)) (fun _ hx ↦ congrArg T (hU₁ hx))
-    (fun _ hx ↦ congrArg T (hV₀ hx)) (fun _ hx ↦ congrArg T (hV₁ hx))
 
 end Monomorphism
 end NoExoticSixSphere.Stiefel

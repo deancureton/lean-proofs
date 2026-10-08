@@ -92,9 +92,5 @@ theorem speed_pos {t : ℝ} (ht : -1 < t) : 0 < speed t := by
   have hp : 0 < t + 1 := by linarith
   exact mul_pos (sq_pos_of_pos (inv_pos.mpr hp)) ((profile_pos_iff t).mpr ht)
 
-theorem profile_or_reverse_pos (t : ℝ) : 0 < profile t ∨ 0 < profile (-t) := by
-  by_cases ht : -1 < t
-  · exact Or.inl ((profile_pos_iff t).mpr ht)
-  · exact Or.inr ((profile_pos_iff (-t)).mpr (by linarith))
 
 end NoExoticSixSphere.SphereSumNeck

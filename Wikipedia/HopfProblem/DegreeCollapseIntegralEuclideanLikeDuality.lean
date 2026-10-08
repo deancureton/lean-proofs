@@ -113,12 +113,5 @@ variable {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   (M : Type) [TopologicalSpace M] [T2Space M] [ChartedSpace E M] [CompactSpace M]
   [IsManifold 𝓘(ℝ, E) ∞ M] [SimplyConnectedSpace M]
 
-theorem exists_full_chart_sign (e : OpenPartialHomeomorph M E) (he : e.target = Set.univ) :
-    ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ∀ (K : Set M) (hK : IsCompact K) (hKs : K ⊆ e.source),
-      supportedClass (E := E) n M K =
-        ε • IntegralChartOrientation.fundamentalClass (n + 1) e K hK hKs := by
-  let : ContractibleSpace e.source :=
-    (IntegralEuclideanLikeCap.fullChartHomeomorph e he).contractibleSpace
-  exact exists_chart_sign (E := E) n M e
 
 end Wikipedia.HopfProblem.DegreeCollapse.IntegralManifoldFundamentalClass

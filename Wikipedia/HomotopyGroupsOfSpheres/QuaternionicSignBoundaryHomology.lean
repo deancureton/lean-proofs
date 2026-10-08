@@ -43,13 +43,5 @@ def signBoundary (x y : Bool) :
     (signCoordinateDerivativeEquiv x y) (hasFDerivAt_signCoordinateDerivativeEquiv x y)
     (signCoordinateMap_zero x y) Filter.univ_mem (contDiffAt_signCoordinateMap x y))
 
-/-- Equality of the actual nonlinear local boundary maps on integral homology. -/
-theorem signBoundary_homology_eq (x y : Bool) (k : ℕ) :
-    singularHomologyMap (signBoundary x y).normalizedMap k =
-      singularHomologyMap (signBoundary true true).normalizedMap k := by
-  apply LocalBoundaryComparison.normalized_homology_eq (parameterBasis rotatedInput)
-  change 0 < (signDerivativeComparisonEquiv x y).toLinearEquiv.toLinearMap.det
-  rw [signDerivativeComparisonEquiv_det]
-  norm_num
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary.MidpointSeed

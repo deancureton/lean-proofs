@@ -36,24 +36,7 @@ theorem originalSlabPoint_left (x : {x : Sphere m // d.leftMap x = b}) :
     originalSlabPoint d (d.leftEndpoint x).val =
       seamCollarPoint d 0 (zero_mem_seamCollarTimes d) x := rfl
 
-theorem isClosedEmbedding_originalSlabPoint : IsClosedEmbedding (originalSlabPoint d) := by
-  let : CompactSpace (CylinderFiberSlab.slab d.map b 0 1) :=
-    CylinderFiberSlab.compactSpace d.map b 0 1
-  have hc : Continuous (originalSlabPoint d) :=
-    (continuous_subtype_val.comp continuous_subtype_val).subtype_mk _
-  apply hc.isClosedEmbedding
-  intro p q he
-  exact Subtype.ext (Subtype.ext (congrArg (fun z : Fiber d ↦ z.val) he))
 
-theorem range_originalSlabPoint (hmiss : ∀ x, d.rightMap x ≠ b) :
-    range (originalSlabPoint d) = {p : Fiber d | 0 ≤ p.val.1} := by
-  ext p
-  constructor
-  · rintro ⟨q, rfl⟩
-    exact q.property.1
-  · intro hp
-    refine ⟨(originalHalfHomeomorph d hmiss).symm ⟨p, hp⟩, ?_⟩
-    exact congrArg Subtype.val ((originalHalfHomeomorph d hmiss).apply_symm_apply ⟨p, hp⟩)
 
 variable (k : ℕ) (hd : m = n + k) (a : Sphere m) (A : d.FramedSlabData k hd a)
 
@@ -78,42 +61,7 @@ theorem contMDiff_originalSlabPoint : letI := A.atlas; letI := fiberAtlas d k hd
   exact (CylinderLevelEquations.contMDiffAt_retract (m := m) a hn).comp p
     A.smooth_inclusion.contMDiffAt
 
-theorem injective_mfderiv_originalSlabPoint (p : CylinderFiberSlab.slab d.map b 0 1) :
-    letI := A.atlas; letI := fiberAtlas d k hd;
-    Injective (mfderiv ((𝓡∂ 1).prod (𝓡 k)) (𝓡 (k + 1)) (originalSlabPoint d) p) := by
-  let := A.atlas
-  let := fiberAtlas d k hd
-  have hcomp := mfderiv_comp p
-    ((contMDiff_ambientInclusion d k hd).mdifferentiableAt (by simp))
-    ((contMDiff_originalSlabPoint d k hd a A).mdifferentiableAt (by simp))
-  intro u v he
-  apply A.injective_differential p
-  change (mfderiv ((𝓡∂ 1).prod (𝓡 k))
-      𝓘(ℝ, WithLp 2 (ℝ × Vector (m + 1)))
-      (ambientInclusion d ∘ originalSlabPoint d) p) u =
-    (mfderiv ((𝓡∂ 1).prod (𝓡 k))
-      𝓘(ℝ, WithLp 2 (ℝ × Vector (m + 1)))
-      (ambientInclusion d ∘ originalSlabPoint d) p) v
-  rw [hcomp]
-  exact congrArg (ambientDifferential d k hd (originalSlabPoint d p)) he
 
-theorem originalSlab_boundary_iff (hmiss : ∀ x, d.rightMap x ≠ b)
-    (p : CylinderFiberSlab.slab d.map b 0 1) : letI := A.atlas;
-    ((𝓡∂ 1).prod (𝓡 k)).IsBoundaryPoint p ↔ (originalSlabPoint d p).val.1 = 0 := by
-  let := A.atlas
-  rw [A.boundary_iff p]
-  constructor
-  · rintro (hp | hp)
-    · exact hp
-    · exact (hmiss p.val.val.2 (d.rightMap_eq_value_of_time p hp)).elim
-  · exact fun hp ↦ Or.inl hp
 
-theorem normalFrame_originalSlab_boundary (x : {x : Sphere m // d.leftMap x = b}) :
-    letI := A.atlas; letI := fiberAtlas d k hd;
-    (normalFrame d k hd a).ambient (originalSlabPoint d (d.leftEndpoint x).val) =
-      A.frame.ambient (d.leftEndpoint x).val := by
-  let := A.atlas
-  let := fiberAtlas d k hd
-  rw [originalSlabPoint_left, normalFrame_seamCollar, A.frame_left]
 
 end Wikipedia.HopfProblem.DegreeCollapse.ReflectedCylinder

@@ -41,12 +41,6 @@ theorem formalPointCrossProduct_edge_boundary (q : ℕ) (v : Fin 2 → V)
   rw [formalBoundary_edge_simplex, map_sub, LinearMap.sub_apply,
     formalPointCrossProduct_simplex_left, formalPointCrossProduct_simplex_left]
 
-/-- The degree-zero endpoint formula for an edge times an arbitrary zero-chain. -/
-theorem formalBoundary_edgeCrossProduct_zero_simplex_left
-    (v : Fin 2 → V) (d : FormalChains W 1) :
-    formalBoundary 1 (formalEdgeCrossProduct 0 (formalSimplex v) d) =
-      formalMap (fun w => (v 1, w)) 1 d - formalMap (fun w => (v 0, w)) 1 d := by
-  rw [formalBoundary_edgeCrossProduct_zero, formalPointCrossProduct_edge_boundary]
 
 /-- The positive-degree signed boundary formula, with the endpoints made explicit. -/
 theorem formalBoundary_edgeCrossProduct_simplex_left (q : ℕ)
@@ -57,14 +51,6 @@ theorem formalBoundary_edgeCrossProduct_simplex_left (q : ℕ)
           formalEdgeCrossProduct q (formalSimplex v) (formalBoundary (q + 1) d) := by
   rw [formalBoundary_edgeCrossProduct, formalPointCrossProduct_edge_boundary]
 
-/-- The formal edge product is an explicit prism between its endpoint insertions. -/
-theorem formalEdgeCrossProduct_prism (q : ℕ) (v : Fin 2 → V)
-    (d : FormalChains W (q + 2)) :
-    formalBoundary (q + 2) (formalEdgeCrossProduct (q + 1) (formalSimplex v) d) +
-        formalEdgeCrossProduct q (formalSimplex v) (formalBoundary (q + 1) d) =
-      formalMap (fun w => (v 1, w)) (q + 2) d -
-        formalMap (fun w => (v 0, w)) (q + 2) d := by
-  rw [formalBoundary_edgeCrossProduct_simplex_left, sub_add_cancel]
 
 /-- For a formal edge cycle the right boundary enters with a minus sign. -/
 theorem formalBoundary_edgeCrossProduct_of_cycle (q : ℕ) (c : FormalChains V 2)
@@ -73,17 +59,6 @@ theorem formalBoundary_edgeCrossProduct_of_cycle (q : ℕ) (c : FormalChains V 2
       -formalEdgeCrossProduct q c (formalBoundary (q + 1) d) := by
   rw [formalBoundary_edgeCrossProduct, hc, map_zero, LinearMap.zero_apply, zero_sub]
 
-/-- A product of an edge cycle and a positive-degree cycle is a cycle. -/
-theorem formalEdgeCrossProduct_isCycle (q : ℕ) (c : FormalChains V 2)
-    (hc : formalBoundary 1 c = 0) (d : FormalChains W (q + 2))
-    (hd : formalBoundary (q + 1) d = 0) :
-    formalBoundary (q + 2) (formalEdgeCrossProduct (q + 1) c d) = 0 := by
-  rw [formalBoundary_edgeCrossProduct_of_cycle q c hc, hd, map_zero, neg_zero]
 
-/-- An edge cycle times any zero-chain is a cycle. -/
-theorem formalEdgeCrossProduct_zero_isCycle (c : FormalChains V 2)
-    (hc : formalBoundary 1 c = 0) (d : FormalChains W 1) :
-    formalBoundary 1 (formalEdgeCrossProduct 0 c d) = 0 := by
-  rw [formalBoundary_edgeCrossProduct_zero, hc, map_zero, LinearMap.zero_apply]
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

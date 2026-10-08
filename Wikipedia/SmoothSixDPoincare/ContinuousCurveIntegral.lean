@@ -67,9 +67,6 @@ def curveIntegral : C(I, E) →L[ℝ] C(I, E) :=
 theorem curveIntegral_apply (a : C(I, E)) (t : I) :
     curveIntegral a t = curvePrimitive a t := rfl
 
-theorem curveIntegral_zero (a : C(I, E)) : curveIntegral a 0 = 0 := by
-  change (∫ s in (0 : ℝ)..0, IccExtendCM a s) = 0
-  exact intervalIntegral.integral_same
 
 theorem curveIntegral_norm_le (a : C(I, E)) : ‖curveIntegral a‖ ≤ ‖a‖ :=
   curveIntegralLinear_norm_le a

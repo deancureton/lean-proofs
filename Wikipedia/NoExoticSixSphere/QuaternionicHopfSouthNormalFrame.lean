@@ -39,25 +39,6 @@ theorem southNormalEquations_first_zero (x : V 8) (hx : southNormalEquations x =
     exact False.elim ((not_lt_of_ge
       (show 0 ≤ Quaternion.normSq (first x) from Quaternion.normSq_nonneg)) hh)
 
-theorem southNormalEquations_isolate (x : V 8) :
-    southNormalEquations x = 0 ∧ polynomial x 0 < 0 ↔
-      ∃ q : Sphere 3, southFiberAmbient q = x := by
-  constructor
-  · rintro ⟨hzero, hhead⟩
-    have hn := congrArg (fun p : SouthNormalModel ↦ p.fst) hzero
-    change ‖x‖ ^ 2 - 1 = 0 at hn
-    have hnorm : ‖x‖ = 1 := by nlinarith [norm_nonneg x]
-    let sx : Sphere 7 := ⟨x, mem_sphere_zero_iff_norm.mpr hnorm⟩
-    have hs : sphereMap sx = south :=
-      (sphereMap_eq_south_iff sx).mpr (southNormalEquations_first_zero x hzero hhead)
-    refine ⟨southFiberInverse ⟨sx, hs⟩, ?_⟩
-    exact congrArg Subtype.val (southFiberPoint_southFiberInverse ⟨sx, hs⟩)
-  · rintro ⟨q, rfl⟩
-    refine ⟨southNormalEquations_zero (southFiberPoint q) (first_southFiberPoint q), ?_⟩
-    have hh := congrArg (fun y : Sphere 4 ↦ y.val 0) (sphereMap_southFiberPoint q)
-    change polynomial (southFiberAmbient q) 0 = -1 at hh
-    rw [hh]
-    norm_num
 
 theorem contMDiff_southFiberAmbient : ContMDiff (𝓡 3) 𝓘(ℝ, V 8) ∞ southFiberAmbient := by
   let : Fact (Module.finrank ℝ (V 4) = 3 + 1) := ⟨finrank_euclideanSpace_fin⟩

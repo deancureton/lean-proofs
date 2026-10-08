@@ -34,16 +34,6 @@ theorem basedFiveSimplexChain_boundary (τ : BasedFiveSimplex x) :
     ((singularComplex X).d 5 4).hom (basedFiveSimplexChain τ) = 0 :=
   HigherHurewicz.correctedSimplexChain_boundary 4 x τ.val (basedFiveSimplex_face τ)
 
-/-- In odd degree the original based simplex itself has zero boundary. -/
-theorem basedFiveSimplex_boundary (τ : BasedFiveSimplex x) :
-    ((singularComplex X).d 5 4).hom (simplexChain X 5 τ.val) = 0 := by
-  have h := basedFiveSimplexChain_boundary τ
-  rw [basedFiveSimplexChain_eq, map_sub] at h
-  have hc := HigherHurewicz.boundary_constantSimplexChain_odd 4 x (by decide)
-  rw [show ((singularComplex X).d 5 4).hom
-      (simplexChain X 5 (ContinuousMap.const (Simplex 5) x)) = 0 from hc,
-    sub_zero] at h
-  exact h
 
 /-- The corrected cycle in the original unnormalized singular complex. -/
 def basedFiveSimplexCycle (τ : BasedFiveSimplex x) :

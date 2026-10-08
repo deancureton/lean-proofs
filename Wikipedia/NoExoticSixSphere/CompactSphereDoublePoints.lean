@@ -36,13 +36,6 @@ theorem doublePoints_subset_time_cylinder (f : ℝ → X → Y)
 
 variable [TopologicalSpace X] [T2Space X] [CompactSpace X]
 
-theorem isCompact_closure_doublePoints_of_exterior_injective (f : ℝ → X → Y)
-    (hext : ∀ t, t ≤ 0 ∨ 1 ≤ t → Injective (f t)) :
-    IsCompact (closure (doublePoints f)) := by
-  have hK : IsCompact (Icc (0 : ℝ) 1 ×ˢ (univ : Set (X × X))) :=
-    isCompact_Icc.prod isCompact_univ
-  exact hK.of_isClosed_subset isClosed_closure
-    (closure_minimal (doublePoints_subset_time_cylinder f hext) hK.isClosed)
 
 theorem compactSpace_unordered_of_exterior_injective (f : ℝ → X → Y)
     (hext : ∀ t, t ≤ 0 ∨ 1 ≤ t → Injective (f t)) :

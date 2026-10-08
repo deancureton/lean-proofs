@@ -112,7 +112,5 @@ theorem unordered_ncard : Nat.card (SphereSelfIntersections.Unordered map) = 1 :
   rw [ordered_ncard] at h
   omega
 
-theorem unorderedParity_one : SphereSelfIntersections.unorderedParity map = 1 := by
-  simp only [SphereSelfIntersections.unorderedParity, unordered_ncard, Nat.cast_one]
 
 end NoExoticSixSphere.WhitneySphere

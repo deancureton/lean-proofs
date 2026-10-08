@@ -80,10 +80,5 @@ theorem nativeMiddleQuotientEquiv_mk (x : LinearMap.ker (detector f A hR)) :
     nativeMiddleQuotientEquiv f A hR d hd (Submodule.Quotient.mk x) = nativeLift f A hR d hd x :=
   ExactKernelQuotient.quotientEquiv_mk _ _ _ _ _ _ _ _ x
 
-theorem nativeMiddleQuotientEquiv_trace (x : LinearMap.ker (detector f A hR)) :
-    singularHomologyMap (TraceBody.nativeTargetInclusion A hR) 3
-      (nativeMiddleQuotientEquiv f A hR d hd (Submodule.Quotient.mk x)) =
-        singularHomologyMap (topMap A) 3 x := by
-  rw [nativeMiddleQuotientEquiv_mk, nativeLift_trace]
 
 end Wikipedia.HopfProblem.DegreeCollapse.SurgeryDetector

@@ -118,15 +118,6 @@ theorem native_cubic_critical_iff
   rw [LocalFunctionReplacement.replace_self Φ hmodel, fderiv_const_add] at h
   exact h
 
-theorem nativeCubicDescent_zero
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, B) (Model m) M ∞)
-    {f : M → ℝ} {b t : ℝ}
-    (hmodel : ∀ p ∈ Φ.source, f (Φ p) = b + cubic σ t p)
-    {x : M} (hx : x ∈ Φ.target) (hcrit : x ∈ ManifoldMorse.criticalPoints B f) :
-    nativeCubicDescent σ Φ t x = 0 := by
-  have hz := cubicDescent_zero_of_critical σ ((native_cubic_critical_iff σ Φ hmodel hx).mp hcrit)
-  unfold nativeCubicDescent FlowConstruction.partialChartField
-  rw [VectorField.mpullback_apply, hz, map_zero, map_zero]
 
 /-- The exact sum-of-squares descent speed in the original manifold. -/
 theorem nativeCubicDescent_speed
@@ -147,23 +138,5 @@ theorem nativeCubicDescent_speed
   change fderiv ℝ (f ∘ Φ) (Φ.symm x) (cubicDescent σ t (Φ.symm x)) = _
   rw [hder, differential_cubicDescent]
 
-/-- The model's strict descent is retained in the original native tangent bundle. -/
-theorem nativeCubicDescent_strict
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, B) (Model m) M ∞)
-    {f : M → ℝ} (hf : ContMDiff 𝓘(ℝ, B) 𝓘(ℝ, ℝ) ∞ f) {b t : ℝ}
-    (hmodel : ∀ p ∈ Φ.source, f (Φ p) = b + cubic σ t p)
-    {x : M} (hx : x ∈ Φ.target) (hreg : x ∉ ManifoldMorse.criticalPoints B f) :
-    mvfderiv 𝓘(ℝ, B) f x (nativeCubicDescent σ Φ t x) < 0 := by
-  have hcoord : (f ∘ Φ) =ᶠ[𝓝 (Φ.symm x)] (fun p => b + cubic σ t p) := by
-    filter_upwards [Φ.open_source.mem_nhds (Φ.map_target' hx)] with p hp
-    exact hmodel p hp
-  have hder : fderiv ℝ (f ∘ Φ) (Φ.symm x) =
-      fderiv ℝ (fun p => b + cubic σ t p) (Φ.symm x) := hcoord.fderiv_eq
-  rw [fderiv_const_add] at hder
-  unfold nativeCubicDescent
-  rw [FlowConstruction.mvfderiv_partialChartField hf Φ.symm _ hx]
-  change fderiv ℝ (f ∘ Φ) (Φ.symm x) (cubicDescent σ t (Φ.symm x)) < 0
-  rw [hder]
-  exact cubicDescent_strict σ (fun h => hreg ((native_cubic_critical_iff σ Φ hmodel hx).mpr h))
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

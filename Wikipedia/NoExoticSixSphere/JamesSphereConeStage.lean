@@ -60,17 +60,5 @@ theorem quotient_eq_iff (n k : ℕ) (p q : ReducedCone.Space n × James.stage (s
         (ReducedCone.boundary n b.1, b.2) = q ∧ stageAction n k a = stageAction n k b :=
   CompactAdjunction.projection_eq_iff (data n k) p q
 
-theorem quotient_mem_words_iff (n k : ℕ)
-    (p : ReducedCone.Space n × James.stage (spherePole n) k) :
-    quotientMap n k p ∈ Set.range (words n k) ↔ p.1 ∈ Set.range (ReducedCone.boundary n) := by
-  have he := CompactAdjunction.preimage_range_inclusion (data n k)
-  change p ∈ CompactAdjunction.quotientMap (data n k) ⁻¹'
-    Set.range (CompactAdjunction.inclusion (data n k)) ↔ _
-  rw [he]
-  constructor
-  · rintro ⟨⟨x, w⟩, hxw⟩
-    exact ⟨x, congrArg Prod.fst hxw⟩
-  · rintro ⟨x, hx⟩
-    exact ⟨(x, p.2), Prod.ext hx rfl⟩
 
 end NoExoticSixSphere.JamesSphere.ConeStage

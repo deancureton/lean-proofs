@@ -103,12 +103,5 @@ def reducedMiddleHomologyEquiv (hz : nativeBeltClass f A hR = 0) :
   (TraceCoreAttachment.traceMiddleHomologyEquiv f A hR).trans
     (nativeMiddleHomologySplit f A hR hz)
 
-theorem reducedMiddleHomologyEquiv_mk (hz : nativeBeltClass f A hR = 0)
-    (x : SingularHomology M 3) :
-    reducedMiddleHomologyEquiv f A hR hz (Submodule.Quotient.mk x) =
-      nativeMiddleHomologySplit f A hR hz (singularHomologyMap (topMap A) 3 x) := by
-  change nativeMiddleHomologySplit f A hR hz
-    (TraceCoreAttachment.traceMiddleHomologyEquiv f A hR (Submodule.Quotient.mk x)) = _
-  rw [TraceCoreAttachment.traceMiddleHomologyEquiv_mk]
 
 end Wikipedia.HopfProblem.DegreeCollapse.TraceBody

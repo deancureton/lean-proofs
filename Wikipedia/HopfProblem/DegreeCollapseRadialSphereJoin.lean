@@ -75,17 +75,5 @@ theorem extend_sphereMap (f : C(UnitSphere E, UnitSphere F)) (x : WithLp 2 (E ×
 
 variable {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
 
-theorem sphereMap_assoc (f : C(UnitSphere E, UnitSphere F))
-    (x : UnitSphere (WithLp 2 (WithLp 2 (E × G) × H))) :
-    unitSphereCoordinates (LinearIsometryEquiv.withLpProdAssoc 2 ℝ F G H)
-      (sphereMap (G := H) (sphereMap (G := G) f) x) =
-    sphereMap (G := WithLp 2 (G × H)) f
-      (unitSphereCoordinates (LinearIsometryEquiv.withLpProdAssoc 2 ℝ E G H) x) := by
-  apply Subtype.ext
-  change WithLp.toLp 2 ((extend (sphereMap f) x.val.fst).fst,
-    WithLp.toLp 2 ((extend (sphereMap f) x.val.fst).snd, x.val.snd)) =
-      WithLp.toLp 2 (extend f x.val.fst.fst, WithLp.toLp 2 (x.val.fst.snd, x.val.snd))
-  rw [extend_sphereMap]
-  rfl
 
 end Wikipedia.HopfProblem.DegreeCollapse.RadialSphereJoin

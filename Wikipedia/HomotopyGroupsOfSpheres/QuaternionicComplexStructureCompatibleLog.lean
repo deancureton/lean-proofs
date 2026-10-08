@@ -105,37 +105,6 @@ theorem continuous_relative_pair :
   (continuous_toSymplectic.comp continuous_fst).inv.mul
     (continuous_toSymplectic.comp continuous_snd)
 
-theorem exists_compatible_relativeLog_neighborhood (n : ℕ) :
-    ∃ U : Set (Space n × Space n), IsOpen U ∧ (∀ J, (J, J) ∈ U) ∧
-      ∀ J J', (J, J') ∈ U →
-        Cayley.relative J J' ∈ compatibleDomain n ∧
-        J.val.val.comp (Exponential.logarithmChart n (Cayley.relative J J')).val =
-          -((Exponential.logarithmChart n (Cayley.relative J J')).val.comp J.val.val) := by
-  obtain ⟨r, hr, hcontrol⟩ := exists_compatible_logarithmBall n
-  let U := (fun p : Space n × Space n ↦ Cayley.relative p.1 p.2) ⁻¹' groupLogarithmBall n r
-  refine ⟨U, (isOpen_groupLogarithmBall n r).preimage continuous_relative_pair, ?_, hcontrol⟩
-  intro J
-  change Cayley.relative J J ∈ groupLogarithmBall n r
-  rw [Cayley.relative_self]
-  exact one_mem_groupLogarithmBall n hr
 
-theorem exists_uniform_relativeLog_partition {X : Type*} [TopologicalSpace X] [CompactSpace X]
-    (H : C(I × X, Space n)) (N : ℕ) :
-    ∃ m : ℕ, N ≤ m ∧ ∀ i : Fin (m + 1),
-      ∀ u ∈ Icc (unitTime m i.castSucc) (unitTime m i.succ), ∀ x,
-        Cayley.relative (H (unitTime m i.castSucc, x)) (H (u, x)) ∈ compatibleDomain n ∧
-        (H (unitTime m i.castSucc, x)).val.val.comp
-            (Exponential.logarithmChart n
-              (Cayley.relative (H (unitTime m i.castSucc, x)) (H (u, x)))).val =
-          -((Exponential.logarithmChart n
-              (Cayley.relative (H (unitTime m i.castSucc, x)) (H (u, x)))).val.comp
-                (H (unitTime m i.castSucc, x)).val.val) := by
-  obtain ⟨r, hr, hcontrol⟩ := exists_compatible_logarithmBall n
-  let F : C(I × X, symplecticSubgroup n) :=
-    ⟨fun z ↦ toSymplectic (H z), continuous_toSymplectic.comp H.continuous⟩
-  obtain ⟨m, hm, hsmall⟩ := Exponential.exists_uniform_increment_partition F
-    (groupLogarithmBall n r)
-    ((isOpen_groupLogarithmBall n r).mem_nhds (one_mem_groupLogarithmBall n hr)) N
-  exact ⟨m, hm, fun i u hu x ↦ hcontrol _ _ (hsmall i u hu x)⟩
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns.ComplexStructures.CompatibleLog

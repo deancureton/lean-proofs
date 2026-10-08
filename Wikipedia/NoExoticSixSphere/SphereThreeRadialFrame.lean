@@ -63,17 +63,7 @@ theorem radialCoordinates_apply (s : Sphere 3) (v : Vector 4) :
       EuclideanTailCoordinates.scalar.symm
         (EuclideanSpace.finAddEquivProd (n := 3) (m := 1) v).2 • s.val := rfl
 
-theorem radialCoordinates_tangent (s : Sphere 3) (v : Vector 3) :
-    radialCoordinates s (EuclideanSpace.finAddEquivProd (n := 3) (m := 1) |>.symm (v, 0)) =
-      operator s.val v := by
-  rw [radialCoordinates_apply, ContinuousLinearEquiv.apply_symm_apply,
-    map_zero, zero_smul, add_zero]
 
-theorem radialCoordinates_radial (s : Sphere 3) (t : ℝ) :
-    radialCoordinates s ((EuclideanSpace.finAddEquivProd (n := 3) (m := 1)).symm
-      (0, EuclideanTailCoordinates.scalar t)) = t • s.val := by
-  rw [radialCoordinates_apply, ContinuousLinearEquiv.apply_symm_apply,
-    map_zero, zero_add, LinearIsometryEquiv.symm_apply_apply]
 
 theorem continuous_radialCoordinates :
     Continuous (fun s ↦ (radialCoordinates s).toContinuousLinearMap) :=

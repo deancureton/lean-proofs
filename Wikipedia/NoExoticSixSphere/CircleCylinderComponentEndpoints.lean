@@ -44,45 +44,7 @@ theorem rightInclusion_mem_component_of_mem
   rw [PreconnectedSpace.connectedComponent_eq_univ]
   exact mem_univ y
 
-theorem rightInclusion_component_all_or_none
-    [PreconnectedSpace {x : Sphere m // d.rightMap x = b}] (p : Fiber d) :
-    (∀ y, rightInclusion d y ∉ connectedComponent p) ∨
-      (∀ y, rightInclusion d y ∈ connectedComponent p) := by
-  classical
-  by_cases h : ∃ x, rightInclusion d x ∈ connectedComponent p
-  · obtain ⟨x, hx⟩ := h
-    exact Or.inr (rightInclusion_mem_component_of_mem d p x hx)
-  · exact Or.inl (not_exists.mp h)
 
-theorem componentEndpoints_eq_top_of_right_mem
-    [PreconnectedSpace {x : Sphere m // d.leftMap x = b}]
-    [PreconnectedSpace {x : Sphere m // d.rightMap x = b}]
-    (k : ℕ) (hd : m = n + k) (x : {x : Sphere m // d.leftMap x = b})
-    (y : {x : Sphere m // d.rightMap x = b})
-    (hy : rightInclusion d y ∈ connectedComponent (leftInclusion d x)) :
-    componentEndpoints d k hd (leftInclusion d x) = ⊤ := by
-  apply Opens.ext
-  apply Set.eq_univ_of_forall
-  intro q
-  apply (mem_componentEndpoints d k hd (leftInclusion d x) q).mpr
-  cases q with
-  | inl z => exact leftInclusion_mem_component d x z
-  | inr z => exact rightInclusion_mem_component_of_mem d (leftInclusion d x) y hy z
 
-theorem componentEndpoints_eq_left_of_right_not_mem
-    [PreconnectedSpace {x : Sphere m // d.leftMap x = b}]
-    (k : ℕ) (hd : m = n + k) (x : {x : Sphere m // d.leftMap x = b})
-    (hy : ∀ y, rightInclusion d y ∉ connectedComponent (leftInclusion d x)) :
-    componentEndpoints d k hd (leftInclusion d x) =
-      DiffeomorphSumClopen.leftOpen {x : Sphere m // d.leftMap x = b}
-        {x : Sphere m // d.rightMap x = b} := by
-  apply Opens.ext
-  ext q
-  refine (mem_componentEndpoints d k hd (leftInclusion d x) q).trans ?_
-  cases q with
-  | inl z =>
-    exact iff_of_true (leftInclusion_mem_component d x z) ⟨z, rfl⟩
-  | inr z =>
-    exact iff_of_false (hy z) (by simp [DiffeomorphSumClopen.leftOpen])
 
 end NoExoticSixSphere.CircleCylinder

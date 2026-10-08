@@ -119,10 +119,5 @@ theorem southPair_coordinateInducedNormalFrame :
     southPairSmoothCollapseData.coordinateInducedNormalFrame = southPairEuclideanNormalFrame :=
   southPairSmoothCollapseData.coordinateInducedNormalFrame_eq_of_radius_one rfl
 
-theorem southPair_coordinateInduced_geometricArf_one :
-    GeometricArf.invariant southPairEuclideanEmbedding
-      southPairSmoothCollapseData.coordinateInducedNormalFrame r p = 1 := by
-  rw [southPair_coordinateInducedNormalFrame]
-  exact southPair_geometricArf_one r p
 
 end NoExoticSixSphere.QuaternionicHopf

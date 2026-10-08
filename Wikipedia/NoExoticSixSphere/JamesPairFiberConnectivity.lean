@@ -47,11 +47,6 @@ theorem fiber_pi (n : ℕ) : ∀ d, 0 < d → ∀ a : sourceImage (n + 2),
       exact NativeHurewiczVanishing.subsingleton d h2
         (fun k hk hkd q ↦ hlow k hk hkd a q) p
 
-theorem fiber_homology (n d : ℕ) (hd : 2 ≤ d) (a : sourceImage (n + 2)) :
-    Subsingleton (SingularHomology (SourceFiber (n + 2) a) d) := by
-  have h := HigherFiberDetection.fiber_homology_subsingleton_of_pi n (d - 2)
-    (fun k hk _ b p ↦ fiber_pi n k hk b p) a
-  simpa only [Nat.sub_add_cancel hd] using h
 
 theorem inclusion_pi_surjective (n d : ℕ) (hd : 0 < d) (a : sourceImage (n + 2)) :
     Function.Surjective

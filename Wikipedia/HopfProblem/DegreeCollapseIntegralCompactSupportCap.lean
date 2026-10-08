@@ -61,18 +61,6 @@ theorem withClasses_of {p q d : ℕ} (h : p + q = d)
     (K : Compacts X) (a : Component X p K) :
     withClasses h c hc (of X p K a) = componentMap (K : Set X) h (c K) a := rfl
 
-/-- On compact spaces the actual whole-space component computes the cap map. -/
-theorem withClasses_eq_top [CompactSpace X] {p q d : ℕ} (h : p + q = d)
-    (c : ∀ K : Compacts X, Homology (ModuleCat.of ℤ ℤ) (K : Set X) d)
-    (hc : ∀ (K L : Compacts X) (hKL : K ≤ L), restrict (ModuleCat.of ℤ ℤ) hKL d (c L) = c K)
-    (a : Cohomology X p) :
-    withClasses h c hc a = componentMap Set.univ h (c ⊤) (topEquiv X p a) := by
-  obtain ⟨K, b, rfl⟩ := exists_representative X p a
-  rw [withClasses_of]
-  change componentMap (K : Set X) h (c K) b =
-    componentMap Set.univ h (c ⊤) (IntegralSupportedCohomology.extend (le_top : K ≤ ⊤) p b)
-  exact ((componentMap_extend (le_top : K ≤ ⊤) h (c ⊤) b).trans
-    (congrArg (fun z => componentMap (K : Set X) h z b) (hc K ⊤ le_top))).symm
 
 section Manifold
 

@@ -44,8 +44,5 @@ def RegularOn (f : ℝ × M → N) (S : Set (ℝ × (M × M))) : Prop :=
     Coincidence.TransverseAt (I := 𝓘(ℝ, ℝ).prod (I.prod I)) (J := J)
       (f ∘ first) (f ∘ second) q
 
-theorem model_dimension [FiniteDimensional ℝ E] (hdim : Module.finrank ℝ E = 2) :
-    Module.finrank ℝ (ℝ × (E × E)) = 5 := by
-  simp only [Module.finrank_prod, Module.finrank_self, hdim]
 
 end Wikipedia.HopfProblem.OrbitPair.SynchronizedPairs

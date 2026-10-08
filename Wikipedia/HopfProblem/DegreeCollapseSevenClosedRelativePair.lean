@@ -61,11 +61,6 @@ theorem halfToClosed_evaluation (k : ℕ)
   cohomologyEvaluation_naturality
     (RelativeSingularHomology.mapChain (halfToClosed A T) (halfToClosed_mapsTo A hA T)) k c z
 
-theorem closed_relative_third_homology_subsingleton
-    (h3 : Surjective (halfToClosedPairMap A hA T 3)) :
-    Subsingleton (RelativeSingularHomology.Homology (closedExteriorRange A hA) 3) := by
-  let := relative_third_homology_subsingleton A hA T
-  exact h3.subsingleton
 
 theorem halfToClosedCohomologyPullback_bijective
     (h3 : Surjective (halfToClosedPairMap A hA T 3))
@@ -93,25 +88,6 @@ theorem extendRelativeClass_evaluation (h : Bijective (halfToClosedCohomologyPul
     cohomologyEvaluation (RelativeSingularHomology.complex (halfExteriorRange A hA T)) 4 c z := by
   rw [← halfToClosed_evaluation, extendRelativeClass_pullback]
 
-theorem extendRelativeClass_evaluation_bijective
-    (h : Bijective (halfToClosedCohomologyPullback A hA T 4))
-    (h4 : Bijective (halfToClosedPairMap A hA T 4))
-    (c : RelativeIntegralCap.Cohomology (halfExteriorRange A hA T) 4)
-    (hc : Bijective
-      (cohomologyEvaluation (RelativeSingularHomology.complex (halfExteriorRange A hA T)) 4 c)) :
-    Bijective (cohomologyEvaluation
-      (RelativeSingularHomology.complex (closedExteriorRange A hA)) 4
-        (extendRelativeClass A hA T h c)) := by
-  constructor
-  · intro x y hxy
-    obtain ⟨a, rfl⟩ := h4.2 x
-    obtain ⟨b, rfl⟩ := h4.2 y
-    rw [extendRelativeClass_evaluation, extendRelativeClass_evaluation] at hxy
-    exact congrArg (halfToClosedPairMap A hA T 4) (hc.1 hxy)
-  · intro k
-    obtain ⟨z, hz⟩ := hc.2 k
-    exact ⟨halfToClosedPairMap A hA T 4 z,
-      (extendRelativeClass_evaluation A hA T h c z).trans hz⟩
 
 theorem extendRelativeClass_generates (h : Bijective (halfToClosedCohomologyPullback A hA T 4))
     (c : RelativeIntegralCap.Cohomology (halfExteriorRange A hA T) 4)

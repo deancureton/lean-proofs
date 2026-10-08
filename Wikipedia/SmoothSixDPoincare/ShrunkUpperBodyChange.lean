@@ -65,19 +65,6 @@ theorem upperBodyChange_symm_on_level (y : d.UpperLevel) :
   rw [Homeomorph.symm_apply_apply] at hi
   exact (congrArg Subtype.val hi).symm
 
-theorem upperBodyChange_level_iff (x : {x : M // f x ≤ f p + d.radius ^ 2}) :
-    f (R.upperBodyChange x).val = f p + d.radius ^ 2 ↔ f x.val = f p + d.radius ^ 2 := by
-  constructor
-  · intro hx
-    have he := R.upperBodyChange_symm_on_level ⟨(R.upperBodyChange x).val, hx⟩
-    change (R.upperBodyChange.symm (R.upperBodyChange x)).val = _ at he
-    rw [Homeomorph.symm_apply_apply] at he
-    rw [he]
-    exact (R.boundaryHomeomorph.symm ⟨(R.upperBodyChange x).val, hx⟩).property
-  · intro hx
-    rw [show (R.upperBodyChange x).val = (R.boundaryHomeomorph ⟨x.val, hx⟩).val from
-      R.upperBodyChange_on_level ⟨x.val, hx⟩]
-    exact (R.boundaryHomeomorph ⟨x.val, hx⟩).property
 
 variable [T2Space M] [CompactSpace M]
 

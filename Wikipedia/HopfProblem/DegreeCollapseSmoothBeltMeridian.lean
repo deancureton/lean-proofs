@@ -149,13 +149,5 @@ theorem nativeUpperMeridian_smooth_immersive (S : AdaptedSurgeryWindows E f)
     (nativeUpperMeridian S q v s) u (nativeUpperMeridian_contMDiff_ambient S q n v s u)
     (nativeUpperMeridian_immersive_ambient S q n v s hs u)
 
-theorem nativeUpperMeridian_avoids_forward_basin (S : AdaptedSurgeryWindows E f)
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (q : criticalPoints E f)
-    (v : sphere (0 : (S.data q).chart.PositiveCoordinates) 1) (s : unitInterval)
-    (hs : 0 < (s : ℝ)) (u : sphere (0 : (S.data q).chart.NegativeCoordinates) 1) :
-    ¬Tendsto (fun t => S.flow t (nativeUpperMeridian S q v s u).val) atTop (𝓝 q.val) := by
-  intro h
-  exact nativeUpperMeridian_avoids_belt S q v s hs u
-    ((S.belt_basin_iff hf q (nativeUpperMeridian S q v s u)).mp h)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

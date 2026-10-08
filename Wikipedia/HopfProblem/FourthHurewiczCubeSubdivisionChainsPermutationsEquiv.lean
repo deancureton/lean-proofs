@@ -52,12 +52,5 @@ def insertEquiv (n : ℕ) :
     ((insertEquiv n).apply_symm_apply σ)
   simpa only [insertEquiv_apply, insert_symm_apply_zero] using h
 
-/-- The other inverse component recovers the remaining coordinates in order. -/
-theorem insertEquiv_symm_snd_apply (σ : Equiv.Perm (Fin (n + 1))) (j : Fin n) :
-    (((insertEquiv n).symm σ).2 j).succ = σ ((σ.symm 0).succAbove j) := by
-  have h := congrArg (fun τ : Equiv.Perm (Fin (n + 1)) =>
-    τ ((((insertEquiv n).symm σ).1).succAbove j))
-    ((insertEquiv n).apply_symm_apply σ)
-  simpa only [insertEquiv_apply, insert_apply_succAbove, insertEquiv_symm_fst] using h
 
 end Wikipedia.HopfProblem.FourthHurewicz.CubeSubdivision.PermutationInsertion

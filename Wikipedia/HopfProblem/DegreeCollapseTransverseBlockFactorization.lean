@@ -109,29 +109,5 @@ theorem exists_transverse_block_factorization (C : (A × B) ≃L[ℝ] (A × B))
   intro p
   exact hmodel p
 
-/-- Remove the two off-diagonal shears by a smooth family of actual
-invertible linear maps, retaining the transverse projected block at all times. -/
-theorem exists_transverse_linear_diagonalization (C : (A × B) ≃L[ℝ] (A × B))
-    (P : A ≃L[ℝ] A) (hP : ∀ x : A, (C (x, 0)).1 = P x) :
-    ∃ (S : B ≃L[ℝ] B) (H : ℝ × (A × B) → A × B), ContDiff ℝ ∞ H ∧
-      (∀ x, H (0, x) = C x) ∧ (∀ x, H (1, x) = (P x.1, S x.2)) ∧
-      (∀ t, Bijective (fun x => H (t, x))) ∧
-      ∀ t x, (H (t, (x, (0 : B)))).1 = P x := by
-  obtain ⟨Q, R, S, hfactor⟩ := exists_transverse_block_factorization C P hP
-  let H : ℝ × (A × B) → A × B := fun p =>
-    (P (p.2.1 + (1 - p.1) • Q p.2.2),
-      S p.2.2 + (1 - p.1) • R (P (p.2.1 + (1 - p.1) • Q p.2.2)))
-  have hH : ContDiff ℝ ∞ H := by dsimp [H]; fun_prop
-  refine ⟨S, H, hH, ?_, ?_, ?_, ?_⟩
-  · intro x
-    have hh := congrArg (fun L : (A × B) →L[ℝ] (A × B) => L x) hfactor
-    change C x = transverseBlockMap P S Q R x at hh
-    simpa only [transverseBlockMap_apply, H, sub_zero, one_smul] using hh.symm
-  · intro x
-    simp only [H, sub_self, zero_smul, add_zero]
-  · intro t
-    exact bijective_transverseBlockMap P S ((1 - t) • Q) ((1 - t) • R)
-  · intro t x
-    simp only [H, map_zero, smul_zero, add_zero]
 
 end Wikipedia.HopfProblem.DegreeCollapse.TransverseGerms

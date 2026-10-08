@@ -67,24 +67,5 @@ theorem exists_supported_retimed_family {F : ℝ × M → N}
   · intro x hx
     exact congrArg F (hpoint x hx)
 
-theorem exists_supported_retimed_collision {F : ℝ × M → N}
-    (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    {x y : M} (hne : x ≠ y) {U : Set M} (hU : IsOpen U) (hx : x ∈ U) (hy : y ∈ U)
-    {a b t₀ t₁ : ℝ} (ht₀ : t₀ ∈ Ioo a b) (ht₁ : t₁ ∈ Ioo a b)
-    (hcollision : F (t₁, x) = F (t₁, y)) :
-    ∃ G : ℝ × M → N, ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ G ∧
-      (∀ t z, z ∉ U ∨ t ∉ Ioo a b → G (t, z) = F (t, z)) ∧
-      (t₀, (x, y)) ∈ FamilyDoublePoints.doublePoints G := by
-  have hCU : ({x, y} : Set M) ⊆ U := by
-    intro z hz
-    rcases mem_insert_iff.mp hz with rfl | hz
-    · exact hx
-    · rcases mem_singleton_iff.mp hz with rfl
-      exact hy
-  obtain ⟨G, hG, hfixed, -, hpoint⟩ :=
-    exists_supported_retimed_family hF ((finite_singleton y).insert x).isClosed hU hCU ht₀ ht₁
-  refine ⟨G, hG, hfixed, hne, ?_⟩
-  rw [hpoint x (mem_insert _ _), hpoint y (mem_insert_of_mem _ (mem_singleton _))]
-  exact hcollision
 
 end Wikipedia.HopfProblem.OrbitPair.NativeFamily

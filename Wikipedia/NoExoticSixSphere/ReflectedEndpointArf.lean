@@ -33,25 +33,6 @@ variable {m n : ℕ} {b : Sphere n}
   [SimplyConnectedSpace (EndpointFiber d)] (x x' : EndpointFiber d)
   [Subsingleton (π_ 2 (EndpointFiber d) x)] [Subsingleton (π_ 2 (EndpointFiber d) x')]
 
-theorem canonicalEndpointFrame_quadraticForm :
-    letI := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left 6 (by simpa using hd);
-    letI := regularFiber_isManifold d.leftMap d.smooth_left b d.regular_left 6 _;
-    letI := RegularSphereFiber.fiber_compact d.leftMap b;
-    ∀ r r' : (RegularSphereFiber.embedding d.leftMap d.smooth_left b d.regular_left 6 hd
-      ).TubularRetraction,
-      (RegularSphereFiber.embedding d.leftMap d.smooth_left b d.regular_left 6 hd
-        ).modTwoHomologyQuadraticForm (canonicalEndpointFrame d hmiss 6 hd a).normalized r' x' =
-      (RegularSphereFiber.embedding d.leftMap d.smooth_left b d.regular_left 6 hd
-        ).modTwoHomologyQuadraticForm
-          (RegularSphereFiber.frame d.leftMap d.smooth_left b d.regular_left 6 hd a) r x := by
-  let := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left 6 (by simpa using hd)
-  let := regularFiber_isManifold d.leftMap d.smooth_left b d.regular_left 6 (by simpa using hd)
-  let := RegularSphereFiber.fiber_compact d.leftMap b
-  intro r r'
-  exact EuclideanEmbedding.modTwoHomologyQuadraticForm_normalized_recoordinateModel
-    (RegularSphereFiber.embedding d.leftMap d.smooth_left b d.regular_left 6 hd)
-    (RegularSphereFiber.frame d.leftMap d.smooth_left b d.regular_left 6 hd a)
-    r r' x x' (canonicalEndpointChange d hmiss 6 hd)
 
 theorem canonicalEndpointFrame_arf :
     letI := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left 6 (by simpa using hd);

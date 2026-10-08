@@ -75,14 +75,6 @@ theorem invariant_isometry (q : QuadraticForm F₂ V) (r : QuadraticForm F₂ W)
   rw [he] at hs
   exact congrArg signParity hs
 
-theorem invariant_prod (q : QuadraticForm F₂ V) (r : QuadraticForm F₂ W)
-    (hq : q.polarBilin.Nondegenerate) (hr : r.polarBilin.Nondegenerate) :
-    invariant (q.prod r) (nondegenerate_polar_prod q r hq hr) =
-      invariant q hq + invariant r hr := by
-  unfold invariant
-  change signParity (gaussSum (fun p : V × W ↦ q p.1 + r p.2)) = _
-  rw [gaussSum_prod]
-  exact signParity_mul _ _ (gaussSum_ne_zero q hq) (gaussSum_ne_zero r hr)
 
 omit [Fintype W] in
 theorem invariant_eq_zero_iff (q : QuadraticForm F₂ V) (hq : q.polarBilin.Nondegenerate) :

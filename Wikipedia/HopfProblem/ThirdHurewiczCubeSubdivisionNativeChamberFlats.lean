@@ -118,10 +118,5 @@ theorem nativeCubeMap_based_of_commonLeft (p : GenLoop (Fin 3) X x)
     (u : NativeCube) (hu : u ∈ Cube.boundary (Fin 3)) : p (f u) = x := by
   simpa only [nativeCubeBlend_zero] using nativeCubeBlend_based p hp (h u hu) 0
 
-theorem nativeCubeMap_based_of_commonRight (p : GenLoop (Fin 3) X x)
-    (hp : NativeCubeInternalBased p) {f g : C(NativeCube, NativeCube)}
-    (h : ∀ u ∈ Cube.boundary (Fin 3), NativeCubeSameFlat (f u) (g u))
-    (u : NativeCube) (hu : u ∈ Cube.boundary (Fin 3)) : p (g u) = x := by
-  simpa only [nativeCubeBlend_one] using nativeCubeBlend_based p hp (h u hu) 1
 
 end Wikipedia.HopfProblem.ThirdHurewicz

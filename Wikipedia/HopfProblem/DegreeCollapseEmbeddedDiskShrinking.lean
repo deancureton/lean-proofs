@@ -52,31 +52,5 @@ theorem exists_embedded_disk_shrinking {f : D → M}
     exact (mul_le_of_le_one_right ha.le (mem_closedBall_zero_iff.mp hx)).trans ha₁
   rw [← hzero x hx, hformula x (mem_closedBall_zero_iff.mp hx), hzero (a • x) hax]
 
-theorem exists_embedded_disk_shrinking_into_open {f : D → M}
-    (hf : ContMDiff 𝓘(ℝ, D) 𝓘(ℝ, E) ∞ f)
-    (hinj : InjOn f (closedBall (0 : D) 1))
-    (hi : ∀ x ∈ closedBall (0 : D) 1, Injective (mfderiv 𝓘(ℝ, D) 𝓘(ℝ, E) f x))
-    (n : ℕ) (hdim : Module.finrank ℝ D + n = Module.finrank ℝ E)
-    {O U : Set M} (hO : IsOpen O) (hfO : MapsTo f (closedBall (0 : D) 1) O)
-    (hU : IsOpen U) (h0U : f 0 ∈ U) :
-    ∃ a : ℝ, 0 < a ∧ a ≤ 1 ∧ ∃ K : Set M, IsCompact K ∧ K ⊆ O ∧
-      ∃ P : Diffeomorph 𝓘(ℝ, E) 𝓘(ℝ, E) M M ∞,
-        Nonempty (SupportedRelativeIsotopy P K {f 0}) ∧
-        (∀ x ∈ closedBall (0 : D) 1, P (f x) = f (a • x)) ∧
-        MapsTo (P ∘ f) (closedBall (0 : D) 1) U := by
-  obtain ⟨ε, hε, hεU⟩ := Metric.nhds_basis_closedBall.mem_iff.mp
-    ((hU.preimage hf.continuous).mem_nhds h0U)
-  let a : ℝ := min 1 ε
-  have ha : 0 < a := lt_min zero_lt_one hε
-  have ha₁ : a ≤ 1 := min_le_left _ _
-  obtain ⟨K, hK, hKO, P, hP, hformula⟩ :=
-    exists_embedded_disk_shrinking hf hinj hi n hdim hO hfO ha ha₁
-  refine ⟨a, ha, ha₁, K, hK, hKO, P, hP, hformula, ?_⟩
-  intro x hx
-  change P (f x) ∈ U
-  rw [hformula x hx]
-  apply hεU
-  rw [mem_closedBall_zero_iff, norm_smul, Real.norm_eq_abs, abs_of_pos ha]
-  exact (mul_le_of_le_one_right ha.le (mem_closedBall_zero_iff.mp hx)).trans (min_le_right _ _)
 
 end Wikipedia.HopfProblem.DegreeCollapse.DiskShrinking

@@ -93,12 +93,6 @@ def reverseComparison (S : LowCollaredSevenState B) (b : B) : Comparison S S.rev
       (normalFrame S m).ambient p (Q (Q.symm v)) at h
     exact h.trans (congrArg ((normalFrame S m).ambient p) (Q.apply_symm_apply v))
 
-theorem reverseComparison_extra (S : LowCollaredSevenState B) (b : B) :
-    letI := S.zeroAtlas; letI := S.reverse.zeroAtlas;
-    (reverseComparison S b).extra = 0 := by
-  let := S.zeroAtlas
-  let := S.reverse.zeroAtlas
-  rfl
 
 section Component
 

@@ -95,16 +95,6 @@ theorem ambient_suspendedTangent (q : Sphere 3) (v : V 3) :
   exact congrArg (fun L : V 3 →L[ℝ] V 8 ↦ L v)
     (QuaternionicHopfFiniteFrameLift.lifted_finite_tangent q)
 
-theorem balanced_suspendedNormal (q : Sphere 3) (w : V 5) :
-    balancedFrameContraction (0, q)
-      (ambientCoordinates (finitePoint reference) (suspendedRightInverse reference w)) =
-        ambientCoordinates (finitePoint q) (suspendedRightInverse q w) := by
-  rw [ambient_suspendedNormal, ambient_suspendedNormal, balanced_normal]
 
-theorem balanced_suspendedTangent (q : Sphere 3) (v : V 3) :
-    balancedFrameContraction (0, q)
-      (ambientCoordinates (finitePoint reference) (suspendedTangent reference v)) =
-        ambientCoordinates (finitePoint q) (suspendedTangent q v) := by
-  rw [ambient_suspendedTangent, ambient_suspendedTangent, balanced_tangent]
 
 end Wikipedia.HopfProblem.DegreeCollapse.QuaternionicHopfSuspendedFrameCoordinates

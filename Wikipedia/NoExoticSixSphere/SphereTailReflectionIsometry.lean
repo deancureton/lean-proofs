@@ -42,9 +42,5 @@ def tailReflectionLinearEquiv : Vector 4 ≃ₗᵢ[ℝ] Vector 4 :=
   LinearIsometryEquiv.ofSurjective tailReflectionLinearIsometry
     (LinearMap.surjective_of_injective tailReflectionLinearIsometry.injective)
 
-theorem tailReflectionLinearEquiv_sphere (s : Sphere 3) :
-    SphereLinearReparametrization.sphereMap tailReflectionLinearEquiv s = tailReflection s := by
-  apply Subtype.ext
-  rfl
 
 end NoExoticSixSphere.SphereSumNeck

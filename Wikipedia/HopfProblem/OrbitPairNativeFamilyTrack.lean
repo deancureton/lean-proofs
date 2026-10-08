@@ -74,39 +74,5 @@ variable [FiniteDimensional ℝ P] [FiniteDimensional ℝ E] [FiniteDimensional 
   [I.Boundaryless] [J.Boundaryless]
   [IsManifold I ∞ X] [IsManifold J ∞ N] [T2Space N]
 
-theorem eventually_injOn_compact {F : P × X → N} {W : Set (P × X)}
-    (hW : IsOpen W) (hF : ContMDiffOn (𝓘(ℝ, P).prod I) J ∞ F W)
-    {S : Set X} (hS : IsCompact S) (p : P) (hmem : ∀ x ∈ S, (p, x) ∈ W)
-    (hinj : InjOn (fun x => F (p, x)) S)
-    (hderiv : ∀ x ∈ S, Injective (mfderiv I J (fun y => F (p, y)) x)) :
-    ∀ᶠ a in 𝓝 p, InjOn (fun x => F (a, x)) S := by
-  let C : Set (P × X) := {p} ×ˢ S
-  have hC : IsCompact C := isCompact_singleton.prod hS
-  have hCW : C ⊆ W := by
-    rintro ⟨a, x⟩ ⟨ha, hx⟩
-    have he : a = p := mem_singleton_iff.mp ha
-    subst a
-    exact hmem x hx
-  have hi : InjOn (track F) C := by
-    rintro ⟨a, x⟩ ⟨ha, hx⟩ ⟨b, y⟩ ⟨hb, hy⟩ heq
-    have ha' : a = p := mem_singleton_iff.mp ha
-    have hb' : b = p := mem_singleton_iff.mp hb
-    subst a
-    subst b
-    exact Prod.ext rfl (hinj hx hy (congrArg Prod.snd heq))
-  have hd (q : P × X) (hq : q ∈ C) :
-      Injective (mfderiv (𝓘(ℝ, P).prod I) (𝓘(ℝ, P).prod J) (track F) q) := by
-    have hp : q.1 = p := mem_singleton_iff.mp hq.1
-    apply injective_mfderiv_track q
-      ((hF.contMDiffAt (hW.mem_nhds (hCW hq))).mdifferentiableAt (by simp))
-    rw [hp]
-    exact hderiv q.2 hq.2
-  obtain ⟨V, hV, hCV, -, hVi⟩ := NativeImmersion.exists_open_injOn_near_compact hW
-    (track_smoothOn hF) hC hCW hi hd
-  have hn := (MorsePerturbation.isOpen_forall_mem_compact hS hV).mem_nhds
-    (x := p) (fun x hx => hCV ⟨mem_singleton _, hx⟩)
-  filter_upwards [hn] with a ha
-  intro x hx y hy hxy
-  exact congrArg Prod.snd (hVi (ha x hx) (ha y hy) (Prod.ext rfl hxy))
 
 end Wikipedia.HopfProblem.OrbitPair.NativeFamily

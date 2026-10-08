@@ -47,20 +47,5 @@ theorem exists_smoothSphereMap :
 
 end EuclideanEmbedding.FramedCollapseData
 
-theorem exists_sixSphereSmoothCollapse {M : Type*} [TopologicalSpace M]
-    [ChartedSpace (EuclideanSpace ℝ (Fin 6)) M] [IsManifold (𝓡 6) ∞ M]
-    (h : M ≃ₜ Sphere 6) :
-    ∃ e : EuclideanEmbedding 6 M,
-      ∃ a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel,
-        ∃ d : e.FramedCollapseData a,
-          ∃ g : C(Sphere e.ambientDimension, Sphere (e.ambientDimension - 6)),
-            ContMDiff (𝓡 e.ambientDimension) (𝓡 (e.ambientDimension - 6)) ∞ g ∧
-            d.sphereMap.Homotopic g ∧
-            (∀ y, g y = sphereZero (e.ambientDimension - 6) ↔
-              ∃ x, e.compactifiedEmbedding x = y) ∧
-            ∀ x, (g : Sphere e.ambientDimension → Sphere (e.ambientDimension - 6))
-              =ᶠ[𝓝 (e.compactifiedEmbedding x)] d.sphereMap := by
-  obtain ⟨e, a, ⟨d⟩⟩ := exists_sixSphereFramedCollapseData h
-  exact ⟨e, a, d, d.exists_smoothSphereMap⟩
 
 end NoExoticSixSphere

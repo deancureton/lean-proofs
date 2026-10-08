@@ -122,10 +122,5 @@ theorem basedThreeSimplexLoop_cubeTetrahedron_other (τ : BasedThreeSimplex x)
   intro s
   exact τ.property _ (threeSimplexQuotient_cubeTetrahedron_boundary e he s)
 
-/-- The actual three-simplex quotient is onto the entire simplex. -/
-theorem threeSimplexQuotient_surjective : Function.Surjective threeSimplexQuotient := by
-  intro s
-  exact ⟨cubeTetrahedron (Equiv.refl (Fin 3)) s,
-    ContinuousMap.congr_fun threeSimplexQuotient_cubeTetrahedron_refl s⟩
 
 end Wikipedia.HopfProblem.ThirdHurewicz

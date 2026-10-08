@@ -106,15 +106,6 @@ theorem pairing_productGenerator :
     singularHomologyMap (SecondStage.arrayPairing 3) 6 productGenerator = unitSphereTopClass 5 :=
   pairingHomologyEquiv.apply_symm_apply _
 
-theorem productGenerator_generates :
-    Function.Surjective (fun k : ℤ ↦ k • productGenerator) := by
-  intro a
-  obtain ⟨k, hk⟩ := unitSphereTopClass_generates 5 (pairingHomologyEquiv a)
-  refine ⟨k, pairingHomologyEquiv.injective ?_⟩
-  rw [map_zsmul]
-  change k • pairingHomologyEquiv (pairingHomologyEquiv.symm (unitSphereTopClass 5)) = _
-  rw [LinearEquiv.apply_symm_apply]
-  exact hk
 
 theorem wordMap_productGenerator : singularHomologyMap (wordMap 3) 6 productGenerator =
     SphereFourHopfHomology.SecondCell.generator := by

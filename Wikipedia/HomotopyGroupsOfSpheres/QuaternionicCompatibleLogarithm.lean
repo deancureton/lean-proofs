@@ -83,12 +83,6 @@ theorem orthogonal_logarithm_eq (a : symplecticSubgroup n) (ha : a ∈ compatibl
   rw [← orthogonal_exp_logarithm a ha.1]
   exact NoExoticSixSphere.OrthogonalExponential.logarithmChart_exp _ ha.2
 
-theorem orthogonal_logarithm_mem_commutant (a : symplecticSubgroup n)
-    (ha : a ∈ compatibleDomain n) :
-    (NoExoticSixSphere.OrthogonalExponential.logarithmChart (4 * n + 4) a.val).val ∈
-      commutant n := by
-  rw [orthogonal_logarithm_eq a ha]
-  exact (logarithmChart n a).property.2
 
 theorem exp_mem_logarithmChart_source (K : SkewSpace n)
     (hK : K ∈ (logarithmChart n).target) : exp K ∈ (logarithmChart n).source := by
@@ -153,26 +147,5 @@ theorem exists_incrementSubdivision {X : Type*} [TopologicalSpace X] [CompactSpa
     NoExoticSixSphere.OrthogonalExponential.exists_incrementSubdivision HO V hV
   exact ⟨t, ht0, hmono, hend, fun i u hu x => hsub (ht i u hu x)⟩
 
-theorem exists_small_compatible_subdivision {X : Type*} [TopologicalSpace X] [CompactSpace X]
-    (H : C(I × X, symplecticSubgroup n)) {ε : ℝ} (hε : 0 < ε) :
-    ∃ t : ℕ → I, t 0 = 0 ∧ Monotone t ∧ (∃ N, ∀ i ≥ N, t i = 1) ∧
-      ∀ i, ∀ u ∈ Icc (t i) (t (i + 1)), ∀ x,
-        (H (t i, x))⁻¹ * H (u, x) ∈ compatibleDomain n ∧
-          ‖logarithmChart n ((H (t i, x))⁻¹ * H (u, x))‖ < ε := by
-  apply exists_incrementSubdivision H
-    {a | a ∈ compatibleDomain n ∧ ‖logarithmChart n a‖ < ε}
-  have hs := (isOpen_compatibleDomain n).mem_nhds (one_mem_compatibleDomain n)
-  have hc : ContinuousAt (logarithmChart n) (1 : symplecticSubgroup n) :=
-    (logarithmChart n).contMDiffOn_toFun.continuousOn.continuousAt
-      ((logarithmChart n).open_source.mem_nhds (one_mem_logarithmChart_source n))
-  have hn : ‖logarithmChart n (1 : symplecticSubgroup n)‖ < ε := by
-    rw [logarithmChart_one]
-    have hz : ‖(0 : SkewSpace n)‖ = 0 := norm_zero (E := SkewSpace n)
-    rwa [hz]
-  have hcn : ContinuousAt (fun a : symplecticSubgroup n => ‖logarithmChart n a‖) 1 :=
-    ContinuousAt.norm (E := SkewSpace n) hc
-  have ht := hcn (gt_mem_nhds hn)
-  filter_upwards [hs, ht] with a ha hn
-  exact ⟨ha, hn⟩
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns.Exponential

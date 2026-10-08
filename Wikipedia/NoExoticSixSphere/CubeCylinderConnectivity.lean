@@ -41,10 +41,6 @@ theorem split_insert (m : ℕ) (z : unitInterval × (Fin m → unitInterval)) :
   · rfl
   · rfl
 
-theorem insert_split (m : ℕ) (x : Fin (m + 1) → unitInterval) :
-    insert m (split m x) = x := by
-  funext i
-  cases i using Fin.cases <;> rfl
 
 theorem insert_boundary (m : ℕ) (z : unitInterval × (Fin m → unitInterval))
     (hz : z ∈ boundary m) : insert m z ∈ Cube.boundary (Fin (m + 1)) := by

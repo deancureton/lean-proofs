@@ -38,30 +38,5 @@ theorem surjective_coprod_comp_both (A B : Vector 3 →L[ℝ] Vector 6)
   rw [hx, hy]
   exact huv
 
-theorem transverse_of_local_reparametrizations
-    {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 6) M]
-    (K F G : Sphere 3 → M) (u v : Sphere 3 → Sphere 3) (x y : Sphere 3)
-    (hF : ContMDiff (𝓡 3) (𝓡 6) ∞ F) (hG : ContMDiff (𝓡 3) (𝓡 6) ∞ G)
-    (hu : IsLocalDiffeomorphAt (𝓡 3) (𝓡 3) ∞ u x)
-    (hv : IsLocalDiffeomorphAt (𝓡 3) (𝓡 3) ∞ v y)
-    (hx : K =ᶠ[𝓝 x] F ∘ u) (hy : K =ᶠ[𝓝 y] G ∘ v)
-    (ht : Surjective ((mfderiv (𝓡 3) (𝓡 6) F (u x)).coprod
-      (mfderiv (𝓡 3) (𝓡 6) G (v y)))) :
-    Surjective ((mfderiv (𝓡 3) (𝓡 6) K x).coprod (mfderiv (𝓡 3) (𝓡 6) K y)) := by
-  rw [hx.mfderiv_eq, hy.mfderiv_eq,
-    mfderiv_comp (f := u) (g := F) x (hF.mdifferentiableAt (by simp))
-      (hu.mdifferentiableAt (by simp)),
-    mfderiv_comp (f := v) (g := G) y (hG.mdifferentiableAt (by simp))
-      (hv.mdifferentiableAt (by simp))]
-  intro z
-  obtain ⟨⟨a, b⟩, hab⟩ := ht z
-  let U := hu.mfderivToContinuousLinearEquiv (by simp)
-  let V := hv.mfderivToContinuousLinearEquiv (by simp)
-  refine ⟨(U.symm a, V.symm b), ?_⟩
-  change ((mfderiv (𝓡 3) (𝓡 6) F (u x)).coprod
-    (mfderiv (𝓡 3) (𝓡 6) G (v y))) (U (U.symm a), V (V.symm b)) = z
-  exact (congrArg ((mfderiv (𝓡 3) (𝓡 6) F (u x)).coprod
-    (mfderiv (𝓡 3) (𝓡 6) G (v y)))
-      (Prod.ext (U.apply_symm_apply a) (V.apply_symm_apply b))).trans hab
 
 end NoExoticSixSphere.SphereSumNeck

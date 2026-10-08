@@ -50,11 +50,5 @@ def sphereCircleHomeomorph :
     (sphereCircleHomeomorph.symm z : EuclideanSpace ℝ (Fin 2)) =
       ![(z : ℂ).re, (z : ℂ).im] := rfl
 
-/-- In fact the sphere comparison preserves the original metrics. -/
-theorem sphereCircleHomeomorph_isometry : Isometry sphereCircleHomeomorph := by
-  intro x y
-  change edist (euclideanPlaneComplexIsometry x.val) (euclideanPlaneComplexIsometry y.val) =
-    edist x.val y.val
-  exact euclideanPlaneComplexIsometry.isometry x.val y.val
 
 end Wikipedia.HopfProblem.SphereHomology

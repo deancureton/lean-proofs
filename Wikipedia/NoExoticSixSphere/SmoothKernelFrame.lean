@@ -69,11 +69,5 @@ theorem orthogonalKernelFrame_ambient (D : M → E →L[ℝ] F)
   intro v
   rfl
 
-theorem orthogonalKernelFrame_comp (D : M → E →L[ℝ] F)
-    (hD : ContMDiff I 𝓘(ℝ, E →L[ℝ] F) ∞ D) (hsurj : ∀ x, Surjective (D x)) (x : M) :
-    (D x).comp ((orthogonalKernelFrame D hD hsurj).ambient x) =
-      ContinuousLinearMap.id ℝ F := by
-  rw [orthogonalKernelFrame_ambient]
-  exact comp_orthogonalRightInverse (D x) (hsurj x)
 
 end NoExoticSixSphere

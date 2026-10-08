@@ -69,19 +69,5 @@ theorem exists_selfIntersection_removal_step_within_target
     (p i).chart hf (p i).smooth (hcompatible i) hvalid har hsource hmaps
   exact hrel.mono (fun x hx => (p i).fixed x hx) (Subset.refl D) (Subset.refl O)
 
-/-- The original collision-removal step, without an additional controlled target. -/
-theorem exists_selfIntersection_removal_step {ι : Type*} [Finite ι] {C K : Set E}
-    (p : ι → MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C) (i : ι)
-    (f : C(E, N)) (hf : ContMDiff 𝓘(ℝ, E) J ∞ f)
-    (hcompatible : ∀ j, (p j).Compatible f)
-    (hdim : 2 * Module.finrank ℝ E < Module.finrank ℝ G)
-    (hK : IsCompact K) (hinj : ∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J f x)) :
-    ∃ g : C(E, N), ContMDiff 𝓘(ℝ, E) J ∞ g ∧ (∀ j, (p j).Compatible g) ∧
-      f.HomotopicRel g C ∧ (∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J g x)) ∧
-      ∀ x y, g x = g y → f x = f y ∧ (p i).cutoff x = (p i).cutoff y := by
-  obtain ⟨g, hg, hc, hrel, hi, hp⟩ :=
-    exists_selfIntersection_removal_step_within_target p i f hf hcompatible hdim hK hinj
-      (subset_univ _) (mapsTo_univ f univ)
-  exact ⟨g, hg, hc, hrel.homotopicRel, hi, hp⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

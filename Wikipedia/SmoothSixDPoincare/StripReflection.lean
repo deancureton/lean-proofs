@@ -31,10 +31,6 @@ theorem reverse_involutive : Involutive reverse := by
   rintro ⟨t, s⟩
   simp only [reverse, sub_sub_cancel]
 
-theorem reverse_tendsto_one_zero : Tendsto reverse (𝓝 (1, 0)) (𝓝 (0, 0)) := by
-  have h : Tendsto reverse (𝓝 (1, 0)) (𝓝 (reverse (1, 0))) :=
-    contDiff_reverse.continuous.continuousAt.tendsto
-  rwa [reverse_one_zero] at h
 
 variable {B : Type*} [NormedAddCommGroup B] [NormedSpace ℝ B]
 

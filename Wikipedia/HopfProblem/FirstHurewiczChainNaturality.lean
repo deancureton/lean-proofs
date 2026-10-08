@@ -84,11 +84,6 @@ theorem inducedChain_comp (f : C(X, Y)) (g : C(Y, Z)) (n : ℕ) :
     (ModuleCat.of ℤ ℤ)).map_id (TopCat.of X)
   exact congrArg ModuleCat.Hom.hom h
 
-theorem inducedHomology_comp (f : C(X, Y)) (g : C(Y, Z)) :
-    inducedHomology (g.comp f) = (inducedHomology g).comp (inducedHomology f) := by
-  have h := ((AlgebraicTopology.singularHomologyFunctor (ModuleCat ℤ) 1).obj
-    (ModuleCat.of ℤ ℤ)).map_comp (TopCat.ofHom f) (TopCat.ofHom g)
-  exact congrArg ModuleCat.Hom.hom h
 
 namespace ChainHomology
 

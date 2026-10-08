@@ -55,15 +55,6 @@ theorem lift_basepoint : lift f a F hF b x hx b = HomotopyFiber.basepoint f x :=
       (t, DiskCylinder.boundaryToDisk b)) = f x
     rw [DiskBoundary.segment_fixed, hF b, hx]
 
-theorem projection_map_lift {N : Type*}
-    (c : HomotopyGroup N (DiskCylinder.Sphere (E := E)) b) :
-    HigherHomotopy.map (N := N) (HomotopyFiber.projection f (f x))
-      (HomotopyFiber.projection_basepoint f x)
-        (HigherHomotopy.map (N := N) (lift f a F hF b x hx)
-          (lift_basepoint f a F hF b x hx) c) =
-      HigherHomotopy.map (N := N) a hx c := by
-  refine Quotient.inductionOn c fun p ↦ ?_
-  rfl
 
 variable {Z : Type*} [TopologicalSpace Z]
   (q : C(Y, Z)) (z : Z) (hq : ∀ y, q (f y) = z)

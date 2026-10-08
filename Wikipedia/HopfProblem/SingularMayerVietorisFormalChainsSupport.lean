@@ -50,16 +50,6 @@ theorem formalChainsSupported_mono {S T : Set V} (h : S ⊆ T) :
   intro c _ v hv i
   exact Fin.elim0 i
 
-theorem formalChainsSupported_inter (S T : Set V) (n : ℕ) :
-    formalChainsSupported (S ∩ T) n =
-      formalChainsSupported S n ⊓ formalChainsSupported T n := by
-  ext c
-  simp only [Submodule.mem_inf, mem_formalChainsSupported_iff, Set.mem_inter_iff]
-  constructor
-  · intro h
-    exact ⟨fun v hv i => (h v hv i).1, fun v hv i => (h v hv i).2⟩
-  · rintro ⟨hS, hT⟩ v hv i
-    exact ⟨hS v hv i, hT v hv i⟩
 
 @[simp] theorem formalSimplex_mem_supported_iff {S : Set V} (v : Fin n → V) :
     formalSimplex v ∈ formalChainsSupported S n ↔ ∀ i, v i ∈ S := by
@@ -86,14 +76,6 @@ theorem formalLinearMap_mem_of_supported [AddCommGroup M] [Module ℤ M]
     (h : ∀ v, (∀ i, v i ∈ S) → f (formalSimplex v) ∈ P) : f c ∈ P := by
   exact (formalChainsSupported_le (P := P.comap f) h) hc
 
-/-- A linear extension stays in a submodule if all supported generators do. -/
-theorem formalLift_mem_of_supported [AddCommGroup M] [Module ℤ M]
-    {S : Set V} (f : (Fin n → V) → M) (P : Submodule ℤ M)
-    {c : FormalChains V n} (hc : c ∈ formalChainsSupported S n)
-    (h : ∀ v, (∀ i, v i ∈ S) → f v ∈ P) : formalLift f c ∈ P := by
-  apply formalLinearMap_mem_of_supported (formalLift f) P hc
-  intro v hv
-  simpa only [formalLift_simplex] using h v hv
 
 /-- Vertex deletion cannot enlarge support, including in augmented degree zero. -/
 theorem formalBoundary_mem_supported {S : Set V} (n : ℕ)
@@ -241,15 +223,5 @@ theorem formalSubdivisionHomotopy_mem_supported (center : FormalCenter V) {S : S
             (formalSimplex_mem_supported hv))
       · exact ih (formalBoundary_mem_supported n (formalSimplex_mem_supported hv))
 
-/-- The finite homotopy to an iterated subdivision preserves center-closed support. -/
-theorem formalSubdivisionIteratedHomotopy_mem_supported (center : FormalCenter V) {S : Set V}
-    (hcenter : ∀ k v, (∀ i, v i ∈ S) → center k v ∈ S)
-    (k n : ℕ) {c : FormalChains V n} (hc : c ∈ formalChainsSupported S n) :
-    formalSubdivisionIteratedHomotopy center k n c ∈ formalChainsSupported S (n + 1) := by
-  rw [formalSubdivisionIteratedHomotopy_apply]
-  apply Submodule.sum_mem
-  intro j hj
-  exact formalSubdivisionHomotopy_mem_supported center hcenter n
-    (formalSubdivision_iterate_mem_supported center hcenter n j hc)
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

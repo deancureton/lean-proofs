@@ -36,16 +36,19 @@ spheres; no orientation convention is required. This replaces the upstream route
 through a constructed threefold, removing its analytic construction from the
 classification dependency.
 
-The retained source closure has 6,789 Lean modules and 641,776 lines. This is a
-large classical prerequisite development, even after pruning. Twenty unused
-theorems were also removed after compiled dependency tracing and source review.
+The retained source closure has 6,789 Lean modules and 629,506 lines. This is a
+large classical prerequisite development, even after pruning. The latest pass
+removed 1,162 unused theorem commands (12,274 lines) after compiled dependency
+tracing and conservative source review. The public classification theorem now
+spells out its hypotheses and diffeomorphism conclusion directly.
 
 ## Verification
 
 The classification target builds on the pinned toolchain (11,021 jobs). Its exact
-recursive axiom audit visits 136,496 constants and accepts only `propext`,
+recursive axiom audit visits 136,495 constants and accepts only `propext`,
 `Classical.choice`, and `Quot.sound`. The final classification statement retains
-the independently supplied smooth atlas.
+the independently supplied smooth atlas. A separate type check confirms that the
+expanded public statement still inhabits the original `SixSphereRigidity` type.
 
 To repeat the checks:
 
@@ -60,7 +63,7 @@ lake env lean --run tools/DeclarationTrace.lean
 `tools/DeclarationTrace.lean` records declaration liveness and independently lists
 the axiom closure. See `tools/PRUNING.md` for the source-pruning procedure.
 
-The post-pruning dependency trace records 71,334 imported project declarations,
-49,309 in the classification proof closure, and the same 136,496-constant axiom
+The post-pruning dependency trace records 70,067 imported project declarations,
+49,308 in the classification proof closure, and the same 136,495-constant axiom
 audit. Unused imported declarations that remain can support elaboration or await
 further conservative pruning; this is not a claim of declaration-minimality.

@@ -27,17 +27,5 @@ variable {B H M C H' N F : Type*}
   {J : ModelWithCorners ℝ C H'} [TopologicalSpace N] [ChartedSpace H' N]
   [NormedAddCommGroup F] [NormedSpace ℝ F] [FiniteDimensional ℝ F]
 
-theorem exists_regularChartFiberManifold (f : ContinuousMap M N)
-    (c : PartialDiffeomorph J 𝓘(ℝ, F) N F ∞)
-    (hf : ContMDiff I J ∞ f) (b : N) (hb : b ∈ c.source)
-    (hreg : ∀ x, f x = b → Function.Surjective (mfderiv I J f x))
-    (k : ℕ) (hd : finrank ℝ B = finrank ℝ F + k) :
-    ∃ atlas : ChartedSpace (EuclideanSpace ℝ (Fin k)) {x : M // f x = b},
-      letI := atlas;
-      IsManifold (𝓡 k) ∞ {x : M // f x = b} ∧
-      ContMDiff (𝓡 k) I ∞ ((↑) : {x : M // f x = b} → M) := by
-  obtain ⟨A⟩ := ChartFiber.nonempty_levelAtlas f c hf b hb hreg k hd
-  exact ⟨ChartFiber.atlas f c b hb A, ChartFiber.isManifold f c b hb A,
-    ChartFiber.contMDiff_subtype_val f c b hb A⟩
 
 end NoExoticSixSphere

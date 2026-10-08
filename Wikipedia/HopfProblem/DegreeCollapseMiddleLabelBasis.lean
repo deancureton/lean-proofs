@@ -78,12 +78,5 @@ theorem exists_middle_label_basis :
   exact ⟨n, ⟨Equiv.ofBijective label hlabel⟩,
     ⟨MiddleBasis.wholeBasis S.toSurgeryWindows D.smooth D.dimension n (by omega) hthree hcount⟩⟩
 
-theorem middle_homology_finrank :
-    Module.finrank ℤ (SingularHomology M 3) = Nat.card D.MiddleLabel := by
-  obtain ⟨n, ⟨e⟩, ⟨b⟩⟩ := D.exists_middle_label_basis
-  calc
-    Module.finrank ℤ (SingularHomology M 3) = n := by
-      simpa only [Module.finrank_fin_fun] using b.finrank_eq.symm
-    _ = Nat.card D.MiddleLabel := by simpa only [Nat.card_fin] using Nat.card_congr e
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation.MiddleDuality.SeparatedSystem

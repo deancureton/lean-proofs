@@ -83,9 +83,6 @@ theorem nativeChart_sourcePoint : nativeChart sourcePoint = 0 := by
       blockChart (SmoothCube.vectorOfCube 3 antipodalCube))) = (0, 0, 0)
   rw [timeCoordinates_half, blockChart_antipodalCube]
 
-theorem zero_mem_nativeChart_target : (0 : Parameters) ∈ nativeChart.target := by
-  have h := nativeChart.map_source sourcePoint_mem_nativeChart
-  rwa [nativeChart_sourcePoint] at h
 
 theorem projectionMap_nativeChart_cube (u : Fin 7 → I) (hu : u ∉ Cube.boundary (Fin 7)) :
     QuaternionCommutatorSourceChart.projectionMap (nativeChart (SmoothCube.quotient 7 u)) =

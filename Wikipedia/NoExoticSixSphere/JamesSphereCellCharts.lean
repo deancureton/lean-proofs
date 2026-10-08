@@ -103,14 +103,5 @@ theorem continuous_inverse_topStratum (n k : ℕ) (hn : 0 < n) :
   rw [he]
   exact continuous_subtype_val.comp continuous_subtype_val
 
-theorem chart_continuousOn_symm (n k : ℕ) (hn : 0 < n) :
-    ContinuousOn (chart n k).symm (chart n k).target := by
-  apply continuousOn_iff_continuous_domRestrict.mpr
-  have hsize (w : characteristic n k '' ball 0 1) : James.size (spherePole n) w.val = k :=
-    (Set.ext_iff.mp (image_ball n k hn) w.val).mp w.property
-  let f : (characteristic n k '' ball 0 1) → topStratum n k := fun w ↦
-    ⟨⟨w.val, le_of_eq (hsize w)⟩, hsize w⟩
-  have hf : Continuous f := (continuous_subtype_val.subtype_mk _).subtype_mk _
-  exact (continuous_inverse_topStratum n k hn).comp hf
 
 end NoExoticSixSphere.JamesSphere.Cell

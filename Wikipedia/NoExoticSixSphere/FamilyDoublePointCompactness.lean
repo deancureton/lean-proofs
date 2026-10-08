@@ -31,12 +31,5 @@ theorem compactSpace_unordered_of_compact_container
   exact Function.Surjective.compactSpace
     (isOpenQuotientMap_unorderedProj f).continuous (isOpenQuotientMap_unorderedProj f).surjective
 
-theorem finite_diagonalOrbits_of_compact_container (f : ℝ → Vector 3 → Vector 6)
-    (hf : ContDiff ℝ ∞ (uncurry f))
-    (hreg : RegularThreeSix (fun p : ℝ × Vector 3 ↦ fderiv ℝ (f p.1) p.2))
-    {K : Set (ℝ × (Vector 3 × Vector 3))} (hK : IsCompact K)
-    (hbound : doublePoints f ⊆ K) : (diagonalOrbits f).Finite := by
-  let := compactSpace_unordered_of_compact_container f hK hbound
-  exact (isClosed_diagonalOrbits f).isCompact.finite (isDiscrete_diagonalOrbits f hf hreg)
 
 end NoExoticSixSphere.FamilyEmbedding

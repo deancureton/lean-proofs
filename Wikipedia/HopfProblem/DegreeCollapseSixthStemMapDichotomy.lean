@@ -63,12 +63,5 @@ theorem nullhomotopic_of_not_homotopic (k : ℕ) (hk : 6 ≤ k) (f g : StageMap 
     (hg : ¬ g.Nullhomotopic) (hfg : ¬ f.Homotopic g) : f.Nullhomotopic :=
   (nullhomotopic_or_homotopic k hk f g hg).resolve_right hfg
 
-theorem nullhomotopic_of_not_homotopic_of_dimensions {m n : ℕ}
-    (k : ℕ) (hk : 6 ≤ k) (hm : m = k + 8) (hn : n = k + 2)
-    (f g : C(Sphere m, Sphere n)) (hg : ¬ g.Nullhomotopic) (hfg : ¬ f.Homotopic g) :
-    f.Nullhomotopic := by
-  subst m
-  subst n
-  exact nullhomotopic_of_not_homotopic k hk f g hg hfg
 
 end Wikipedia.HopfProblem.DegreeCollapse.SixthStemMapDichotomy

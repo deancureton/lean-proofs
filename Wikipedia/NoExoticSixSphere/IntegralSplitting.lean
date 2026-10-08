@@ -88,11 +88,5 @@ theorem splitEquiv_symm_inl (x : K) : (splitEquiv i l hi hexact hl).symm (x, 0) 
   change i x + (0 : ℤ) • (hl 1).choose = i x
   rw [zero_zsmul, add_zero]
 
-theorem splitEquiv_snd (x : H) : (splitEquiv i l hi hexact hl x).2 = l x := by
-  have he := sumMap_coordinate i l hexact (hl 1).choose (hl 1).choose_spec
-    (splitEquiv i l hi hexact hl x)
-  change l ((splitEquiv i l hi hexact hl).symm (splitEquiv i l hi hexact hl x)) = _ at he
-  rw [LinearEquiv.symm_apply_apply] at he
-  exact he.symm
 
 end NoExoticSixSphere.IntegralSplitting

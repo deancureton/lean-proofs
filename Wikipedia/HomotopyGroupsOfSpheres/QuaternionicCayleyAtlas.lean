@@ -61,9 +61,6 @@ def skewInclusion (n : ℕ) : SkewSpace n →L[ℝ]
     (Vector (4 * n + 4) →L[ℝ] Vector (4 * n + 4)) :=
   (skewSubmodule n).subtypeL
 
-theorem skewInclusion_injective (n : ℕ) : Function.Injective (skewInclusion n) := by
-  intro K L h
-  exact Subtype.ext h
 
 /-- Finite-dimensional linear algebra supplies a continuous projection onto the model. -/
 def skewProjection (n : ℕ) :

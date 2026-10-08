@@ -51,30 +51,5 @@ theorem exists_relative_tangent_identity_isotopy {f : E → E} {U S : Set E}
       rw [heq, hS x ⟨hx, hxS⟩, sub_self, smul_zero, add_zero]
     · exact hfix t x (fun h => hx (hKU h))
 
-/-- A relative coordinate germ is realized by an actual supported native diffeomorphism. -/
-theorem exists_relative_tangent_identity_diffeomorph {f : E → E} {U S : Set E}
-    (hU : IsOpen U) (hzero : (0 : E) ∈ U) (hf : ContDiffOn ℝ ∞ f U)
-    (hf₀ : f 0 = 0) (hdf : fderiv ℝ f 0 = ContinuousLinearMap.id ℝ E)
-    (Q : E →L[ℝ] F) (hQ : ∀ x ∈ U, Q (f x) = Q x)
-    (hS : ∀ x ∈ U ∩ S, f x = x) :
-    ∃ (D : Diffeomorph 𝓘(ℝ, E) 𝓘(ℝ, E) E E ∞) (K : Set E),
-      IsCompact K ∧ K ⊆ U ∧ SupportedDiffeomorph.IsotopicToIdentity D ∧
-      (∀ x ∉ K, D x = x) ∧ (∀ x, Q (D x) = Q x) ∧
-      (∀ x ∈ S, D x = x) ∧ (D : E → E) =ᶠ[𝓝 (0 : E)] f := by
-  obtain ⟨A, K, hK, hKU, hA, hA₀, hdiff, hfix, hprojection, hfixed, hgerm⟩ :=
-    exists_relative_tangent_identity_isotopy hU hzero hf hf₀ hdf Q hQ hS
-  obtain ⟨D, hD⟩ := hdiff 1
-  have hiso : SupportedDiffeomorph.IsotopicToIdentity D := by
-    refine ⟨A, hA, hA₀, fun x => (hD x).symm, ?_⟩
-    intro t
-    obtain ⟨e, he⟩ := hdiff t
-    exact ⟨e, fun x => (he x).symm⟩
-  refine ⟨D, K, hK, hKU, hiso, fun x hx => (hD x).trans (hfix 1 x hx), ?_, ?_, ?_⟩
-  · intro x
-    rw [hD, hprojection]
-  · intro x hx
-    exact (hD x).trans (hfixed 1 x hx)
-  · filter_upwards [hgerm] with x hx
-    exact (hD x).trans hx
 
 end Wikipedia.SmoothSixDPoincare.SmallPerturbation

@@ -71,12 +71,5 @@ theorem cylinderRetraction_val_of_mem {n : ℕ} {u : unitInterval × Simplex n}
     cylinderRetraction n (t, s.val) = sideInclusion n (t, s) :=
   cylinderRetraction_fix (sideInclusion n (t, s))
 
-/-- The displayed map is a retraction, not merely a map into the subspace. -/
-theorem cylinderRetraction_retract (n : ℕ) :
-    (cylinderRetraction n).comp (bottomOrSideInclusion n) =
-      ContinuousMap.id (↥(bottomOrSide n)) := by
-  apply ContinuousMap.ext
-  intro u
-  exact cylinderRetraction_fix u
 
 end Wikipedia.HopfProblem.SecondHurewicz.SimplyConnected

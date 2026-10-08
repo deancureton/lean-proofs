@@ -38,10 +38,6 @@ theorem isOpenEmbedding_inl : Topology.IsOpenEmbedding (inl h) :=
 theorem isOpenEmbedding_inr : Topology.IsOpenEmbedding (inr h) :=
   h.isOpenEmbedding.comp Topology.IsOpenEmbedding.inr
 
-theorem disjoint_inclusions : Disjoint (range (inl h)) (range (inr h)) := by
-  apply Set.disjoint_left.mpr
-  rintro _ ⟨x, rfl⟩ ⟨y, he⟩
-  exact Sum.inr_ne_inl (h.injective he)
 
 def integralEquiv (n : ℕ) :
     (SingularHomology X n × SingularHomology Y n) ≃ₗ[ℤ] SingularHomology Z n :=

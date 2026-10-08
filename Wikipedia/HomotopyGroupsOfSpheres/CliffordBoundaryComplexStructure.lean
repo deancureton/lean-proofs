@@ -108,13 +108,6 @@ theorem structureMap_matrix (v : Sphere 2) :
   exact RankSixComplexProjection.matrix_ofMatrix _
     (realGenerator_transpose v.val) (realGenerator_square v)
 
-theorem structureMap_pfaffian (v : Sphere 2) :
-    pfaffian (RankSixComplexProjection.matrix (structureMap v)) = -1 := by
-  rw [structureMap_matrix]
-  have hv := sphereTwo_sum_sq v
-  norm_num [pfaffian, realGenerator, Matrix.cons_val_two, Matrix.cons_val_three,
-    Matrix.cons_val_four, vecCons_five]
-  nlinarith [hv]
 
 def structurePole : Sphere 2 :=
   ⟨EuclideanSpace.basisFun (Fin 3) ℝ 1, mem_sphere_zero_iff_norm.mpr

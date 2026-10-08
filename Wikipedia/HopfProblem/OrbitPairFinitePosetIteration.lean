@@ -59,24 +59,5 @@ theorem iterationHomeomorph_succ (P : PartOrd.{u}) [Fintype P] (r : ℕ)
       letI : Fintype ((iteratedChains r).obj P) := Fintype.ofFinite _
       iterationHomeomorph P r (subdivisionHomeomorph ((iteratedChains r).obj P) z) := rfl
 
-theorem iterationHomeomorph_naturality (r : ℕ) {P Q : PartOrd.{u}}
-    [Fintype P] [Fintype Q] (f : P ⟶ Q) (hf : Function.Injective f)
-    (z : SSet.toTop.obj (nerve ((iteratedChains r).obj P))) :
-    iterationHomeomorph Q r
-      ((SSet.toTop.map (PartOrd.nerveFunctor.map ((iteratedChains r).map f))) z) =
-      (SSet.toTop.map (PartOrd.nerveFunctor.map f)) (iterationHomeomorph P r z) := by
-  induction r with
-  | zero => rfl
-  | succ r ih =>
-    letI : Fintype ((iteratedChains r).obj P) := Fintype.ofFinite _
-    letI : Fintype ((iteratedChains r).obj Q) := Fintype.ofFinite _
-    change iterationHomeomorph Q r
-      (subdivisionHomeomorph ((iteratedChains r).obj Q)
-        ((SSet.toTop.map (nerveMap (NonemptyFiniteChains.orderHomMap
-          ((iteratedChains r).map f).hom).monotone.functor)) z)) = _
-    exact (congrArg (iterationHomeomorph Q r)
-      (subdivisionHomeomorph_naturality ((iteratedChains r).obj P)
-        ((iteratedChains r).map f).hom (iteratedChains_map_injective r f hf) z)).trans
-      (ih (subdivisionHomeomorph ((iteratedChains r).obj P) z))
 
 end Wikipedia.HopfProblem.OrbitPair.FinitePoset

@@ -39,15 +39,7 @@ theorem reduce_entry (A : ReductionDomain) (r s : Fin 2) :
     r.succ s.succ (Fin.succ_ne_zero r) (Fin.succ_ne_zero s)
   simpa only [reductionColumn, swap_mul_succ_row, swap_mul_first_row] using h
 
-theorem reduce_first_column_zero (A : ReductionDomain) :
-    (reduce A).val 0 0 = A.val.val 0 1 -
-      A.val.val 0 0 * (1 + A.val.val 1 0)⁻¹ * A.val.val 1 1 := by
-  exact reduce_entry A 0 0
 
-theorem reduce_first_column_one (A : ReductionDomain) :
-    (reduce A).val 1 0 = A.val.val 2 1 -
-      A.val.val 2 0 * (1 + A.val.val 1 0)⁻¹ * A.val.val 1 1 := by
-  exact reduce_entry A 1 0
 
 def scalarRotation (s t : ℝ) : ℍ :=
   Real.cos s • 1 + (Real.sin s * Real.cos t) • i + (Real.sin s * Real.sin t) • j

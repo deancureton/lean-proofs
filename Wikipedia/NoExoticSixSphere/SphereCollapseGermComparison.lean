@@ -49,14 +49,6 @@ theorem exists_homotopy_of_fiber_germs :
     obtain ⟨x, rfl⟩ := (d.sphereMap_zero_iff y).mp hy
     exact (hgerm x).symm
 
-/-- The comparison retains the actual distinguished basepoint at infinity. -/
-theorem exists_based_homotopy_of_fiber_germs
-    (hinfty : g (sphereInfinity e.ambientDimension) = sphereInfinity (e.ambientDimension - n)) :
-    ∃ H : d.sphereMap.Homotopy g, ∀ t : I,
-      H (t, sphereInfinity e.ambientDimension) = sphereInfinity (e.ambientDimension - n) := by
-  obtain ⟨H, hH⟩ := d.exists_homotopy_of_fiber_germs g hfiber hgerm
-  refine ⟨H, fun t ↦ ?_⟩
-  rw [hH t _ (d.sphereMap_infty.trans hinfty.symm), d.sphereMap_infty]
 
 /-- Comparison at the same actual finite suspension stage, not just an abstract stable class. -/
 theorem iterate_nullhomotopic_iff_of_fiber_germs (r : ℕ) :

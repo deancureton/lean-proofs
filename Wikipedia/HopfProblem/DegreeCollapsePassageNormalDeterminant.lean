@@ -74,19 +74,5 @@ theorem passage_normal_relative_det_neg
   rw [LinearMap.det_id, mul_one]
   exact mul_neg_of_pos_of_neg (inv_pos.mpr hc₀) (mul_neg_of_pos_of_neg hc₁ hC)
 
-theorem passage_normal_contributions_opposite
-    {Y : Type} [TopologicalSpace Y] (a : C(sphere (0 : N) 1, Y))
-    (P : P₃ ≃L[ℝ] (ℝ × U)) (B : (ℝ × U) ≃L[ℝ] N)
-    {c₀ c₁ : ℝ} (hc₀ : 0 < c₀) (hc₁ : 0 < c₁)
-    (C : U ≃L[ℝ] U) (hC : C.toLinearMap.det < 0) :
-    let L₀ := (P.trans (passageNormalProduct c₀ hc₀.ne' (ContinuousLinearEquiv.refl ℝ U))).trans B
-    let L₁ := (P.trans (passageNormalProduct c₁ hc₁.ne' C)).trans B
-    singularHomologyMap
-      (a.comp (LinearSphereAction.sphereMap L₁.toContinuousLinearMap L₁.injective)) 2 =
-      -singularHomologyMap
-        (a.comp (LinearSphereAction.sphereMap L₀.toContinuousLinearMap L₀.injective)) 2 := by
-  dsimp only
-  exact attaching_contributions_opposite_of_relative_det_neg a _ _
-    (passage_normal_relative_det_neg P B hc₀ hc₁ C hC)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

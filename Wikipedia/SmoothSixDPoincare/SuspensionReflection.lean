@@ -47,9 +47,6 @@ theorem reflect_height (x : Suspension X) :
   obtain ⟨⟨t, u⟩, rfl⟩ := Suspension.mk_surjective x
   rfl
 
-theorem reflect_reflect (x : Suspension X) : reflect (reflect x) = x := by
-  obtain ⟨⟨t, u⟩, rfl⟩ := Suspension.mk_surjective x
-  rw [reflect_mk, reflect_mk, unitInterval.symm_symm]
 
 theorem reflect_north : MapsTo (reflect (X := X)) Suspension.northOpen Suspension.southOpen := by
   intro x hx

@@ -114,12 +114,5 @@ theorem Data.link_isClosedEmbedding (d : Data D) {ε : ℝ} (hε : 0 < ε)
     (hball : closedBall (0 : Vector 4) ε ⊆ d.coord.target) : IsClosedEmbedding (d.link ε) :=
   (d.continuous_link hε hball).isClosedEmbedding (d.link_injective hε hball)
 
-theorem Data.link_ne_center (d : Data D) {ε : ℝ} (hε : 0 < ε)
-    (hball : closedBall (0 : Vector 4) ε ⊆ d.coord.target)
-    {x : X} (hz : residual (D x) = 0) (q : Sphere 3) : d.link ε q ≠ x := by
-  intro he
-  have hr := congrArg (fun y ↦ residual (D y)) he
-  rw [d.residual_link hε hball q, hz] at hr
-  exact scaledParameter_ne_zero hε q hr
 
 end NoExoticSixSphere.ResidualCoordinates

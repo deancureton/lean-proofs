@@ -50,13 +50,6 @@ theorem primitiveSurgeryMap_surjective : Surjective (primitiveSurgeryMap A hA T 
     (LinearEquiv.ofBijective (singularHomologyMap (halfOldInclusion A hA T) 3)
       (primitive_halfOldInclusion_bijective A hA T C σ hσ)).symm.surjective
 
-theorem primitiveSurgeryMap_oldInclusion (x : SingularHomology (HalfExterior A hA T) 3) :
-    primitiveSurgeryMap A hA T C σ hσ (singularHomologyMap (halfOldInclusion A hA T) 3 x) =
-      singularHomologyMap (halfNewInclusion A hA T) 3 x := by
-  let e := LinearEquiv.ofBijective (singularHomologyMap (halfOldInclusion A hA T) 3)
-    (primitive_halfOldInclusion_bijective A hA T C σ hσ)
-  change singularHomologyMap (halfNewInclusion A hA T) 3 (e.symm (e x)) = _
-  rw [LinearEquiv.symm_apply_apply]
 
 theorem primitiveSurgeryMap_kernel :
     (primitiveSurgeryMap A hA T C σ hσ).ker =
@@ -105,25 +98,6 @@ def primitiveThirdHomologyEquiv :
         (QuotientAddGroup.quotientKerEquivOfSurjective p
           (IntegerSplit.projection_surjective σ.toAddMonoidHom c hσ)))
 
-theorem primitiveThirdHomologyEquiv_surgeryMap
-    (x : SingularHomology (OldPositiveHalf A T) 3) :
-    primitiveThirdHomologyEquiv A hA T C σ hσ (primitiveSurgeryMap A hA T C σ hσ x) =
-      IntegerSplit.projection σ.toAddMonoidHom
-        (singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3
-          (unitSphereTopClass 2)) hσ x := by
-  let r := primitiveSurgeryMap A hA T C σ hσ
-  let p := IntegerSplit.projection σ.toAddMonoidHom
-    (singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3 (unitSphereTopClass 2)) hσ
-  let er := QuotientAddGroup.quotientKerEquivOfSurjective r
-    (primitiveSurgeryMap_surjective A hA T C σ hσ)
-  let ep := QuotientAddGroup.quotientKerEquivOfSurjective p
-    (IntegerSplit.projection_surjective σ.toAddMonoidHom _ hσ)
-  have hk : r.ker = p.ker := (primitiveSurgeryMap_kernel A hA T C σ hσ).trans
-    (IntegerSplit.projection_kernel σ.toAddMonoidHom _ hσ).symm
-  have hx : er (QuotientAddGroup.mk x) = r x := rfl
-  change ep (QuotientAddGroup.quotientAddEquivOfEq hk (er.symm (r x))) = p x
-  rw [← hx, er.symm_apply_apply, QuotientAddGroup.quotientAddEquivOfEq_mk]
-  rfl
 
 include C hσ in
 theorem primitive_new_third_finite [Finite σ.toAddMonoidHom.ker] :

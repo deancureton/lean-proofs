@@ -58,10 +58,6 @@ theorem joinedLoop_right (hr : 0 < r) {α β : ℝ → N}
       congr 1
       ring
 
-theorem joinedLoop_short_germ (hr : 0 < r) (α β : ℝ → N) :
-    (fun t => joinedLoop hr α β (t + r)) =ᶠ[𝓝 (0 : ℝ)] α := by
-  filter_upwards [Ioo_mem_nhds (neg_lt_zero.mpr hr) hr] with t ht
-  exact joinedLoop_left hr α β ⟨ht.1.le, ht.2.le⟩
 
 theorem joinedLoop_range (hr : 0 < r) {α β : ℝ → N}
     (h0 : β 0 = α r) (h1 : β 1 = α (-r)) :

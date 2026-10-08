@@ -110,12 +110,5 @@ theorem baseChangeDiffeomorph_new (y : NewPatch E F) :
     letI := Q.charted
     baseChangeDiffeomorph A A' n D hD P Q (newMap A n y) = newMap A' n y := rfl
 
-theorem baseChangeDiffeomorph_closedNewMap (p : ClosedNewFace E F) :
-    letI := P.charted
-    letI := Q.charted
-    baseChangeDiffeomorph A A' n D hD P Q (closedNewMap A n p) = closedNewMap A' n p := by
-  let _ := P.charted
-  let _ := Q.charted
-  exact baseChangeBoundary_closedNewMap A A' n D.toHomeomorph hD p
 
 end Wikipedia.SmoothSixDPoincare.FramedSurgery

@@ -51,13 +51,6 @@ def degreeQuotientMulEquiv :
   (QuotientGroup.quotientMulEquivOfEq projectionDegree_range_eq_integerConnecting_ker).trans
     (QuotientGroup.quotientKerEquivOfSurjective integerConnecting integerConnecting_surjective)
 
-theorem degreeQuotientMulEquiv_mk (k : Multiplicative ℤ) :
-    degreeQuotientMulEquiv (QuotientGroup.mk k) = integerConnecting k := by
-  change QuotientGroup.quotientKerEquivOfSurjective integerConnecting integerConnecting_surjective
-    (QuotientGroup.quotientMulEquivOfEq projectionDegree_range_eq_integerConnecting_ker
-      (QuotientGroup.mk k)) = integerConnecting k
-  rw [QuotientGroup.quotientMulEquivOfEq_mk]
-  rfl
 
 def sphereDegreeQuotientMulEquiv :
     (Multiplicative ℤ ⧸ projectionDegree.range) ≃*

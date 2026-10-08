@@ -63,38 +63,5 @@ theorem leftEndpointArf_eq_clopen
     (RegularSphereFiber.frame d.leftMap d.smooth_left b d.regular_left 6 hd a.2) r r x x).symm.trans
       ((leftEndpointAffineComparison d hd a y).geometricArf_eq r rZ x z)
 
-theorem rightEndpointArf_eq_clopen
-    [SimplyConnectedSpace {x : Sphere m // d.rightMap x = b}]
-    (x : {x : Sphere m // d.rightMap x = b})
-    [Subsingleton (π_ 2 {x : Sphere m // d.rightMap x = b} x)] (z : rightZeroOpen d 6 hd) :
-    letI := regularFiberAtlas d.rightMap d.smooth_right b d.regular_right 6 (by simpa using hd);
-    letI := regularFiber_isManifold d.rightMap d.smooth_right b d.regular_right 6 _;
-    letI := RegularSphereFiber.fiber_compact d.rightMap b;
-    letI := timeZeroAtlas d 6 hd;
-    letI := rightZeroOpen_isManifold d hd;
-    letI := rightZeroOpen_compact d hd;
-    letI := rightZeroOpen_simplyConnected d hd;
-    letI := rightZeroOpen_piTwo_subsingleton d hd x z;
-    ∀ r : (RegularSphereFiber.embedding d.rightMap d.smooth_right b d.regular_right 6 hd
-        ).TubularRetraction,
-      ∀ rZ : (rightZeroEmbedding d hd a).TubularRetraction,
-        GeometricArf.invariant
-          (RegularSphereFiber.embedding d.rightMap d.smooth_right b d.regular_right 6 hd)
-          (RegularSphereFiber.frame d.rightMap d.smooth_right b d.regular_right 6 hd a.2) r x =
-        GeometricArf.invariant (rightZeroEmbedding d hd a) (rightZeroFrame d hd a y) rZ z := by
-  let := regularFiberAtlas d.rightMap d.smooth_right b d.regular_right 6 (by simpa using hd)
-  let := regularFiber_isManifold d.rightMap d.smooth_right b d.regular_right 6 (by simpa using hd)
-  let := RegularSphereFiber.fiber_compact d.rightMap b
-  let := timeZeroAtlas d 6 hd
-  let := rightZeroOpen_isManifold d hd
-  let := rightZeroOpen_compact d hd
-  let := rightZeroOpen_simplyConnected d hd
-  let := rightZeroOpen_piTwo_subsingleton d hd x z
-  intro r rZ
-  exact (GeometricArf.invariant_normalized
-    (RegularSphereFiber.embedding d.rightMap d.smooth_right b d.regular_right 6 hd)
-    (RegularSphereFiber.frame d.rightMap d.smooth_right b d.regular_right 6 hd a.2)
-      r r x x).symm.trans
-      ((rightEndpointAffineComparison d hd a y).geometricArf_eq r rZ x z)
 
 end NoExoticSixSphere.CircleCylinder

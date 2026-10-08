@@ -39,11 +39,6 @@ structure Realization where
 
 variable [T2Space M] [CompactSpace M]
 
-theorem nonempty_realization : Nonempty T.Realization := by
-  let _ := RegularLevel.chartedSpace hf d.upper_regular
-  obtain ⟨_, _, D, _, _, hlevel, hheight, _⟩ :=
-    RegularLevel.exists_height_preserving_ambient_extension hf d.upper_regular T.upperMap T.isotopic
-  exact ⟨⟨D, hheight, hlevel⟩⟩
 
 namespace Realization
 

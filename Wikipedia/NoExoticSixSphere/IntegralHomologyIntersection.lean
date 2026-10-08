@@ -80,20 +80,6 @@ theorem integralHomologyIntersection_comm (c d : SingularHomology M 3) :
     integralHomologyIntersection e r m c d = integralHomologyIntersection e r m d c :=
   homotopyIntersection_comm e r _ _
 
-theorem integralHomologyIntersection_independent (e' : EuclideanEmbedding 6 M)
-    (r' : TubularRetraction e') :
-    integralHomologyIntersection e r m = integralHomologyIntersection e' r' m := by
-  ext c d
-  exact homotopyIntersection_independent e r e' r' _ _
 
-theorem integralHomologyIntersection_unique
-    (B : SingularHomology M 3 →ₗ[ℤ] SingularHomology M 3 →ₗ[ℤ] ZMod 2)
-    (hB : ∀ f g : BasedMap 3 M m,
-      B (hurewiczSphereClass m f) (hurewiczSphereClass m g) =
-        sphereIntersectionNumber e r f.val g.val) : B = integralHomologyIntersection e r m := by
-  ext c d
-  obtain ⟨f, rfl⟩ := hurewiczSphereClass_surjective m c
-  obtain ⟨g, rfl⟩ := hurewiczSphereClass_surjective m d
-  exact (hB f g).trans (integralHomologyIntersection_sphereClass e r m f g).symm
 
 end NoExoticSixSphere.EuclideanEmbedding

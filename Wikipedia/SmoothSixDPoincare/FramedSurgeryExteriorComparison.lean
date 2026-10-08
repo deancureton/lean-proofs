@@ -94,18 +94,6 @@ theorem presentationExteriorDiffeomorph_point
     _ = presentationBoundaryHomeomorph A d hface n y.val :=
       congrArg (presentationBoundaryHomeomorph A d hface n) hy
 
-theorem presentationExteriorDiffeomorph_symm_point
-    (hD : D.toHomeomorph = d.openExteriorHomeomorph) (z : d.newOpenExterior) :
-    letI := P.charted
-    ((P.presentationExteriorDiffeomorph d hface D).symm z).val =
-      (presentationBoundaryHomeomorph A d hface n).symm z.val := by
-  let _ := P.charted
-  have he := P.presentationExteriorDiffeomorph_point d hface D hD
-    ((P.presentationExteriorDiffeomorph d hface D).symm z)
-  rw [Diffeomorph.apply_symm_apply] at he
-  have hi := congrArg (presentationBoundaryHomeomorph A d hface n).symm he
-  rw [Homeomorph.symm_apply_apply] at hi
-  exact hi.symm
 
 end SmoothBoundaryData
 

@@ -50,14 +50,5 @@ theorem native_attaching_component_of_pairwise_joined
     NormedSpace.sphere_nonempty.mpr zero_le_one
   exact ⟨d.coreBoundaryMap ⟨v, hv⟩, fun u => hjoined u ⟨v, hv⟩⟩
 
-theorem native_attaching_distinct_components_of_not_one_component
-    (hindex : 0 < Module.finrank ℝ d.chart.NegativeCoordinates)
-    (hnot : ¬∃ a : {z : M // f z ≤ f p - d.radius ^ 2},
-      ∀ u, Joined (d.coreBoundaryMap u) a) :
-    ∃ u v, ¬Joined (d.coreBoundaryMap u) (d.coreBoundaryMap v) := by
-  classical
-  by_contra h
-  push_neg at h
-  exact hnot (native_attaching_component_of_pairwise_joined d hindex h)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

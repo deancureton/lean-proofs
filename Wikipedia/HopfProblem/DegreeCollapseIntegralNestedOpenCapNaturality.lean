@@ -97,26 +97,5 @@ theorem componentMap_subsetInclusion {U V : Set M} (hUV : U ⊆ V)
     supportedClass_subsetInclusion (E := E) n hUV hU hV] at he
   exact he
 
-/-- Original extension and original homology inclusion intertwine the actual open cap maps. -/
-theorem dualityMap_subsetInclusion {U V : Set M} (hUV : U ⊆ V)
-    (hU : IsOpen U) (hV : IsOpen V) (p q : ℕ) (h : p + q = n + 3)
-    (a : IntegralCompactSupportCohomology.Cohomology U p) :
-    singularHomologyMap (subsetInclusion hUV) q (dualityMap (E := E) n U hU p q h a) =
-      dualityMap (E := E) n V hV p q h
-        (IntegralCompactSupportCohomology.openMap (subsetInclusion hUV)
-          (subsetInclusion_isOpenEmbedding hUV hU) p a) := by
-  obtain ⟨K, b, rfl⟩ := IntegralCompactSupportCohomology.exists_representative U p a
-  let f := subsetInclusion hUV
-  let hf := subsetInclusion_isOpenEmbedding hUV hU
-  let L := IntegralCompactSupportCohomology.mapCompact f K
-  have ht := (congrArg (dualityMap (E := E) n V hV p q h)
-    (IntegralCompactSupportCohomology.openMap_of f hf p K b)).trans
-      (dualityMap_of (E := E) n V hV p q h L
-        (IntegralOpenEmbeddingSupport.extension f hf (K : Set U) K.isCompact
-          (L : Set V) rfl p b))
-  exact (congrArg (singularHomologyMap f q)
-    (dualityMap_of (E := E) n U hU p q h K b)).trans
-      ((componentMap_subsetInclusion (E := E) n hUV hU hV (K : Set U) K.isCompact
-        (L : Set V) rfl p q h b).trans ht.symm)
 
 end Wikipedia.HopfProblem.DegreeCollapse.IntegralOpenFundamentalClass

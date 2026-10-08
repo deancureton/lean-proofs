@@ -144,14 +144,6 @@ def nativeCubeCycle201 : Equiv.Perm (Fin 3) := Equiv.swap 1 2 * Equiv.swap 0 1
   funext i
   fin_cases i <;> rfl
 
-theorem permuteCubeLoop_cycle120_additiveClass (p : GenLoop (Fin 3) X x) :
-    nativeCubeClass (permuteCubeLoop p nativeCubeCycle120) = nativeCubeClass p := by
-  rw [nativeCubeCycle120, permuteCubeLoop_mul, permuteCubeLoop_swap01_additiveClass,
-    permuteCubeLoop_swap12_additiveClass, neg_neg]
 
-theorem permuteCubeLoop_cycle201_additiveClass (p : GenLoop (Fin 3) X x) :
-    nativeCubeClass (permuteCubeLoop p nativeCubeCycle201) = nativeCubeClass p := by
-  rw [nativeCubeCycle201, permuteCubeLoop_mul, permuteCubeLoop_swap12_additiveClass,
-    permuteCubeLoop_swap01_additiveClass, neg_neg]
 
 end Wikipedia.HopfProblem.ThirdHurewicz

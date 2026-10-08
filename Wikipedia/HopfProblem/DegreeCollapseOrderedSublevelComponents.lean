@@ -79,16 +79,5 @@ theorem ordered_upper_pathConnected_of_later_indices
       {x : M // f x ≤ f (S.point j) + (S.data (S.point j)).radius ^ 2} := hupper
   exact native_lower_pathConnected_of_upper (S.data (S.point j)) hf.continuous (hindex j hij)
 
-theorem ordered_lower_pathConnected_of_later_indices
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (i : Fin S.count)
-    (hindex : ∀ j : Fin S.count, i.val ≤ j.val →
-      2 ≤ Module.finrank ℝ (S.data (S.point j)).chart.NegativeCoordinates) :
-    PathConnectedSpace {x : M // f x ≤ S.lower (S.point i)} := by
-  let : PathConnectedSpace
-      {x : M // f x ≤ f (S.point i) + (S.data (S.point i)).radius ^ 2} :=
-    ordered_upper_pathConnected_of_later_indices S hf i
-    (fun j hij => hindex j hij.le)
-  exact native_lower_pathConnected_of_upper (S.data (S.point i)) hf.continuous
-    (hindex i le_rfl)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

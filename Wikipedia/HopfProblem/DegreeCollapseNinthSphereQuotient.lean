@@ -68,10 +68,6 @@ theorem generator_pow (z : ZMod 24) :
   change Multiplicative.ofAdd (z.val • (1 : ZMod 24)) = Multiplicative.ofAdd z
   simp only [nsmul_eq_mul, mul_one, ZMod.natCast_zmod_val]
 
-theorem exists_generator_pow (x : Target) :
-    ∃ k : Fin 24, generator ^ k.val = x := by
-  obtain ⟨z, rfl⟩ := projection_surjective x
-  exact ⟨⟨z.toAdd.val, ZMod.val_lt z.toAdd⟩, generator_pow z.toAdd⟩
 
 theorem pow_twentyFour (x : Target) : x ^ 24 = 1 := by
   obtain ⟨c, rfl⟩ := sourceProjection_surjective x

@@ -134,14 +134,6 @@ def spherePreimageOutwardFrame (u : unitary ℂ) (b : Bool × Bool)
     Module.Basis (Unit ⊕ Fin 7) ℝ SphereAmbient :=
   transportedSphereOutwardFrame (preimageSourceIsometry u b) rotatedInput v
 
-theorem spherePreimageOutwardFrame_normal (u : unitary ℂ) (b : Bool × Bool)
-    (v : Module.Basis (Fin 7) ℝ (ParameterSpace rotatedInput)) :
-    spherePreimageOutwardFrame u b v (Sum.inl ()) =
-      (midpointSphereEmbedding (phaseInput u b)).val := by
-  change transportedSphereOutwardFrame (preimageSourceIsometry u b) rotatedInput v
-    (Sum.inl ()) = _
-  rw [transportedSphereOutwardFrame_normal]
-  exact congrArg Subtype.val (spherePreimageSourceChart_zero u b)
 
 theorem spherePreimageOutwardFrame_tangent (u : unitary ℂ) (b : Bool × Bool)
     (v : Module.Basis (Fin 7) ℝ (ParameterSpace rotatedInput)) (i : Fin 7) :
@@ -157,11 +149,6 @@ theorem spherePreimageOutwardFrame_orientation (u : unitary ℂ) (b : Bool × Bo
   transportedSphereOutwardFrame_orientation (preimageSourceIsometry u b)
     (preimageSourceIsometry_det_pos u b) rotatedInput v
 
-theorem spherePreimageSourceChart_relativeDet_pos (u : unitary ℂ) (b : Bool × Bool) :
-    0 < ((chartRadialFrame (spherePreimageSourceChart u b) 0).comp
-      (sourceRadialEquiv rotatedInput).symm.toContinuousLinearMap).det := by
-  rw [spherePreimageSourceChart, transportedSphereSourceChart_relativeDet]
-  exact preimageSourceIsometry_det_pos u b
 
 end MidpointSeed
 

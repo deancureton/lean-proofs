@@ -60,11 +60,6 @@ def negativeSublevelBodyEquiv :
     (fun _ ↦ neg_eq_zero)
   boundary_point _ := Subtype.ext rfl
 
-theorem oppositeHalf_hasInwardCollar : P.oppositeHalf.toBody.HasInwardCollar := by
-  obtain ⟨_, c, _⟩ := RegularMorseSublevel.exists_fullSmoothHandleChain
-    P.smooth P.morse P.distinct 0 (RegularTimeMorse.regular_zero_not_critical P.regular)
-  exact SmoothBoundaryBody.hasInwardCollar_transport P.negativeSublevelBodyEquiv
-    (c.hasInwardCollar ⟨InwardBoundaryCollar.ofIsEmpty _⟩)
 
 end ExcellentMorsePresentation
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

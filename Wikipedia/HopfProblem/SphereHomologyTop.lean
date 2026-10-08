@@ -54,19 +54,7 @@ def unitSphereTopClass (n : ℕ) : SingularHomology (UnitSphere (n + 1)) (n + 1)
     unitSphereHomologyTopEquiv n (unitSphereTopClass n) = 1 :=
   (unitSphereHomologyTopEquiv n).apply_symm_apply 1
 
-theorem unitSphereTopClass_ne_zero (n : ℕ) : unitSphereTopClass n ≠ 0 := by
-  intro h
-  have hh := congrArg (unitSphereHomologyTopEquiv n) h
-  simp at hh
 
-/-- The top classes are compatible with the literal singular suspension maps. -/
-theorem unitSphereTopClass_suspension (n : ℕ) :
-    unitSphereHomologySuspensionEquiv (n + 1) n (unitSphereTopClass (n + 1)) =
-      unitSphereTopClass n := by
-  apply (unitSphereHomologyTopEquiv n).injective
-  change unitSphereHomologyTopEquiv (n + 1) (unitSphereTopClass (n + 1)) =
-    unitSphereHomologyTopEquiv n (unitSphereTopClass n)
-  simp
 
 /-- Every top homology class is an integral multiple of the constructed primitive class. -/
 theorem unitSphereTopClass_generates (n : ℕ)

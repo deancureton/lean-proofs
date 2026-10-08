@@ -59,8 +59,5 @@ theorem annularInclusionPartial_source (m n : ℕ)
   intro z
   exact ⟨mem_univ z.1, mem_univ z.2⟩
 
-theorem annularInclusionPartial_point (m n : ℕ)
-    [Fact (Module.finrank ℝ N = m + 1)] [Fact (Module.finrank ℝ P = n + 1)]
-    (z : AnnularParameters N P) : annularInclusionPartial m n z = (z.1, z.2.val) := by rfl
 
 end Wikipedia.SmoothSixDPoincare.MorseHandle

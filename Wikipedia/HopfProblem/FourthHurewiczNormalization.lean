@@ -42,13 +42,6 @@ theorem normalizationFourSimplexHomotopy_endpoint (smp : SingularSimplex X 4) :
     timeSlice (normalizationFourSimplexHomotopy x smp) 1 =
       (normalizedFourSimplex x smp).val := rfl
 
-/-- This endpoint runs the genuine third-homotopy contraction after the lower stages. -/
-theorem normalizedFourSimplex_val_stages (smp : SingularSimplex X 4) :
-    (normalizedFourSimplex x smp).val =
-      timeSlice (threeFourSimplexHomotopy x (lowerNormalizedFourSimplexMap x smp)) 1 := by
-  rw [normalizedFourSimplex_val, normalizationFourSimplexHomotopy,
-    ThirdHurewicz.timeSlice_composeSimplexHomotopies_one]
-  rfl
 
 @[simp] theorem normalizedFourSimplex_const :
     normalizedFourSimplex x (ContinuousMap.const (Simplex 4) x) =

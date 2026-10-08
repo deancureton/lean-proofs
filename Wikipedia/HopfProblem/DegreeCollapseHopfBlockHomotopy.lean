@@ -120,12 +120,5 @@ def blockHomotopy (f : C(P × UnitSphere E, OrthogonalOperators n)) :
   nonnegativeHomotopy (blockMap f) (suspendedMap f)
     (fun z ↦ block_suspended_inner_nonnegative f z.1 z.2.val)
 
-theorem block_nullhomotopic_iff_suspended (f : C(P × UnitSphere E, OrthogonalOperators n)) :
-    (blockMap (G := G) f).Nullhomotopic ↔ (suspendedMap (G := G) f).Nullhomotopic := by
-  constructor
-  · rintro ⟨c, ⟨H⟩⟩
-    exact ⟨c, ⟨(blockHomotopy f).symm.trans H⟩⟩
-  · rintro ⟨c, ⟨H⟩⟩
-    exact ⟨c, ⟨(blockHomotopy f).trans H⟩⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.HopfBlockHomotopy

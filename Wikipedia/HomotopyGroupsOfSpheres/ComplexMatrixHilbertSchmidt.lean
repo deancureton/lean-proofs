@@ -72,9 +72,5 @@ theorem squareNorm_action_commutator (A B : Matrix N N ℂ) :
       2 * ImaginarySymmetricMatrices.squareNorm (ImaginarySymmetricMatrices.commutator A B) := by
   rw [action_commutator, squareNorm_action]
 
-theorem squareNorm_action_imaginary (A : Matrix N N ℝ) :
-    squareNorm (action (ImaginarySymmetricMatrices.imaginary A)) =
-      2 * RealMatrixSquareNorm.squareNorm A := by
-  rw [squareNorm_action, ImaginarySymmetricMatrices.squareNorm_imaginary]
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexMatrixRealRepresentation

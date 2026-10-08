@@ -94,19 +94,5 @@ end NoExoticSixSphere.EuclideanEmbedding.FramedCollapseData
 
 namespace NoExoticSixSphere
 
-theorem exists_sixSphereRegularCollapse {M : Type*} [TopologicalSpace M]
-    [ChartedSpace (EuclideanSpace ℝ (Fin 6)) M] [IsManifold (𝓡 6) ∞ M]
-    (h : M ≃ₜ Sphere 6) :
-    ∃ e : EuclideanEmbedding 6 M,
-      ∃ g : C(Sphere e.ambientDimension, Sphere (e.ambientDimension - 6)),
-        ContMDiff (𝓡 e.ambientDimension) (𝓡 (e.ambientDimension - 6)) ∞ g ∧
-        (∀ y, g y = sphereZero (e.ambientDimension - 6) ↔
-          ∃ x, e.compactifiedEmbedding x = y) ∧
-        ∀ y, g y = sphereZero (e.ambientDimension - 6) →
-          Function.Surjective
-            (mfderiv (𝓡 e.ambientDimension) (𝓡 (e.ambientDimension - 6)) g y) := by
-  obtain ⟨e, a, ⟨d⟩⟩ := exists_sixSphereFramedCollapseData h
-  obtain ⟨g, hg, _, hfiber, hregular, _⟩ := d.exists_smoothSphereMap_regular
-  exact ⟨e, g, hg, hfiber, hregular⟩
 
 end NoExoticSixSphere

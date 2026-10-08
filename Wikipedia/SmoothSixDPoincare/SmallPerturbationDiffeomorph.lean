@@ -79,8 +79,5 @@ def diffeomorphIdAdd {u : E → E} {k : ℝ≥0}
     exact isInvertible_fderiv_id_add hs hu hk x
   exact hloc.diffeomorphOfBijective (bijective_id_add hu hk)
 
-theorem diffeomorphIdAdd_apply {u : E → E} {k : ℝ≥0}
-    (hs : ContDiff ℝ ∞ u) (hu : LipschitzWith k u) (hk : k < 1) (x : E) :
-    diffeomorphIdAdd hs hu hk x = x + u x := by rfl
 
 end Wikipedia.SmoothSixDPoincare.SmallPerturbation

@@ -132,18 +132,6 @@ theorem projection_fiberInclusion (p : Sphere 3 × Sphere 3) :
     sphereProjection 16 (QuaternionicHopfProductImmersion.fiberInclusion p) = squarePoint p := by
   rw [← point_squarePoint, SphereFiniteRepresentative.projection_point]
 
-theorem square_value_zero (p : Sphere 3 × Sphere 3) :
-    SphereFiniteRepresentative.value (SphereSmash.squareMap suspendedMap) (squarePoint p) = 0 := by
-  have h := SphereFiniteProductDerivative.value_square suspendedMap
-    (suspendedPoint p.1, suspendedPoint p.2)
-    (suspended_image_ne_pole p.1) (suspended_image_ne_pole p.2)
-  change SphereFiniteRepresentative.value
-    (SphereSmash.squareMap suspendedMap) (squarePoint p) =
-    sumCoordinates 5
-      (SphereFiniteRepresentative.value suspendedMap.val (suspendedPoint p.1),
-        SphereFiniteRepresentative.value suspendedMap.val (suspendedPoint p.2)) at h
-  rw [suspended_value_zero, suspended_value_zero] at h
-  exact h.trans (map_zero (sumCoordinates 5))
 
 def squareRightInverse (p : Sphere 3 × Sphere 3) : V 10 →L[ℝ] V 16 :=
   (sumCoordinates 8).toContinuousLinearMap.comp

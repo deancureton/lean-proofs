@@ -41,27 +41,5 @@ variable {V E H M : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]
   {J : ModelWithCorners ℝ E H} [TopologicalSpace M] [ChartedSpace H M]
   {Φ : PartialDiffeomorph 𝓘(ℝ, ℝ × V) J (ℝ × V) M ∞}
 
-theorem LongitudinalTubeMotion.exists_centered_clock (A : LongitudinalTubeMotion Φ) :
-    ∃ D : Diffeomorph 𝓘(ℝ, ℝ) 𝓘(ℝ, ℝ) ℝ ℝ ∞,
-      D 0 = 0 ∧ D 1 = 1 ∧ D (1 / 2) = A.time ∧
-      MapsTo D (Icc (0 : ℝ) 1) (Icc (0 : ℝ) 1) ∧
-      (∀ t ∈ Icc (0 : ℝ) 1,
-        Real.smoothTransition (D t) * A.destination = 1 ↔ t = 1 / 2) ∧
-      HasDerivAt (fun t : ℝ => Real.smoothTransition (D t) * A.destination)
-        (deriv Real.smoothTransition A.time * A.destination) (1 / 2) := by
-  obtain ⟨D, h0, h1, hpoint, -, hinterval, -, hder⟩ :=
-    exists_centered_passage_clock A.time_mem
-  refine ⟨D, h0, h1, hpoint, hinterval, ?_, ?_⟩
-  · intro t ht
-    rw [A.unique_time (D t) (hinterval ht), ← hpoint]
-    exact D.injective.eq_iff
-  · have htransition :=
-      ((Real.smoothTransition.contDiff (n := ⊤)).differentiable (by simp) A.time).hasDerivAt
-    have htransition' : HasDerivAt Real.smoothTransition
-        (deriv Real.smoothTransition A.time) (D (1 / 2)) := by
-      rw [hpoint]
-      exact htransition
-    convert! ((htransition'.comp (1 / 2) hder).mul_const A.destination) using 1
-    rw [mul_one]
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

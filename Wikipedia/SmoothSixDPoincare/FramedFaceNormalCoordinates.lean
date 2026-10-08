@@ -112,41 +112,5 @@ theorem bijective_normalProjection_comp_of_transverse (k : ℕ)
     (hg.mdifferentiableAt (by simp)), ← hcross]
   exact hi
 
-theorem exists_normal_chart_of_transverse (k : ℕ)
-    (hdim : Module.finrank ℝ F = k) (g : Hemisphere.Sphere k → X)
-    (hg : ContMDiff (𝓡 k) J ∞ g) (a : Hemisphere.Sphere k) (u : UnitSphere E)
-    (hcross : coreMap A u = g a)
-    (htrans : Surjective ((mfderiv (𝓡 k) J g a).coprod
-      (mfderiv (𝓡 m) J (coreMap A) u))) :
-    ∃ Φ : PartialDiffeomorph 𝓘(ℝ, F) (𝓡 k) F (Hemisphere.Sphere k) ∞,
-      0 ∈ Φ.source ∧ Φ 0 = a ∧ Φ.target ⊆ g ⁻¹' A.chart.target ∧
-      (∀ v ∈ Φ.source, normalProjection A (g (Φ v)) = v) ∧
-      ∀ x ∈ Φ.target, Φ.symm x = normalProjection A (g x) := by
-  let U := g ⁻¹' A.chart.target
-  have hU : IsOpen U := A.chart.open_target.preimage hg.continuous
-  have ha : a ∈ U := by
-    change g a ∈ A.chart.target
-    exact hcross ▸ core_mem_chart_target A u
-  have hn : ContMDiffOn (𝓡 k) 𝓘(ℝ, F) ∞ (normalProjection A ∘ g) U :=
-    (contMDiffOn_normalProjection A).comp hg.contMDiffOn (fun _ hx => hx)
-  let L : EuclideanSpace ℝ (Fin k) →L[ℝ] F :=
-    mfderiv (𝓡 k) 𝓘(ℝ, F) (normalProjection A ∘ g) a
-  have hL : Bijective L := bijective_normalProjection_comp_of_transverse A k hdim g hg
-    a u hcross htrans
-  have hLi : L.IsInvertible :=
-    ⟨(LinearEquiv.ofBijective L.toLinearMap hL).toContinuousLinearEquiv, rfl⟩
-  obtain ⟨ψ, haψ, hψU, heq⟩ := exists_partialDiffeomorph_boundaryless hU ha hn hLi
-  have hψa : ψ a = 0 := by
-    rw [← heq haψ]
-    change normalProjection A (g a) = 0
-    rw [← hcross, normalProjection_core]
-  have hz : (0 : F) ∈ ψ.target := hψa ▸ ψ.map_source' haψ
-  refine ⟨ψ.symm, hz, ?_, hψU, ?_, ?_⟩
-  · rw [← hψa]
-    exact ψ.left_inv' haψ
-  · intro v hv
-    exact (heq (ψ.map_target' hv)).trans (ψ.right_inv' hv)
-  · intro x hx
-    exact (heq hx).symm
 
 end Wikipedia.SmoothSixDPoincare.FramedSurgery

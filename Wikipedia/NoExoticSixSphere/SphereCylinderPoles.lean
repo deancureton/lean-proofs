@@ -69,10 +69,6 @@ theorem not_mem_band_iff (n : ℕ) (y : Sphere (n + 1)) :
     · exact endPole_not_mem_band n false
     · exact endPole_not_mem_band n true
 
-theorem band_compl_eq (n : ℕ) :
-    (band n)ᶜ = {endPole n false, endPole n true} := by
-  ext y
-  exact not_mem_band_iff n y
 
 theorem injective_point (n : ℕ) : Injective (point n) :=
   LeftInverse.injective (inverse_point n)

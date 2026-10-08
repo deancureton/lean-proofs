@@ -61,11 +61,6 @@ theorem size_reverse_le (w : James.Space X x₀) :
   rw [← reverse_word, James.word_letters, List.length_reverse, James.length_letters] at h
   exact h
 
-theorem size_reverse (w : James.Space X x₀) :
-    James.size x₀ (reverse x₀ w) = James.size x₀ w := by
-  have h := size_reverse_le x₀ (reverse x₀ w)
-  rw [reverse_reverse] at h
-  exact le_antisymm (size_reverse_le x₀ w) h
 
 def mapWords (f : X → Y) : James.Space X x₀ →* James.Space Y y₀ :=
   James.lift x₀ (fun x ↦ James.letter y₀ (f x))

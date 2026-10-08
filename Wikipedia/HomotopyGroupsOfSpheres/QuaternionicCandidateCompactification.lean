@@ -112,12 +112,6 @@ theorem compactifiedCandidate_zero_iff (x : Sphere 7) :
   (targetCompactification_symm_zero_iff (sphereCandidateQuaternionMap x)).trans
     (sphereCandidateQuaternionMap_target_iff x)
 
-theorem compactifiedCandidate_zero_fiber_ncard :
-    {x | compactifiedCandidate x = ((0 : Parameters) : OnePoint Parameters)}.ncard = 12 := by
-  have he : {x | compactifiedCandidate x = ((0 : Parameters) : OnePoint Parameters)} =
-      sphereCandidateTargetPreimage := Set.ext compactifiedCandidate_zero_iff
-  rw [he]
-  exact sphereCandidateTargetPreimage_ncard_eq_twelve
 
 end MidpointSeed
 

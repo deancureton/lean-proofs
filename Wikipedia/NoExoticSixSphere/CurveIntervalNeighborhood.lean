@@ -94,15 +94,6 @@ theorem IntervalNeighborhood.endpoints_distinct (d : IntervalNeighborhood X) :
 def IntervalNeighborhood.intervalMap (d : IntervalNeighborhood X) : Icc d.left d.right → X :=
   fun t ↦ d.chart.symm t.val
 
-theorem IntervalNeighborhood.isClosedEmbedding_intervalMap [T2Space X]
-    (d : IntervalNeighborhood X) : IsClosedEmbedding d.intervalMap := by
-  let := isCompact_iff_compactSpace.mp (isCompact_interval d.left d.right)
-  have hc : Continuous d.intervalMap :=
-    (d.chart.continuousOn_symm.mono d.interval_target).domRestrict
-  apply hc.isClosedEmbedding
-  intro s t he
-  exact Subtype.ext (d.chart.symm.injOn (d.interval_target s.property)
-    (d.interval_target t.property) he)
 
 theorem exists_interval_neighborhood (e : OpenPartialHomeomorph X HalfLine)
     (x : X) (hx : x ∈ e.source) :

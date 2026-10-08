@@ -55,12 +55,6 @@ theorem southPairEuclideanToProduct_apply (p : Sphere 3 × Sphere 3) :
 theorem southPairEuclideanToProduct_symm_apply (p : Sphere 3 × Sphere 3) :
     letI := southPairEuclideanAtlas; southPairEuclideanToProduct.symm p = p := rfl
 
-theorem contMDiff_southPairAmbient_euclidean :
-    letI := southPairEuclideanAtlas;
-    ContMDiff (𝓡 6) 𝓘(ℝ, SouthPairAmbientModel) ∞ southPairAmbient := by
-  let _ := southPairEuclideanAtlas
-  have h := contMDiff_southPairAmbient.comp southPairEuclideanToProduct.contMDiff
-  exact h
 
 section Differential
 

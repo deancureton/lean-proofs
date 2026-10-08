@@ -71,8 +71,6 @@ theorem contMDiff_variationPoint (v : VertexSpace.Space N m) :
 def variationCoordinates (v : VertexSpace.Space N m) (W : ReversibleModel v) : Model N m :=
   atVertices v (variationPoint v W)
 
-theorem variationCoordinates_zero (v : VertexSpace.Space N m) : variationCoordinates v 0 = 0 := by
-  rw [variationCoordinates, variationPoint_zero, atVertices_self]
 
 theorem contDiffAt_variationCoordinates (v : VertexSpace.Space N m) :
     ContDiffAt ℝ ∞ (variationCoordinates v) 0 := by

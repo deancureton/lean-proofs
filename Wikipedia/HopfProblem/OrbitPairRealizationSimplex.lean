@@ -61,11 +61,5 @@ theorem characteristic_zero (x : S _⦋0⦌) :
   change characteristic S 0 x t = characteristic S 0 x _
   rw [simplexZero_eq_vertex t]
 
-theorem characteristic_constant (n : ℕ) (x : S _⦋0⦌) :
-    characteristic S n (SSet.yonedaEquiv (SSet.const x : Δ[n] ⟶ S)) =
-      ContinuousMap.const (Simplex n) (vertex S x) := by
-  change characteristic S n (S.map (⦋n⦌.const ⦋0⦌ 0).op x) = _
-  rw [characteristic_map, characteristic_zero]
-  rfl
 
 end Wikipedia.HopfProblem.OrbitPair.RealizationSimplex

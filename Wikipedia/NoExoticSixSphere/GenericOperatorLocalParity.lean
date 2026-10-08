@@ -73,17 +73,5 @@ theorem originalLink_parity (c : RankTwoCoordinates (Vector 3) (Vector 6))
   rw [changed_originalLink c D d hD hε hball] at he
   exact he.symm.trans (d.link_parity ((operatorEquiv c).continuous.comp hD) hε hball)
 
-theorem exists_local_parity [FiniteDimensional ℝ X]
-    (D : X → Vector 3 →L[ℝ] Vector 6) (hD : ContDiff ℝ ∞ D) (hreg : RegularThreeSix D)
-    (x : X) (hx : ¬ Injective (D x)) :
-    ∃ c : RankTwoCoordinates (Vector 3) (Vector 6),
-    ∃ d : ResidualCoordinates.Data (inCoordinates c D), x ∈ d.coord.source ∧
-    ∃ ε : ℝ, ∃ hε : 0 < ε, ∃ hball : closedBall (0 : Vector 4) ε ⊆ d.coord.target,
-      Monomorphism.sphereParity 1 (originalLink c D d hD.continuous hε hball) = 1 := by
-  obtain ⟨c, hc, hz, hb⟩ := hreg.residual_regular x hx
-  obtain ⟨d, hdx⟩ := ResidualCoordinates.exists_data (inCoordinates c D)
-    (contDiff_inCoordinates c D hD) x hc hb
-  obtain ⟨ε, hε, hball⟩ := d.exists_radius hdx hz
-  exact ⟨c, d, hdx, ε, hε, hball, originalLink_parity c D d hD.continuous hε hball⟩
 
 end NoExoticSixSphere.GenericLocalParity

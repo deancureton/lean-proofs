@@ -62,21 +62,6 @@ theorem exists_finite_selfIntersection_removal_within_target
     · exact hnew.2
     · exact hold.2 j hjs
 
-/-- The original finite collision-removal API follows by forgetting target containment. -/
-theorem exists_finite_selfIntersection_removal {ι : Type*} [Finite ι] {C K : Set E}
-    (p : ι → MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C)
-    (f : C(E, N)) (hf : ContMDiff 𝓘(ℝ, E) J ∞ f)
-    (hcompatible : ∀ j, (p j).Compatible f)
-    (hdim : 2 * Module.finrank ℝ E < Module.finrank ℝ G)
-    (hK : IsCompact K) (hinj : ∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J f x))
-    (s : Finset ι) :
-    ∃ g : C(E, N), ContMDiff 𝓘(ℝ, E) J ∞ g ∧ (∀ j, (p j).Compatible g) ∧
-      f.HomotopicRel g C ∧ (∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J g x)) ∧
-      ∀ x y, g x = g y → f x = f y ∧ ∀ i ∈ s, (p i).cutoff x = (p i).cutoff y := by
-  obtain ⟨g, hg, hc, hrel, hi, hp⟩ :=
-    exists_finite_selfIntersection_removal_within_target p f hf hcompatible hdim hK hinj
-      (fun _ => subset_univ _) (mapsTo_univ f univ) s
-  exact ⟨g, hg, hc, hrel.homotopicRel, hi, hp⟩
 
 variable [T2Space N]
 
@@ -111,21 +96,5 @@ theorem exists_embedding_of_finite_separating_patches_within_target
   obtain ⟨i, hi⟩ := hseparate x x.property y y.property hne hold
   exact hi (hcutoffs i (Finset.mem_univ i))
 
-/-- The original finite-patch embedding statement, forgetting its controlled target. -/
-theorem exists_embedding_of_finite_separating_patches {ι : Type*} [Finite ι] {C K : Set E}
-    (p : ι → MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C)
-    (f : C(E, N)) (hf : ContMDiff 𝓘(ℝ, E) J ∞ f)
-    (hcompatible : ∀ j, (p j).Compatible f)
-    (hdim : 2 * Module.finrank ℝ E < Module.finrank ℝ G)
-    (hK : IsCompact K) (hinj : ∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J f x))
-    (hseparate : ∀ x ∈ K, ∀ y ∈ K, x ≠ y → f x = f y →
-      ∃ i, (p i).cutoff x ≠ (p i).cutoff y) :
-    ∃ g : C(E, N), ContMDiff 𝓘(ℝ, E) J ∞ g ∧ f.HomotopicRel g C ∧
-      Topology.IsClosedEmbedding (fun x : K => g x) ∧
-      ∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J g x) := by
-  obtain ⟨g, hg, hrel, he, hi⟩ :=
-    exists_embedding_of_finite_separating_patches_within_target p f hf hcompatible hdim
-      hK hinj hseparate (fun _ => subset_univ _) (mapsTo_univ f univ)
-  exact ⟨g, hg, hrel.homotopicRel, he, hi⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

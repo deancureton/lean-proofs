@@ -62,13 +62,6 @@ end QuaternionicBottMatrix
 
 namespace ComplexCrossProductUnitary
 
-theorem reducedSevenCubeSum_first_column (p : GenLoop (Fin 5) UnitSphere axis)
-    (u : Fin 5 → I) (v : Fin 2 → I) (r : Fin 2) :
-    (reducedSevenCubeSum p (Sum.elim u v)).val r 0 =
-      QuaternionicBottMatrix.firstColumnFormula
-        ((v 0 : ℝ) * Real.pi) ((v 1 : ℝ) * Real.pi) (symmetricMap (p u)) r := by
-  rw [reducedSevenCubeSum_apply]
-  exact QuaternionicBottMatrix.reducedTwoCubeMap_first_column _ _ _
 
 end ComplexCrossProductUnitary
 end Wikipedia.HomotopyGroupsOfSpheres

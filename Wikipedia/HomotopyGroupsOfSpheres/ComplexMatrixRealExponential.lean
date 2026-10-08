@@ -33,9 +33,6 @@ def skewMap : DirectionSpace N →ₗ[ℝ] SkewOperators (2 * Fintype.card N) :=
 theorem skewMap_coe (A : DirectionSpace N) :
     (skewMap A).val = action (imaginary A.val) := rfl
 
-theorem skewMap_injective : Function.Injective (skewMap (N := N)) := by
-  intro A B h
-  exact directionMap_injective (action_injective (congrArg Subtype.val h))
 
 def specialOrthogonal (B : SpecialSpace N) : OrthogonalOperators (2 * Fintype.card N) :=
   orthogonal B.val.val

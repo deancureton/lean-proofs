@@ -47,18 +47,7 @@ theorem nativeStageEquiv_nativeStep {k : ℕ} (x : NativeStage k) :
     nativeStageEquiv (k + 1) (nativeStep x) = step (nativeStageEquiv k x) :=
   (nativeStageEquiv (k + 1)).apply_symm_apply _
 
-theorem nativeStep_sphereClass {k : ℕ}
-    (f : BasedMap (k + 8) (Sphere (k + 2)) (spherePole (k + 2))) :
-    nativeStep (sphereClass f) = sphereClass (SphereMapSuspension.basedMap f.val) := by
-  apply (nativeStageEquiv (k + 1)).injective
-  rw [nativeStageEquiv_nativeStep, nativeStageEquiv_sphereClass, step_classOf,
-    nativeStageEquiv_sphereClass]
-  rfl
 
-theorem nativeStep_one (k : ℕ) : nativeStep (1 : NativeStage k) = 1 := by
-  apply (nativeStageEquiv (k + 1)).injective
-  rw [nativeStageEquiv_nativeStep, nativeStageEquiv_one, step_stageZero,
-    nativeStageEquiv_one]
 
 def nativeTransition (k l : ℕ) (h : k ≤ l) : OneHom (NativeStage k) (NativeStage l) where
   toFun x := (nativeStageEquiv l).symm (transition k l h (nativeStageEquiv k x))
@@ -81,11 +70,5 @@ instance : DirectedSystem NativeStage (fun {k l} h ↦ nativeTransition k l h) w
     rw [nativeStageEquiv_transition, nativeStageEquiv_transition, nativeStageEquiv_transition]
     exact (Nat.leRecOn_trans h h' (nativeStageEquiv i x)).symm
 
-theorem nativeTransition_succ {k l : ℕ} (h : k ≤ l) (x : NativeStage k) :
-    nativeTransition k (l + 1) (h.trans (Nat.le_succ l)) x =
-      nativeStep (nativeTransition k l h x) := by
-  apply (nativeStageEquiv (l + 1)).injective
-  rw [nativeStageEquiv_transition, nativeStageEquiv_nativeStep, nativeStageEquiv_transition,
-    transition_succ]
 
 end NoExoticSixSphere.StableSixSphereMaps

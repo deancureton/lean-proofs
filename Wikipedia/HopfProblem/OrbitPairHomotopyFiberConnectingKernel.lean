@@ -103,11 +103,5 @@ theorem loopInclusion_eq_const_iff_exists_sourceLoop_class (f : C(X, Y)) (x : X)
     intro q
     exact Quotient.sound ⟨mappedLoopNullhomotopy f x q.val (Cube.boundary N) q.property⟩
 
-theorem loopMap_range_eq_loopInclusion_ker [DecidableEq N] [Nonempty N]
-    (f : C(X, Y)) (x : X) :
-    (HigherHomotopy.mapMonoidHom (N := N) (loopMap f x) (loopMap_base f x)).range =
-      (HigherHomotopy.mapMonoidHom (N := N) (loopInclusion f x) (loopInclusion_base f x)).ker := by
-  ext c
-  exact (loopInclusion_eq_const_iff_exists_sourceLoop_class f x c).symm
 
 end Wikipedia.HopfProblem.OrbitPair.HomotopyFiber

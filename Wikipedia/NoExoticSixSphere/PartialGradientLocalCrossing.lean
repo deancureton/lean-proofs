@@ -199,28 +199,5 @@ theorem exists_crossing_homotopy (hU : IsOpen U) (hf : ContDiffOn ℝ ∞ f U)
     δ l k e hlk hgap p hp S hS hLow hd
   exact ⟨q, hq, G, fun t x ↦ ⟨(hG t x).1, (hG t x).2.1⟩⟩
 
-theorem exists_local_crossing_neighborhood (hU : IsOpen U) (hf : ContDiffOn ℝ ∞ f U)
-    (ε : ℝ) (hε : 0 < ε) (hd : finrank ℝ B < finrank ℝ D) :
-    ∃ V : Set E, IsOpen V ∧ (0 : E) ∈ V ∧ V ⊆ C.chart.source ∧
-      ∃ l k : ℝ, l < k ∧ k < f 0 ∧
-        ∀ (p : C(M, E)), (∀ x, p x ∈ V) →
-          ∀ (S : Set M), IsCompact S → (∀ x ∈ S, f (p x) ≤ l) →
-            ∃ q : C(M, E), (∀ x, f (q x) < k) ∧
-              ∃ G : ContinuousMap.HomotopyRel p q S,
-                ∀ t x, G (t, x) ∈ C.chart.source ∧ f (G (t, x)) < f 0 + ε := by
-  obtain ⟨r, hr, hball⟩ := C.exists_radial_radius
-  obtain ⟨δ, hδ, hgap⟩ := C.exists_radial_endpoint_gap hU hf r hr hball
-  let l := f 0 - 3 * δ / 4
-  let k := f 0 - δ / 2
-  have hlk : l < k := by dsimp [l, k]; linarith
-  let V := C.crossingDomain r l (k + δ) (f 0 + ε)
-  refine ⟨V, C.isOpen_crossingDomain hU hf.continuousOn r l (k + δ) (f 0 + ε),
-    C.zero_mem_crossingDomain r l (k + δ) (f 0 + ε) hr
-      (by dsimp [l]; linarith) (by dsimp [k]; linarith) (by linarith),
-    C.crossingDomain_subset_source r l (k + δ) (f 0 + ε), l, k, hlk,
-    (by dsimp [k]; linarith), ?_⟩
-  intro p hp S hS hLow
-  exact C.exists_crossing_homotopy (I := I) hU hf r hr hball δ l k (f 0 + ε) hlk
-    hgap p hp S hS hLow hd
 
 end NoExoticSixSphere.PartialGradientCoordinates.LocalData

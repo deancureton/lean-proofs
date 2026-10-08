@@ -52,23 +52,5 @@ theorem Data.forward_apply (d : Data f) (q : E × (T × ℝ)) :
   rw [d.coord_apply]
   rfl
 
-theorem exists_flattened_germ (f : T → E × ℝ → E × F)
-    (hf : ContDiff ℝ ∞ (uncurry f)) (q : E × (T × ℝ))
-    (hq : spatial f q ∈ chart) (hz : residual (spatial f q) = 0)
-    (hb : Bijective (fderiv ℝ (fun p ↦ residual (spatial f p)) q)) :
-    ∃ d : Data f, q ∈ d.coord.source ∧
-      ∃ g : (T × E) × ℝ → F, ContDiff ℝ ∞ g ∧
-        g =ᶠ[𝓝 (d.forward q)] d.flattened ∧ vertical g (d.forward q) = 0 ∧
-        Bijective (fderiv ℝ (vertical g) (d.forward q)) := by
-  obtain ⟨d, hdq⟩ := exists_data f hf q hq
-  have hr := d.forward_mem_target hdq
-  obtain ⟨g, hg, he, hv, hD⟩ := exists_global_representative d.target.isOpen hr
-    (d.contDiffOn_flattened hf)
-  refine ⟨d, hdq, g, hg, he, ?_, ?_⟩
-  · rw [hv, d.vertical_flattened_eq hf hr, d.inverse_forward hdq]
-    exact hz
-  · rw [hD]
-    apply d.bijective_fderiv_vertical hf hr
-    simpa only [d.inverse_forward hdq] using hb
 
 end NoExoticSixSphere.FamilyFlattening

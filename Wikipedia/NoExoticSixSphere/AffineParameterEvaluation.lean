@@ -33,10 +33,6 @@ theorem surjective_evaluation (x : E) : Surjective (evaluation (F := F) x) := by
   change (0 : E →L[ℝ] F) x + v = v
   simp
 
-theorem fderiv_parameter_value (x : E) (p : Parameters E F) :
-    fderiv ℝ (fun q ↦ value q x) p = evaluation x := by
-  change fderiv ℝ (evaluation (F := F) x) p = evaluation x
-  exact (evaluation (F := F) x).hasFDerivAt.fderiv
 
 theorem hasFDerivAt_weighted_value (x : E) (p : Parameters E F) (a : ℝ) (b : F) :
     HasFDerivAt (fun q ↦ b + a • value q x) (a • evaluation x) p :=

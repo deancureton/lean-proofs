@@ -130,27 +130,5 @@ theorem exists_native_cubic_field_cancellation_in (hσ : ∀ i, σ i ≠ 0)
     · exact hxp ((Φ.right_inv' hxt).symm.trans (congrArg Φ hh))
     · exact hxq ((Φ.right_inv' hxt).symm.trans (congrArg Φ hh))
 
-/-- The unrestricted neighborhood version retains the original cancellation interface. -/
-theorem exists_native_cubic_field_cancellation (hσ : ∀ i, σ i ≠ 0)
-    {a : ℝ} (ha : 0 < a)
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, E) (Model m) M ∞)
-    (haxis : Icc (-a) a ×ˢ {(0 : Fin m → ℝ)} ⊆ Φ.source)
-    (V : (x : M) → TangentSpace 𝓘(ℝ, E) x)
-    (hV : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    (hmodel : ∀ x ∈ Φ.target, V x = nativeCubicDescent σ Φ (-(a ^ 2)) x) :
-    ∃ φ : Model m → ℝ, ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧ tsupport φ ⊆ Φ.source ∧
-      (∀ p, φ p ∈ Icc (0 : ℝ) 1) ∧ (∀ s ∈ Icc (-a) a, φ (s, 0) = 1) ∧
-      ∃ V' : (x : M) → TangentSpace 𝓘(ℝ, E) x,
-        ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-          (fun x => (⟨x, V' x⟩ : TangentBundle 𝓘(ℝ, E) M)) ∧
-        (∀ x ∈ Φ.target,
-          V' x = FlowConstruction.partialChartField Φ.symm (cancelledDescent σ a φ) x) ∧
-        (∀ x, V' x = 0 ↔ V x = 0 ∧ x ≠ Φ (a, 0) ∧ x ≠ Φ (-a, 0)) ∧
-        ∀ x ∉ Φ '' tsupport φ, ∀ᶠ y in 𝓝 x, V' y = V y := by
-  obtain ⟨φ, hφ, hc, hsupp, -, hrange, hone, hrest⟩ :=
-    exists_native_cubic_field_cancellation_in σ hσ ha Φ haxis V hV hmodel
-      isOpen_univ (fun _ _ => mem_univ _)
-  exact ⟨φ, hφ, hc, hsupp, hrange, hone, hrest⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

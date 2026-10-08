@@ -73,9 +73,5 @@ theorem localHomeomorph_apply (z : Parameters) : localHomeomorph z = coordinateM
 theorem zero_mem_localHomeomorph_source : (0 : Parameters) ∈ localHomeomorph.source :=
   hasStrictFDerivAt_coordinateMap.mem_toOpenPartialHomeomorph_source
 
-theorem zero_mem_localHomeomorph_target : (0 : TargetTangent) ∈ localHomeomorph.target := by
-  have h := hasStrictFDerivAt_coordinateMap.image_mem_toOpenPartialHomeomorph_target
-  change coordinateMap 0 ∈ localHomeomorph.target at h
-  rwa [coordinateMap_zero] at h
 
 end NoExoticSixSphere.QuaternionCommutatorLocalRegularity

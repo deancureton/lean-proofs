@@ -128,17 +128,6 @@ theorem modTwoHomologyQuadraticForm_unique
   rw [modTwoSphereClass_eq_standard]
   exact (hQ f.val).trans (e.modTwoHomologyQuadraticForm_sphereClass ν r m f.val).symm
 
-theorem modTwoHomologyQuadraticForm_retraction_independent (r' : TubularRetraction e) :
-    e.modTwoHomologyQuadraticForm ν r m = e.modTwoHomologyQuadraticForm ν r' m := by
-  apply e.modTwoHomologyQuadraticForm_unique ν r' m
-  intro f
-  rw [modTwoHomologyQuadraticForm_sphereClass]
-  exact e.geometricSphereParity_retraction_independent ν r r' f
 
-theorem modTwoHomologyQuadraticForm_basepoint_independent
-    (m' : M) [Subsingleton (π_ 2 M m')] :
-    e.modTwoHomologyQuadraticForm ν r m = e.modTwoHomologyQuadraticForm ν r m' := by
-  apply e.modTwoHomologyQuadraticForm_unique ν r m'
-  exact e.modTwoHomologyQuadraticForm_sphereClass ν r m
 
 end NoExoticSixSphere.EuclideanEmbedding

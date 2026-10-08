@@ -41,10 +41,6 @@ def retainedFirstBoundary (q : ℕ) :
         formalSimplex (w ∘ i.succ.succAbove) :=
   formalLift_simplex _ _
 
-/-- Every simplex in the retained-face formula starts at the original vertex. -/
-theorem retainedFace_first_vertex (q : ℕ) (w : Fin (q + 2) → W) (i : Fin (q + 1)) :
-    (w ∘ i.succ.succAbove) 0 = w 0 := by
-  simp only [Function.comp_apply, Fin.succ_succAbove_zero]
 
 /-- The exact first-face separation of the original simplicial boundary. -/
 theorem formalBoundary_firstFace_split_simplex (q : ℕ) (w : Fin (q + 2) → W) :
@@ -54,13 +50,6 @@ theorem formalBoundary_firstFace_split_simplex (q : ℕ) (w : Fin (q + 2) → W)
   simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_succ, Fin.succAbove_zero]
   rfl
 
-/-- The separation holds on arbitrary formal chains, not only generators. -/
-theorem formalBoundary_firstFace_split (q : ℕ) :
-    (formalBoundary (V := W) (q + 1)) = firstFace q + retainedFirstBoundary q := by
-  apply formalChains_ext
-  intro w
-  simpa only [LinearMap.add_apply, firstFace_simplex] using
-    formalBoundary_firstFace_split_simplex q w
 
 /-- With a common first right vertex, the frozen recursive edge product
 has one common cone on the complete signed boundary. -/

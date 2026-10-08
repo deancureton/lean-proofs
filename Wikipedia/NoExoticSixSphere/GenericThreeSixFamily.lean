@@ -44,16 +44,5 @@ theorem ae_generic_families [MeasurableSpace (V →L[ℝ] W)]
         Surjective (fderiv ℝ (difference f A) q) :=
   (ae_regular_jets μ f hf hv hw).and (ae_regular_double_points μ f hf)
 
-theorem exists_small_generic_family (f : ℝ → V → W) (hf : ContDiff ℝ ∞ (uncurry f))
-    (hv : finrank ℝ V = 3) (hw : finrank ℝ W = 6) {ε : ℝ} (hε : 0 < ε) :
-    ∃ A : V →L[ℝ] W, ‖A‖ < ε ∧
-      OperatorRank.RegularThreeSix (fun q : ℝ × V ↦ fderiv ℝ (perturb f A q.1) q.2) ∧
-      ∀ q : ℝ × (V × V), q.2.1 ≠ q.2.2 → difference f A q = 0 →
-        Surjective (fderiv ℝ (difference f A) q) := by
-  let : MeasurableSpace (V →L[ℝ] W) := borel (V →L[ℝ] W)
-  let : BorelSpace (V →L[ℝ] W) := ⟨rfl⟩
-  have hdense := Measure.dense_of_ae (ae_generic_families addHaar f hf hv hw)
-  obtain ⟨A, hA, hsmall⟩ := hdense.exists_dist_lt 0 hε
-  exact ⟨A, by simpa only [dist_zero_left] using hsmall, hA⟩
 
 end NoExoticSixSphere.DoublePointPerturbation

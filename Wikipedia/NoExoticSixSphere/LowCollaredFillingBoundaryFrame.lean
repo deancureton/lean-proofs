@@ -59,27 +59,7 @@ theorem outwardNormal_norm (m : S.Space) (p : S.HalfBoundary) :
   EmbeddedTime.outwardNormal_norm (n := 6) S.embedding (retraction S m) S.zeroTimeMap
     S.time_smooth S.time_regular (S.halfBoundaryHomeomorph p)
 
-theorem outwardNormal_mem_half_tangent (m : S.Space) (p : S.HalfBoundary) :
-    outwardNormal S m p ∈ (S.halfAmbientDerivative p.val).range := by
-  rw [S.range_halfAmbientDerivative]
-  exact EmbeddedTime.outwardNormal_mem_tangent (n := 6) S.embedding (retraction S m)
-    S.zeroTimeMap (S.halfBoundaryHomeomorph p)
 
-theorem outwardNormal_mem_boundary_normal (m : S.Space) (p : S.HalfBoundary) :
-    letI := S.halfBoundaryAtlas; outwardNormal S m p ∈ (embedding S).normalFiber p := by
-  let := S.halfBoundaryAtlas
-  let := S.zeroAtlas
-  let eZ : EuclideanEmbedding 6 S.Zero := EmbeddedTime.zeroEmbedding (n := 6)
-    S.embedding S.zeroTimeMap S.time_smooth S.time_regular
-  change outwardNormal S m p ∈ ((eZ.reparametrize S.halfBoundaryDiffeomorph).tangentImage p)ᗮ
-  rw [eZ.reparametrize_tangentImage]
-  change outwardNormal S m p ∈ (EmbeddedTime.zeroDerivative (n := 6) S.embedding
-    S.zeroTimeMap S.time_smooth S.time_regular (S.halfBoundaryHomeomorph p)).rangeᗮ
-  apply (Submodule.mem_orthogonal _ _).mpr
-  rintro _ ⟨v, rfl⟩
-  exact (real_inner_comm _ _).trans (EmbeddedTime.outwardNormal_orthogonal_zero (n := 6)
-    S.embedding (retraction S m) S.zeroTimeMap S.time_smooth S.time_regular
-      (S.halfBoundaryHomeomorph p) v)
 
 theorem outwardNormal_time_derivative_neg (m : S.Space) (p : S.HalfBoundary) :
     fderiv ℝ (EmbeddedTime.extension S.embedding (retraction S m) S.zeroTimeMap)

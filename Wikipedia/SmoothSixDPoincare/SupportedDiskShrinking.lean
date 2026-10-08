@@ -160,20 +160,5 @@ def shrinkingIsotopy {a : ℝ} (ha : 0 < a) (ha₁ : a ≤ 1) :
     rcases mem_singleton_iff.mp hx with rfl
     exact shrinkingFamily_origin a t
 
-/-- The image is precisely the smaller closed disk, not just a subset of it. -/
-theorem shrinkingDiffeomorph_image_unitDisk {a : ℝ} (ha : 0 < a) (ha₁ : a ≤ 1) :
-    shrinkingDiffeomorph (N := N) ha ha₁ '' closedBall 0 1 = closedBall 0 a := by
-  ext y
-  constructor
-  · rintro ⟨x, hx, rfl⟩
-    rw [mem_closedBall_zero_iff, shrinkingDiffeomorph_inner ha ha₁
-      (mem_closedBall_zero_iff.mp hx), norm_smul, Real.norm_eq_abs, abs_of_pos ha]
-    exact mul_le_of_le_one_right ha.le (mem_closedBall_zero_iff.mp hx)
-  · intro hy
-    have hnorm : ‖a⁻¹ • y‖ ≤ 1 := by
-      rw [norm_smul, Real.norm_eq_abs, abs_of_pos (inv_pos.mpr ha)]
-      exact (inv_mul_le_iff₀ ha).mpr (by simpa only [mul_one] using mem_closedBall_zero_iff.mp hy)
-    refine ⟨a⁻¹ • y, mem_closedBall_zero_iff.mpr hnorm, ?_⟩
-    rw [shrinkingDiffeomorph_inner ha ha₁ hnorm, smul_inv_smul₀ ha.ne']
 
 end Wikipedia.SmoothSixDPoincare.SmoothRadial

@@ -63,15 +63,5 @@ theorem common_kernel (n : ℕ) (x v : Vector (n + 1))
   have hn : ‖v‖ ^ 2 = 0 := (mul_eq_zero.mp h).resolve_left (ne_of_gt (scalar_pos n x))
   exact norm_eq_zero.mp (sq_eq_zero_iff.mp hn)
 
-theorem injective_fderiv_heightMap (n : ℕ) (x : Vector (n + 1)) :
-    Injective (fderiv ℝ (heightMap n) x) := by
-  have hψ := ((contDiff_map n).differentiable (by simp) x).hasFDerivAt
-  have hρ := ((contDiff_definingFunction (E := Vector (n + 1))).differentiable
-    (by simp) x).hasFDerivAt
-  have hd := hψ.prodMk hρ
-  apply (injective_iff_map_eq_zero _).mpr
-  intro v hv
-  rw [show fderiv ℝ (heightMap n) x = _ from hd.fderiv] at hv
-  exact common_kernel n x v (congrArg Prod.fst hv) (congrArg Prod.snd hv)
 
 end NoExoticSixSphere.DiskRadialFlattening

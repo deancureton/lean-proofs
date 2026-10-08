@@ -78,13 +78,5 @@ theorem normalDeficit_bounds (x : X) : 0 ≤ C.normalDeficit x ∧ C.normalDefic
   · rw [C.normalDeficit_exterior x (fun h => hx (C.interiorImage_subset_range h))]
     norm_num
 
-theorem normalDeficit_pos_iff (x : X) : 0 < C.normalDeficit x ↔ x ∈ C.interiorImage := by
-  by_cases hx : x ∈ range C.map
-  · obtain ⟨p, rfl⟩ := hx
-    rw [C.normalDeficit_face, C.map_mem_interiorImage_iff]
-    exact sub_pos
-  · have hnot : x ∉ C.interiorImage := fun h => hx (C.interiorImage_subset_range h)
-    rw [C.normalDeficit_exterior x hnot]
-    exact iff_of_false (lt_irrefl _) hnot
 
 end Wikipedia.SmoothSixDPoincare.SmoothClosedFace

@@ -89,20 +89,6 @@ theorem middle_basin_pair_iff (hsep : NoMiddleConnections S)
   · rintro ⟨rfl, rfl⟩
     exact ⟨critical_backward_limit S p.property, critical_forward_limit S p.property⟩
 
-theorem distinct_middle_basins_disjoint (hsep : NoMiddleConnections S)
-    (p q : criticalPoints E f) (hp : nativeMorseIndex E f p = 3)
-    (hq : nativeMorseIndex E f q = 3) (hpq : p ≠ q) :
-    Disjoint {x | Tendsto (fun t => S.flow t x) atBot (𝓝 p.val)}
-      {x | Tendsto (fun t => S.flow t x) atTop (𝓝 q.val)} := by
-  apply Set.disjoint_left.mpr
-  intro x hx hy
-  exact hpq ((middle_basin_pair_iff S hsep p q hp hq x).mp ⟨hx, hy⟩).2
 
-theorem same_middle_basins_inter (hsep : NoMiddleConnections S)
-    (p : criticalPoints E f) (hp : nativeMorseIndex E f p = 3) :
-    {x | Tendsto (fun t => S.flow t x) atBot (𝓝 p.val)} ∩
-      {x | Tendsto (fun t => S.flow t x) atTop (𝓝 p.val)} = {p.val} := by
-  ext x
-  exact (middle_basin_pair_iff S hsep p p hp hp x).trans (and_iff_left rfl)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation.MiddleDuality

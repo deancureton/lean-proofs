@@ -124,15 +124,6 @@ theorem trans_extra (F : StabilizedFramedDiffeomorph e₁ a₁ e₂ a₂)
     (G : StabilizedFramedDiffeomorph e₂ a₂ e₃ a₃) :
     (F.trans G).extra = F.extra + G.extra := rfl
 
-theorem frame_eq_of_source_columns (F : StabilizedFramedDiffeomorph e₁ a₁ e₂ a₂)
-    (x : M₁) {k : ℕ} (C : Vector k →L[ℝ] Vector e₁.ambientDimension)
-    (Q : Vector (e₁.ambientDimension - n) ≃ₗᵢ[ℝ] Vector k)
-    (h : a₁.ambient x = C.comp Q.toContinuousLinearMap)
-    (v : Vector ((e₁.ambientDimension - n) + F.extra)) :
-    a₂.ambient (F.diffeomorph x) (F.normal v) =
-      F.ambient (BlockSum.operator F.extra C (extendColumnChange Q F.extra v)) := by
-  rw [F.frame_eq, h, block_comp_columnChange]
-  rfl
 
 def symmOfZero (F : StabilizedFramedDiffeomorph e₁ a₁ e₂ a₂) (h : F.extra = 0) :
     StabilizedFramedDiffeomorph e₂ a₂ e₁ a₁ := by

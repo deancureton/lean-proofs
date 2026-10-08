@@ -45,37 +45,5 @@ theorem coordinateEquiv_old (N d : ℕ) (y : EuclideanSpace ℝ (Fin N)) :
     (EuclideanSpace.finAddEquivProd (𝕜 := ℝ) (n := N) (m := 1 + d)).symm (y, 0)
   rw [map_zero]
 
-/-- The actual Euclidean disk is embedded and immersive, with the original collar and avoidance. -/
-theorem exists_euclidean_embedding_rel_sphere_avoiding {d N : ℕ}
-    {f : EuclideanSpace ℝ (Fin d) → EuclideanSpace ℝ (Fin N)}
-    (hf : ContDiff ℝ ∞ f) (hi : InjOn f (sphere 0 1))
-    (hd : ∀ x ∈ sphere 0 1, Injective (fderiv ℝ f x))
-    {U : Set (EuclideanSpace ℝ (Fin d))} (hU : IsOpen U) (hSU : sphere 0 1 ⊆ U)
-    (S : Set (EuclideanSpace ℝ (Fin N))) (ha : ∀ x ∈ U ∩ ball 0 1, f x ∉ S) :
-    ∃ G : EuclideanSpace ℝ (Fin d) → EuclideanSpace ℝ (Fin (N + (1 + d))),
-      ContDiff ℝ ∞ G ∧
-      IsClosedEmbedding (fun x : closedBall (0 : EuclideanSpace ℝ (Fin d)) 1 ↦ G x.val) ∧
-      (∀ x ∈ closedBall 0 1, Injective (fderiv ℝ G x)) ∧
-      (∀ x ∈ ball 0 1, G x ∉ appendZeroMap N (1 + d) '' S) ∧
-      ∃ V : Set (EuclideanSpace ℝ (Fin d)), IsOpen V ∧ sphere 0 1 ⊆ V ∧ V ⊆ U ∧
-        ∀ x ∈ V, G x = appendZeroMap N (1 + d) (f x) := by
-  obtain ⟨g, hg, hge, hgd, hga, V, hV, hSV, hVU, hVg⟩ :=
-    exists_embedding_rel_sphere_avoiding hf hi hd hU hSU S ha
-  let L := coordinateEquiv N d
-  refine ⟨L ∘ g, L.contDiff.comp hg, L.toHomeomorph.isClosedEmbedding.comp hge,
-    ?_, ?_, V, hV, hSV, hVU, ?_⟩
-  · intro x hx
-    rw [(L.hasFDerivAt.comp x ((hg.differentiable (by simp) x).hasFDerivAt)).fderiv]
-    exact L.injective.comp (hgd x hx)
-  · intro x hx h
-    obtain ⟨y, hy, heq⟩ := h
-    have hgxy : g x = (y, 0) := L.injective (by
-      rw [coordinateEquiv_old]
-      exact heq.symm)
-    exact hga x hx (by rw [hgxy]; exact ⟨hy, rfl⟩)
-  · intro x hx
-    change L (g x) = _
-    rw [hVg x hx]
-    exact coordinateEquiv_old N d (f x)
 
 end NoExoticSixSphere.DiskGraph

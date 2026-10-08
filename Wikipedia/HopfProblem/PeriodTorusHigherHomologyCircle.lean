@@ -62,9 +62,6 @@ theorem circle_homology_subsingleton (n : ℕ) :
     ((homeomorphHomologyEquiv (Homeomorph.prodUnique Circle Unit).symm (n + 2)).trans
       (circleProductHomologyEquiv Unit (n + 1))).injective.subsingleton
 
-theorem circle_homology_isZero (n : ℕ) : IsZero (SingularHomology Circle (n + 2)) := by
-  let := circle_homology_subsingleton n
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- The actual higher circle homology is explicitly equivalent to the zero free module. -/
 def circleHomologyHigherEquivZero (n : ℕ) :

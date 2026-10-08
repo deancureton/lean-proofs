@@ -168,11 +168,5 @@ theorem pullback_eq (f : C(X, Y)) (n : ℕ) (α : Cochain Y n) :
     pullback f n α (simplexChain X n σ) = α (simplexChain Y n (f.comp σ)) :=
   singularPullback_simplex f n α σ
 
-/-- Alexander–Whitney multiplication is natural under actual continuous maps. -/
-theorem pullback_cup (f : C(X, Y)) {p q : ℕ} (α : Cochain Y p) (β : Cochain Y q) :
-    pullback f (p + q) (cup α β) = cup (pullback f p α) (pullback f q β) := by
-  apply chainMap_ext X (p + q)
-  intro σ
-  simp only [pullback_simplex, cup_simplex, ContinuousMap.comp_assoc]
 
 end Wikipedia.HopfProblem.SingularCohomologyCup

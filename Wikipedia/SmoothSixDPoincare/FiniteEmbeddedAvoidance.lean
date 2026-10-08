@@ -86,23 +86,5 @@ theorem exists_finite_embedded_image_avoidance {ι : Type*} [Finite ι] {C K : S
       hself hobstacle hK hderiv hO hmaps s
   exact ⟨f', hf', hc, hhom.homotopicRel, hd, hnoNew, hmaps', havoid⟩
 
-/-- Finite avoidance of a whole smooth image, with no extra compact-region target constraint. -/
-theorem exists_finite_embedded_avoidance {ι : Type*} [Finite ι] {C K : Set E}
-    (p : ι → MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C)
-    (f : C(E, N)) (g : C(Y, N)) (hf : ContMDiff 𝓘(ℝ, E) J ∞ f) (hg : ContMDiff I' J ∞ g)
-    (hcompatible : ∀ j, (p j).Compatible f)
-    (hself : 2 * Module.finrank ℝ E < Module.finrank ℝ G)
-    (hobstacle : Module.finrank ℝ E + Module.finrank ℝ E' < Module.finrank ℝ G)
-    (hK : IsCompact K) (hderiv : ∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J f x))
-    (s : Finset ι) :
-    ∃ f' : C(E, N), ContMDiff 𝓘(ℝ, E) J ∞ f' ∧ (∀ j, (p j).Compatible f') ∧
-      f.HomotopicRel f' C ∧ (∀ x ∈ K, Function.Injective (mfderiv 𝓘(ℝ, E) J f' x)) ∧
-      (∀ x y, f' x = f' y → f x = f y) ∧
-      ∀ x, (f x ∉ range g ∨ ∃ i ∈ s, (p i).cutoff x ≠ 0) → f' x ∉ range g := by
-  obtain ⟨f', hf', hc, hhom, hd, hnoNew, -, havoid⟩ :=
-    exists_finite_embedded_image_avoidance p f g univ hf hg hcompatible hself hobstacle
-      hK hderiv isOpen_univ (fun _ _ => mem_univ _) s
-  refine ⟨f', hf', hc, hhom, hd, hnoNew, ?_⟩
-  simpa only [image_univ] using havoid
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

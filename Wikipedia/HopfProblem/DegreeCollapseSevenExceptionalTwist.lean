@@ -124,32 +124,5 @@ theorem exists_shrunk_twist_with_primitive_free_or_order_four (v s : Sphere 3)
         Q.twisted Q.twisted_radius Q.family Q.twisted_tube v s (2 * j)
           Q.family_multiplier (E.symm h) hh' hc' hβ⟩
 
-theorem exists_shrunk_twist_with_infinite_or_order_four (v s : Sphere 3)
-    (hfamily : ∀ j : ℤ, Nonempty (ShrunkEvenTwist A v j))
-    (h2 : ∀ x : SingularHomology (OldPositiveHalf A T) 3, (2 : ℤ) • x = 0)
-    (hc : singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3
-      (unitSphereTopClass 2) ≠ 0)
-    (hn : ∃ x, meridianCharacter A hA T s x ≠ 0)
-    (hz : meridianCharacter A hA T s
-      (singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3
-        (unitSphereTopClass 2)) = 0) :
-    ∃ (j : ℤ) (Q : ShrunkEvenTwist A v j),
-      (∃ x : SingularHomology
-        (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3,
-          Injective (fun n : ℤ ↦ n • x)) ∨
-      (Finite (SingularHomology
-        (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3) ∧
-       Nat.card (SingularHomology
-        (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3) =
-          Nat.card (SingularHomology (OldPositiveHalf A T) 3) ∧
-       ∃ x : SingularHomology
-        (PositiveHalf Q.twisted Q.twisted_radius (Q.twistedTimeData hA T)) 3,
-          (4 : ℤ) • x = 0 ∧ (2 : ℤ) • x ≠ 0) := by
-  obtain ⟨j, Q, hout⟩ := exists_shrunk_twist_with_primitive_free_or_order_four
-    hA T v s hfamily h2 hc hn hz
-  refine ⟨j, Q, ?_⟩
-  rcases hout with ⟨x, σ, hx, _⟩ | hout
-  · exact Or.inl ⟨x, IntegerSplit.coefficient_injective σ x hx⟩
-  · exact Or.inr hout
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery

@@ -66,16 +66,6 @@ theorem homotopy_mem (smp : C(Simplex 1, X)) (hs : ∀ s, smp s ∈ U) (p : I ×
   rw [homotopy, dif_pos hs]
   exact (edgeStraighteningHomotopy a (restrict U smp hs) p).property
 
-theorem homotopy_const : homotopy U a (ContinuousMap.const (Simplex 1) a.val) =
-    ContinuousMap.const (I × Simplex 1) a.val := by
-  classical
-  have hs : ∀ s : Simplex 1, (ContinuousMap.const (Simplex 1) a.val) s ∈ U :=
-    fun _ ↦ a.property
-  rw [homotopy, dif_pos hs]
-  ext p
-  change (edgeStraighteningHomotopy a (ContinuousMap.const (Simplex 1) a) p).val = a.val
-  rw [edgeStraighteningHomotopy_const]
-  rfl
 
 theorem homotopy_face :
     FaceCompatibleHomotopies 0 (stationarySimplexHomotopy 0) (homotopy U a) := by

@@ -119,19 +119,5 @@ theorem isOpen_surjective_nativeDerivative {f : P → X → F} {W : Set (P × X)
   refine ⟨?_, hleft' ▸ hsurj⟩
   rwa [hleft'] at hmem
 
-/-- Surjectivity on a compact source set persists throughout a parameter neighborhood. -/
-theorem eventually_surjective_nativeDerivative {f : P → X → F} {W : Set (P × X)}
-    (hW : IsOpen W)
-    (hf : ContMDiffOn (𝓘(ℝ, P).prod I) 𝓘(ℝ, F) ∞ (uncurry f) W)
-    (hdim : Module.finrank ℝ E = Module.finrank ℝ F)
-    {K : Set X} (hK : IsCompact K) {a : P}
-    (hmem : ∀ x ∈ K, (a, x) ∈ W)
-    (hregular : ∀ x ∈ K, Surjective (mfderiv I 𝓘(ℝ, F) (f a) x)) :
-    ∀ᶠ b in 𝓝 a, ∀ x ∈ K, Surjective (mfderiv I 𝓘(ℝ, F) (f b) x) := by
-  have hopen := MorsePerturbation.isOpen_forall_mem_compact hK
-    (isOpen_surjective_nativeDerivative hW hf hdim)
-  have hn := hopen.mem_nhds (fun x hx => ⟨hmem x hx, hregular x hx⟩)
-  filter_upwards [hn] with b hb x hx
-  exact (hb x hx).2
 
 end Wikipedia.SmoothSixDPoincare.NativeSubmersion

@@ -114,15 +114,6 @@ theorem step_perform {d : ℕ} (hd : 0 < d) (hsmall : d ≤ 2)
     (T : TimeData A) (hT : T.time = S.time) : S.Step (S.perform A hA T hT) :=
   ⟨d, hd, hsmall, f, A, hA, T, hT, rfl⟩
 
-theorem exists_step_of_positive_core {d : ℕ} (hd : 0 < d) (hsmall : d ≤ 2)
-    (f : C(NoExoticSixSphere.Sphere d, S.Space))
-    (hf : ContMDiff (𝓡 d) (𝓡 7) ∞ f) (hi : Injective f)
-    (hdf : ∀ s, Injective (mfderiv (𝓡 d) (𝓡 7) f s)) (hpos : ∀ s, 0 < S.time (f s)) :
-    ∃ (A : FramedAttachingProduct S.embedding S.normalFrame f) (hA : A.radius = 2)
-      (T : TimeData A) (hT : T.time = S.time), S.Step (S.perform A hA T hT) := by
-  obtain ⟨A, hA, T, hT⟩ := exists_positive_framed_surgery_timeData hd (hsmall.trans (by decide))
-    S.embedding S.normalFrame f hf hi hdf S.time S.time_smooth S.time_regular hpos
-  exact ⟨A, hA, T, hT, S.step_perform hd hsmall A hA T hT⟩
 
 end LowCollaredSevenState
 end Wikipedia.HopfProblem.DegreeCollapse

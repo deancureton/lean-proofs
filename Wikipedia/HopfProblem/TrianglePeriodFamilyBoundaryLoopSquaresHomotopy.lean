@@ -27,16 +27,6 @@ open SpecialPeriods.EllipticAttachingMeridians
 
 variable {X : Type*} [TopologicalSpace X] {a b : X} {p : Path a a} {q : Path b b}
 
-/-- A periodic real-time map is determined by its actual values on the closed unit interval. -/
-theorem loopPeriodic_unique (f : ℝ → X) (hf : Function.Periodic f 1)
-    (hp : ∀ t : unitInterval, f (t : ℝ) = p t) : f = loopPeriodic p := by
-  have h : hf.lift = (loopOnCircle p : LoopCircle → X) := by
-    funext z
-    obtain ⟨t, rfl⟩ := loopUnitCircle_surjective z
-    rw [Function.Periodic.lift_coe, loopOnCircle_unit]
-    exact hp t
-  funext t
-  exact congrFun h (t : LoopCircle)
 
 /-- Descend the actual square in its loop parameter by identifying only the two endpoints. -/
 def loopSquareQuotient (S : LoopSquare p q) (z : unitInterval × LoopQuotient) : X :=
@@ -131,22 +121,12 @@ theorem periodicSquare_add_int (S : LoopSquare p q) (s : unitInterval) (t : ℝ)
   rw [loopCircle_add_int]
   rfl
 
-/-- Period one is a property of the actual real-time map in each row. -/
-theorem periodicSquare_periodic (S : LoopSquare p q) (s : unitInterval) :
-    Function.Periodic (fun t : ℝ => periodicSquare S (s, t)) 1 := by
-  intro t
-  simpa only [Int.cast_one] using periodicSquare_add_int S s t 1
 
 /-- Time zero retains exactly the original basepoint trajectory. -/
 @[simp] theorem periodicSquare_tail (S : LoopSquare p q) (s : unitInterval) :
     periodicSquare S (s, 0) = S.tail s :=
   periodicSquare_unit S s 0
 
-/-- The same actual trajectory occurs at every integer real time. -/
-theorem periodicSquare_int (S : LoopSquare p q) (s : unitInterval) (k : ℤ) :
-    periodicSquare S (s, (k : ℝ)) = S.tail s := by
-  have h := periodicSquare_add_int S s 0 k
-  simpa only [zero_add, periodicSquare_tail] using h
 
 /-- The jointly continuous periodic homotopy between the actual real-time loop extensions. -/
 def periodicHomotopy (S : LoopSquare p q) : (loopPeriodic p).Homotopy (loopPeriodic q) where
@@ -166,17 +146,5 @@ theorem periodicHomotopy_add_int (S : LoopSquare p q) (s : unitInterval) (t : �
     periodicHomotopy S (s, t + (k : ℝ)) = periodicHomotopy S (s, t) :=
   periodicSquare_add_int S s t k
 
-/-- Any rowwise-periodic extension of this literal square equals the constructed one. -/
-theorem periodicSquare_unique (S : LoopSquare p q) (F : unitInterval × ℝ → X)
-    (hF : ∀ s : unitInterval, Function.Periodic (fun t : ℝ => F (s, t)) 1)
-    (hunit : ∀ s t : unitInterval, F (s, (t : ℝ)) = S.map (s, t)) :
-    F = periodicSquare S := by
-  funext z
-  have h : (hF z.1).lift = (fun c : LoopCircle => circleSquare S (z.1, c)) := by
-    funext c
-    obtain ⟨t, rfl⟩ := loopUnitCircle_surjective c
-    rw [Function.Periodic.lift_coe, circleSquare_unit]
-    exact hunit z.1 t
-  exact congrFun h (z.2 : LoopCircle)
 
 end Wikipedia.HopfProblem.TrianglePeriodFamily.BoundaryLoopSquares

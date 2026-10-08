@@ -49,42 +49,6 @@ theorem negativeHalfInclusion_homology_factorization (k : ℕ) :
   singularHomologyMap_comp S.negativeHalfTimeHomeomorph.toHomotopyEquiv.toFun
     (TimeCollar.halfInclusion (fun p : S.Space ↦ -S.time p)) k
 
-theorem negativeHalfInclusion_homology_bijective (eBoundary : B ≃ₜ Sphere 6)
-    [Finite (SingularHomology S.Space 3)] [Subsingleton (SingularHomology S.Half 3)]
-    (k : ℕ) (hk : k ≠ 0) (h6 : k < 6) :
-    Bijective (singularHomologyMap S.negativeHalfInclusion k) := by
-  have hB (j : ℕ) (hj : j ≠ 0) (hj6 : j ≠ 6) : Subsingleton (SingularHomology B j) := by
-    let : Subsingleton (SingularHomology (Sphere 6) j) :=
-      SphereHomology.unitSphere_homology_subsingleton 5 j hj hj6
-    exact (homotopyEquivHomologyEquiv eBoundary.toHomotopyEquiv j).injective.subsingleton
-  have hneg : Bijective (singularHomologyMap
-      (TimeCollar.halfInclusion (fun p : S.Space ↦ -S.time p)) k) := by
-    by_cases h1 : k = 1
-    · subst k
-      let := hB 1 (by decide) (by decide)
-      let : Subsingleton (SingularHomology S.Space 1) :=
-        IntegralTopClassLift.first_homology_subsingleton S.Space
-      exact S.collar.negativeInclusion_homology_bijective_of_ambient_zero 1
-    · obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hk
-      let := hB j (by omega) (by omega)
-      let := hB (j + 1) (by omega) (by omega)
-      let : Subsingleton (SingularHomology S.Half (j + 1)) :=
-        S.half_positive_homology_of_sphere eBoundary (j + 1) (by omega)
-      exact S.collar.negativeInclusion_homology_bijective j
-  rw [S.negativeHalfInclusion_homology_factorization k]
-  exact hneg.comp
-    (homotopyEquivHomologyEquiv S.negativeHalfTimeHomeomorph.toHomotopyEquiv k).bijective
 
-theorem negativeHalfInclusion_homology_six_surjective (eBoundary : B ≃ₜ Sphere 6) :
-    Surjective (singularHomologyMap S.negativeHalfInclusion 6) := by
-  let : SimplyConnectedSpace B := eBoundary.toHomotopyEquiv.simplyConnectedSpace
-  let : Subsingleton (SingularHomology (Sphere 6) 5) :=
-    SphereHomology.unitSphere_homology_subsingleton 5 5 (by decide) (by decide)
-  let : Subsingleton (SingularHomology B 5) :=
-    (homotopyEquivHomologyEquiv eBoundary.toHomotopyEquiv 5).injective.subsingleton
-  let : Subsingleton (SingularHomology S.Half 6) := S.half_sixth_homology
-  rw [S.negativeHalfInclusion_homology_factorization 6]
-  exact (S.collar.negativeInclusion_homology_surjective 5).comp
-    (homotopyEquivHomologyEquiv S.negativeHalfTimeHomeomorph.toHomotopyEquiv 6).surjective
 
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

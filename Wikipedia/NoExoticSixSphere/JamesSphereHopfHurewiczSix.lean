@@ -107,15 +107,5 @@ theorem attaching_coordinate : SphereFiveEighth.relation.1.toAdd =
     wordIntegerEquiv (adjointClass SphereFourAttaching.attachingClass) :=
   coordinate_hurewicz SphereFourAttaching.attachingClass
 
-theorem coordinate_comparison_cube (p : GenLoop (Fin 6) (WordHomology.Words 3) 1) :
-    (SphereFourSeventh.groupEquiv
-      (InclusionRange.orderedComparison 3 (by decide) 6 (Quotient.mk' p))).1.toAdd =
-        wordIntegerEquiv (SixthHurewicz.cubeHomologyClass p) := by
-  let c : π_ 6 (WordHomology.Words 3) 1 := Quotient.mk' p
-  have he := congrArg
-    (fun a : π_ 6 (WordHomology.Words 3) 1 ↦
-      wordIntegerEquiv (SixthHurewicz.hurewiczFunction 1 a))
-    ((InclusionRange.orderedComparison 3 (by decide) 6).symm_apply_apply c)
-  exact (coordinate_hurewicz _).trans he
 
 end NoExoticSixSphere.SphereFourHopfHomology

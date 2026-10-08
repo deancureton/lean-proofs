@@ -93,31 +93,8 @@ theorem addFactor_map (f : C(OnePoint E, OnePoint F)) (hf : f ∞ = ∞)
     (x : OnePoint E) (t : OnePoint T) : addFactor f hf T (map (x, t)) = map (f x, t) :=
   productMap_apply _ _ _ _ (x, t)
 
-theorem addFactor_left_coordinates (f : C(OnePoint E, OnePoint F)) (hf : f ∞ = ∞)
-    (g : C(OnePoint G, OnePoint H)) (hg : g ∞ = ∞)
-    (e : E ≃ₜ G) (d : F ≃ₜ H) (h : ∀ x, d.onePointCongr (f x) = g (e.onePointCongr x))
-    (z : OnePoint (E × T)) :
-    (d.prodCongr (Homeomorph.refl T)).onePointCongr (addFactor f hf T z) =
-      addFactor g hg T ((e.prodCongr (Homeomorph.refl T)).onePointCongr z) := by
-  obtain ⟨⟨x, t⟩, rfl⟩ := map_surjective z
-  rw [addFactor_map, map_prodCongr, map_prodCongr, addFactor_map, h]
 
-theorem addFactor_right_coordinates (f : C(OnePoint E, OnePoint F)) (hf : f ∞ = ∞)
-    (e : T ≃ₜ U) (z : OnePoint (E × T)) :
-    ((Homeomorph.refl F).prodCongr e).onePointCongr (addFactor f hf T z) =
-      addFactor f hf U (((Homeomorph.refl E).prodCongr e).onePointCongr z) := by
-  obtain ⟨⟨x, t⟩, rfl⟩ := map_surjective z
-  rw [addFactor_map, map_prodCongr, map_prodCongr, addFactor_map]
-  rw [onePoint_refl, onePoint_refl]
 
-theorem addFactor_assoc (f : C(OnePoint E, OnePoint F)) (hf : f ∞ = ∞)
-    (z : OnePoint ((E × T) × U)) :
-    (Homeomorph.prodAssoc F T U).onePointCongr
-        (addFactor (addFactor f hf T) (addFactor_infty f hf) U z) =
-      addFactor f hf (T × U) ((Homeomorph.prodAssoc E T U).onePointCongr z) := by
-  obtain ⟨⟨p, u⟩, rfl⟩ := map_surjective z
-  obtain ⟨⟨x, t⟩, rfl⟩ := map_surjective p
-  rw [addFactor_map, addFactor_map, map_assoc, map_assoc, addFactor_map]
 
 theorem addFactor_unique [Unique T] (f : C(OnePoint E, OnePoint F)) (hf : f ∞ = ∞)
     (z : OnePoint (E × T)) :

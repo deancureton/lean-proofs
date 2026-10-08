@@ -60,40 +60,7 @@ theorem fiber_pi_le_seven (n : ℕ) : ∀ d, 0 < d → d ≤ 7 →
       exact NativeHurewiczFiniteDetection.subsingleton d h2 hle p
         (fun k hk hkd ↦ hlow k (by omega) hkd a p)
 
-theorem fiber_homology_le_eight (n d : ℕ) (hd : 2 ≤ d) (hle : d ≤ 8)
-    (a : sourceImage (n + 2)) :
-    Subsingleton (SingularHomology (SourceFiber (n + 2) a) d) := by
-  have h := fiber_homology_subsingleton_of_pi n (d - 2)
-    (fun k hk hkd b p ↦ fiber_pi_le_seven n k hk (by omega) b p) a
-  simpa only [Nat.sub_add_cancel hd] using h
 
-theorem inclusion_piEight_surjective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Surjective
-      (HigherHomotopy.map (N := Fin 8) (subtypeInclusion (sourceImage (n + 2)))
-        (y := a) rfl) := by
-  let : Subsingleton (π_ 7
-      (HomotopyFiber.Space (subtypeInclusion (sourceImage (n + 2)))
-        ((subtypeInclusion (sourceImage (n + 2))) a))
-      (HomotopyFiber.basepoint (subtypeInclusion (sourceImage (n + 2))) a)) :=
-    fiber_pi_le_seven n 7 (by decide) (by decide) a (sourceFiberBasepoint (n + 2) a)
-  exact HomotopyFiberConnectivity.map_surjective_of_fiber_subsingleton 7
-    (subtypeInclusion (sourceImage (n + 2))) a
 
-theorem inclusion_pi_bijective_through_seven (n d : ℕ) (hd : 2 ≤ d) (hle : d ≤ 7)
-    (a : sourceImage (n + 2)) :
-    Function.Bijective
-      (HigherHomotopy.map (N := Fin d) (subtypeInclusion (sourceImage (n + 2)))
-        (y := a) rfl) := by
-  let : NeZero d := ⟨by omega⟩
-  let : Subsingleton (π_ d
-      (HomotopyFiber.Space (subtypeInclusion (sourceImage (n + 2)))
-        ((subtypeInclusion (sourceImage (n + 2))) a))
-      (HomotopyFiber.basepoint (subtypeInclusion (sourceImage (n + 2))) a)) :=
-    fiber_pi_le_seven n d (by omega) hle a (sourceFiberBasepoint (n + 2) a)
-  refine ⟨HomotopyFiberConnectivity.map_injective_of_fiber_subsingleton d
-    (subtypeInclusion (sourceImage (n + 2))) a, ?_⟩
-  exact RelativeNormalization.inclusion_surjective_of_fiberConnectivity
-    (sourceImage (n + 2)) 6
-    (fun k hk hkn b p ↦ fiber_pi_le_seven n k hk (by omega) b p) d hd (by omega) a
 
 end NoExoticSixSphere.JamesSphere.HigherFiberDetection

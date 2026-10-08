@@ -68,8 +68,6 @@ theorem normalize_mul_norm (a : ℍ) (ha : a ≠ 0) :
 /-- The open chart where the first quaternionic coordinate is nonzero. -/
 def firstChart : Set BaseSphere := {v | v.val.fst ≠ 0}
 
-theorem isOpen_firstChart : IsOpen firstChart := by
-  exact isOpen_ne.preimage ((WithLp.continuous_fst 2 ℍ ℍ).comp continuous_subtype_val)
 
 theorem firstChart_norm (v : BaseSphere) :
     ‖v.val.fst‖ ^ 2 + Quaternion.normSq v.val.snd = 1 := by

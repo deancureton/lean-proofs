@@ -102,18 +102,6 @@ theorem nonnegative_diagonalization_odd (K : SkewSpace n)
       (diagonalization_eigenColumn U _ _ hd a)
   exact antipodal_i_eigenvalue_odd K hexp (hα a) hv he
 
-/-- Every antipodal symplectic generator has positive odd quaternionic spectral speeds. -/
-theorem exists_antipodal_diagonalization (K : SkewSpace n)
-    (hexp : (Exponential.exp K).val.val.val =
-      -(1 : Vector (4 * n + 4) →L[ℝ] Vector (4 * n + 4))) :
-    ∃ (U : SpGroup (Fin (n + 1))) (m : Fin (n + 1) → ℕ),
-      conjugateMatrix U (coefficients n K.val) =
-        Matrix.diagonal (fun a => (((2 * (m a : ℝ) + 1) * Real.pi) • QuaternionicScalars.i)) := by
-  obtain ⟨U, α, hα, hd⟩ := exists_unitary_diagonalization (n + 1)
-    (coefficients n K.val) (coefficients_skew K)
-  choose m hm using nonnegative_diagonalization_odd K hexp U α hα hd
-  refine ⟨U, m, ?_⟩
-  simpa only [hm] using hd
 
 /-- Outside the minimum locus, a fast odd spectral speed may occupy the first coordinate. -/
 theorem exists_fast_antipodal_diagonalization (K : SkewSpace n)

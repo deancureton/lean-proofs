@@ -71,13 +71,6 @@ theorem retainClosedDisjointFace_disjoint_closedNewMap :
   have he := P.retainClosedDisjointFace_map C hC z x rfl
   exact oldMap_ne_closedNewMap_of_not_mem A n x hx p (he.symm.trans hp.symm)
 
-theorem closedNewMap_not_mem_retainedInterior (p : ClosedNewFace E F) :
-    letI := P.charted
-    closedNewMap A n p ∉ (P.retainClosedDisjointFace C hC).interiorImage := by
-  let _ := P.charted
-  intro hp
-  exact disjoint_left.mp (P.retainClosedDisjointFace_disjoint_closedNewMap C hC)
-    ((P.retainClosedDisjointFace C hC).interiorImage_subset_range hp) (mem_range_self p)
 
 end SmoothBoundaryData
 

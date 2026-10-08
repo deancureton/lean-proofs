@@ -30,10 +30,6 @@ theorem quotient_symm_trans_cancel {x y z : X}
     p.symm.trans (p.trans q) = q := by
   rw [← trans_assoc, symm_trans, refl_trans]
 
-theorem quotient_trans_symm_cancel {x y z : X}
-    (p : Path.Homotopic.Quotient x y) (q : Path.Homotopic.Quotient x z) :
-    p.trans (p.symm.trans q) = q := by
-  rw [← trans_assoc, trans_symm, refl_trans]
 
 theorem quotient_trans_right_cancel {x y z : X}
     {p q : Path.Homotopic.Quotient x y} (r : Path.Homotopic.Quotient y z)
@@ -123,23 +119,6 @@ def switchClass (x : X) (hxU : x ∈ D.U) (hxV : x ∈ D.V) :
   (Path.Homotopic.Quotient.mk (D.pathU x hxU)).trans
     (Path.Homotopic.Quotient.mk (D.pathV x hxV)).symm
 
-/-- The two-chart loop is constant on every path component of the overlap. -/
-theorem switchClass_eq_of_joinedIn {x y : X}
-    (hxU : x ∈ D.U) (hxV : x ∈ D.V) (hyU : y ∈ D.U) (hyV : y ∈ D.V)
-    (hxy : JoinedIn ((D.U : Set X) ∩ D.V) x y) :
-    D.switchClass x hxU hxV = D.switchClass y hyU hyV := by
-  let p := hxy.somePath
-  have hU := D.pathU_trans hxU hyU p (fun t => (hxy.somePath_mem t).1)
-  have hV := D.pathV_trans hxV hyV p (fun t => (hxy.somePath_mem t).2)
-  apply quotient_trans_right_cancel (Path.Homotopic.Quotient.mk (D.pathV y hyV))
-  change ((Path.Homotopic.Quotient.mk (D.pathU x hxU)).trans
-      (Path.Homotopic.Quotient.mk (D.pathV x hxV)).symm).trans
-      (Path.Homotopic.Quotient.mk (D.pathV y hyV)) =
-    ((Path.Homotopic.Quotient.mk (D.pathU y hyU)).trans
-      (Path.Homotopic.Quotient.mk (D.pathV y hyV)).symm).trans
-      (Path.Homotopic.Quotient.mk (D.pathV y hyV))
-  rw [trans_assoc, ← hV, quotient_symm_trans_cancel, hU]
-  simp only [trans_assoc, symm_trans, trans_refl]
 
 /-- The switch loop through the basepoint is null-homotopic. -/
 @[simp] theorem switchClass_base : D.switchClass D.base D.baseU D.baseV = 1 := by

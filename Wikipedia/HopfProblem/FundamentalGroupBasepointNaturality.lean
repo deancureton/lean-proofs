@@ -135,22 +135,6 @@ theorem fundamentalGroup_basepoint_change_eq_one_iff (p : Path x₀ x₁)
   · rintro rfl
     exact map_one _
 
-/-- Equality of images is unchanged by transporting the source loop classes. -/
-theorem fundamentalGroup_map_basepoint_change_eq_iff (f : C(X, Y)) (p : Path x₀ x₁)
-    (γ δ : FundamentalGroup X x₀) :
-    FundamentalGroup.map f x₁ (fundamentalGroupMulEquivOfPath p γ) =
-        FundamentalGroup.map f x₁ (fundamentalGroupMulEquivOfPath p δ) ↔
-      FundamentalGroup.map f x₀ γ = FundamentalGroup.map f x₀ δ := by
-  rw [← fundamentalGroup_basepoint_naturality_apply,
-    ← fundamentalGroup_basepoint_naturality_apply]
-  exact (fundamentalGroupMulEquivOfPath (p.map f.continuous)).injective.eq_iff
 
-/-- Membership in the kernel of the actual induced map is basepoint-independent. -/
-theorem fundamentalGroup_map_basepoint_change_eq_one_iff (f : C(X, Y)) (p : Path x₀ x₁)
-    (γ : FundamentalGroup X x₀) :
-    FundamentalGroup.map f x₁ (fundamentalGroupMulEquivOfPath p γ) = 1 ↔
-      FundamentalGroup.map f x₀ γ = 1 := by
-  rw [← fundamentalGroup_basepoint_naturality_apply]
-  exact fundamentalGroup_basepoint_change_eq_one_iff (p.map f.continuous) _
 
 end Wikipedia.HopfProblem

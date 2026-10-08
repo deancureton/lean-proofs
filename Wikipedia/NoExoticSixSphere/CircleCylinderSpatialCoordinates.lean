@@ -45,15 +45,7 @@ theorem inner_radialUnit_spatialIsometry (m : ℕ) (left : Bool) (v : Vector (m 
   rw [radialUnit, spatialIsometry_apply, (ambientCoordinates m).inner_map_map]
   simp [WithLp.prod_inner_apply]
 
-theorem inner_radialUnit_timeUnit (m : ℕ) (left : Bool) :
-    inner ℝ (radialUnit m left) (timeUnit m) = 0 := by
-  rw [real_inner_comm, inner_timeUnit, radialUnit, timeCoordinate_ambientCoordinates]
-  rfl
 
-theorem inner_timeUnit_spatialIsometry (m : ℕ) (v : Vector (m + 1)) :
-    inner ℝ (timeUnit m) (spatialIsometry m v) = 0 := by
-  rw [inner_timeUnit, spatialIsometry_apply, timeCoordinate_ambientCoordinates]
-  exact map_zero seamLinear
 
 theorem ambientCoordinates_endpoint (m : ℕ) (left : Bool) (v : Vector (m + 1)) :
     ambientCoordinates m (WithLp.toLp 2 ((SphereCylinder.endPole 0 left).val, v)) =

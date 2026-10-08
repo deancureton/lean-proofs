@@ -139,23 +139,5 @@ namespace NoExoticSixSphere.OrthogonalExponential
 
 open GLOrthonormalization CayleyTransform IntervalCoordinates
 
-/-- Every compact path family can be replaced by finitely many actual exponential segments,
-relative to both endpoint slices and any specified stationary parameters. -/
-theorem exists_brokenExponentialHomotopy {n : ℕ} {X : Type*} [TopologicalSpace X] [CompactSpace X]
-    (H : C(I × X, OrthogonalOperators n)) (S : Set X)
-    (hS : ∀ x ∈ S, ∀ u, H (u, x) = H (0, x)) :
-    ∃ N : ℕ, ∃ t : ℕ → I, ∃ K : ℕ → C(X, SkewOperators n),
-      ∃ G : C(I × X, OrthogonalOperators n),
-        t 0 = 0 ∧ Monotone t ∧ t N = 1 ∧
-        Nonempty (H.HomotopyRel G {p | p.1 = 0 ∨ p.1 = 1 ∨ p.2 ∈ S}) ∧
-        ∀ i < N, ∀ u ∈ Icc (t i) (t (i + 1)), ∀ x,
-          G (u, x) = H (t i, x) * exp ((normalize (t i) (t (i + 1)) u : ℝ) • K i x) := by
-  obtain ⟨t, ht0, hmono, ⟨N, hN⟩, hsmall⟩ := exists_logarithmSubdivision H
-  let K (i : ℕ) := logarithmicIncrement H (t i) (t (i + 1))
-    (fun x ↦ hsmall i (t (i + 1)) ⟨hmono i.le_succ, le_rfl⟩ x)
-  refine ⟨N, t, K, BrokenPaths.ending H t hmono hsmall N, ht0, hmono, hN N le_rfl,
-    ⟨BrokenPaths.homotopyRel H t hmono hsmall N S hS⟩, ?_⟩
-  intro i hi u hu x
-  exact BrokenPaths.ending_on_interval H t hmono hsmall N i hi u x hu
 
 end NoExoticSixSphere.OrthogonalExponential

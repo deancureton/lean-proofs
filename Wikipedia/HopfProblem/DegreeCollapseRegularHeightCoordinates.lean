@@ -84,27 +84,5 @@ theorem heightMap_localDiffeomorph {F : ℝ × V → ℝ} (hF : ContDiff ℝ ∞
     isOpen_univ (mem_univ p) (contDiff_heightMap hF).contDiffOn hinv
   exact ⟨Φ, hp, fun _ _ => congrFun hΦ.symm _⟩
 
-/-- One genuine height chart covers the entire compact regular center arc. -/
-theorem exists_height_chart {F : ℝ × V → ℝ} (hF : ContDiff ℝ ∞ F)
-    {K : Set ℝ} (hK : IsCompact K) {c : ℝ → ℝ}
-    (hc : ∀ s ∈ K, F (s, 0) = c s) (hinj : InjOn c K)
-    (hreg : ∀ s ∈ K, fderiv ℝ F (s, 0) (1, 0) ≠ 0)
-    {U : Set (ℝ × V)} (hU : IsOpen U) (hKU : K ×ˢ {0} ⊆ U) :
-    ∃ Φ : PartialDiffeomorph 𝓘(ℝ, ℝ × V) 𝓘(ℝ, ℝ × V) (ℝ × V) (ℝ × V) ∞,
-      K ×ˢ {0} ⊆ Φ.source ∧ Φ.source ⊆ U ∧ (Φ : (ℝ × V) → ℝ × V) = heightMap F := by
-  have hi : InjOn (heightMap F) (K ×ˢ {(0 : V)}) := by
-    rintro ⟨s, z⟩ ⟨hs, hz⟩ ⟨t, w⟩ ⟨ht, hw⟩ he
-    have hz' : z = 0 := hz
-    have hw' : w = 0 := hw
-    subst z
-    subst w
-    have he' : F (s, 0) = F (t, 0) := congrArg Prod.fst he
-    rw [hc s hs, hc t ht] at he'
-    exact Prod.ext (hinj hs ht he') rfl
-  apply exists_partialDiffeomorph_near_compact (hK.prod isCompact_singleton) hi ?_ hU hKU
-  rintro ⟨s, z⟩ ⟨hs, hz⟩
-  have hz' : z = 0 := hz
-  subst z
-  exact heightMap_localDiffeomorph hF (hreg s hs)
 
 end Wikipedia.HopfProblem.DegreeCollapse.RegularHeightCoordinates

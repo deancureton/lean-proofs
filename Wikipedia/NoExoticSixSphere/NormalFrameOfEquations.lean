@@ -84,16 +84,5 @@ noncomputable def inducedFrame {i : M → E} {G : E → F}
   rw [heq]
   exact fun x ↦ contMDiffAt_orthogonalRightInverse (contMDiff_equationDifferential hi hG x) (hreg x)
 
-theorem inducedFrame_ambient {i : M → E} {G : E → F}
-    (hi : ContMDiff I 𝓘(ℝ, E) ∞ i)
-    (hG : ∀ x, ContDiffAt ℝ ∞ G (i x)) (hzero : ∀ x, G (i x) = 0)
-    (hreg : ∀ x, Surjective (fderiv ℝ G (i x)))
-    (hinj : ∀ x, Injective (ambientDifferential I i x))
-    (hd : finrank ℝ E = finrank ℝ F + finrank ℝ B) (x : M) :
-    (inducedFrame hi hG hzero hreg hinj hd).ambient x =
-      orthogonalRightInverse (fderiv ℝ G (i x)) := by
-  apply ContinuousLinearMap.ext
-  intro v
-  rfl
 
 end NoExoticSixSphere.NormalFrameOfEquations

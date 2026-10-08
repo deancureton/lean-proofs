@@ -24,11 +24,6 @@ def south : Sphere 4 := ⟨-(spherePole 4).val, by
   rw [mem_sphere_zero_iff_norm, norm_neg]
   exact mem_sphere_zero_iff_norm.mp (spherePole 4).property⟩
 
-theorem south_ne_pole : south ≠ spherePole 4 := by
-  intro h
-  have he := congrArg (fun y : Sphere 4 ↦ y.val 0) h
-  change -(1 : ℝ) = 1 at he
-  norm_num at he
 
 theorem south_join : SphereCylinder.join 3 (-1, (0 : V 4)) = south.val := by
   change SphereCylinder.join 3 (-1, (0 : V 4)) = -(spherePole 4).val

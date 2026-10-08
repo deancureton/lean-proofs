@@ -89,14 +89,5 @@ def nativeHalfDiskBoundaryDiffeomorph
   exact (regularFiber_contMDiff_iff_ambient
     S.zeroTimeMap S.time_smooth 0 S.time_regular 6 (by simp) _).mpr hforward
 
-theorem ExcellentMorsePresentation.nonempty_zero_sphere_diffeomorph_of_single_positive_critical
-    (P : S.ExcellentMorsePresentation) (p : S.Space)
-    (hp : p ∈ criticalPoints (Vector 7) P.function) (hpos : 0 < P.function p)
-    (hunique : ∀ x ∈ criticalPoints (Vector 7) P.function, 0 < P.function x → x = p) :
-    letI := S.zeroAtlas;
-    Nonempty (Diffeomorph (𝓡 6) (𝓡 6) (Sphere 6) S.Zero ∞) := by
-  let := S.zeroAtlas
-  obtain ⟨d⟩ := P.nonempty_native_half_disk_of_single_positive_critical p hp hpos hunique
-  exact ⟨nativeHalfDiskBoundaryDiffeomorph d⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

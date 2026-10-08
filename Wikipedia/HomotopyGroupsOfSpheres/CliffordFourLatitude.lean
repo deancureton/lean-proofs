@@ -87,11 +87,6 @@ theorem fourLatitudePoint_arccos (t : I) (q : EquatorSphere) :
     rw [Real.sin_arccos]
     rfl
 
-theorem fourLatitudePoint_surjective (v : UnitSphere) :
-    ∃ θ : ℝ, 0 ≤ θ ∧ θ ≤ Real.pi ∧ ∃ q : EquatorSphere, fourLatitudePoint θ q = v := by
-  obtain ⟨⟨t, q⟩, h⟩ := Latitude.point_surjective 3 v
-  exact ⟨Real.arccos (Latitude.height t), Real.arccos_nonneg _, Real.arccos_le_pi _, q,
-    (fourLatitudePoint_arccos t q).trans h⟩
 
 def fourPolarAngle : C(UnitSphere, ℝ) :=
   ⟨fun v ↦ Real.arccos (v.val 0), by fun_prop⟩

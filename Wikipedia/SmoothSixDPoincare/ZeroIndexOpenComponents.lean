@@ -21,11 +21,6 @@ variable {E F R X Y : Type*} [NormedAddCommGroup E] [NormedAddCommGroup F]
   [TopologicalSpace R] [TopologicalSpace X] [TopologicalSpace Y] [Subsingleton E]
   (d : SurgeryBoundaryPair E F R X Y)
 
-theorem zeroIndex_oldOpenExterior : (d.oldOpenExterior : Set X) = univ := by
-  apply eq_univ_of_forall
-  intro x
-  rintro ⟨p, _⟩
-  exact isEmptyElim p.1
 
 theorem zeroIndex_newPiece_range : range d.newPiece = range d.beltSphere := by
   ext y

@@ -54,12 +54,6 @@ theorem seam_eq_zero_iff (c : Sphere 1) :
     · exact seam_left
     · exact seam_right
 
-theorem clock_mem_interval (c : Sphere 1) : clock c ∈ Icc (0 : ℝ) 1 := by
-  have hh : |c.val 0| ≤ 1 := by
-    simpa only [Real.norm_eq_abs, ClosedHemisphere.unit_norm] using PiLp.norm_apply_le c.val 0
-  obtain ⟨hlo, hhi⟩ := abs_le.mp hh
-  rw [clock_apply]
-  constructor <;> linarith
 
 variable {m n : ℕ} {b : Sphere n}
   (d : RegularCollaredCylinder (M := Sphere m) (𝓡 m) (𝓡 n) b 0 1)

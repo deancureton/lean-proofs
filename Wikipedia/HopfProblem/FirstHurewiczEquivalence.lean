@@ -145,12 +145,6 @@ theorem hurewiczFunction_eq_zero_iff (b : X) [PathConnectedSpace X]
   rw [← Abelianization.ker_of]
   rfl
 
-/-- The kernel form of the actual degree-one singular Hurewicz theorem. -/
-theorem hurewiczPi1_ker (b : X) [PathConnectedSpace X] :
-    (hurewiczPi1 b).ker = commutator (FundamentalGroup X b) := by
-  ext g
-  change hurewiczFunction b g = 0 ↔ g ∈ commutator (FundamentalGroup X b)
-  exact hurewiczFunction_eq_zero_iff b g
 
 /-- The Hurewicz homomorphism onto actual integral singular first homology
 is surjective for a path-connected space. -/

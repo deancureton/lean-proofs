@@ -22,11 +22,6 @@ namespace Wikipedia.SmoothSixDPoincare.SphereCoordinates
 
 variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
 
-theorem norm_unit_inversion (w : V) : ‖(‖w‖ ^ 2)⁻¹ • w‖ = ‖w‖⁻¹ := by
-  rw [norm_smul, Real.norm_eq_abs, abs_inv, abs_of_nonneg (sq_nonneg _)]
-  by_cases hw : ‖w‖ = 0
-  · simp only [hw, zero_pow (by norm_num : 2 ≠ 0), inv_zero, mul_zero]
-  · field_simp
 
 theorem stereoInvFunAux_inversion (v : V) {w : V} (hw : w ≠ 0) :
     stereoInvFunAux v ((‖w‖ ^ 2)⁻¹ • w) =

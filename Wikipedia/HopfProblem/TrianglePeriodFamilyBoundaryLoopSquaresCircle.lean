@@ -124,13 +124,7 @@ def loopPeriodic (p : Path a a) : C(ℝ, X) :=
 @[simp] theorem loopPeriodic_unit (p : Path a a) (t : unitInterval) :
     loopPeriodic p (t : ℝ) = p t := loopOnCircle_unit p t
 
-theorem loopPeriodic_add_one (p : Path a a) (t : ℝ) :
-    loopPeriodic p (t + 1) = loopPeriodic p t := by
-  simp only [loopPeriodic_apply, loopCircle_add_one]
 
-theorem loopPeriodic_add_int (p : Path a a) (t : ℝ) (k : ℤ) :
-    loopPeriodic p (t + (k : ℝ)) = loopPeriodic p t := by
-  simp only [loopPeriodic_apply, loopCircle_add_int]
 
 @[simp] theorem loopPeriodic_zero (p : Path a a) : loopPeriodic p 0 = a :=
   (loopPeriodic_unit p 0).trans p.source

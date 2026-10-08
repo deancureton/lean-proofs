@@ -114,13 +114,5 @@ theorem puncturedIntervalHomeomorph_symm_coordinate
         (fun x : Ioo (1 / 2 : ℝ) 1 => (x : ℝ)) t := by
   cases t <;> rfl
 
-/-- Splitting into the two components does not change the underlying real point. -/
-theorem puncturedIntervalHomeomorph_coordinate
-    (t : {s : Ioo (0 : ℝ) 1 // (s : ℝ) ≠ 1 / 2}) :
-    Sum.elim (fun x : Ioo (0 : ℝ) (1 / 2) => (x : ℝ))
-      (fun x : Ioo (1 / 2 : ℝ) 1 => (x : ℝ)) (puncturedIntervalHomeomorph t) =
-      (t.val : ℝ) := by
-  rw [← puncturedIntervalHomeomorph_symm_coordinate,
-    puncturedIntervalHomeomorph.symm_apply_apply]
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology.CircleTopology

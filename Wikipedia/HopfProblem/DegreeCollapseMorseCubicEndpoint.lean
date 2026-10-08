@@ -32,35 +32,5 @@ variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
 open Wikipedia.SmoothSixDPoincare.ManifoldMorse
 
-/-- Separate the selected signed square and convert it to an actual cubic endpoint chart. -/
-theorem exists_cubic_endpoint_of_morseChart (c : SignedMorseChart (E := E) f x)
-    {m : ℕ} (ρ : Option (Fin m) ≃ Fin (Module.finrank ℝ E))
-    {a : ℝ} (ha : 0 < a) :
-    let e := c.weights (ρ none)
-    let σ := fun i : Fin m => c.weights (ρ (some i))
-    ∃ Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, E) (Model m) M ∞,
-      (e * a, (0 : Fin m → ℝ)) ∈ Φ.source ∧ Φ (e * a, 0) = x ∧
-      Φ.target ⊆ c.chart.source ∧
-      (∀ p ∈ Φ.source, f (Φ p) =
-        f x - cubic σ (-(a ^ 2)) (e * a, 0) + cubic σ (-(a ^ 2)) p) := by
-  let e := c.weights (ρ none)
-  let σ := fun i : Fin m => c.weights (ρ (some i))
-  let b := f x - cubic σ (-(a ^ 2)) (e * a, 0)
-  let Q := splitNativeChart c ρ
-  have he : e ^ 2 = 1 := by
-    rcases c.signs (ρ none) with h | h <;> change c.weights (ρ none) ^ 2 = 1 <;>
-      rw [h] <;> norm_num
-  have hquad : ∀ p ∈ Q.source, f (Q p) = b + cubic σ (-(a ^ 2)) (e * a, 0) +
-      e * p.1 ^ 2 + ∑ i, σ i * p.2 i ^ 2 := by
-    intro p hp
-    have hh := splitNativeChart_equation c ρ hp
-    change f (Q p) = f x + e * p.1 ^ 2 + ∑ i, σ i * p.2 i ^ 2 at hh
-    rw [hh]
-    dsimp only [b]
-    ring
-  obtain ⟨Φ, hp, hcenter, htarget, hformula⟩ :=
-    exists_native_cubic_endpoint σ ha e he Q (splitNativeChart_zero_mem c ρ) b hquad
-  exact ⟨Φ, hp, hcenter.trans (splitNativeChart_center c ρ),
-    fun _ hy => (htarget hy).1, hformula⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

@@ -63,7 +63,11 @@ namespace NoExoticSixSphere
 universe u
 
 /-- Every smooth manifold homeomorphic to the standard six-sphere is diffeomorphic to it. -/
-theorem noExoticSixSpheres : SixSphereRigidity.{u} := by
+theorem noExoticSixSpheres :
+    ∀ (M : Type u) (_ : TopologicalSpace M)
+      (_ : ChartedSpace (EuclideanSpace ℝ (Fin 6)) M)
+      (_ : IsManifold (𝓡 6) ∞ M),
+      Nonempty (M ≃ₜ Sphere 6) → Nonempty (M ≃ₘ⟮𝓡 6, 𝓡 6⟯ Sphere 6) := by
   intro M _ _ _ ⟨h⟩
   exact SixSphereThirteen.nonempty_diffeomorph h
 

@@ -33,29 +33,5 @@ variable {M : Type*} [TopologicalSpace M]
   {a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel}
   (d : e.FramedCollapseData a)
 
-theorem exists_originalAtlas_filling_of_stable_class_zero (m : M)
-    (hd : 8 ≤ e.ambientDimension)
-    (hz : d.sixthStableClass hd = StableSixSphereMaps.nullClass) :
-    ∃ r : ℕ,
-      ∃ G : C(Sphere (e.ambientDimension + (r + 1)),
-          Sphere ((e.ambientDimension - 6) + (r + 1))),
-        ∃ hG : ContMDiff (𝓡 (e.ambientDimension + (r + 1)))
-          (𝓡 ((e.ambientDimension - 6) + (r + 1))) ∞ G,
-        ∃ hGreg : ∀ y, G y = equators (e.ambientDimension - 6) (r + 1)
-          (sphereZero (e.ambientDimension - 6)) → Function.Surjective
-            (mfderiv (𝓡 (e.ambientDimension + (r + 1)))
-              (𝓡 ((e.ambientDimension - 6) + (r + 1))) G y),
-        ∃ A : SphereFiberFramedFilling G hG
-          (equators (e.ambientDimension - 6) (r + 1) (sphereZero (e.ambientDimension - 6)))
-          hGreg 6 (by omega)
-          (equators e.ambientDimension (r + 1) (e.compactifiedEmbedding m)),
-          letI := A.topology;
-          letI := A.atlas;
-          letI := A.boundaryAtlas;
-          ∃ D : M ≃ₘ⟮𝓡 6, 𝓡 6⟯ {w : A.W // ((𝓡∂ 1).prod (𝓡 6)).IsBoundaryPoint w},
-            ∀ x, A.inclusion (D x).val = WithLp.toLp 2
-              (0, (equators e.ambientDimension (r + 1) (e.compactifiedEmbedding x)).val) := by
-  obtain ⟨r, hr⟩ := (d.sixthStableClass_eq_null_iff hd).mp hz
-  exact ⟨r, d.exists_originalAtlas_filling_of_iterate_nullhomotopic m r hr⟩
 
 end NoExoticSixSphere.EuclideanEmbedding.FramedCollapseData

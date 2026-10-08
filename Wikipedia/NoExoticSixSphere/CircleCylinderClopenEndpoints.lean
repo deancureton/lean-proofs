@@ -87,11 +87,6 @@ theorem rightZeroDiffeomorph_val (x : {x : Sphere m // d.rightMap x = b}) :
   let := timeZeroAtlas d k hd
   exact DiffeomorphSumClopen.rightImageDiffeomorph_val (endpointsDiffeomorph d k hd) x
 
-theorem leftZeroOpen_compl : (leftZeroOpen d k hd : Set (TimeZero d))ᶜ = rightZeroOpen d k hd := by
-  let := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left k (by simpa using hd)
-  let := regularFiberAtlas d.rightMap d.smooth_right b d.regular_right k (by simpa using hd)
-  let := timeZeroAtlas d k hd
-  exact DiffeomorphSumClopen.leftImage_compl (endpointsDiffeomorph d k hd)
 
 def leftZeroComplementHomeomorph : ↥((leftZeroOpen d k hd : Set (TimeZero d))ᶜ) ≃ₜ
     {x : Sphere m // d.rightMap x = b} := by

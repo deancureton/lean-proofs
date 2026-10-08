@@ -72,11 +72,6 @@ theorem unitNormal_eq_of_negative (u v : V) (hu : l u < 0) (hv : l v < 0) :
     NormedSpace.normalize_smul_of_pos (div_pos_of_neg_of_neg hu hv)]
   rfl
 
-theorem unitNormal_eq_of_positive (u v : V) (hu : 0 < l u) (hv : 0 < l v) :
-    unitNormal D l u = unitNormal D l v := by
-  rw [unitNormal, projected_eq_smul D l u v hv.ne',
-    NormedSpace.normalize_smul_of_pos (div_pos hu hv)]
-  rfl
 
 theorem norm_unitNormal (hD : Injective D) (u : V) (hu : l u ≠ 0) :
     ‖unitNormal D l u‖ = 1 :=
@@ -88,7 +83,5 @@ theorem unitNormal_mem_range (u : V) : unitNormal D l u ∈ D.range :=
 theorem unitNormal_mem_orthogonal (u : V) : unitNormal D l u ∈ (tangent D l)ᗮ :=
   (tangent D l)ᗮ.smul_mem _ (projected_mem_orthogonal D l u)
 
-theorem unitNormal_neg (u : V) : unitNormal D l (-u) = -unitNormal D l u := by
-  simp only [unitNormal, projected, map_neg, NormedSpace.normalize_neg]
 
 end NoExoticSixSphere.CoorientedHypersurfaceNormal

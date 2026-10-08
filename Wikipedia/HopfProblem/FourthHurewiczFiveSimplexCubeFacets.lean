@@ -44,11 +44,6 @@ theorem cubeFacet_removeNth (n : ℕ) (i : Fin (n + 1)) (u : Fin (n + 1) → I) 
     cubeFacet n i (u i) (Fin.removeNth i u) = u :=
   Fin.insertNth_self_removeNth i u
 
-theorem cubeFacet_removeNth_of_eq (n : ℕ) (i : Fin (n + 1)) (ε : I)
-    (u : Fin (n + 1) → I) (hu : u i = ε) :
-    cubeFacet n i ε (Fin.removeNth i u) = u := by
-  rw [← hu]
-  exact cubeFacet_removeNth n i u
 
 /-- An endpoint among the remaining coordinates is still an actual
 boundary coordinate after insertion. -/
@@ -58,17 +53,7 @@ theorem cubeFacet_boundary_of_endpoint (n : ℕ) (i : Fin (n + 1)) (ε : I)
   refine ⟨i.succAbove j, ?_⟩
   simpa only [cubeFacet_apply_succAbove] using hj
 
-theorem cubeFacet_boundary (n : ℕ) (i : Fin (n + 1)) (ε : I)
-    (u : Fin n → I) (hu : u ∈ Cube.boundary (Fin n)) :
-    cubeFacet n i ε u ∈ Cube.boundary (Fin (n + 1)) := by
-  obtain ⟨j, hj⟩ := hu
-  exact cubeFacet_boundary_of_endpoint n i ε u j hj
 
-theorem cubeFacet_boundary_of_inserted_endpoint (n : ℕ) (i : Fin (n + 1))
-    (ε : I) (hε : ε = 0 ∨ ε = 1) (u : Fin n → I) :
-    cubeFacet n i ε u ∈ Cube.boundary (Fin (n + 1)) := by
-  refine ⟨i, ?_⟩
-  simpa only [cubeFacet_apply_self] using hε
 
 /-- Inserting an endpoint into a boundary point exhibits two distinct
 endpoint coordinates of the larger cube. -/

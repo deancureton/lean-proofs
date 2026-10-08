@@ -83,12 +83,6 @@ theorem formalSubdivisionIteratedHomotopy_succ (center : FormalCenter V) (k n : 
   | zero => rfl
   | succ k ih => rw [Function.iterate_succ_apply', formalSubdivision_zero, ih]
 
-/-- The iterated homotopy identity in augmented degree zero. -/
-theorem formalSubdivisionIteratedHomotopy_boundary_zero (center : FormalCenter V)
-    (k : ℕ) (c : FormalChains V 0) :
-    formalBoundary 0 (formalSubdivisionIteratedHomotopy center k 0 c) =
-      c - (formalSubdivision center 0)^[k] c := by
-  simp
 
 /-- The full telescoping identity `d Hₖ + Hₖ d = id - sd^k`. -/
 theorem formalSubdivisionIteratedHomotopy_boundary (center : FormalCenter V)

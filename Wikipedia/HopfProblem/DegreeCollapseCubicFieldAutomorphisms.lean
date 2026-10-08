@@ -47,16 +47,6 @@ theorem transverseFieldChange_cubicDescent (σ : Fin m → ℝ)
     funext i
     simp only [Pi.neg_apply, neg_mul]
 
-/-- These are actual transformations of ODE solutions, with the same time parameter. -/
-theorem hasDerivAt_transverseFieldChange (σ : Fin m → ℝ)
-    (T : (Fin m → ℝ) ≃L[ℝ] (Fin m → ℝ))
-    (hcomm : ∀ z, T (fun i => σ i * z i) = fun i => σ i * T z i)
-    {t r : ℝ} {γ : ℝ → Model m} (hγ : HasDerivAt γ (cubicDescent σ t (γ r)) r) :
-    HasDerivAt (transverseFieldChange T ∘ γ)
-      (cubicDescent σ t (transverseFieldChange T (γ r))) r := by
-  have hh := (transverseFieldChange T).toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt r hγ
-  have he := transverseFieldChange_cubicDescent σ T hcomm t (γ r)
-  exact he ▸ hh
 
 variable {A B : Type*} [NormedAddCommGroup A] [NormedSpace ℝ A]
   [NormedAddCommGroup B] [NormedSpace ℝ B]
@@ -77,26 +67,5 @@ theorem splitTransverseChange_commutes (σ : Fin m → ℝ)
   simp only [splitTransverseChange, ContinuousLinearEquiv.trans_apply,
     e.apply_symm_apply, he, ContinuousLinearEquiv.prodCongr_apply, map_smul]
 
-/-- The actual diagonal holonomy blocks give an actual native model
-diffeomorphism preserving the cubic field and its entire longitudinal axis. -/
-theorem splitTransverseChange_field_automorphism (σ : Fin m → ℝ)
-    (e : (Fin m → ℝ) ≃L[ℝ] (A × B)) (α β : ℝ)
-    (he : ∀ z, e (fun i => σ i * z i) = (α • (e z).1, β • (e z).2))
-    (P : A ≃L[ℝ] A) (S : B ≃L[ℝ] B) :
-    ∃ D : Diffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, Model m) (Model m) (Model m) ∞,
-      (∀ p : Model m, D p = (p.1, e.symm (P (e p.2).1, S (e p.2).2))) ∧
-      (∀ s : ℝ, D (s, 0) = (s, 0)) ∧
-      ∀ t p, fderiv ℝ D p (cubicDescent σ t p) = cubicDescent σ t (D p) := by
-  let T := splitTransverseChange e P S
-  let L := transverseFieldChange T
-  refine ⟨L.toDiffeomorph, fun p => rfl, ?_, ?_⟩
-  · intro s
-    change (s, T 0) = (s, 0)
-    rw [map_zero]
-  · intro t p
-    change fderiv ℝ L p (cubicDescent σ t p) = cubicDescent σ t (L p)
-    rw [L.fderiv]
-    exact transverseFieldChange_cubicDescent σ T
-      (splitTransverseChange_commutes σ e α β he P S) t p
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

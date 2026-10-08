@@ -73,16 +73,6 @@ theorem tangentResolutionFrameRemainder_normalized_parity :
   Monomorphism.sphereParityOfDimension_fixedNormalReduction (e.ambientDimension - 6)
     1 rfl rfl _ _
 
-theorem tangentResolutionFrameRemainder_parity :
-    Monomorphism.sphereParityOfDimension 1 rfl rfl
-        (e.tangentResolutionFrameRemainder ν Φ F G hε ha hprod
-          hleft hright hF hG hFi hGi) =
-      Monomorphism.sphereParityOfDimension ((e.ambientDimension - 6) + 1)
-        (by have h := e.dimension_le_ambient (F (Stiefel.pole 3)); omega) (by omega)
-        (e.resolutionFrameRemainder ν Φ F G hε ha hprod hleft hright hF hG hFi hGi) := by
-  rw [← e.tangentResolutionFrameRemainder_normalized_parity]
-  exact e.normalizedResolutionFrameRemainder_parity ν Φ F G hε ha hprod
-    hleft hright hF hG hFi hGi
 
 theorem resolutionFrameParity_tangent_decomposition :
     e.sphereDerivativeParity ν (gluedSphere Φ ε a F G)

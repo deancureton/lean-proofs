@@ -71,9 +71,5 @@ theorem hopf_two_letters (n : ℕ) (x y : Sphere n) :
 def inclusion (n : ℕ) : C(Sphere n, James.Space (Sphere n) (spherePole n)) :=
   ⟨James.letter (spherePole n), James.continuous_letter (spherePole n)⟩
 
-theorem hopf_inclusion (n : ℕ) : (hopf n).comp (inclusion n) = ContinuousMap.const _ 1 := by
-  apply ContinuousMap.ext
-  intro x
-  exact hopf_letter n x
 
 end NoExoticSixSphere.JamesSphere

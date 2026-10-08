@@ -74,17 +74,6 @@ theorem retimed_injective_spatial_of_full_derivative
   rw [hS, hD]
   exact (hi.comp hB.injective).comp hinr
 
-theorem retimed_spatial_derivative_of_translation_germ (p : ℝ × M) (c : ℝ)
-    (hΨ : Ψ =ᶠ[𝓝 p] fun q => (q.1 + c, q.2)) :
-    (mfderiv I J (fun x => retimedFamily F Ψ (p.1, x)) p.2 : E →L[ℝ] G) =
-      (mfderiv I J (fun x => F (p.1 + c, x)) p.2 : E →L[ℝ] G) := by
-  have hc : ContinuousAt (fun x : M => (p.1, x)) p.2 :=
-    continuous_const.continuousAt.prodMk continuous_id.continuousAt
-  have he : (fun x => retimedFamily F Ψ (p.1, x)) =ᶠ[𝓝 p.2]
-      (fun x => F (p.1 + c, x)) := by
-    filter_upwards [hΨ.comp_tendsto hc] with x hx
-    exact congrArg F hx
-  exact he.mfderiv_eq
 
 theorem retimed_spatial_derivative_of_identity_germ (p : ℝ × M)
     (hΨ : Ψ =ᶠ[𝓝 p] id) :
@@ -98,19 +87,5 @@ theorem retimed_spatial_derivative_of_identity_germ (p : ℝ × M)
     exact congrArg F hx
   exact he.mfderiv_eq
 
-theorem retimed_immersive_of_corridor
-    (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    (hi : ∀ t x, Injective (mfderiv I J (fun y => F (t, y)) x))
-    {S W : Set (ℝ × M)} (hmap : MapsTo Ψ S W)
-    (hfull : ∀ p ∈ W, Injective (mfderiv (𝓘(ℝ, ℝ).prod I) J F p))
-    (hfix : ∀ p ∉ S, Ψ =ᶠ[𝓝 p] id) :
-    ∀ t x, Injective (mfderiv I J (fun y => retimedFamily F Ψ (t, y)) x) := by
-  intro t x
-  by_cases hp : (t, x) ∈ S
-  · exact retimed_injective_spatial_of_full_derivative Ψ hF (t, x) (hfull _ (hmap hp))
-  · have he := retimed_spatial_derivative_of_identity_germ
-      (F := F) (J := J) Ψ (t, x) (hfix _ hp)
-    rw [he]
-    exact hi t x
 
 end Wikipedia.HopfProblem.OrbitPair.NativeFamily

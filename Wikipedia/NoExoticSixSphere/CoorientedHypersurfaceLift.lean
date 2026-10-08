@@ -48,9 +48,5 @@ theorem level_unitNormal_lift_negative (hD : Injective D) (u v : V)
     ((projected_eq_zero_iff D l hD u).mp hz)
   exact mul_neg_of_pos_of_neg (inv_pos.mpr (norm_pos_iff.mpr hn)) hu
 
-theorem exists_negative_unitNormal_lift (hD : Injective D) (u : V) (hu : l u < 0) :
-    ∃ v, D v = unitNormal D l u ∧ l v < 0 := by
-  obtain ⟨v, hv, _⟩ := exists_unitNormal_lift D l u
-  exact ⟨v, hv, level_unitNormal_lift_negative D l hD u v hu hv⟩
 
 end NoExoticSixSphere.CoorientedHypersurfaceNormal

@@ -55,40 +55,5 @@ theorem coordinate_dist_of_mem_closedStar (P : PartOrd.{u}) [Fintype P] (r : ℕ
       (iteratedCoordinateMap P r w)) he
   exact hd.symm.le.trans (iteratedCoordinateMap_mesh P r k x t (stdSimplex.vertex i))
 
-theorem exists_subdivision_star_refinement (P : PartOrd.{u}) [Fintype P]
-    {ι : Type*} (U : ι → Set (SSet.toTop.obj (nerve P)))
-    (hU : ∀ i, IsOpen (U i)) (hcover : ∀ z, ∃ i, z ∈ U i) :
-    ∃ R : ℕ, ∀ r ≥ R, ∀ p : (iteratedChains r).obj P, ∃ i : ι,
-      ∀ z ∈ nativeClosedStar ((iteratedChains r).obj P) p,
-        iterationHomeomorph P r z ∈ U i := by
-  classical
-  have hV : ∀ i, ∃ V : Set (P → ℝ), IsOpen V ∧ (coordinateMap P) ⁻¹' V = U i :=
-    fun i ↦ (coordinateMap_isClosedEmbedding P).isEmbedding.isInducing.isOpen_iff.mp (hU i)
-  choose V hVo hVU using hV
-  have hK : Set.range (coordinateMap P) ⊆ ⋃ i, V i := by
-    rintro y ⟨z, rfl⟩
-    obtain ⟨i, hi⟩ := hcover z
-    refine Set.mem_iUnion.mpr ⟨i, ?_⟩
-    rw [← hVU i] at hi
-    exact hi
-  obtain ⟨δ, hδ, hball⟩ := lebesgue_number_lemma_of_metric
-    (isCompact_range (coordinateMap P).continuous) hVo hK
-  obtain ⟨R, hR⟩ := eventually_atTop.mp
-    ((meshBound_tendsto_zero (Fintype.card P) 1).eventually (gt_mem_nhds hδ))
-  refine ⟨R, fun r hr p ↦ ?_⟩
-  let a := vertex (nerve ((iteratedChains r).obj P)) (ComposableArrows.mk₀ p)
-  obtain ⟨i, hi⟩ := hball (coordinateMap P (iterationHomeomorph P r a))
-    ⟨iterationHomeomorph P r a, rfl⟩
-  refine ⟨i, fun z hz ↦ ?_⟩
-  have hd : dist (iteratedCoordinateMap P r z) (iteratedCoordinateMap P r a) < δ :=
-    (coordinate_dist_of_mem_closedStar P r p z hz).trans_lt
-      (by simpa only [mul_one] using hR r hr)
-  have hv : coordinateMap P (iterationHomeomorph P r z) ∈ V i := by
-    apply hi
-    change dist (coordinateMap P (iterationHomeomorph P r z))
-      (coordinateMap P (iterationHomeomorph P r a)) < δ
-    exact hd
-  have hz' : iterationHomeomorph P r z ∈ (coordinateMap P) ⁻¹' V i := hv
-  rwa [hVU i] at hz'
 
 end Wikipedia.HopfProblem.OrbitPair.FinitePoset

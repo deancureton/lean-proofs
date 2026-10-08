@@ -80,42 +80,5 @@ variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 6) M]
   (e : EuclideanEmbedding 6 M)
   (a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel)
 
-theorem sphereParity_zero_of_framed_collared_disk
-    (f : Sphere 3 → M) (hf : ContMDiff (𝓡 3) (𝓡 6) ∞ f) (hi : Injective f)
-    (hd : ∀ s, Injective (mfderiv (𝓡 3) (𝓡 6) f s))
-    (F : Vector 4 → Vector e.ambientDimension × ℝ)
-    (hF : ∀ x ∈ Metric.closedBall (0 : Vector 4) 1, ContDiffAt ℝ ∞ F x)
-    (hDF : ∀ x ∈ Metric.closedBall (0 : Vector 4) 1, Injective (fderiv ℝ F x))
-    (hb : ∀ s : Sphere 3, F s.val = (e.toFun (f s), 0))
-    (A : C(Disk (E := Vector 4), e.NormalModel →L[ℝ] (Vector e.ambientDimension × ℝ)))
-    (hA : ∀ x, Injective (A x))
-    (hAD : ∀ x, Disjoint (A x).range (fderiv ℝ F x.val).range)
-    (hAb : ∀ s, A (boundaryToDisk s) =
-      (ContinuousLinearMap.inl ℝ (Vector e.ambientDimension) ℝ).comp (a.ambient (f s)))
-    (hheight : ∀ s : Sphere 3, 0 < (fderiv ℝ F s.val s.val).2) :
-    e.sphereParity a f hf hi hd = 0 := by
-  let aS : C(Sphere 3, e.NormalModel →L[ℝ] Vector e.ambientDimension) :=
-    ⟨fun s ↦ a.ambient (f s), a.contMDiff_ambient.continuous.comp hf.continuous⟩
-  let TS : C(Sphere 3, Vector 3 →L[ℝ] Vector e.ambientDimension) :=
-    ⟨framedDerivative (e.toFun ∘ f), e.continuous_sphereTangentOperator f hf⟩
-  let v := (ContinuousMap.fst : C(Vector e.ambientDimension × ℝ, _)).comp
-    (radialDerivativeMap F hF)
-  let c := (ContinuousMap.snd : C(Vector e.ambientDimension × ℝ, ℝ)).comp
-    (radialDerivativeMap F hF)
-  have haS : ∀ s, Injective (aS s) := fun s ↦ a.ambient_injective (f s)
-  have hTS : ∀ s, Injective (TS s) := e.injective_sphereTangentOperator f hf hd
-  have hrS : ∀ s, Disjoint (aS s).range (TS s).range :=
-    e.rawSphereNormal_range_disjoint a f hf
-  have he : sphereOperatorMap aS TS haS hTS hrS = e.rawSphereFrameOperatorMap a f hf hd := by
-    apply ContinuousMap.ext
-    intro s
-    apply Subtype.ext
-    rfl
-  apply (e.sphereParity_zero_iff_raw_twisted_extension a f hf hd hi).mpr
-  rw [← he]
-  exact extends_twisted_sphereOperatorMap aS TS v c haS hTS hrS hheight
-    A (diskDifferential F hF) hA (fun x ↦ hDF x.val x.property) hAD hAb
-    (boundary_tangent_derivative F hF (e.toFun ∘ f) (e.smooth.comp hf) hb)
-    (fun _ ↦ rfl)
 
 end NoExoticSixSphere.EuclideanEmbedding

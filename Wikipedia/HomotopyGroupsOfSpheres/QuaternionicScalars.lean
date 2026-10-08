@@ -51,11 +51,6 @@ def k : ℍ := ⟨0, 0, 0, 1⟩
 theorem i_mul_j_eq_neg_j_mul_i : i * j = -(j * i) := by
   rw [i_mul_j, j_mul_i, neg_neg]
 
-theorem i_ne_zero : i ≠ 0 := by
-  intro h
-  have := congrArg QuaternionAlgebra.imI h
-  change (1 : ℝ) = 0 at this
-  exact one_ne_zero this
 
 theorem j_ne_zero : j ≠ 0 := by
   intro h

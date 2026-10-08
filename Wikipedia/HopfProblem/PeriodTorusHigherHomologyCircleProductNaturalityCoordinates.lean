@@ -113,11 +113,6 @@ theorem circleProjectionHomology_naturality (f : C(X, Y)) (n : ℕ) :
       (singularHomologyMap f n).comp (circleProjectionHomology X n) := by
   rw [← singularHomologyMap_comp, circleProductMap_projection, singularHomologyMap_comp]
 
-/-- Naturality of the actual section-induced map on singular homology. -/
-theorem circleSectionHomology_naturality (f : C(X, Y)) (n : ℕ) :
-    (singularHomologyMap (circleProductMap f) n).comp (circleSectionHomology X n) =
-      (circleSectionHomology Y n).comp (singularHomologyMap f n) := by
-  rw [← singularHomologyMap_comp, circleProductMap_section, singularHomologyMap_comp]
 
 /-- The first arc's actual homology coordinates commute with `f`. -/
 theorem productUHomologyEquiv_naturality (f : C(X, Y)) (n : ℕ)
@@ -139,17 +134,6 @@ theorem productVHomologyEquiv_naturality (f : C(X, Y)) (n : ℕ)
   rw [singularHomologyMap_comp, singularHomologyMap_comp] at h
   exact LinearMap.congr_fun h a
 
-/-- Naturality of the product coordinates on the pair of actual open members. -/
-theorem productArcHomologyEquiv_naturality (f : C(X, Y)) (n : ℕ)
-    (a : SingularHomology (productU X) n × SingularHomology (productV X) n) :
-    productArcHomologyEquiv Y n
-        (singularHomologyMap (productUMap f) n a.1,
-          singularHomologyMap (productVMap f) n a.2) =
-      (singularHomologyMap f n (productArcHomologyEquiv X n a).1,
-        singularHomologyMap f n (productArcHomologyEquiv X n a).2) := by
-  apply Prod.ext
-  · exact productUHomologyEquiv_naturality f n a.1
-  · exact productVHomologyEquiv_naturality f n a.2
 
 /-- The actual homology coordinates of a topological sum are natural in both summands. -/
 theorem sumHomologyEquiv_naturality {X' Y' : Type}

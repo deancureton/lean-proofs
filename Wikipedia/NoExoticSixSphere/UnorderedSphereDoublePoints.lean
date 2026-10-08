@@ -44,10 +44,6 @@ theorem ordered_ncard_eq_twice_unordered (hfin : (pairs f).Finite) :
   let := hfin.to_subtype
   exact card_eq_twice_orbits (swap f) (swap_involutive f) (swap_ne f)
 
-theorem unorderedParity_eq_half_ordered (hfin : (pairs f).Finite) :
-    unorderedParity f = (((pairs f).ncard / 2 : ℕ) : ZMod 2) := by
-  rw [ordered_ncard_eq_twice_unordered f hfin]
-  simp [unorderedParity]
 
 theorem unorderedParity_zero_of_injective (hi : Injective f) : unorderedParity f = 0 := by
   have hp : IsEmpty (pairs f) := ⟨fun p ↦ p.property.1 (hi p.property.2)⟩

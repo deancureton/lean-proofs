@@ -100,43 +100,5 @@ theorem normalized_cubic_axis_velocity
 
 variable [IsManifold 𝓘(ℝ, B) ∞ M]
 
-/-- The native cubic endpoint axis has exactly the normalized-flow germ
-wherever its scalar height derivative is nonzero. -/
-theorem eventually_cubic_axis_eq_flow
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, B) (Model m) M ∞)
-    {f : M → ℝ} (hf : ContMDiff 𝓘(ℝ, B) 𝓘(ℝ, ℝ) ∞ f) {b t s₀ : ℝ}
-    (hmodel : ∀ p ∈ Φ.source, f (Φ p) = b + cubic σ t p)
-    (hs₀ : (s₀, (0 : Fin m → ℝ)) ∈ Φ.source) (hd₀ : s₀ ^ 2 + t ≠ 0)
-    {W : (x : M) → TangentSpace 𝓘(ℝ, B) x}
-    (hW : ContMDiff 𝓘(ℝ, B) (𝓘(ℝ, B).tangent) 1
-      (fun x => (⟨x, W x⟩ : TangentBundle 𝓘(ℝ, B) M)))
-    (F : Flow ℝ M) (hcurve : ∀ x, IsMIntegralCurve (fun r => F r x) W)
-    (hnorm : ∀ᶠ x in 𝓝 (Φ (s₀, 0)), W x =
-      (mvfderiv 𝓘(ℝ, B) f x (nativeCubicDescent σ Φ t x))⁻¹ •
-        nativeCubicDescent σ Φ t x) :
-    (fun s => Φ (s, 0)) =ᶠ[𝓝 s₀]
-      (fun s => F (cubic σ t (s, 0) - cubic σ t (s₀, 0)) (Φ (s₀, 0))) := by
-  let g := fun s => cubic σ t (s, 0)
-  have hg : ContDiff ℝ ∞ g :=
-    (contDiff_cubic σ t).comp (contDiff_id.prodMk contDiff_const)
-  have hgder (s : ℝ) : deriv g s = s ^ 2 + t := (hasDerivAt_cubic_axis_parameter σ t s).deriv
-  apply eventually_eq_flow_with_scalar_height hW F hcurve hg (by rwa [hgder])
-  have hαc : ContinuousAt (fun s : ℝ => Φ (s, (0 : Fin m → ℝ))) s₀ :=
-    (hasMFDerivAt_chart_axis Φ hs₀).continuousAt
-  have hsource : ∀ᶠ s in 𝓝 s₀, (s, (0 : Fin m → ℝ)) ∈ Φ.source :=
-    (continuous_id.prodMk continuous_const).continuousAt (Φ.open_source.mem_nhds hs₀)
-  have hreg : ∀ᶠ s in 𝓝 s₀, s ^ 2 + t ≠ 0 :=
-    ((continuous_id.pow 2).add_const t).continuousAt
-      ((isClosed_singleton (x := (0 : ℝ))).isOpen_compl.mem_nhds hd₀)
-  filter_upwards [hsource, hreg, hαc hnorm] with s hs hd hWs
-  rw [hgder]
-  have hv := normalized_cubic_axis_velocity σ Φ hf hmodel hs hd
-  have hv' : (s ^ 2 + t) • W (Φ (s, 0)) =
-      mfderiv 𝓘(ℝ, Model m) 𝓘(ℝ, B) Φ (s, 0) (1, 0) := by
-    rw [hWs]
-    exact hv
-  apply (hasMFDerivAt_chart_axis Φ hs).congr_mfderiv
-  exact congrArg (fun v : TangentSpace 𝓘(ℝ, B) (Φ (s, 0)) =>
-    (1 : ℝ →L[ℝ] ℝ).smulRight v) hv'.symm
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

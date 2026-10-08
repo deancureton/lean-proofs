@@ -43,10 +43,6 @@ theorem targetRotation_mul_self : targetRotation * targetRotation = 1 := by
     simp [targetRotation, Matrix.mul_apply, Fin.sum_univ_three, Matrix.cons_val_two] <;>
     ring_nf <;> norm_num [rotationScale_sq]
 
-theorem targetRotation_det : targetRotation.det = 1 := by
-  simp [targetRotation, Matrix.det_fin_three]
-  ring_nf
-  norm_num [rotationScale_sq]
 
 theorem matrix_targetRotation (z : Vector) :
     matrix (targetRotation *ᵥ z) = targetRotation * matrix z * targetRotation := by

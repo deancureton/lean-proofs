@@ -36,10 +36,6 @@ theorem homotopicRel (H : HomotopicRelWithin f g C K O) : f.HomotopicRel g C := 
   obtain ⟨F, _⟩ := H
   exact ⟨F⟩
 
-theorem mapsTo_left (H : HomotopicRelWithin f g C K O) : MapsTo f K O := by
-  obtain ⟨F, hF⟩ := H
-  intro x hx
-  exact (congrArg (fun y => y ∈ O) (F.map_zero_left x)).mp (hF 0 hx)
 
 theorem mapsTo_right (H : HomotopicRelWithin f g C K O) : MapsTo g K O := by
   obtain ⟨F, hF⟩ := H
@@ -79,17 +75,6 @@ def restrictMap (f : C(X, Y)) (hf : MapsTo f K O) : C(K, O) :=
   ⟨fun x => ⟨f x, hf x.property⟩,
     (f.continuous.comp continuous_subtype_val).subtype_mk _⟩
 
-theorem homotopicRel_restrict (H : HomotopicRelWithin f g C K O)
-    (hf : MapsTo f K O) (hg : MapsTo g K O) :
-    (restrictMap f hf).HomotopicRel (restrictMap g hg) {x : K | x.val ∈ C} := by
-  obtain ⟨F, hF⟩ := H
-  refine ⟨{
-    toFun := fun p => ⟨F (p.1, p.2.val), hF p.1 p.2.property⟩
-    continuous_toFun := (F.continuous.comp
-      (continuous_fst.prodMk (continuous_subtype_val.comp continuous_snd))).subtype_mk _
-    map_zero_left := fun x => Subtype.ext (F.map_zero_left x.val)
-    map_one_left := fun x => Subtype.ext (F.map_one_left x.val)
-    prop' := fun t x hx => Subtype.ext (F.eq_fst t hx) }⟩
 
 end HomotopicRelWithin
 end Wikipedia.SmoothSixDPoincare

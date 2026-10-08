@@ -72,11 +72,5 @@ def retainedCapOldMap : C(UnitSphere N, oldPatch (U.liftCapFace j hj hopen A x�
 theorem retainedCapOldMap_point (v : UnitSphere N) :
     (U.retainedCapOldMap j hj hopen A x₀ v).val = j v := rfl
 
-theorem retainedCapOldMap_range : range (U.retainedCapOldMap j hj hopen A x₀) =
-    (Subtype.val : oldPatch (U.liftCapFace j hj hopen A x₀) → U.boundary) ⁻¹' range j := by
-  ext x
-  constructor
-  · rintro ⟨v, rfl⟩; exact ⟨v, rfl⟩
-  · rintro ⟨v, hv⟩; exact ⟨v, Subtype.ext hv⟩
 
 end Wikipedia.SmoothSixDPoincare.SmoothBoundaryBody

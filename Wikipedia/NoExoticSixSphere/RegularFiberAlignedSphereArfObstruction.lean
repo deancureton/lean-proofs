@@ -52,20 +52,5 @@ theorem geometricArf_eq_zero_of_suspended_homotopy_sixSphere_at
     f G hf hG b hregf hregG hd a x (D.symm.toHomeomorph.trans hX) j
     (hH.trans (iterate_homotopic HG j))
 
-theorem not_finitely_stably_homotopic_sixSphere_at_of_geometricArf_ne_zero
-    (hX : {x : Sphere m // g x = c} ≃ₜ Sphere 6) :
-    letI := regularFiberAtlas f hf b hregf 6 (by simpa using hd);
-    letI := regularFiber_isManifold f hf b hregf 6 _;
-    letI := fiber_compact f b;
-    ∀ r : (embedding f hf b hregf 6 hd).TubularRetraction,
-      GeometricArf.invariant (embedding f hf b hregf 6 hd) (frame f hf b hregf 6 hd a) r x ≠ 0 →
-        ¬ ∃ j : ℕ, (iterate f j).Homotopic (iterate g j) := by
-  let := regularFiberAtlas f hf b hregf 6 (by simpa using hd)
-  let := regularFiber_isManifold f hf b hregf 6 (by simpa using hd)
-  let := fiber_compact f b
-  intro r hArf
-  rintro ⟨j, hH⟩
-  exact hArf (geometricArf_eq_zero_of_suspended_homotopy_sixSphere_at
-    f g hf hg b c hregf hregg hd hn a x hX j hH r)
 
 end NoExoticSixSphere.RegularSphereFiber

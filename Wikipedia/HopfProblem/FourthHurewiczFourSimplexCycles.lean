@@ -33,17 +33,6 @@ theorem basedFourSimplexChain_boundary (τ : BasedFourSimplex x) :
     ((singularComplex X).d 4 3).hom (basedFourSimplexChain τ) = 0 :=
   HigherHurewicz.correctedSimplexChain_boundary 3 x τ.val (basedFourSimplex_face τ)
 
-/-- In even degree the uncorrected simplex need not be a cycle. -/
-theorem basedFourSimplex_boundary (τ : BasedFourSimplex x) :
-    ((singularComplex X).d 4 3).hom (simplexChain X 4 τ.val) =
-      simplexChain X 3 (ContinuousMap.const (Simplex 3) x) := by
-  have h := basedFourSimplexChain_boundary τ
-  rw [basedFourSimplexChain_eq, map_sub] at h
-  have hc := HigherHurewicz.boundary_constantSimplexChain_even 3 x (by decide)
-  rw [show ((singularComplex X).d 4 3).hom
-      (simplexChain X 4 (ContinuousMap.const (Simplex 4) x)) =
-      simplexChain X 3 (ContinuousMap.const (Simplex 3) x) from hc] at h
-  exact sub_eq_zero.mp h
 
 /-- The actual corrected singular four-cycle. -/
 def basedFourSimplexCycle (τ : BasedFourSimplex x) :

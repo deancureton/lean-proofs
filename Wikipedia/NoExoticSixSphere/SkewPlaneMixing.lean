@@ -37,18 +37,6 @@ theorem commutator_mixing (K : SkewOperators n) {α β : ℝ} {x y v w : Vector 
     operator_smul_left, operator_smul_left, operator_smul_right, operator_smul_right]
   module
 
-theorem commutator_companion (K : SkewOperators n) {α β : ℝ} {x y v w : Vector n}
-    (hx : (K : Vector n →L[ℝ] Vector n) x = α • y)
-    (hy : (K : Vector n →L[ℝ] Vector n) y = (-α) • x)
-    (hv : (K : Vector n →L[ℝ] Vector n) v = β • w)
-    (hw : (K : Vector n →L[ℝ] Vector n) w = (-β) • v) :
-    commutator (K : Vector n →L[ℝ] Vector n) (companion x y v w : Vector n →L[ℝ] Vector n) =
-      (-(α + β)) • (mixing x y v w : Vector n →L[ℝ] Vector n) := by
-  change commutator (K : Vector n →L[ℝ] Vector n) (operator x w + operator y v) =
-    (-(α + β)) • (operator x v - operator y w)
-  rw [commutator_add_right, commutator_operator, commutator_operator, hx, hy, hv, hw,
-    operator_smul_left, operator_smul_left, operator_smul_right, operator_smul_right]
-  module
 
 theorem innerForm_mixing {x y : Vector n} (hx : ‖x‖ = 1) (hy : ‖y‖ = 1)
     (hxy : inner ℝ x y = 0) (v w v' w' : complement x y) :

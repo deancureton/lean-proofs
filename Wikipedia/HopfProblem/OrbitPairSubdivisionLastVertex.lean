@@ -88,10 +88,5 @@ theorem lastVertex_stdSimplex (n : SimplexCategory) :
   exact SSet.sd.descOfIsLeftKanExtension_fac_app SSet.stdSimplex.sdIso.inv (𝟭 SSet)
     (simplexLastVertexNat ≫ (Functor.rightUnitor SSet.stdSimplex).inv) n
 
-theorem lastVertex_simplex (S : SSet.{u}) (n : ℕ) (x : S _⦋n⦌) :
-    SSet.stdSimplex.sdIso.inv.app ⦋n⦌ ≫ SSet.sd.map (SSet.yonedaEquiv.symm x) ≫
-        lastVertex.app S = simplexLastVertex ⦋n⦌ ≫ SSet.yonedaEquiv.symm x := by
-  rw [lastVertex.naturality, ← Category.assoc, lastVertex_stdSimplex]
-  rfl
 
 end Wikipedia.HopfProblem.OrbitPair.Subdivision

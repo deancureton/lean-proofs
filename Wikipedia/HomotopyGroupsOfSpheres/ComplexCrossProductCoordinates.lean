@@ -37,9 +37,6 @@ theorem matrix_transpose_mul_conjugate_vector (z : Vector) :
     simp [matrix, outer, crossMatrix, normPolynomial, Matrix.mulVec, dotProduct,
       Fin.sum_univ_three, Matrix.cons_val_two] <;> ring
 
-theorem matrix_unit_mul_conjugate (z : UnitSphere) :
-    matrix z.val *ᵥ (fun r ↦ star (z.val r)) = z.val := by
-  rw [matrix_mul_conjugate_vector, normPolynomial_unit, one_smul]
 
 theorem matrix_unit_transpose_mul_conjugate (z : UnitSphere) :
     (matrix z.val).transpose *ᵥ (fun r ↦ star (z.val r)) = z.val := by

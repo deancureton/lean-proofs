@@ -88,14 +88,6 @@ theorem extend_cylinderMap (f : ℝ × M → N) (g : ℝ × Plane → N) (q : �
   rw [extend_on c f g ⟨cylinderMap c q, cylinderMap_mem_region c hsource q⟩,
     coordinates_cylinderMap c hsource]
 
-theorem extend_eq_off_image (f : ℝ × M → N) (g : ℝ × Plane → N)
-    {T : Set (ℝ × Plane)} (hfixed : ∀ q, q ∉ T → g q = f (cylinderMap c q))
-    {q : ℝ × M} (hq : q ∉ cylinderMap c '' T) : extend c f g q = f q := by
-  apply OpenMapExtension.eq_off (region c) f (g ∘ coordinates c) (S := cylinderMap c '' T) _ hq
-  intro p hp
-  have hpt : coordinates c p ∉ T := fun h =>
-    hp ⟨coordinates c p, h, cylinderMap_coordinates c p⟩
-  exact (hfixed _ hpt).trans (congrArg f (cylinderMap_coordinates c p))
 
 variable [T2Space M]
 

@@ -97,24 +97,5 @@ theorem normalSourceChange_toContinuousLinearMap {k' : ℕ}
     (normalSourceChange Q).toContinuousLinearMap = BlockSum.operator 4 Q.toContinuousLinearMap :=
   rfl
 
-theorem exists_combined_extension_normal_coordinates {k' : ℕ}
-    (C : Vector L ≃L[ℝ] (Vector N × ℝ)) (Q : Vector k' ≃L[ℝ] Vector k)
-    (G : C(Disk (E := Vector 4), Monomorphism.Space L (k + 4)))
-    (A : Sphere 3 → Vector k →L[ℝ] Vector L) (D : Sphere 3 → Vector 4 →L[ℝ] Vector L)
-    (hG : ∀ s, (G (boundaryToDisk s)).val = OperatorSum.operator (A s) (D s)) :
-    ∃ H : C(Disk (E := Vector 4), Monomorphism.Space (N + 6) ((k' + 5) + 4)),
-      ∀ s, (H (boundaryToDisk s)).val =
-        combined (C.toContinuousLinearMap.comp ((A s).comp Q.toContinuousLinearMap))
-          (C.toContinuousLinearMap.comp (D s)) := by
-  let G' : C(Disk (E := Vector 4), Monomorphism.Space L (k' + 4)) :=
-    (Monomorphism.recoordinateHomeomorph (ContinuousLinearEquiv.refl ℝ (Vector L))
-      (normalSourceChange Q) :
-        C(Monomorphism.Space L (k + 4), Monomorphism.Space L (k' + 4))).comp G
-  have hG' : ∀ s, (G' (boundaryToDisk s)).val =
-      OperatorSum.operator ((A s).comp Q.toContinuousLinearMap) (D s) := by
-    intro s
-    change (G (boundaryToDisk s)).val.comp (normalSourceChange Q).toContinuousLinearMap = _
-    rw [hG, normalSourceChange_toContinuousLinearMap, OperatorSum.operator_comp_block]
-  exact exists_combined_extension C G' (fun s ↦ (A s).comp Q.toContinuousLinearMap) D hG'
 
 end NoExoticSixSphere.CollaredDiskFrame

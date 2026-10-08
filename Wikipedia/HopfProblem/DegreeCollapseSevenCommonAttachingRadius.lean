@@ -54,18 +54,5 @@ theorem normalizeAtRadius_twist (A B : FramedAttachingProduct e a f)
       (A.normalizeAtRadius r hr hA).tube (s, (ρ s).1.1 w) := by
   rw [normalizeAtRadius_tube, normalizeAtRadius_tube, ht, map_smul]
 
-/-- Both products now use the same actual tube radius before unit normalization. -/
-theorem exists_common_normalized_twist (A B : FramedAttachingProduct e a f)
-    (ρ : C(Sphere 3, OrthogonalOperators 4))
-    (ht : ∀ (s : Sphere 3) (w : Vector 4), B.tube (s, w) = A.tube (s, (ρ s).1.1 w)) :
-    ∃ A' B' : FramedAttachingProduct e a f,
-      A'.radius = 2 ∧ B'.radius = 2 ∧ A'.disk = A.disk ∧ B'.disk = B.disk ∧
-      ∀ (s : Sphere 3) (w : Vector 4), B'.tube (s, w) = A'.tube (s, (ρ s).1.1 w) := by
-  let r := min A.radius B.radius
-  have hr : 0 < r := lt_min A.radius_pos B.radius_pos
-  have hA : r ≤ A.radius := min_le_left _ _
-  have hB : r ≤ B.radius := min_le_right _ _
-  exact ⟨A.normalizeAtRadius r hr hA, B.normalizeAtRadius r hr hB,
-    rfl, rfl, rfl, rfl, normalizeAtRadius_twist A B ρ ht r hr hA hB⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery.FramedAttachingProduct

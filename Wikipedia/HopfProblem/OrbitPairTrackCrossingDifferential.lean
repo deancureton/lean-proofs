@@ -125,30 +125,5 @@ theorem transverseAt_iff_track_coprod {F : ℝ × M → N} (q : ℝ × (M × M))
   rw [hU, hV, hT₁, hT₂]
   exact (surjective_track_coprod_iff A B).symm
 
-/-- A normalized model-space formula for each native track derivative
-can establish transversality without unfolding a concrete family inside
-dependent tangent-space instances. -/
-theorem transverseAt_of_track_derivative_formulas {F : ℝ × M → N}
-    (q : ℝ × (M × M))
-    (hF₁ : MDifferentiableAt (𝓘(ℝ, ℝ).prod I) J F (first q))
-    (hF₂ : MDifferentiableAt (𝓘(ℝ, ℝ).prod I) J F (second q))
-    (A B : ℝ × E →L[ℝ] ℝ × G)
-    (hA : (mfderiv (𝓘(ℝ, ℝ).prod I) (𝓘(ℝ, ℝ).prod J)
-      (NativeFamily.track F) (first q) : ℝ × E →L[ℝ] ℝ × G) = A)
-    (hB : (mfderiv (𝓘(ℝ, ℝ).prod I) (𝓘(ℝ, ℝ).prod J)
-      (NativeFamily.track F) (second q) : ℝ × E →L[ℝ] ℝ × G) = B)
-    (ht : Surjective (A.coprod B)) :
-    Coincidence.TransverseAt (I := 𝓘(ℝ, ℝ).prod (I.prod I)) (J := J)
-      (F ∘ first) (F ∘ second) q := by
-  apply (transverseAt_iff_track_coprod q hF₁ hF₂).mpr
-  let U : ℝ × E →L[ℝ] ℝ × G :=
-    mfderiv (𝓘(ℝ, ℝ).prod I) (𝓘(ℝ, ℝ).prod J) (NativeFamily.track F) (first q)
-  let V : ℝ × E →L[ℝ] ℝ × G :=
-    mfderiv (𝓘(ℝ, ℝ).prod I) (𝓘(ℝ, ℝ).prod J) (NativeFamily.track F) (second q)
-  have hU : U = A := hA
-  have hV : V = B := hB
-  change Surjective (U.coprod V)
-  rw [hU, hV]
-  exact ht
 
 end Wikipedia.HopfProblem.OrbitPair.SynchronizedPairs

@@ -61,18 +61,6 @@ theorem chartSingularSet_isDiscrete (D : X → BlockMap E F) (hD : ContDiff ℝ 
     rcases Set.mem_singleton_iff.mp hy with rfl
     exact ⟨he, hx⟩
 
-theorem finite_singularSet_inter (D : X → BlockMap E F) (hD : ContDiff ℝ ∞ D)
-    (hd : finrank ℝ X = finrank ℝ F)
-    (hreg : ∀ x, D x ∈ chart → residual (D x) = 0 →
-      Surjective (fderiv ℝ (fun y ↦ residual (D y)) x))
-    {K : Set X} (hK : IsCompact K) (hchart : ∀ x ∈ K, D x ∈ chart) :
-    (K ∩ {x | ¬ Injective (D x)}).Finite := by
-  have hc : IsClosed {x | ¬ Injective (D x)} :=
-    (ContinuousLinearMap.isOpen_injective.preimage hD.continuous).isClosed_compl
-  apply (hK.inter_right hc).finite
-  apply (chartSingularSet_isDiscrete D hD hd hreg).mono
-  intro x hx
-  exact ⟨hchart x hx.1, hx.2⟩
 
 theorem dense_isolated_translations (D : X → BlockMap E F) (hD : ContDiff ℝ ∞ D)
     (hd : finrank ℝ X = finrank ℝ F) :

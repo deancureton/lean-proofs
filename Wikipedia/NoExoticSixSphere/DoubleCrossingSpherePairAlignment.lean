@@ -64,13 +64,7 @@ theorem alignedRight_center : alignedRight (sourceChart 0) = 0 := by
   change right (alignment (sourceChart 0)) = 0
   rw [alignment_center, right_first]
 
-theorem alignedLeft_zero_fiber (x : Sphere 3) : alignedLeft x = 0 ↔ x = sourceChart 0 := by
-  rw [← alignedLeft_center]
-  exact injective_alignedLeft.eq_iff
 
-theorem alignedRight_zero_fiber (x : Sphere 3) : alignedRight x = 0 ↔ x = sourceChart 0 := by
-  rw [← alignedRight_center]
-  exact injective_alignedRight.eq_iff
 
 theorem norm_alignedLeft_le_two (x : Sphere 3) : ‖alignedLeft x‖ ≤ 2 :=
   norm_left_le_two (alignment x)
@@ -123,8 +117,5 @@ theorem aligned_intersectionPairs_ncard :
   (MapIntersections.pairs_ncard_reparametrize left right alignment.toEquiv alignment.toEquiv).trans
     intersectionPairs_ncard
 
-theorem aligned_intersectionParity_zero : MapIntersections.parity alignedLeft alignedRight = 0 := by
-  rw [MapIntersections.parity, aligned_intersectionPairs_ncard]
-  decide
 
 end NoExoticSixSphere.DoubleCrossingSpherePair

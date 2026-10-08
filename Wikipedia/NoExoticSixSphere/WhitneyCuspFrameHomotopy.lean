@@ -66,13 +66,6 @@ def gaussMap : C(Sphere 3, Space 6 3) :=
     (fun q ↦ injective_deformation 1 zero_le_one q.val (ne_zero_of_mem_unit_sphere q))
     (continuous_deformation_sphere 1)
 
-theorem gaussMap_operator (q : Sphere 3) :
-    (gaussMap q).val = Orthonormalization.operator
-      (fun p : Vector 4 ↦ fderiv ℝ (map (p 0)) (source p)) q.val := by
-  change Orthonormalization.operator (fun p : Vector 4 ↦ deformation 1 p) q.val = _
-  have he : (fun p : Vector 4 ↦ deformation 1 p) =
-      fun p ↦ fderiv ℝ (map (p 0)) (source p) := funext deformation_one
-  rw [he]
 
 def normalizedDeformation : C(unitInterval × Sphere 3, Space 6 3) :=
   Orthonormalization.map

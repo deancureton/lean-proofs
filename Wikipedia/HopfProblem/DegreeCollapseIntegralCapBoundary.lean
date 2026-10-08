@@ -67,16 +67,5 @@ theorem cap_is_cycle_of_boundary_killed (p q : ℕ) (α : Cochain X p)
       (capInDegree (p := p) (q := q + 1) (by omega) α c) = 0 := by
   rw [boundary_cap_closed p q α hα c, hc, zsmul_zero]
 
-/-- A relative coboundary caps to this explicit absolute boundary whenever
-the lower relative cochain kills the ambient boundary chain. -/
-theorem cap_coboundary_boundary (p q : ℕ) (α : Cochain X p) (c : Chains X (p + q + 1))
-    (hc : capInDegree rfl α (((singularComplex X).d (p + q + 1) (p + q)).hom c) = 0) :
-    capInDegree (p := p + 1) (q := q) (by omega) (coboundary α) c =
-      ((singularComplex X).d (q + 1) q).hom
-        (-((-1 : ℤ) ^ p) • capInDegree (p := p) (q := q + 1) (by omega) α c) := by
-  have he := cap_boundary p q α c
-  rw [hc] at he
-  rw [map_zsmul, neg_zsmul]
-  exact eq_neg_of_add_eq_zero_left he.symm
 
 end Wikipedia.HopfProblem.DegreeCollapse.IntegralCap

@@ -72,12 +72,5 @@ variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E] [TopologicalSpace M] [ChartedSpace E M]
   [IsManifold 𝓘(ℝ, E) ∞ M] [T2Space M] [CompactSpace M]
 
-/-- A closed band without native critical points is a product with its bottom level. -/
-theorem nonempty_regularBandHomeomorph {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) {a b : ℝ} (hab : a ≤ b)
-    (hband : ∀ x, f x ∈ Icc a b → x ∉ ManifoldMorse.criticalPoints E f) :
-    Nonempty ({x : M // f x ∈ Icc a b} ≃ₜ ({x : M // f x = a} × Icc a b)) := by
-  obtain ⟨F, hF⟩ := exists_heightTranslatingFlow hf hband
-  exact ⟨regularBandHomeomorphOfFlow hf.continuous hab F hF⟩
 
 end Wikipedia.SmoothSixDPoincare.FlowConstruction

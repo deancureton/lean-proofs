@@ -44,18 +44,7 @@ theorem contMDiff_inwardNormal : letI := zeroAtlas t ht hreg;
   let := zeroAtlas t ht hreg
   exact (contMDiff_outwardNormal e r t ht hreg).neg
 
-theorem contMDiff_inwardTimeCovector : letI := zeroAtlas t ht hreg;
-    ContMDiff (𝓡 n) 𝓘(ℝ, Vector e.ambientDimension →L[ℝ] ℝ) ∞
-      (inwardTimeCovector e r t) := by
-  let := zeroAtlas t ht hreg
-  exact ((contMDiff_timeCovector e r t ht).comp (contMDiff_zeroInclusion t ht hreg)).neg
 
-theorem inwardTimeCovector_frame
-    (a : SmoothRangeFrame (𝓡 (n + 1)) e.normalProjection e.NormalModel)
-    (p : {x : M // t x = 0}) (v : e.NormalModel) :
-    inwardTimeCovector e r t p (a.ambient p.val v) = 0 := by
-  change -timeCovector e r t p.val (a.ambient p.val v) = 0
-  rw [timeCovector_frame, neg_zero]
 
 include ht hreg in
 theorem inwardTimeCovector_inward_neg (p : {x : M // t x = 0}) :

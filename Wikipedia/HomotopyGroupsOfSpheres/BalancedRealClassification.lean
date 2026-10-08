@@ -55,13 +55,6 @@ theorem mem_locus_of_relations (n : ℕ) (A : Matrix (Index n) (Index n) ℝ)
   rw [orbitMatrix_mul, hV]
   exact hA.symm
 
-theorem mem_locus_iff (n : ℕ) (A : Matrix (Index n) (Index n) ℝ) :
-    A ∈ locus n ↔ A.transpose = A ∧ A * A = 1 ∧ A.trace = 0 := by
-  constructor
-  · intro hA
-    exact ⟨transpose_eq ⟨A, hA⟩, square_eq ⟨A, hA⟩, trace_eq_zero ⟨A, hA⟩⟩
-  · rintro ⟨hsym, hsq, htrace⟩
-    exact mem_locus_of_relations n A hsym hsq htrace
 
 def ofRelations (n : ℕ) (A : Matrix (Index n) (Index n) ℝ)
     (hsym : A.transpose = A) (hsq : A * A = 1) (htrace : A.trace = 0) : Space n :=

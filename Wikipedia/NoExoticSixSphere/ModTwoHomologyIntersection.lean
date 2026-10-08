@@ -88,21 +88,7 @@ theorem modTwoHomologyIntersection_sphereClass (f g : BasedMap 3 M m) :
   unfold modTwoSphereClass
   rw [modTwoHomologyIntersection_reduction, integralHomologyIntersection_sphereClass]
 
-theorem modTwoHomologyIntersection_comm (a b : ModHomology 2 M 3) :
-    modTwoHomologyIntersection e r m a b = modTwoHomologyIntersection e r m b a := by
-  obtain ⟨f, rfl⟩ := modTwoSphereClass_surjective m a
-  obtain ⟨g, rfl⟩ := modTwoSphereClass_surjective m b
-  rw [modTwoHomologyIntersection_sphereClass, modTwoHomologyIntersection_sphereClass]
-  exact sphereIntersectionNumber_comm e r f.val g.val
 
-theorem modTwoHomologyIntersection_independent (e' : EuclideanEmbedding 6 M)
-    (r' : TubularRetraction e') :
-    modTwoHomologyIntersection e r m = modTwoHomologyIntersection e' r' m := by
-  ext a b
-  obtain ⟨f, rfl⟩ := modTwoSphereClass_surjective m a
-  obtain ⟨g, rfl⟩ := modTwoSphereClass_surjective m b
-  rw [modTwoHomologyIntersection_sphereClass, modTwoHomologyIntersection_sphereClass]
-  exact sphereIntersectionNumber_independent e r e' r' f.val g.val
 
 theorem modTwoHomologyIntersection_unique
     (B : ModHomology 2 M 3 →ₗ[ZMod 2] ModHomology 2 M 3 →ₗ[ZMod 2] ZMod 2)

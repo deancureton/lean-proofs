@@ -86,13 +86,5 @@ theorem midpoint_target_of_matrix (B : Space (Fin 3)) (u : unitary ℂ)
   simp only [embed, Quaternion.coeComplex_zero, zero_mul, add_zero]
   fin_cases r <;> rfl
 
-theorem midpoint_target_iff (B : Space (Fin 3)) (hdet : B.val.val.det = 1) :
-    firstColumnFormula (Real.pi / 2) (Real.pi / 2) B = targetColumn ↔
-      ∃ u : unitary ℂ, u.val ^ 3 = -1 ∧
-        B.val.val = u.val • targetMatrix targetAlpha targetBeta := by
-  constructor
-  · exact midpoint_target_forward B hdet
-  · rintro ⟨u, _, hB⟩
-    exact midpoint_target_of_matrix B u hB
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

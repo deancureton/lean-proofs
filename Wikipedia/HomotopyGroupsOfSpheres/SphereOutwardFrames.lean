@@ -22,8 +22,6 @@ namespace Wikipedia.HomotopyGroupsOfSpheres.SphereCenteredCoordinates
 variable {E F : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [NormedAddCommGroup F] [InnerProductSpace ℝ F]
 
-theorem inner_self_unit (z : UnitSphere E) : inner ℝ z.val z.val = 1 := by
-  rw [real_inner_self_eq_norm_sq, mem_sphere_zero_iff_norm.mp z.property, one_pow]
 
 theorem inner_normal_tangent (z : UnitSphere E) (v : Tangent z) :
     inner ℝ z.val v.val = 0 := by
@@ -93,12 +91,5 @@ theorem outwardFrame_orientation_map {ι : Type*} [Fintype ι] [DecidableEq ι]
   exact ((outwardFrame z b).orientation_comp_linearEquiv_eq_iff_det_pos
     e.toLinearEquiv).mpr he
 
-/-- The tangent part of an outward frame is the actual inverse-chart differential. -/
-theorem outwardFrame_inverse_fderiv {ι : Type*} (z : UnitSphere E)
-    (b : Module.Basis ι ℝ (Tangent z)) (i : ι) :
-    outwardFrame z b (Sum.inr i) =
-      fderiv ℝ (fun v : Tangent z ↦ (inverse z v).val) 0 (b i) := by
-  rw [(hasFDerivAt_inverse_val z).fderiv]
-  exact outwardFrame_tangent z b i
 
 end Wikipedia.HomotopyGroupsOfSpheres.SphereCenteredCoordinates

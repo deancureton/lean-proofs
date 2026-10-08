@@ -38,14 +38,6 @@ theorem diagonal_squared_coordinate (z : UnitSphere) (d : Fin 3 → ℂ)
   squared_coordinate_elimination _ _ _ (diagonal_entry_unitary z d hd r)
     (diagonal_phase_equation z d hd r) (diagonal_square_norm_relation z d hd r)
 
-theorem diagonal_squared_coordinate_eq (z : UnitSphere) (d : Fin 3 → ℂ)
-    (hd : (symmetricMap z).val.val = Matrix.diagonal d) (r : Fin 3)
-    (hc : diagonalCoefficient (d r) (squareSum z.val) ≠ 0) :
-    z.val r ^ 2 = diagonalNumerator (d r) (squareSum z.val) /
-      diagonalCoefficient (d r) (squareSum z.val) := by
-  apply (eq_div_iff hc).mpr
-  rw [mul_comm]
-  exact diagonal_squared_coordinate z d hd r
 
 theorem diagonal_same_squared_coordinate (z w : UnitSphere) (d : Fin 3 → ℂ)
     (hz : (symmetricMap z).val.val = Matrix.diagonal d)

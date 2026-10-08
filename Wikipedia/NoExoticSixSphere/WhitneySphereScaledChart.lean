@@ -27,8 +27,6 @@ def dilation (ε : ℝ) (hε : 0 < ε) :
     (Vector 3 × Vector 3) ≃L[ℝ] (Vector 3 × Vector 3) :=
   ContinuousLinearEquiv.smulLeft (R₁ := ℝ) (M₁ := Vector 3 × Vector 3) (Units.mk0 ε hε.ne')
 
-theorem dilation_apply (ε : ℝ) (hε : 0 < ε) (z : Vector 3 × Vector 3) :
-    dilation ε hε z = ε • z := by rfl
 
 variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 6) M]
   (Φ : PartialDiffeomorph 𝓘(ℝ, Vector 3 × Vector 3) (𝓡 6)
@@ -38,8 +36,6 @@ def scaledChart (ε : ℝ) (hε : 0 < ε) :
     PartialDiffeomorph 𝓘(ℝ, Vector 3 × Vector 3) (𝓡 6) (Vector 3 × Vector 3) M ∞ :=
   (dilation ε hε).toDiffeomorph.toPartialDiffeomorph.trans Φ
 
-theorem scaledChart_apply (ε : ℝ) (hε : 0 < ε) (z : Vector 3 × Vector 3) :
-    scaledChart Φ ε hε z = Φ (ε • z) := by rfl
 
 theorem unitProduct_subset_scaledChart_source {ε : ℝ} (hε : 0 < ε)
     (hprod : closedBall (0 : Vector 3) ε ×ˢ closedBall (0 : Vector 3) ε ⊆ Φ.source) :
@@ -56,8 +52,6 @@ theorem unitProduct_subset_scaledChart_source {ε : ℝ} (hε : 0 < ε)
     have hz2 : ‖z.2‖ ≤ 1 := by simpa only [mem_closedBall, dist_zero_right] using hz.2
     nlinarith
 
-theorem chartMap_scaledChart (ε : ℝ) (hε : 0 < ε) :
-    chartMap (scaledChart Φ ε hε) = fun x ↦ Φ (ε • map x) := by rfl
 
 end NoExoticSixSphere.WhitneySphere
 

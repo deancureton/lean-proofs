@@ -95,17 +95,6 @@ def openCell (n k : ℕ) (hn : 0 < n) := CellAttachmentChart.openCell (isPushout
 def chart (n k : ℕ) (hn : 0 < n) : Coordinates n k ≃ₜ openCell n k hn :=
   CellAttachmentChart.chart (isPushout n k hn)
 
-theorem openCell_eq_topStratum (n k : ℕ) (hn : 0 < n) :
-    (openCell n k hn : Set (James.stage (spherePole n) (k + 1))) =
-      Cell.topStratum n (k + 1) := by
-  ext w
-  constructor
-  · rintro ⟨x, rfl⟩
-    exact (Cell.size_characteristic_eq_iff n (k + 1) x.val).mpr x.property
-  · intro hw
-    obtain ⟨x, rfl⟩ := Cell.closedPresentation_surjective n (k + 1) hn w
-    have hx : x.val ∈ ball 0 1 := (Cell.size_characteristic_eq_iff n (k + 1) x.val).mp hw
-    exact ⟨⟨x.val, hx⟩, rfl⟩
 
 def punctured (n k : ℕ) (p : Coordinates n k) (hp : ‖p‖ < 1) :=
   PuncturedCellAttachment.punctured (j := presentation n k) p hp

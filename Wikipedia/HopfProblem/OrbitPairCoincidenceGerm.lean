@@ -33,10 +33,5 @@ theorem differential_congr {u v u' v' : X → N} {x : X}
   change B - A = B' - A'
   rw [hA, hB]
 
-theorem transverseAt_congr {u v u' v' : X → N} {x : X}
-    (hu : u =ᶠ[𝓝 x] u') (hv : v =ᶠ[𝓝 x] v') :
-    TransverseAt (I := I) (J := J) u v x ↔ TransverseAt (I := I) (J := J) u' v' x := by
-  unfold TransverseAt
-  rw [differential_congr hu hv]
 
 end Wikipedia.HopfProblem.OrbitPair.Coincidence

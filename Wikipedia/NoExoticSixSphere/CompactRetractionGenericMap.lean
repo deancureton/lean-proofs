@@ -105,24 +105,5 @@ theorem exists_small_regular_on_compact_mem [IsManifold (𝓡 n) ∞ M]
   · intro x hx hzero
     exact map_eq_of_cutoff_zero e r f χ p x (hb x hx) hzero
 
-theorem exists_small_regular_on_compact [IsManifold (𝓡 n) ∞ M]
-    {L : Set (Vector d)} (hL : IsCompact L)
-    (hf : ∀ x ∈ L, ContMDiffAt (𝓡 d) (𝓡 n) ∞ f x) (hχ : ContDiff ℝ ∞ χ)
-    (hb : ∀ x ∈ L, f x ∈ r.base) (U : TopologicalSpace.Opens (Vector d))
-    (hUL : (U : Set _) ⊆ L) (hd : d = 4) (hn : n = 7) {ε : ℝ} (hε : 0 < ε) :
-    ∃ C : Set (PartialDiffeomorph (𝓡 n) (𝓡 n) M (Vector n) ∞),
-      ∃ p : Parameters d e,
-        C.Countable ∧ (∀ y : M, ∃ c ∈ C, y ∈ c.source) ∧ ‖p‖ < ε ∧
-        (∀ x ∈ L, ambient e f χ p x ∈ r.domain) ∧
-        (∀ x ∈ L, ContMDiffAt (𝓡 d) (𝓡 n) ∞ (map e r f χ p) x) ∧
-        (∀ x ∈ L, χ x = 0 → map e r f χ p x = f x) ∧
-        ∀ c ∈ C, OperatorRank.RegularFourSevenOn
-          (fun x ↦ chartJet e r f χ c (p, x))
-          {x | (p, x) ∈ activeChartDomain e r f χ U
-            (fun x hx ↦ (hf x (hUL hx)).contMDiffWithinAt) hχ c} := by
-  obtain ⟨C, p, hC, hcov, hp, -, hmem, hs, heq, hg⟩ :=
-    exists_small_regular_on_compact_mem e r f χ hL hf hχ hb U hUL hd hn
-      univ univ_mem hε
-  exact ⟨C, p, hC, hcov, hp, hmem, hs, heq, hg.1⟩
 
 end NoExoticSixSphere.CompactRetractionAffineFamily

@@ -30,11 +30,5 @@ theorem cubeOrientation_sum (n : ℕ) :
   rw [Finset.sum_neg_distrib] at h
   omega
 
-/-- The same cancellation with coefficients in any additive commutative group. -/
-theorem cubeOrientation_constant_sum {A : Type*} [AddCommGroup A] (n : ℕ) (a : A) :
-    (∑ e : Equiv.Perm (Fin (n + 2)), cubeOrientation e • a) = 0 := by
-  have h := map_sum (zmultiplesHom A a) (cubeOrientation (n := n + 2)) Finset.univ
-  rw [cubeOrientation_sum] at h
-  exact h.symm.trans (zero_zsmul a)
 
 end Wikipedia.HopfProblem.HigherHurewicz.SimplexGeometry

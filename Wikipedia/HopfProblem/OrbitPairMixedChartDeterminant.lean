@@ -63,19 +63,5 @@ theorem det_of_comparison_square (K : S ≃L[ℝ] W) (P : S ≃L[ℝ] R)
 
 variable {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V] [FiniteDimensional ℝ V]
 
-theorem det_pair_comparison (K : (V × V) ≃L[ℝ] W) (P : (V × V) ≃L[ℝ] R)
-    (Q : R ≃L[ℝ] W) (C : W →L[ℝ] W) (M : R →L[ℝ] R)
-    (D : (V × V) →L[ℝ] (V × V)) (A B : V →L[ℝ] V)
-    (h : K.symm.toContinuousLinearMap.comp
-      (C.comp (Q.toContinuousLinearMap.comp (M.comp P.toContinuousLinearMap))) =
-        D.comp (A.prodMap B)) :
-    M.det * C.det * (fixedCoordinates K P Q).toContinuousLinearMap.det =
-      D.det * A.det * B.det := by
-  have hs := det_of_comparison_square K P Q C M (D.comp (A.prodMap B)) h
-  have hp : (D.comp (A.prodMap B)).det = D.det * (A.det * B.det) := by
-    change (D.toLinearMap.comp (A.toLinearMap.prodMap B.toLinearMap)).det = _
-    rw [LinearMap.det_comp, LinearMap.det_prodMap]
-  rw [hp] at hs
-  exact hs.trans (mul_assoc _ _ _).symm
 
 end Wikipedia.HopfProblem.OrbitPair.MixedChartDeterminant

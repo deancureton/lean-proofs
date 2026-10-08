@@ -44,9 +44,6 @@ theorem sourcePairChart_source (n : ℕ) :
   change (sphereProjection n).source ×ˢ (sphereProjection n).source = _
   rw [sphereProjection_source]
 
-theorem sourcePairChart_target (n : ℕ) : (sourcePairChart n).target = univ := by
-  change (sphereProjection n).target ×ˢ (sphereProjection n).target = _
-  rw [sphereProjection_target, univ_prod_univ]
 
 theorem sourcePairChart_apply (n : ℕ) (p : Sphere n × Sphere n) :
     sourcePairChart n p = (sphereProjection n p.1, sphereProjection n p.2) := rfl

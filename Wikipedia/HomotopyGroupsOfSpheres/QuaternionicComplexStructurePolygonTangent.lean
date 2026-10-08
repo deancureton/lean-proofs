@@ -103,13 +103,6 @@ def jumpDirection (a b : ComplexStructures.Space n) (τ : Fin (m + 2) → ℝ)
   fun j ↦ ⟨(Polygon.velocityJump (toSymplectic a) (toSymplectic b) τ (forget v) j).val,
     velocityJump_mem a b τ hv j⟩
 
-theorem modelInclusion_jumpDirection (a b : ComplexStructures.Space n) (τ : Fin (m + 2) → ℝ)
-    (v : ComplexStructureVertices.Space n m) (hv : v ∈ admissible a b m) :
-    modelInclusion v (jumpDirection a b τ v hv) =
-      Polygon.velocityJump (toSymplectic a) (toSymplectic b) τ (forget v) := by
-  funext j
-  apply Subtype.ext
-  rfl
 
 end ComplexStructurePolygon
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns

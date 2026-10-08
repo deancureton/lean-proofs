@@ -74,21 +74,5 @@ theorem exists_framedDiskThickening_collar (h : M ≃ₜ Sphere 6) (f : C(Sphere
   · intro s
     exact (A.normalFrame_core s.val (sphere_subset_closedBall s.property)).trans (hTb s)
 
-theorem exists_framedDiskThickening (h : M ≃ₜ Sphere 6) (f : C(Sphere 3, M))
-    (hf : ContMDiff (𝓡 3) (𝓡 6) ∞ f) (hi : Injective f)
-    (hd : ∀ s, Injective (mfderiv (𝓡 3) (𝓡 6) f s)) :
-    ∃ D : DiskData (pole 3) (e.toFun ∘ f),
-      ∃ T : Vector 4 → Vector ((e.ambientDimension - 6) + 5) →L[ℝ]
-          Vector (e.ambientDimension + 6),
-        ∃ A : DiskThickening.FramedProduct D.toFun T,
-          (∀ s : Sphere 3, T s.val =
-            boundaryFrameOperator (e.normalFrameOnSphere a f s).val) ∧
-          (∀ s : Sphere 3, DiskThickening.map D.toFun A.transverse (s.val, 0) =
-            appendZeroMap e.ambientDimension 6 (e.toFun (f s))) ∧
-          ∀ s : Sphere 3, A.normalFrame (s.val, 0) =
-            boundaryFrameOperator (e.normalFrameOnSphere a f s).val := by
-  obtain ⟨D, _, _, _, T, A, hTb, hcore, hnormal, _⟩ :=
-    e.exists_framedDiskThickening_collar a h f hf hi hd
-  exact ⟨D, T, A, hTb, hcore, hnormal⟩
 
 end NoExoticSixSphere.EuclideanEmbedding

@@ -49,8 +49,6 @@ theorem zero_mem_localAdmissible (a b : Sphere n) (v : Space n m)
   change fromCoordinates v 0 ∈ admissible (costDomain n) a b m
   rwa [fromCoordinates_zero]
 
-theorem localEnergy_zero (a b : Sphere n) (τ : Fin (m + 2) → ℝ) (v : Space n m) :
-    localEnergy a b τ v 0 = energy a b τ v := by rw [localEnergy, fromCoordinates_zero]
 
 theorem contDiffOn_localEnergy (a b : Sphere n) (τ : Fin (m + 2) → ℝ) (v : Space n m) :
     ContDiffOn ℝ ∞ (localEnergy a b τ v) (localAdmissible a b v) := by

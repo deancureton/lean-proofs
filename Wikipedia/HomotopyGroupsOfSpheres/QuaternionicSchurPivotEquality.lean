@@ -81,12 +81,5 @@ theorem target_midpoint_of_pivot_unit (s t : ℝ) (B : Space (Fin 3))
   rw [hs', Real.sin_pi_div_two, one_mul] at hi
   exact ⟨hs', Real.strictAntiOn_cos.injOn ht hmid (hi.trans Real.cos_pi_div_two.symm)⟩
 
-theorem target_pivot_normSq_lt_one_away (s t : ℝ) (B : Space (Fin 3))
-    (hs : s ∈ Set.Icc 0 Real.pi) (ht : t ∈ Set.Icc 0 Real.pi)
-    (h : firstColumnFormula s t B = targetColumn)
-    (hne : ¬(s = Real.pi / 2 ∧ t = Real.pi / 2)) :
-    Quaternion.normSq (schurPivot s t B) < 1 := by
-  apply lt_of_le_of_ne (schurPivot_normSq_le_one s t B)
-  exact fun hp ↦ hne (target_midpoint_of_pivot_unit s t B hs ht h hp)
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

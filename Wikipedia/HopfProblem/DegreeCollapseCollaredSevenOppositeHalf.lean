@@ -72,9 +72,6 @@ theorem oppositeGluingHomeomorph_negative (p : S.NegativeHalf) :
     P.oppositeGluingHomeomorph
       (BoundaryGluing.right P.halfBody.inclusion P.oppositeHalf.inclusion p) = p.val := rfl
 
-theorem oppositeHalf_nonempty [Nonempty B] : Nonempty P.oppositeHalf.body := by
-  let b : B := Classical.choice inferInstance
-  exact ⟨⟨(S.collar.zeroPoint b).val, (S.collar.zeroPoint_time b).le⟩⟩
 
 end ExcellentMorsePresentation
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

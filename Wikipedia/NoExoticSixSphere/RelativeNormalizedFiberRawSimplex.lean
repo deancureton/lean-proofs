@@ -43,11 +43,5 @@ theorem homologyMap_simplex_eq_fiberClass (smp : RelativeSimplex U 3)
       RelativeSimplexFiberClass.fiberClass U a 0 smp hv := by
   rw [homologyMap_simplex, simplexClass_eq_fiberClass U a hπ smp hv]
 
-theorem homologyMap_simplex_eq_boundaryClass (smp : RelativeSimplex U 3)
-    (hv : smp.val (stdSimplex.vertex (S := ℝ) (0 : Fin 4)) = a.val) :
-    homologyMap U a hπ (homologyClass U 2 smp) =
-      RelativeBoundaryFiberClass.homologyClass U a 1 smp (stdSimplex.vertex 0) hv := by
-  rw [homologyMap_simplex_eq_fiberClass U a hπ smp hv,
-    RelativeBoundaryFiberClass.homologyClass_firstVertex U a 0 smp hv]
 
 end NoExoticSixSphere.RelativeNormalizedFiberClasses

@@ -73,16 +73,5 @@ theorem primitive_free_part [Finite H]
   rw [hk] at he
   omega
 
-theorem torsion_iff_kernel (σ : K →+ ℤ)
-    (h2 : ∀ x : σ.ker, (2 : ℤ) • x = 0) (x : K) :
-    (∃ n : ℤ, n ≠ 0 ∧ n • x = 0) ↔ σ x = 0 := by
-  constructor
-  · rintro ⟨n, hn, hx⟩
-    have he := congrArg σ hx
-    simp only [map_zsmul, map_zero, zsmul_eq_mul, Int.cast_id] at he
-    exact (mul_eq_zero.mp he).resolve_left hn
-  · intro hx
-    refine ⟨2, by norm_num, ?_⟩
-    exact congrArg Subtype.val (h2 ⟨x, hx⟩)
 
 end Wikipedia.HopfProblem.DegreeCollapse.ExponentTwoFreeQuotient

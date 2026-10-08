@@ -59,9 +59,6 @@ theorem second_comp_connectingMap (n : ℕ) :
     (connectingMap hS n).comp (homologyLinearMap S.g (n + 1)) = 0 :=
   congrArg ModuleCat.Hom.hom (hS.comp_δ (n + 1) n (by simp))
 
-theorem first_comp_second (n : ℕ) :
-    (homologyLinearMap S.g n).comp (homologyLinearMap S.f n) = 0 := by
-  rw [← homologyLinearMap_comp, S.zero, homologyLinearMap_zero]
 
 /-- Exactness at the homology of the first complex, in every degree. -/
 theorem exact_at_leftHomology (n : ℕ) :

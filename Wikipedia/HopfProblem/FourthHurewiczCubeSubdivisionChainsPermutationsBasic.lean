@@ -30,16 +30,6 @@ def insert (k : Fin (n + 1)) (e : Equiv.Perm (Fin n)) :
     insert k e (k.succAbove j) = (e j).succ := by
   simp [insert]
 
-/-- The insertion is literally the ordered tuple with the zero coordinate inserted. -/
-theorem insert_apply (k : Fin (n + 1)) (e : Equiv.Perm (Fin n))
-    (j : Fin (n + 1)) :
-    insert k e j =
-      (k.insertNth (0 : Fin (n + 1)) (fun i => (e i).succ) :
-        Fin (n + 1) → Fin (n + 1)) j := by
-  refine Fin.succAboveCases k ?_ ?_ j
-  · simp
-  · intro i
-    simp
 
 @[simp] theorem insert_symm_apply_zero (k : Fin (n + 1))
     (e : Equiv.Perm (Fin n)) :

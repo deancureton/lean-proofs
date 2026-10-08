@@ -105,22 +105,5 @@ theorem isClosed_doublePoints {ι : Type*}
 
 variable [CompactSpace M]
 
-theorem isCompact_doublePoints {ι : Type*}
-    (c : ι → PartialDiffeomorph 𝓘(ℝ, Plane) I Plane M ∞)
-    (hsource : ∀ i, (c i).source = univ) (hcover : ∀ x : M, ∃ i, x ∈ (c i).target)
-    (F : ℝ × M → N) (hF : ContMDiff (𝓘(ℝ, ℝ).prod I) J ∞ F)
-    (hinj : ∀ t x, Injective (mfderiv I J (fun y => F (t, y)) x))
-    (a b : ℝ) (hends : ∀ t, t ≤ a ∨ b ≤ t → Injective (fun x => F (t, x))) :
-    IsCompact (doublePoints F) := by
-  apply (isCompact_Icc (a := a) (b := b)).prod (isCompact_univ (X := M × M))
-    |>.of_isClosed_subset (isClosed_doublePoints c hsource hcover F hF hinj)
-  intro q hq
-  constructor
-  · constructor
-    · by_contra ht
-      exact hq.1 (hends q.1 (Or.inl (le_of_lt (lt_of_not_ge ht))) hq.2)
-    · by_contra ht
-      exact hq.1 (hends q.1 (Or.inr (le_of_lt (lt_of_not_ge ht))) hq.2)
-  · exact mem_univ _
 
 end Wikipedia.HopfProblem.OrbitPair.FamilyDoublePoints

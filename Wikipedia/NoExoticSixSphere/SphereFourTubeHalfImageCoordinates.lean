@@ -52,21 +52,5 @@ variable {M : Type} [TopologicalSpace M] [ChartedSpace (Vector 7) M] [T2Space M]
   (hhalf : ∀ x, 0 ≤ τ x ↔ 0 ≤ t x ∧ x ∉ openRegion Φ 1)
   (hinner : ∀ p : Sphere 3 × Vector 4, ‖p.2‖ ≤ 3 / 2 → τ (Φ p) = ‖p.2‖ ^ 2 - 1)
 
-theorem exists_even_longitude_relation
-    (a : SingularHomology (halfCoreComplement Φ t) 3)
-    (hclass : singularHomologyMap (subtypeInclusion (halfCoreComplement Φ t)) 3 a =
-      (2 : ℤ) • singularHomologyMap (coreInHalf Φ hΦ t hpos) 3 (unitSphereTopClass 2))
-    (s v₀ : Sphere 3) : ∃ k : ℤ,
-    singularHomologyMap (halfComplementRetraction Φ hΦ t τ hpos hhalf) 3 a =
-      (2 : ℤ) • singularHomologyMap
-        ((boundaryInNewHalf Φ hΦ τ hinner).comp (leftSection v₀)) 3 (unitSphereTopClass 2) +
-      k • singularHomologyMap
-        ((boundaryInNewHalf Φ hΦ τ hinner).comp (rightSection s)) 3 (unitSphereTopClass 2) := by
-  obtain ⟨v, hv, hfst⟩ :=
-    exists_boundary_class_of_double_core_image Φ hΦ t τ hpos hhalf hinner a hclass
-  obtain ⟨k, hk⟩ := two_longitude_decomposition s v₀ v hfst
-  refine ⟨k, ?_⟩
-  rw [hv, hk, map_add, map_zsmul, map_zsmul]
-  simp only [singularHomologyMap_comp, LinearMap.comp_apply]
 
 end NoExoticSixSphere.SphereFourTube

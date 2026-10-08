@@ -29,11 +29,6 @@ def productPairLinearCoordinates (n : ℕ) :
   ((productFiniteLinearCoordinates n).prodCongr (productFiniteLinearCoordinates n)).trans
     EuclideanSpace.finAddEquivProd.symm
 
-theorem productPairSphereHomeomorph_linearCoordinates (n : ℕ)
-    (z : OnePoint ((EuclideanSpace ℝ (Fin n) × ℝ) × (EuclideanSpace ℝ (Fin n) × ℝ))) :
-    productPairSphereHomeomorph n z = euclideanOnePointSphere ((n + 1) + (n + 1))
-      ((productPairLinearCoordinates n).toHomeomorph.onePointCongr z) := by
-  induction z using OnePoint.rec <;> rfl
 
 end NoExoticSixSphere.SuspensionProductComparison
 

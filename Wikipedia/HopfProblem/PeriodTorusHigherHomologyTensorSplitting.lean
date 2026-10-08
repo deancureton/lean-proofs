@@ -146,23 +146,6 @@ def homologyRealizationIso (n : ℕ) : (homologyComplex K).homology n ≅ K.homo
     (homologyRealizationIso K n).hom.hom (cycleClass (homologyComplex K) n c) = c.1 :=
   homologyMap_realization_cycleClass K n c
 
-/-- Although cycle sections need not be natural on chains, the induced
-identification of the actual homology groups is natural. -/
-theorem homologyRealizationIso_naturality
-    {L : ChainComplex (ModuleCat.{0} ℤ) ℕ} [∀ n, Module.Projective ℤ (L.homology n)]
-    (f : K ⟶ L) (n : ℕ) :
-    HomologicalComplex.homologyMap (homologyComplexMap f) n ≫ (homologyRealizationIso L n).hom =
-      (homologyRealizationIso K n).hom ≫ HomologicalComplex.homologyMap f n := by
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro x
-  obtain ⟨c, rfl⟩ := cycleClass_surjective (homologyComplex K) n x
-  exact (congrArg (homologyRealizationIso L n).hom.hom
-    (homologyMap_cycleClass (homologyComplexMap f) n c)).trans
-      ((homologyRealizationIso_cycleClass L n _).trans
-        ((mapCycles_val (homologyComplexMap f) n c).trans
-          (congrArg (HomologicalComplex.homologyMap f n).hom
-            (homologyRealizationIso_cycleClass K n c).symm)))
 
 variable [∀ n, Module.Projective ℤ (K.X n)]
 

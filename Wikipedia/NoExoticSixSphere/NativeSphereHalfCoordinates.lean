@@ -114,14 +114,6 @@ theorem mem_halfSphere_one {y : Sphere 3} (hy : y ≠ spherePole 3)
   refine ⟨hs, hc, ht, ?_⟩
   simpa only [one_add_one_eq_two, div_self (two_ne_zero : (2 : ℝ) ≠ 0)] using (hc 0).2
 
-theorem halfSphere_cover (y : Sphere 3) :
-    y = spherePole 3 ∨ sphereChart 3 y 0 = 1 / 2 ∨ y ∈ halfSphere 0 ∨ y ∈ halfSphere 1 := by
-  by_cases hy : y = spherePole 3
-  · exact Or.inl hy
-  · rcases lt_trichotomy (sphereChart 3 y 0) (1 / 2) with h | h | h
-    · exact Or.inr (Or.inr (Or.inl (mem_halfSphere_zero hy h)))
-    · exact Or.inr (Or.inl h)
-    · exact Or.inr (Or.inr (Or.inr (mem_halfSphere_one hy h)))
 
 theorem bijective_mfderiv_halfSphereCoordinates (b : ℝ) (hb : b ∈ Icc (0 : ℝ) 1)
     (y : Sphere 3) (hy : y ∈ halfSphere b) :

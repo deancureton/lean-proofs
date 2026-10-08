@@ -96,8 +96,5 @@ theorem nativeStageEquiv_one (k : ℕ) : nativeStageEquiv k 1 = stageZero k := b
   rw [← hf, nativeStageEquiv_sphereClass]
   rfl
 
-theorem nativeStageEquiv_eq_stageZero_iff {k : ℕ} (x : NativeStage k) :
-    nativeStageEquiv k x = stageZero k ↔ x = 1 := by
-  rw [← nativeStageEquiv_one k, (nativeStageEquiv k).injective.eq_iff]
 
 end NoExoticSixSphere.StableSixSphereMaps

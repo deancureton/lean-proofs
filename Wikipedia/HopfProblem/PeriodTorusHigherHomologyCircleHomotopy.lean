@@ -145,14 +145,5 @@ def homeomorphHomologyEquiv (e : X ≃ₜ Y) (n : ℕ) :
   rw [singularHomologyMap_id]
   rfl
 
-theorem homeomorphHomologyEquiv_trans (e : X ≃ₜ Y) (f : Y ≃ₜ Z) (n : ℕ) :
-    homeomorphHomologyEquiv (e.trans f) n =
-      (homeomorphHomologyEquiv e n).trans (homeomorphHomologyEquiv f n) := by
-  apply LinearEquiv.ext
-  intro a
-  change singularHomologyMap ((f : C(Y, Z)).comp (e : C(X, Y))) n a =
-    singularHomologyMap (f : C(Y, Z)) n (singularHomologyMap (e : C(X, Y)) n a)
-  rw [singularHomologyMap_comp]
-  rfl
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

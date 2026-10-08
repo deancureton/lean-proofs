@@ -70,9 +70,6 @@ theorem isLocalDiffeomorph_cubic : IsLocalDiffeomorph 𝓘(ℝ, ℝ) 𝓘(ℝ, �
 def cubicDiffeomorph : ℝ ≃ₘ[ℝ] ℝ :=
   isLocalDiffeomorph_cubic.diffeomorphOfBijective ⟨strictMono_cubic.injective, surjective_cubic⟩
 
-theorem cubicDiffeomorph_apply (x : ℝ) : cubicDiffeomorph x = cubic x := by
-  unfold cubicDiffeomorph IsLocalDiffeomorph.diffeomorphOfBijective
-  rfl
 
 def cubicInverse : ℝ → ℝ := cubicDiffeomorph.symm
 
@@ -85,7 +82,5 @@ theorem cubicInverse_cubic (x : ℝ) : cubicInverse (cubic x) = x :=
 theorem cubic_cubicInverse (x : ℝ) : cubic (cubicInverse x) = x :=
   cubicDiffeomorph.apply_symm_apply x
 
-theorem cubicInverse_zero : cubicInverse 0 = 0 := by
-  simpa only [cubic, zero_pow (by decide : 3 ≠ 0), add_zero] using cubicInverse_cubic 0
 
 end Wikipedia.HopfProblem.DegreeCollapse.SupportedCusp

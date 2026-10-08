@@ -63,19 +63,6 @@ theorem capPinchDiffeomorph_symm_apply (ε : ℝ) (hε : 0 < ε) (x : Sphere 3) 
   rw [← capPinchDiffeomorph_apply ε hε, Diffeomorph.apply_symm_apply,
     Homeomorph.apply_symm_apply]
 
-theorem contMDiff_capPinchComparison {ε : ℝ} (hε : 0 < ε) :
-    ContMDiff (𝓡 3) (𝓡 3) ∞ (capPinchComparison ε hε.ne') := by
-  have he : (capPinchComparison ε hε.ne' : Sphere 3 → Sphere 3) =
-      capPinchDiffeomorph ε hε := funext fun x ↦ (capPinchDiffeomorph_apply ε hε x).symm
-  rw [he]
-  exact (capPinchDiffeomorph ε hε).contMDiff_toFun
 
-theorem contMDiff_capPinchComparison_symm {ε : ℝ} (hε : 0 < ε) :
-    ContMDiff (𝓡 3) (𝓡 3) ∞ (capPinchComparison ε hε.ne').symm := by
-  have he : ((capPinchComparison ε hε.ne').symm : Sphere 3 → Sphere 3) =
-      (capPinchDiffeomorph ε hε).symm :=
-    funext fun x ↦ (capPinchDiffeomorph_symm_apply ε hε x).symm
-  rw [he]
-  exact (capPinchDiffeomorph ε hε).contMDiff_invFun
 
 end NoExoticSixSphere.SphereSumNeck

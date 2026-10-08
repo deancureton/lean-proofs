@@ -63,9 +63,5 @@ theorem halfBoundaryPair_attaching (s : NoExoticSixSphere.Sphere d) :
   change (boundaryPair A hR).attachingSphere s = f s
   exact boundaryPair_attaching A hR s
 
-theorem halfBoundaryPair_belt_ambient (w : sphere (0 : Vector (7 - d)) 1) :
-    ((halfBoundaryPair A hR T).beltSphere w).val.val.val.val = A.map (0, w.val) := by
-  change ((boundaryPair A hR).beltSphere w).val.val.val = _
-  exact boundaryPair_belt_ambient A hR w
 
 end Wikipedia.HopfProblem.DegreeCollapse.LowSurgery.FramedAttachingProduct.NativeSurgery

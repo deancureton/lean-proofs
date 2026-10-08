@@ -78,39 +78,7 @@ theorem quotientParity_mk (x : LinearMap.ker (detector f A hR)) :
     quotientParity f A hR d hd r m (Submodule.Quotient.mk x) = e.integralHomologyParity a r m x :=
   rfl
 
-theorem quotientParity_zero : quotientParity f A hR d hd r m 0 = 0 := by
-  change e.integralHomologyParity a r m 0 = 0
-  exact e.integralHomologyParity_zero a r m
 
-theorem nativeMiddleQuotientEquiv_parity :
-    letI := UnitSurgery.targetChartedSpace A hR;
-    letI := UnitSurgery.target_isManifold A hR;
-    letI := UnitSurgery.compactSpace_target A hR;
-    letI : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-      (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1;
-    ∀ (r' : TubularRetraction (UnitSurgery.inducedEmbedding A hR)) (m' : UnitSurgery.Target A hR),
-      letI : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-        (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m';
-      ∀ x : LinearMap.ker (detector f A hR) ⧸ Submodule.span ℤ {nativeAttachingClass f A hR d hd},
-        (UnitSurgery.inducedEmbedding A hR).integralHomologyParity
-          (UnitSurgery.normalFraming A hR) r' m' (nativeMiddleQuotientEquiv f A hR d hd x) =
-        quotientParity f A hR d hd r m x := by
-  let := UnitSurgery.targetChartedSpace A hR
-  let := UnitSurgery.target_isManifold A hR
-  let := UnitSurgery.compactSpace_target A hR
-  let : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1
-  intro r' m'
-  let : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m'
-  intro x
-  refine Quotient.inductionOn x ?_
-  intro y
-  exact (congrArg ((UnitSurgery.inducedEmbedding A hR).integralHomologyParity
-    (UnitSurgery.normalFraming A hR) r' m')
-    (nativeMiddleQuotientEquiv_mk f A hR d hd y)).trans
-      ((nativeLift_parity f A hR d hd r m r' m' y).trans
-        (quotientParity_mk f A hR d hd r m y).symm)
 
 include A hR d hd in
 theorem attachingClass_parity_zero :

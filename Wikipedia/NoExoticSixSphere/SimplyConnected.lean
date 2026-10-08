@@ -26,11 +26,5 @@ theorem simplyConnectedSpace_of_homeomorph {M : Type u} [TopologicalSpace M]
   let _ := sphere_six_simplyConnected
   exact e.toHomotopyEquiv.simplyConnectedSpace
 
-/-- All loops in a candidate six-sphere are nullhomotopic. -/
-theorem loops_nullhomotopic_of_homeomorph {M : Type u} [TopologicalSpace M]
-    (e : M ≃ₜ Sphere 6) (x : M) (γ : Path x x) :
-    Path.Homotopic γ (Path.refl x) := by
-  let _ := simplyConnectedSpace_of_homeomorph e
-  exact SimplyConnectedSpace.paths_homotopic _ _
 
 end NoExoticSixSphere

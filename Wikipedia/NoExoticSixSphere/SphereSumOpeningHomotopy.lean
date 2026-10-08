@@ -85,27 +85,5 @@ def gluedOpeningHomotopy (hF : ContMDiff (𝓡 3) (𝓡 6) ∞ F)
   map_zero_left _ := rfl
   map_one_left _ := rfl
 
-theorem gluedSphere_zero_equator {x : Sphere 3} (hx : x.val 0 = 0) :
-    gluedSphere Φ ε 0 F G x = Φ 0 := by
-  have hn : SphereCylinder.tail 2 x.val ≠ 0 := by
-    intro hz
-    have h := join_head_tail x.val
-    rw [hx, hz] at h
-    have he : SphereCylinder.join 2 (0, (0 : Vector 3)) = 0 :=
-      (SphereCylinder.join 2).map_zero
-    exact ne_zero_of_mem_unit_sphere x (h.symm.trans he)
-  have hb : x ∈ neckRegion := by
-    change |x.val 0| < 4 * ‖SphereCylinder.tail 2 x.val‖
-    rw [hx, abs_zero]
-    positivity
-  rw [gluedSphere_middle Φ F G hb]
-  have ht : (SphereCylinder.inverse 2 x).1 = 0 := by
-    change x.val 0 / ‖SphereCylinder.tail 2 x.val‖ = 0
-    rw [hx, zero_div]
-  change Φ (ε • capPair 0 (SphereCylinder.inverse 2 x)) = Φ 0
-  have he : capPair 0 (SphereCylinder.inverse 2 x) = 0 := by
-    rw [show SphereCylinder.inverse 2 x = (0, (SphereCylinder.inverse 2 x).2) from
-      Prod.ext ht rfl, capPair_zero_middle]
-  rw [he, smul_zero]
 
 end NoExoticSixSphere.SphereSumNeck

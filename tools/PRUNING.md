@@ -76,3 +76,23 @@ snapshot and apply only bounded batches with the gates above. The scanner does n
 rewrite imports, prune commands, or invoke Lean. A smoke trace can be parsed with
 `--expected-root Wikipedia.HomotopyGroupsOfSpheres.ComplexMatrixRealification.matrix_mul`;
 its candidates are not valid for the classification root.
+
+## Reviewed theorem pruning
+
+A subsequent pass removed 1,162 proof-term-dead theorem commands across 866 files,
+totaling 12,274 lines. Source hashes, live-range overlap, generated descendants,
+textual clients, complete command boundaries, comments and attributes were checked
+before deletion. Definitions, abbreviations and direct-term proofs were deferred.
+The classification target rebuilt successfully without restoring any deletion.
+
+The surviving source in each of those files is byte-identical to the baseline
+after applying only the reviewed range deletions. The separate change to the
+classification theorem expands its statement rather than changing its proof.
+This remains a conservative pruning pass, not a declaration-minimal extraction.
+
+The second full trace records 70,067 project constants, 49,308 live project
+constants, and a 136,495-constant total closure. The strict audit and the trace
+both report exactly the three standard axioms. A separate Lean type check confirms
+that the expanded public theorem still inhabits the original `SixSphereRigidity`
+type. The declaration list remains useful for further review; unreferenced support
+and direct-term theorem proofs have not been indiscriminately removed.

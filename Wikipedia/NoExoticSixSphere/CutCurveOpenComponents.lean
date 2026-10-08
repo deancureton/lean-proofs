@@ -38,12 +38,6 @@ theorem closure_cutComponent_away_from_cuts {S : Set X} (x : {x : X // x ∉ S})
   rw [isClosed_connectedComponent.closure_eq] at hz
   exact ⟨z, hz, rfl⟩
 
-theorem frontier_cutComponent_subset [LocallyConnectedSpace X] {S : Set X}
-    (hS : IsClosed S) (x : {x : X // x ∉ S}) : frontier (cutComponent S x) ⊆ S := by
-  intro y hy
-  by_contra hyn
-  have hmem := closure_cutComponent_away_from_cuts x (frontier_subset_closure hy) hyn
-  exact hy.2 ((isOpen_cutComponent hS x).interior_eq.symm ▸ hmem)
 
 theorem chartedSpace_locallyConnected [ChartedSpace HalfLine X] : LocallyConnectedSpace X :=
   ChartedSpace.locallyConnectedSpace HalfLine X

@@ -133,21 +133,6 @@ theorem southPairRadialFrame_zero (p : Sphere 3 × Sphere 3) :
   rw [southPairRadialFrame, southRadialFrame_zero, southRadialFrame_zero,
     southPairNormalFrame_ambient]
 
-theorem southPairRadialFrame_one (p : Sphere 3 × Sphere 3) (v w : V 4) (u s : ℝ) :
-    letI := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-      (by simp only [finrank_euclideanSpace_fin]);
-    southPairRadialFrame 1 p (WithLp.toLp 2
-        (WithLp.toLp 2 ((2 : ℝ) * (-u), (2 : ℝ) • targetTailChartEquiv.symm v),
-          WithLp.toLp 2 ((2 : ℝ) * (-s), (2 : ℝ) • targetTailChartEquiv.symm w))) =
-      WithLp.toLp 2
-        (StereographicEquator.lift 7 (southChartFrame.ambient (southFiberDiffeomorph p.1) v) +
-          u • (spherePole 7).val,
-        StereographicEquator.lift 7 (southChartFrame.ambient (southFiberDiffeomorph p.2) w) +
-          s • (spherePole 7).val) := by
-  let := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-    (by simp only [finrank_euclideanSpace_fin])
-  exact congrArg (fun z : V 8 × V 8 ↦ (WithLp.toLp 2 z : SouthPairAmbientModel))
-    (Prod.ext (southRadialFrame_one p.1 v u) (southRadialFrame_one p.2 w s))
 
 def southPairRawNormalFrameMap :
     C(Sphere 3 × Sphere 3, SouthPairNormalModel →L[ℝ] SouthPairAmbientModel) :=

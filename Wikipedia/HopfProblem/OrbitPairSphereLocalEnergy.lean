@@ -39,13 +39,7 @@ theorem contDiffOn_cost : ContDiffOn ℝ ∞ (cost d) (domain d) := by
 
 theorem cost_nonneg (p : Vector n × Vector n) : 0 ≤ cost d p := sq_nonneg _
 
-theorem cost_diagonal (hx : ‖x‖ = 1) {a : Vector n} (ha : ‖a‖ = 1) : cost d (a, a) = 0 := by
-  rw [cost, backward_base hx ha, d.log_base, norm_zero, zero_pow (by decide)]
 
-theorem energy_segment_eq_cost (hx : ‖x‖ = 1) (a b : Vector n) (l u : ℝ) :
-    SpherePathEnergy.energy (segment d a b l u) l u = cost d (a, b) / (u - l) := by
-  rw [energy_segment]
-  exact SphereTangentExponential.energy_segment hx _ l u
 
 theorem cost_eq_angle (hx : ‖x‖ = 1) (hε : ε ≤ Real.pi / 2)
     {a b : Vector n} (ha : ‖a‖ = 1) (hb : ‖b‖ = 1) (hp : (a, b) ∈ domain d) :
@@ -105,14 +99,6 @@ theorem exists_smooth_cost_near_diagonal (m : ℕ) (p : Sphere m) :
     contMDiffOn_sphereCost D hp ?_⟩
   linarith [Real.pi_pos]
 
-theorem exists_open_diagonal_cost_domain (m : ℕ) :
-    ∃ U : Set (Sphere m × Sphere m), IsOpen U ∧ (∀ p : Sphere m, (p, p) ∈ U) ∧
-      ContMDiffOn ((𝓡 m).prod (𝓡 m)) 𝓘(ℝ, ℝ) ∞ (sphereCost m) U := by
-  choose U hU hp hs using exists_smooth_cost_near_diagonal m
-  refine ⟨⋃ p, U p, isOpen_iUnion hU, fun p => mem_iUnion.mpr ⟨p, hp p⟩, ?_⟩
-  intro q hq
-  obtain ⟨p, hpq⟩ := mem_iUnion.mp hq
-  exact ((hs p).contMDiffAt ((hU p).mem_nhds hpq)).contMDiffWithinAt
 
 end NativeSphere
 

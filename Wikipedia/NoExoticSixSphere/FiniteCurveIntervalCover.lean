@@ -46,18 +46,6 @@ theorem IntervalNeighborhood.boundary_mem_endpoints (d : IntervalNeighborhood X)
   change x = d.chart.symm d.left ∨ x ∈ {d.chart.symm d.right}
   exact Or.inl hxe
 
-theorem IntervalNeighborhood.endpoints_subset_closedSet (d : IntervalNeighborhood X) :
-    d.endpoints ⊆ d.closedSet := by
-  intro x hx
-  rcases hx with hx | hx
-  · exact ⟨d.left, ⟨le_rfl, d.lt.le⟩, hx.symm⟩
-  · exact ⟨d.right, ⟨d.lt.le, le_rfl⟩, (mem_singleton_iff.mp hx).symm⟩
 
-theorem IntervalNeighborhood.closedSet_sdiff_openSet_subset [T2Space X]
-    (d : IntervalNeighborhood X) : d.closedSet \ d.openSet ⊆ d.endpoints := by
-  have he : d.closedSet \ d.openSet = frontier d.openSet := by
-    rw [frontier, d.isOpen_openSet.interior_eq, d.closure_openSet]
-  rw [he]
-  exact d.frontier_subset_endpoints
 
 end NoExoticSixSphere.CurveDecomposition

@@ -43,29 +43,5 @@ theorem exists_transverse_chart_in_balls
   exact ⟨by simpa only [mem_ball, dist_zero_right] using hzr,
     by simpa only [mem_ball, dist_zero_right] using hzs⟩
 
-/-- Two actual transverse charts fixing zero construct their relative
-chart inside both prescribed endpoint transverse slice radii. -/
-theorem exists_relative_transverse_chart_in_balls
-    (P Q : PartialDiffeomorph 𝓘(ℝ, Z) 𝓘(ℝ, Z) Z Z ∞)
-    (hP0 : (0 : Z) ∈ P.source) (hPfix : P 0 = 0)
-    (hQ0 : (0 : Z) ∈ Q.source) (hQfix : Q 0 = 0)
-    {r s : ℝ} (hr : 0 < r) (hs : 0 < s) :
-    ∃ H : PartialDiffeomorph 𝓘(ℝ, Z) 𝓘(ℝ, Z) Z Z ∞,
-      (0 : Z) ∈ H.source ∧ H 0 = 0 ∧ (H : Z → Z) = Q.trans P.symm ∧
-      H.source ⊆ (Q.trans P.symm).source ∧
-      ∀ z ∈ H.source, ‖z‖ < r ∧ ‖H z‖ < s := by
-  let G := Q.trans P.symm
-  have hPt : (0 : Z) ∈ P.target := hPfix ▸ P.map_source' hP0
-  have hG0 : (0 : Z) ∈ G.source := by
-    change (0 : Z) ∈ Q.source ∧ Q 0 ∈ P.target
-    exact ⟨hQ0, hQfix.symm ▸ hPt⟩
-  have hGfix : G 0 = 0 := by
-    change P.symm (Q 0) = 0
-    rw [hQfix]
-    have hh : P.symm (P 0) = 0 := P.left_inv' hP0
-    rwa [hPfix] at hh
-  obtain ⟨H, hH0, hHfix, hmap, hsub, _, hnorm⟩ :=
-    exists_transverse_chart_in_balls G hG0 hGfix hr hs
-  exact ⟨H, hH0, hHfix, hmap, hsub, hnorm⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.TransverseGerms

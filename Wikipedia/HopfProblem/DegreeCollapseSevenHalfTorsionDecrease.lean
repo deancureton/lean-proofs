@@ -70,16 +70,6 @@ theorem halfTwistedNew_card (v s : Sphere 3) (j : ℤ)
 
 variable [Subsingleton (SingularHomology (OldPositiveHalf A T) 4)]
 
-theorem halfTwist_card_relation (v s : Sphere 3) (l l' j : ℤ)
-    (hρ : ∀ c : SingularHomology (Sphere 3) 3, singularHomologyMap (column v ρ) 3 c = j • c)
-    (hrel : l • halfSectionClass A hA T v + l' • halfMeridianClass A hA T s = 0)
-    (hn : l' - l * j ≠ 0) :
-    l.natAbs * Nat.card (SingularHomology
-      (PositiveHalf B hB (twistTimeData A hA B hB ρ ht T)) 3) =
-        (l' - l * j).natAbs * Nat.card (SingularHomology (OldPositiveHalf A T) 3) := by
-  rw [halfTwistedNew_card A hA T B hB ρ ht v s j hρ, halfOld_card A hA T s]
-  exact relation_index _ _ (halfMeridian_coefficient_injective A hA T s) l (l' - l * j) hn
-    (twisted_meridian_relation A hA T v s l l' j hrel)
 
 theorem halfTwist_strict_decrease [Finite (SingularHomology (OldPositiveHalf A T) 3)]
     (v s : Sphere 3) (l l' j : ℤ)

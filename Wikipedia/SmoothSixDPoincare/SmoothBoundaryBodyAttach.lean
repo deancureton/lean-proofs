@@ -84,36 +84,6 @@ theorem attach_boundary_toHomeomorph :
     (e.attach hi hi' A A' hface n P Q).boundary.toHomeomorph =
       baseChangeBoundary A A' n e.boundary.toHomeomorph hface := rfl
 
-theorem exists_attach [FiniteDimensional ℝ G] [J.Boundaryless]
-    [IsManifold J ∞ X] [IsManifold J ∞ X'] :
-    ∃ (P : SmoothBoundaryData A n) (Q : SmoothBoundaryData A' n),
-      letI := P.charted
-      letI := Q.charted
-      ∃ f : SmoothBoundaryBodyEquiv (J := J)
-          (boundaryBodyMap A i n hi) (boundaryBodyMap A' i' n hi'),
-        f.body =
-          baseChangeBody A A' i i' e.boundary.toHomeomorph hface e.body e.boundary_point := by
-  obtain ⟨P⟩ := nonempty_smoothBoundaryData A n
-  obtain ⟨Q⟩ := nonempty_smoothBoundaryData A' n
-  exact ⟨P, Q, e.attach hi hi' A A' hface n P Q, rfl⟩
 
-theorem exists_attach_postcompose [FiniteDimensional ℝ G] [J.Boundaryless]
-    [IsManifold J ∞ X] [IsManifold J ∞ X'] :
-    ∃ (P : SmoothBoundaryData A n) (Q : SmoothBoundaryData (A.postcompose e.boundary) n),
-      letI := P.charted
-      letI := Q.charted
-      ∃ f : SmoothBoundaryBodyEquiv (J := J) (boundaryBodyMap A i n hi)
-          (boundaryBodyMap (A.postcompose e.boundary) i' n hi'),
-        (∀ y, f.body (FaceAttachment.oldMap (bodyFaceMap A i) y) =
-          FaceAttachment.oldMap (bodyFaceMap (A.postcompose e.boundary) i') (e.body y)) ∧
-        (∀ k, f.body (FaceAttachment.handleMap (bodyFaceMap A i) k) =
-          FaceAttachment.handleMap (bodyFaceMap (A.postcompose e.boundary) i') k) ∧
-        f.boundary.toHomeomorph = baseChangeBoundary A (A.postcompose e.boundary) n
-          e.boundary.toHomeomorph (fun _ => rfl) := by
-  obtain ⟨P⟩ := nonempty_smoothBoundaryData A n
-  obtain ⟨Q⟩ := nonempty_smoothBoundaryData (A.postcompose e.boundary) n
-  refine ⟨P, Q, e.attach hi hi' A (A.postcompose e.boundary) (fun _ => rfl) n P Q, ?_⟩
-  exact ⟨e.attach_old hi hi' A (A.postcompose e.boundary) (fun _ => rfl) n P Q,
-    e.attach_handle hi hi' A (A.postcompose e.boundary) (fun _ => rfl) n P Q, rfl⟩
 
 end Wikipedia.SmoothSixDPoincare.SmoothBoundaryBodyEquiv

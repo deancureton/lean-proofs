@@ -83,17 +83,6 @@ theorem insertedMap_source {u : Vector 3} (hu : u ∈ ball (0 : Vector 3) P.radi
   rw [P.insertedMap_on (show shiftedSourceChart P.center u ∈ P.sourcePatch from ⟨u, hu, rfl⟩)]
   exact P.localFamily_source 1 u
 
-theorem insertedMap_source_global {u : Vector 3} (hu : plane u ∈ P.chart.source) :
-    P.insertedMap (shiftedSourceChart P.center u) =
-      P.chart (scaledMap P.cutoff P.scale 1 u) := by
-  by_cases hx : shiftedSourceChart P.center u ∈ P.sourcePatch
-  · exact (P.insertedMap_on hx).trans (P.localFamily_source 1 u)
-  · have hxK : shiftedSourceChart P.center u ∉ P.sourceSupport :=
-      fun h ↦ hx (P.sourceSupport_subset h)
-    have huK : u ∉ scaledSupport P.cutoff P.scale := fun h ↦ hxK ⟨u, h, rfl⟩
-    rw [P.insertedMap_fixed hxK,
-      scaledMap_eq_plane_off_support P.cutoff P.scale_pos.ne' 1 huK]
-    exact (P.plane_formula u hu).symm
 
 theorem inserted_crossing : P.insertedMap (P.crossingPoint 1) =
     P.insertedMap (P.crossingPoint (-1)) := by

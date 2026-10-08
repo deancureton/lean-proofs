@@ -182,13 +182,5 @@ theorem homologyBiprodEquiv_desc {A : ChainComplex (ModuleCat.{0} ℤ) ℕ}
     rw [biprod.inr_desc] at h
     exact (congrArg (fun k => k.hom a.2) h).symm
 
-/-- The same sum formula for an arbitrary class of the biproduct homology. -/
-theorem homologyBiprodEquiv_desc_apply {A : ChainComplex (ModuleCat.{0} ℤ) ℕ}
-    (f : K ⟶ A) (g : L ⟶ A) (a : (K ⊞ L).homology n) :
-    (homologyMap (biprod.desc f g) n).hom a =
-      (homologyMap f n).hom (homologyBiprodEquiv K L n a).1 +
-        (homologyMap g n).hom (homologyBiprodEquiv K L n a).2 := by
-  have h := homologyBiprodEquiv_desc n f g (homologyBiprodEquiv K L n a)
-  rwa [LinearEquiv.symm_apply_apply] at h
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

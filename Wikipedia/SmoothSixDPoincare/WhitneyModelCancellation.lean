@@ -56,21 +56,5 @@ theorem disjoint_shifted_ranges {h : ℝ} (hh : 0 < h) {d : Space → Space}
   rintro z ⟨p, rfl⟩ ⟨q, hq⟩
   exact shifted_firstSheet_ne_secondSheet hh hd p q hq.symm
 
-/-- An actual compactly supported smooth diffeomorphism removes the model's two intersections. -/
-theorem exists_small_model_cancellation :
-    ∃ η : ℝ, 0 < η ∧ ∀ h : ℝ, 0 < h → h < η →
-      ∃ d : Diffeomorph 𝓘(ℝ, Space) 𝓘(ℝ, Space) Space Space ∞,
-        (∀ z, d z = z + cutoff z • moveVector h) ∧
-        (∀ z ∉ tsupport cutoff, d z = z) ∧
-        Disjoint (range (d ∘ firstSheet)) (range (secondSheet h)) := by
-  obtain ⟨ε, hε, hsmall⟩ :=
-    SmallPerturbation.exists_radius_bumpTranslation contDiff_cutoff hasCompactSupport_cutoff
-  refine ⟨ε / 4, by positivity, ?_⟩
-  intro h hh hsmallh
-  have hnorm : ‖moveVector h‖ < ε := by
-    rw [norm_moveVector hh.le]
-    linarith
-  obtain ⟨d, hd, hfix⟩ := hsmall (moveVector h) hnorm
-  exact ⟨d, hd, hfix, disjoint_shifted_ranges hh hd⟩
 
 end Wikipedia.SmoothSixDPoincare.WhitneyPairModel

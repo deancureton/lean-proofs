@@ -62,16 +62,6 @@ def standardLastVertexEquiv (n : ℕ) : ContinuousMap.HomotopyEquiv
   (TopCat.homeoOfIso (SSet.toTop.mapIso (SSet.stdSimplex.sdIso.app ⦋n⦌))).toHomotopyEquiv.trans
     (simplexLastVertexEquiv n)
 
-theorem standardLastVertexEquiv_forward (n : ℕ) :
-    (standardLastVertexEquiv.{u} n).toFun =
-      (SSet.toTop.map (lastVertex.app (SSet.stdSimplex.obj ⦋n⦌))).hom := by
-  change (simplexLastVertexEquiv n).toFun.comp
-    (SSet.toTop.map (SSet.stdSimplex.sdIso.hom.app ⦋n⦌)).hom = _
-  rw [simplexLastVertexEquiv_forward]
-  have h : SSet.stdSimplex.sdIso.hom.app ⦋n⦌ ≫ simplexLastVertex ⦋n⦌ =
-      lastVertex.app (SSet.stdSimplex.obj ⦋n⦌) := by
-    rw [← lastVertex_stdSimplex, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-  exact congrArg TopCat.Hom.hom ((SSet.toTop.map_comp _ _).symm.trans (congrArg _ h))
 
 end Subdivision
 

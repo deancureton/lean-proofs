@@ -76,17 +76,6 @@ theorem exists_integral_section_coordinate (g : G)
   obtain ⟨l, hl⟩ := hd
   exact ⟨l, hk.symm.trans (congrArg (fun n : ℤ ↦ n • μ) hl)⟩
 
-theorem exists_torsion_corrected_section (g : G)
-    (hz : character μ q hker hμ hq (q g) = 0) :
-    ∃ l : ℤ, (2 : ℤ) • (g - l • μ) = 0 ∧ q (g - l • μ) = q g := by
-  obtain ⟨l, hl⟩ := exists_integral_section_coordinate μ q hker h2 hμ hq g hz
-  have hqμ : q μ = 0 := by
-    change μ ∈ q.ker
-    rw [hker]
-    exact AddSubgroup.mem_zmultiples μ
-  refine ⟨l, ?_, ?_⟩
-  · rw [smul_sub, hl, ← mul_zsmul, sub_self]
-  · rw [map_sub, map_zsmul, hqμ, smul_zero, sub_zero]
 
 theorem exists_even_twist_double_relation (g : G)
     (hz : character μ q hker hμ hq (q g) = 0) :

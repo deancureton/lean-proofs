@@ -91,10 +91,5 @@ theorem straightening_zero (L : C(I × X, E)) (hzero : ∀ x, L (0, x) = 0)
     (t : I) (x : X) : straightening L hzero (0, (t, x)) = L (t, x) :=
   straightening_tail L hzero 0 t x t.2.1
 
-theorem straightening_one (L : C(I × X, E)) (hzero : ∀ x, L (0, x) = 0)
-    (t : I) (x : X) : straightening L hzero (1, (t, x)) = (t : ℝ) • L (1, x) := by
-  rw [straightening_prefix L hzero 1 t x t.2.2]
-  change ((t : ℝ) / 1) • L (1, x) = _
-  rw [div_one]
 
 end NoExoticSixSphere.PrefixCoordinates

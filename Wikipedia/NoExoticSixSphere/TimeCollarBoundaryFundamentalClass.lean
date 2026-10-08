@@ -73,15 +73,6 @@ theorem boundaryConnectingClass_eq_fundamentalClass :
   apply ModTwoLocalClass.eq_manifoldClass_of_ne_zero (E := Vector 6) 3 x
   exact boundaryConnectingClass_local_ne_zero C x
 
-theorem boundaryDualityMap_connecting_fundamental (p q : ℕ) (h : p + q = 6)
-    (a : ModTwoCapProduct.Cohomology (boundary t) p) :
-    boundaryDualityMap C (p + 1) q (by omega)
-        (RelativeModTwoCochains.connecting (boundary t) p a) =
-      modHomologyMap 2 (subtypeInclusion (boundary t)) q
-        (ModTwoCapProduct.capProductInDegree (boundary t) h a
-          (ManifoldFundamentalClass.fundamentalClass (E := Vector 6) 3 (boundary t))) := by
-  rw [← boundaryConnectingClass_eq_fundamentalClass C]
-  exact boundaryDualityMap_connecting C p q h a
 
 include C in
 theorem boundaryCap_kernel (p q : ℕ) (h : p + q = 6)

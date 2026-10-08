@@ -57,17 +57,6 @@ theorem differential_symm_toContinuousLinearMap (x : c.source) :
   rw [differential_toContinuousLinearMap]
   exact h.symm
 
-theorem continuous_differential : Continuous (fun x : c.source ↦
-    (differential c x).toContinuousLinearMap) := by
-  simp_rw [differential_toContinuousLinearMap]
-  exact (c.contMDiffOn_toFun.contDiffOn.continuousOn_fderiv_of_isOpen
-    c.open_source (by simp)).domRestrict
 
-theorem continuous_inverse_differential : Continuous (fun x : c.source ↦
-    (differential c x).symm.toContinuousLinearMap) := by
-  simp_rw [differential_symm_toContinuousLinearMap]
-  exact (c.contMDiffOn_invFun.contDiffOn.continuousOn_fderiv_of_isOpen
-    c.open_target (by simp)).comp_continuous c.toOpenPartialHomeomorph.continuousOn.domRestrict
-      (fun x ↦ c.map_source x.property)
 
 end NoExoticSixSphere.ChartDifferential

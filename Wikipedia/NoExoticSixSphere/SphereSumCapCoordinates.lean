@@ -56,8 +56,6 @@ def sphereCapCoordinates (ε : ℝ) (hε : ε ≠ 0) :
   (gnomonicChart.trans (capScaling ε hε).toDiffeomorph.toPartialDiffeomorph).trans
     sourceComplementChart
 
-theorem sphereCapCoordinates_apply (ε : ℝ) (hε : ε ≠ 0) (x : Sphere 3) :
-    sphereCapCoordinates ε hε x = sphereCap ε x := by rfl
 
 theorem sphereCapCoordinates_source (ε : ℝ) (hε : ε ≠ 0) :
     (sphereCapCoordinates ε hε).source = {x | 0 < x.val 0} := by
@@ -92,12 +90,5 @@ theorem sphereCap_cylinder {ε : ℝ} (hε : 0 < ε) (t : ℝ) (s : Sphere 2) (h
   rw [sphereCap, gnomonic_cylinder, smul_smul, ← mul_inv]
   exact sourceComplementChart_inverse_ray (mul_pos hε ht) s
 
-theorem sphereCap_pole (ε : ℝ) :
-    sphereCap ε (SphereCylinder.endPole 2 true) =
-      -referencePole 3 := by
-  have hz : gnomonic (SphereCylinder.endPole 2 true) = 0 := by
-    rw [gnomonic, SphereCylinder.tail_endPole, smul_zero]
-  rw [sphereCap, hz, smul_zero]
-  exact referenceComplementChart_zero _ _ _
 
 end NoExoticSixSphere.SphereSumNeck

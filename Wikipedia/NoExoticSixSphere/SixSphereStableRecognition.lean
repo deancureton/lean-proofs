@@ -47,13 +47,5 @@ namespace NoExoticSixSphere
 
 universe u
 
-theorem sixSphereRigidity_of_collapse_suspension_nullhomotopic
-    (hnull : ∀ (M : Type u) (_ : TopologicalSpace M)
-      (_ : ChartedSpace (EuclideanSpace ℝ (Fin 6)) M) (_ : IsManifold (𝓡 6) ∞ M)
-      (h : M ≃ₜ Sphere 6),
-        (SphereMapSuspension.map (SixSphereThirteen.sphereMap h)).Nullhomotopic) :
-    SixSphereRigidity.{u} := by
-  intro M t c s ⟨h⟩
-  exact SixSphereThirteen.nonempty_diffeomorph_of_suspension_nullhomotopic h (hnull M t c s h)
 
 end NoExoticSixSphere

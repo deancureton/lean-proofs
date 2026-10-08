@@ -58,10 +58,6 @@ theorem cylinderAngularDerivativeEquiv_det (z : UnitSphere) :
     LinearMap.det_smul, LinearMap.det_id, LinearMap.det_id]
   simp [Module.finrank_self, pow_two]
 
-theorem cylinderAngularDerivativeEquiv_det_pos (z : UnitSphere) :
-    0 < (cylinderAngularDerivativeEquiv z).toLinearMap.det := by
-  rw [cylinderAngularDerivativeEquiv_det]
-  positivity
 
 theorem hasFDerivAt_cylinderAngularDerivativeEquiv (z : UnitSphere) :
     HasFDerivAt (cylinderAngularParameters z)
@@ -90,35 +86,12 @@ theorem sphereCandidateCoordinates_sourceChart (z : UnitSphere) :
   funext p
   exact congrArg (chart (localColumn z 0)) (sphereCandidateQuaternionMap_sourceChart z p)
 
-theorem sphereCandidateCoordinates_midpoint (z : UnitSphere) :
-    sphereCandidateCoordinates z (midpointSphereEmbedding z) = 0 := by
-  have h := congrFun (sphereCandidateCoordinates_sourceChart z) 0
-  simpa only [Function.comp_apply, sphereSourceChart_zero, cylinderAngularParameters_zero,
-    localCoordinateMap_zero] using h
 
-theorem contDiffAt_sphereCandidateCoordinates_sourceChart (z : UnitSphere) {n : ℕ∞ω} :
-    ContDiffAt ℝ n (sphereCandidateCoordinates z ∘ sphereSourceChart z) 0 := by
-  rw [sphereCandidateCoordinates_sourceChart]
-  have h : ContDiffAt ℝ n (localCoordinateMap z) (cylinderAngularParameters z 0) := by
-    rw [cylinderAngularParameters_zero]
-    exact contDiffAt_localCoordinateMap z
-  exact h.comp 0 (contDiff_cylinderAngularParameters z).contDiffAt
 
 def sphereCandidateCoordinateDerivativeEquiv (z : UnitSphere)
     (hz : firstColumnFormula (Real.pi / 2) (Real.pi / 2) (symmetricMap z) = targetColumn) :
     ParameterSpace z ≃L[ℝ] TargetSpace z :=
   (cylinderAngularDerivativeEquiv z).trans (localCoordinateDerivativeEquiv z hz)
 
-theorem hasFDerivAt_sphereCandidateCoordinateDerivativeEquiv (z : UnitSphere)
-    (hz : firstColumnFormula (Real.pi / 2) (Real.pi / 2) (symmetricMap z) = targetColumn) :
-    HasFDerivAt (sphereCandidateCoordinates z ∘ sphereSourceChart z)
-      (sphereCandidateCoordinateDerivativeEquiv z hz).toContinuousLinearMap 0 := by
-  rw [sphereCandidateCoordinates_sourceChart]
-  have h : HasFDerivAt (localCoordinateMap z)
-      (localCoordinateDerivativeEquiv z hz).toContinuousLinearMap
-      (cylinderAngularParameters z 0) := by
-    rw [cylinderAngularParameters_zero]
-    exact hasFDerivAt_localCoordinateDerivativeEquiv z hz
-  exact h.comp 0 (hasFDerivAt_cylinderAngularDerivativeEquiv z)
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

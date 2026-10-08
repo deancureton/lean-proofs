@@ -106,15 +106,5 @@ theorem attachingHomologyEquiv_apply (k : ℕ) (hk : k ≠ 0) (a : SingularHomol
   · change -(signedAttachingEquiv e f k hk a).2 = _
     rw [signedAttachingEquiv_snd, neg_neg]
 
-theorem attaching_homology_bijective (k : ℕ) (hk : k ≠ 0) :
-    Function.Bijective (fun a : SingularHomology A k ↦
-      (singularHomologyMap f.hom k a, singularHomologyMap e.hom k a)) := by
-  have h : (fun a : SingularHomology A k ↦
-      (singularHomologyMap f.hom k a, singularHomologyMap e.hom k a)) =
-      attachingHomologyEquiv e f k hk := by
-    funext a
-    exact (attachingHomologyEquiv_apply e f k hk a).symm
-  rw [h]
-  exact (attachingHomologyEquiv e f k hk).bijective
 
 end NoExoticSixSphere.DoubleMappingCylinder

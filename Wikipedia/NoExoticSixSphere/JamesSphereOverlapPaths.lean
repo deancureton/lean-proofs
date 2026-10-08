@@ -60,10 +60,6 @@ theorem pathEquiv_toFun (n : ℕ) : (pathEquiv n).toFun = pathInclusion n := by
   apply Subtype.ext
   exact pathEquiv_apply_val n p
 
-theorem pathInclusion_homology_bijective (n k : ℕ) :
-    Function.Bijective (singularHomologyMap (pathInclusion n) k) := by
-  rw [← pathEquiv_toFun]
-  exact (homotopyEquivHomologyEquiv (pathEquiv n) k).bijective
 
 def loopProductEquiv (n : ℕ) :
     EndingPath.restriction (spherePole (n + 1)) (overlap n) ≃ₕ
@@ -77,12 +73,6 @@ theorem loopProductEquiv_symm_curve (n : ℕ) (x : Sphere n)
   change (pathEquiv n ((middlePathEquiv n).symm (x, p))).val.val = _
   rw [pathEquiv_apply_val, middlePathEquiv_symm_curve]
 
-theorem loopProductEquiv_symm_source (n : ℕ) (x : Sphere n)
-    (p : Path (spherePole (n + 1)) (spherePole (n + 1))) :
-    EndingPath.source (spherePole (n + 1)) ((loopProductEquiv n).symm (x, p)).val = middle n x := by
-  change EndingPath.source (spherePole (n + 1))
-    (pathEquiv n ((middlePathEquiv n).symm (x, p))).val = _
-  rw [pathEquiv_apply_val, middlePathEquiv_symm_source]
 
 def generatorCoverHomologyEquiv (n k : ℕ) (hk : k ≠ 0) :
     SingularHomology (Sphere n × Path (spherePole (n + 1)) (spherePole (n + 1))) k ≃ₗ[ℤ]

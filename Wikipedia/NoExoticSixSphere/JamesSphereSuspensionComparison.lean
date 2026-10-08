@@ -76,13 +76,5 @@ def orderedHopfHom (n : ℕ) (hn : 2 ≤ n) (d : ℕ) [NeZero d] :
   (coordinateEquiv (n + n) (d + 1)).toMonoidHom.comp
     ((NativeHopf.hopfHom n hn d).comp (coordinateEquiv n (d + 1)).symm.toMonoidHom)
 
-theorem orderedHopfHom_suspension (n : ℕ) (hn : 2 ≤ n) (d : ℕ) [NeZero d]
-    (c : π_ d (Sphere n) (spherePole n)) :
-    orderedHopfHom n hn d (CubicalSphereSuspension.hom d n c) = 1 := by
-  rw [← coordinateEquiv_letterHom n hn d c]
-  change coordinateEquiv (n + n) (d + 1)
-    (NativeHopf.hopfHom n hn d ((coordinateEquiv n (d + 1)).symm
-      (coordinateEquiv n (d + 1) (NativeHopf.letterHom n hn d c)))) = 1
-  rw [MulEquiv.symm_apply_apply, NativeHopf.hopfHom_letterHom, map_one]
 
 end NoExoticSixSphere.JamesSphere.SuspensionComparison

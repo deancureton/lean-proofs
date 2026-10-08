@@ -52,17 +52,7 @@ def insertPermutation (e : Equiv.Perm (Fin n)) (r : Fin (n + 1)) :
     insertPermutation e r i = j.castSucc ↔ i = r.succAbove (e.symm j) := by
   rw [← (insertPermutation e r).eq_symm_apply, insertPermutation_symm_castSucc]
 
-/-- An old rank strictly below the insertion rank is unchanged. -/
-theorem insertPermutation_apply_castSucc_of_lt (e : Equiv.Perm (Fin n))
-    (r : Fin (n + 1)) (j : Fin n) (h : j.castSucc < r) :
-    insertPermutation e r j.castSucc = (e j).castSucc := by
-  rw [← Fin.succAbove_of_castSucc_lt r j h, insertPermutation_apply_succAbove]
 
-/-- An old rank at or above the insertion rank shifts by one. -/
-theorem insertPermutation_apply_succ_of_le (e : Equiv.Perm (Fin n))
-    (r : Fin (n + 1)) (j : Fin n) (h : r ≤ j.castSucc) :
-    insertPermutation e r j.succ = (e j).castSucc := by
-  rw [← Fin.succAbove_of_le_castSucc r j h, insertPermutation_apply_succAbove]
 
 theorem insertPermutation_pair_injective :
     Function.Injective (fun er : Equiv.Perm (Fin n) × Fin (n + 1) =>

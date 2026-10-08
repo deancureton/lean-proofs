@@ -62,9 +62,6 @@ theorem sphereIntersectionNumber_const_left (m : M) (g : C(Sphere 3, M)) :
   exact sphereIntersectionNumber_zero_of_disjoint e r (ContinuousMap.const _ y) g'
     contMDiff_const hg' hdis
 
-theorem sphereIntersectionNumber_const_right (f : C(Sphere 3, M)) (m : M) :
-    sphereIntersectionNumber e r f (ContinuousMap.const _ m) = 0 := by
-  rw [sphereIntersectionNumber_comm, sphereIntersectionNumber_const_left]
 
 theorem sphereIntersectionNumber_zero_of_nullhomotopic_left
     (f g : C(Sphere 3, M)) (m : M) (H : f.Homotopic (ContinuousMap.const _ m)) :
@@ -72,10 +69,5 @@ theorem sphereIntersectionNumber_zero_of_nullhomotopic_left
   rw [sphereIntersectionNumber_homotopic e r f (ContinuousMap.const _ m) g g H
     (ContinuousMap.Homotopic.refl g), sphereIntersectionNumber_const_left]
 
-theorem sphereIntersectionNumber_zero_of_nullhomotopic_right
-    (f g : C(Sphere 3, M)) (m : M) (H : g.Homotopic (ContinuousMap.const _ m)) :
-    sphereIntersectionNumber e r f g = 0 := by
-  rw [sphereIntersectionNumber_comm]
-  exact sphereIntersectionNumber_zero_of_nullhomotopic_left e r g f m H
 
 end NoExoticSixSphere.EuclideanEmbedding

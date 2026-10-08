@@ -88,16 +88,6 @@ theorem circleProductHomologyEquiv_naturality (f : C(X, Y)) (n : ℕ)
   · exact LinearMap.congr_fun (circleProjectionHomology_naturality f (n + 1)) a
   · exact circleBoundary_naturality f n a
 
-/-- The canonical inverse-coordinate classes are natural as actual homology classes. -/
-theorem circleProductHomologyEquiv_symm_naturality (f : C(X, Y)) (n : ℕ)
-    (a : SingularHomology X (n + 1) × SingularHomology X n) :
-    singularHomologyMap (circleProductMap f) (n + 1)
-        ((circleProductHomologyEquiv X n).symm a) =
-      (circleProductHomologyEquiv Y n).symm
-        (singularHomologyMap f (n + 1) a.1, singularHomologyMap f n a.2) := by
-  apply (circleProductHomologyEquiv Y n).injective
-  rw [circleProductHomologyEquiv_naturality, LinearEquiv.apply_symm_apply,
-    LinearEquiv.apply_symm_apply]
 
 /-- The degree-zero actual projection equivalence is natural as well. -/
 theorem circleProductHomologyZeroEquiv_naturality (f : C(X, Y))

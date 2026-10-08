@@ -125,13 +125,6 @@ def northContraction :
     change mk (unitInterval.symm 1 * a.1.1) a.1.2 = north
     simp
 
-/-- The explicit contraction has the expected cylinder-coordinate formula. -/
-theorem northContraction_mk (s t : unitInterval) (x : X)
-    (ht : (t : ℝ) < 3 / 4) :
-    (northContraction (s, ⟨mk t x, ht⟩) : Suspension X) =
-      mk (unitInterval.symm s * t) x := by
-  exact congrArg Subtype.val
-    (northContract_projection s (⟨(t, x), ht⟩ : NorthCylinder X))
 
 instance northOpen_contractibleSpace :
     ContractibleSpace (northOpen : Set (Suspension X)) :=
@@ -232,13 +225,6 @@ def southContraction :
       a.1.2 = south
     simp
 
-/-- The southern contraction has the reflected cylinder-coordinate formula. -/
-theorem southContraction_mk (s t : unitInterval) (x : X)
-    (ht : 1 / 4 < (t : ℝ)) :
-    (southContraction (s, ⟨mk t x, ht⟩) : Suspension X) =
-      mk (unitInterval.symm (unitInterval.symm s * unitInterval.symm t)) x := by
-  exact congrArg Subtype.val
-    (southContract_projection s (⟨(t, x), ht⟩ : SouthCylinder X))
 
 instance southOpen_contractibleSpace :
     ContractibleSpace (southOpen : Set (Suspension X)) :=

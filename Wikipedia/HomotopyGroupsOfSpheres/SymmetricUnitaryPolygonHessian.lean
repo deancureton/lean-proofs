@@ -60,24 +60,5 @@ theorem secondDerivative_eq_localHessian (a b : SpecialSpace N) (τ : Fin (m + 2
     (hasDerivAt_vertexVariation_coordinates v W)
   exact congrArg₂ (fun X Y ↦ localHessian a b τ v X Y) ht ht
 
-theorem negative_hessianFamily_of_negative_variations (a b : SpecialSpace N)
-    (τ : Fin (m + 2) → ℝ) (v : VertexSpace.Space N m) (hv : v ∈ admissible a b m)
-    (hcrit : fderiv ℝ (localEnergy a b τ v) 0 = 0) {r : ℕ}
-    (R : (Fin r → ℝ) →ₗ[ℝ] ReversibleModel v)
-    (hneg : ∀ c, c ≠ 0 → deriv (deriv (fun s ↦ energy a b τ (vertexVariation v (R c) s))) 0 < 0) :
-    ∃ L : (Fin r → ℝ) →ₗ[ℝ] Model N m, Function.Injective L ∧
-      ∀ c, c ≠ 0 → localHessian a b τ v (L c) (L c) < 0 := by
-  let L : (Fin r → ℝ) →ₗ[ℝ] Model N m := (coordinateVelocity v).toLinearMap.comp R
-  have hLneg (c : Fin r → ℝ) (hc : c ≠ 0) : localHessian a b τ v (L c) (L c) < 0 := by
-    have h := hneg c hc
-    rwa [secondDerivative_eq_localHessian a b τ v hv hcrit (R c)] at h
-  refine ⟨L, ?_, hLneg⟩
-  apply (LinearMap.ker_eq_bot).mp
-  apply LinearMap.ker_eq_bot'.mpr
-  intro c hc
-  by_contra hzero
-  have h := hLneg c hzero
-  simp only [hc, map_zero] at h
-  exact lt_irrefl 0 h
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicSymmetricMatrices.Polygon

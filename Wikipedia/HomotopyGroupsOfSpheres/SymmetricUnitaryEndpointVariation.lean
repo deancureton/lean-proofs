@@ -94,19 +94,5 @@ theorem endpointVariation_base (A C : DirectionSpace N) (t : ℝ) :
   simp only [endpointVariation, zero_mul, zero_smul, exponential_zero,
     sandwich_identity, exponentialCurve]
 
-theorem continuous_endpointVariation (A C : DirectionSpace N) :
-    Continuous (fun z : ℝ × ℝ ↦ endpointVariation A C z.1 z.2) := by
-  have hA : Continuous (fun z : ℝ × ℝ ↦ z.2 • A) := continuous_snd.smul continuous_const
-  have hC : Continuous (fun z : ℝ × ℝ ↦ (z.1 * Real.sin (Real.pi * z.2)) • C) :=
-    (continuous_fst.mul (Real.continuous_sin.comp (continuous_snd.const_mul Real.pi))).smul
-      continuous_const
-  let E : C(DirectionSpace N, SpecialSpace N) := ⟨exponential, continuous_exponential⟩
-  let D : C(ℝ × ℝ, DirectionSpace N) :=
-    ⟨fun z ↦ (z.1 * Real.sin (Real.pi * z.2)) • C, hC⟩
-  let P : C(ℝ × ℝ, DirectionSpace N × SpecialSpace N) :=
-    ⟨fun z ↦ (z.2 • A, (E.comp D) z), hA.prodMk (E.comp D).continuous⟩
-  let S : C(DirectionSpace N × SpecialSpace N, SpecialSpace N) :=
-    ⟨fun z ↦ sandwich z.1 z.2, continuous_sandwich⟩
-  exact (S.comp P).continuous
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicSymmetricMatrices

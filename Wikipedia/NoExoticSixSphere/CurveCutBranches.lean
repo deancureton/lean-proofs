@@ -54,11 +54,6 @@ theorem IntervalNeighborhood.rightBranch_subset_openSet (d : IntervalNeighborhoo
   apply interior_maximal Ioo_subset_Icc_self isOpen_Ioo
   exact ⟨(interior_subset hv.2).1.trans_lt hy.2.1, hy.2.2⟩
 
-theorem IntervalNeighborhood.branches_disjoint (d : IntervalNeighborhood X) (v : X) :
-    Disjoint (d.leftBranch v) (d.rightBranch v) := by
-  apply disjoint_left.mpr
-  intro y hl hr
-  exact (not_lt_of_gt hl.2.2) hr.2.1
 
 theorem IntervalNeighborhood.not_mem_leftBranch (d : IntervalNeighborhood X) (v : X) :
     v ∉ d.leftBranch v := fun h ↦ lt_irrefl _ h.2.2

@@ -36,9 +36,6 @@ theorem isClosed_simplexBoundary (n : ℕ) : IsClosed (simplexBoundary n) := by
       isClosed_eq ((continuous_apply i).comp continuous_subtype_val) continuous_const
   simpa only [simplexBoundary, ofPred_exists] using h
 
-theorem isClosed_bottomOrSide (n : ℕ) : IsClosed (bottomOrSide n) := by
-  exact (isClosed_eq continuous_fst continuous_const).union
-    ((isClosed_simplexBoundary n).preimage continuous_snd)
 
 theorem simplexFace_mem_boundary (n : ℕ) (i : Fin (n + 2)) (s : Simplex n) :
     simplexFace n i s ∈ simplexBoundary (n + 1) :=

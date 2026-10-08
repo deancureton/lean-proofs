@@ -30,15 +30,6 @@ theorem formalChains_bilinear_ext {n m : ℕ} [AddCommGroup M] [Module ℤ M]
   apply formalChains_ext
   exact h v
 
-theorem formalChains_bilinear_ext_iff {n m : ℕ} [AddCommGroup M] [Module ℤ M]
-    {f g : FormalChains V n →ₗ[ℤ] FormalChains W m →ₗ[ℤ] M} :
-    f = g ↔ ∀ v w, f (formalSimplex v) (formalSimplex w) =
-      g (formalSimplex v) (formalSimplex w) := by
-  constructor
-  · rintro rfl
-    intros
-    rfl
-  · exact formalChains_bilinear_ext
 
 /-- Extend a function on pairs of ordered simplices linearly in each argument. -/
 def formalBilinearLift {n m : ℕ} [AddCommGroup M] [Module ℤ M]

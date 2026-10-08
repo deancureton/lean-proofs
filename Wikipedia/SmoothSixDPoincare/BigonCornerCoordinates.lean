@@ -120,36 +120,11 @@ theorem leftCornerCoordinates_lower (h t : ℝ) :
   congr 1
   ring
 
-theorem leftCornerCoordinates_upper {h : ℝ} (hh : h ≠ 0) {t : ℝ} (ht : t ≠ 1) :
-    leftCornerCoordinates h (2 * t - 1, h * (1 - (2 * t - 1) ^ 2)) = (0, t) := by
-  have hq : (0 : ℝ) + t ≠ 1 := by simpa only [zero_add] using ht
-  have hinv : leftCornerInverse h (0, t) =
-      (2 * t - 1, h * (1 - (2 * t - 1) ^ 2)) := by
-    apply Prod.ext <;> dsimp [leftCornerInverse] <;> ring
-  rw [← hinv]
-  exact leftCornerCoordinates_inverse hh hq
 
 theorem leftCornerCoordinates_corner (h : ℝ) : leftCornerCoordinates h (-1, 0) = (0, 0) := by
   convert leftCornerCoordinates_lower h 0 using 1
   norm_num
 
-/-- Off both boundary arcs, the corner map has both coordinates nonzero. -/
-theorem leftCornerCoordinates_axes {h : ℝ} (hh : h ≠ 0) {p : ℝ × ℝ}
-    (hp : arcTime p ≠ 1) :
-    ((leftCornerCoordinates h p).2 = 0 ↔ p.2 = 0) ∧
-      ((leftCornerCoordinates h p).1 = 0 ↔ p.2 = h * (1 - p.1 ^ 2)) := by
-  have hd : 4 * h * (1 - arcTime p) ≠ 0 :=
-    mul_ne_zero (mul_ne_zero (by norm_num) hh) (sub_ne_zero.mpr (Ne.symm hp))
-  constructor
-  · change p.2 / (4 * h * (1 - arcTime p)) = 0 ↔ p.2 = 0
-    exact div_eq_zero_iff.trans (or_iff_left (fun h => hd h))
-  · change arcTime p - p.2 / (4 * h * (1 - arcTime p)) = 0 ↔ _
-    rw [sub_eq_zero, eq_div_iff hd]
-    have hid : arcTime p * (4 * h * (1 - arcTime p)) = h * (1 - p.1 ^ 2) := by
-      dsimp [arcTime]
-      ring
-    rw [hid]
-    exact eq_comm
 
 /-- Reflection interchanging the two bigon endpoints. -/
 def bigonReflection : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ) :=
@@ -170,8 +145,6 @@ def rightCornerChart {h : ℝ} (hh : h ≠ 0) :
     PartialDiffeomorph 𝓘(ℝ, ℝ × ℝ) 𝓘(ℝ, ℝ × ℝ) (ℝ × ℝ) (ℝ × ℝ) ∞ :=
   bigonReflection.toDiffeomorph.toPartialDiffeomorph.trans (leftCornerChart hh)
 
-theorem rightCornerChart_apply {h : ℝ} (hh : h ≠ 0) (p : ℝ × ℝ) :
-    rightCornerChart hh p = rightCornerCoordinates h p := by rfl
 
 theorem rightCornerCoordinates_corner (h : ℝ) : rightCornerCoordinates h (1, 0) = (0, 0) :=
   leftCornerCoordinates_corner h

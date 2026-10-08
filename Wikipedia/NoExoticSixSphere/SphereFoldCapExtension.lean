@@ -35,11 +35,6 @@ theorem axisDilation_head {c : ℝ} (hc : 0 < c) (x : Sphere 3) :
   change (axisDenominator c (x.val 0))⁻¹ * axisNumerator c (x.val 0) = _
   ring
 
-theorem thirdAxis_head_le (x : Sphere 3) :
-    (axisDilation (1 / 3) x).val 0 ≤ -(1 / 2 : ℝ) ↔ x.val 0 ≤ 1 / 2 := by
-  rw [axisDilation_head (by norm_num), div_le_iff₀ (axisDenominator_pos (by norm_num) x)]
-  dsimp [axisNumerator, axisDenominator]
-  constructor <;> intro h <;> linarith
 
 theorem thirdAxis_head_lt (x : Sphere 3) :
     (axisDilation (1 / 3) x).val 0 < -(1 / 2 : ℝ) ↔ x.val 0 < 1 / 2 := by

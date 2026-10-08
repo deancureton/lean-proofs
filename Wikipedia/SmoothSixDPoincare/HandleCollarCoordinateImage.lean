@@ -70,17 +70,6 @@ theorem exists_coordinates_of_depth_le_half (z : Handle E F)
     change normalScale u t • (‖z.2.val‖⁻¹ • z.2.val) = z.2.val
     rw [hscale, smul_inv_smul₀ hF.ne']
 
-theorem coordinates_image : range (coordinates (E := E) (F := F)) =
-    {z : Handle E F | HandleCollarDepth.depth (2 * ‖z.1.val‖ - 1) (1 - ‖z.2.val‖) ≤ 1 / 2} := by
-  ext z
-  constructor
-  · rintro ⟨q, rfl⟩
-    change HandleCollarDepth.depth _ _ ≤ 1 / 2
-    rw [depth_coordinates]
-    exact time_le_half q.2
-  · intro hz
-    obtain ⟨q, hq, _⟩ := exists_coordinates_of_depth_le_half z hz
-    exact ⟨q, hq⟩
 
 theorem coordinates_inner_image :
     coordinates (E := E) (F := F) '' {q : (Disk E × Sphere F) × unitInterval | q.2 < 1} =

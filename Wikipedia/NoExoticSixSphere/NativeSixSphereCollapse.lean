@@ -72,9 +72,5 @@ theorem nativeStableCollapse_eq_identity_iff_finite :
         nativeTransition (e.ambientDimension - 8) l h (d.nativeSixthStageClass hd) = 1 :=
   nativeClassOf_eq_identity_iff _
 
-theorem nativeStableCollapse_eq_identity_iff_nullhomotopic :
-    d.nativeStableCollapse hd = nativeIdentityClass ↔
-      ∃ r : ℕ, (SphereMapSuspension.iterate d.sphereMap r).Nullhomotopic := by
-  rw [d.nativeStableCollapse_eq_identity_iff, d.sixthStableClass_eq_null_iff]
 
 end NoExoticSixSphere.EuclideanEmbedding.FramedCollapseData

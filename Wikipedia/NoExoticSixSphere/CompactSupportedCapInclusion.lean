@@ -60,25 +60,5 @@ variable {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   {M : Type} [TopologicalSpace M] [T2Space M] [ChartedSpace E M]
   (U : Set M) (hU : IsOpen U) [ChartedSpace E U]
 
-/-- The actual cap square for restriction to a neighborhood and absolute homology inclusion. -/
-theorem dualityMap_neighborhood (K : Set M) (hK : IsCompact K) (hKU : K ⊆ U)
-    (p q : ℕ) (h : p + q = n + 3) (a : SupportedModTwoCohomology.Cohomology K p) :
-    modHomologyMap 2 (subtypeInclusion U) q
-        (dualityMap (E := E) n (supportIn U K) (supportIn_isCompact U K hK hKU) p q h
-          (neighborhoodEquiv U K hU hK.isClosed hKU p a)) =
-      dualityMap (E := E) n K hK p q h a := by
-  have he := RelativeModTwoCap.capProductInDegree_naturality (subtypeInclusion U)
-    (show Set.MapsTo (subtypeInclusion U) (supportIn U K)ᶜ Kᶜ from fun _ hx => hx) h a
-    (CompactSupportedFundamentalClass.fundamentalClass (E := E) n
-      (supportIn U K) (supportIn_isCompact U K hK hKU))
-  change modHomologyMap 2 (subtypeInclusion U) q
-      (dualityMap (E := E) n (supportIn U K) (supportIn_isCompact U K hK hKU) p q h
-        (neighborhoodEquiv U K hU hK.isClosed hKU p a)) =
-    RelativeModTwoCap.capProductInDegree Kᶜ h a
-      (inclusionMap (ModuleCat.of ℤ (ZMod 2)) U K (n + 3)
-        (CompactSupportedFundamentalClass.fundamentalClass (E := E) n
-          (supportIn U K) (supportIn_isCompact U K hK hKU))) at he
-  rw [CompactSupportedFundamentalClass.inclusion_fundamentalClass (E := E) n U hU K hK hKU] at he
-  exact he
 
 end NoExoticSixSphere.CompactSupportedCapMap

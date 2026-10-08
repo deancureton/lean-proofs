@@ -44,10 +44,6 @@ theorem small_energy_step_of_large (E : ℝ) {r : ℝ} (hr : 0 < r)
   apply (div_lt_iff₀ (by positivity : 0 < (m : ℝ) + 1)).mpr
   simpa only [mul_comm] using hlarge
 
-theorem exists_small_energy_steps (E : ℝ) {r : ℝ} (hr : 0 < r) :
-    ∃ m : ℕ, ∀ i : Fin (m + 1), E * (time m i.succ - time m i.castSucc) < r ^ 2 := by
-  obtain ⟨m, hm⟩ := exists_nat_gt (E / r ^ 2)
-  exact ⟨m, small_energy_step_of_large E hr m hm⟩
 
 theorem exists_small_energy_steps_above (E : ℝ) {r : ℝ} (hr : 0 < r) (N : ℕ) :
     ∃ m : ℕ, N ≤ m ∧

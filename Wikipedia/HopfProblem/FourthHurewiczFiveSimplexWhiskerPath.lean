@@ -59,20 +59,5 @@ theorem whiskerConcat_apply {a b c : X} (p : Path a b) (q : Path b c) (s : I) :
       if (s : ℝ) ≤ 1 / 2 then p (Set.projIcc 0 1 zero_le_one (2 * (s : ℝ)))
       else q (Set.projIcc 0 1 zero_le_one (2 * (s : ℝ) - 1)) := rfl
 
-/-- The native loop is literally the prescribed arm-middle-reversed-arm path. -/
-theorem whiskeredLoop_path (F : BasedCubicalCell (n + 2) x) (u : Fin (n + 1) → I) :
-    genLoopEquivOfUnique (Fin 1) (whiskeredLoop F u) =
-      (whiskerArm F 0 (Or.inl rfl) u).trans
-        ((whiskerAcross F u).trans (whiskerArm F 1 (Or.inr rfl) u).symm) := by
-  apply Path.ext
-  funext s
-  change F.val (whiskerMap n (u, s)) = _
-  by_cases hs : (s : ℝ) ≤ 1 / 2
-  · rw [whiskerMap_concat, if_pos hs, whiskerConcat_apply, if_pos hs]
-    rfl
-  · rw [whiskerMap_concat, if_neg hs, whiskerConcat_apply, if_neg hs,
-      whiskerConcat_apply]
-    dsimp only
-    split_ifs <;> rfl
 
 end Wikipedia.HopfProblem.HigherHurewicz.CubicalBoundary

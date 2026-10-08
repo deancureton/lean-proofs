@@ -33,12 +33,6 @@ theorem simplexBarycenter_eq_vertexBarycenter (v : Fin (n + 1) → Simplex p) :
   rw [simplexBarycenter_coe]
   simp only [vertexBarycenter, Nat.cast_add, Nat.cast_one, one_div]
 
-/-- The entire actual affine image lies in the ambient convex hull of its vertices. -/
-theorem affineSimplex_ambient_range_subset_convexHull (v : Fin (n + 1) → Simplex p) :
-    range (fun t => (affineSimplex v t : Fin (p + 1) → ℝ)) ⊆
-      convexHull ℝ (range fun i => (v i : Fin (p + 1) → ℝ)) := by
-  rintro _ ⟨t, rfl⟩
-  exact affineSimplex_mem_convexHull v t
 
 /-- The sharp barycenter estimate in the actual standard-simplex metric. -/
 theorem dist_simplexBarycenter_convexHull_le (v : Fin (n + 1) → Simplex p) {D : ℝ}
@@ -62,16 +56,6 @@ theorem dist_simplexBarycenter_vertex_le (v : Fin (n + 1) → Simplex p) {D : �
     dist (simplexBarycenter v) (v i) ≤ (n : ℝ) / ((n : ℝ) + 1) * D :=
   dist_simplexBarycenter_convexHull_le v hpair (subset_convexHull ℝ _ (mem_range_self i))
 
-/-- Barycenters of nested vertex families satisfy the same actual metric estimate. -/
-theorem dist_simplexBarycenter_simplexBarycenter_le {m : ℕ}
-    (v : Fin (n + 1) → Simplex p) (w : Fin (m + 1) → Simplex p) {D : ℝ}
-    (hpair : ∀ i j, dist (v i) (v j) ≤ D)
-    (hw : ∀ i, (w i : Fin (p + 1) → ℝ) ∈
-      convexHull ℝ (range fun j => (v j : Fin (p + 1) → ℝ))) :
-    dist (simplexBarycenter v) (simplexBarycenter w) ≤
-      (n : ℝ) / ((n : ℝ) + 1) * D := by
-  apply dist_simplexBarycenter_convexHull_le v hpair
-  exact affineSimplex_mem_of_convex w (convex_convexHull ℝ _) hw _
 
 /-- A pairwise vertex bound controls every pair of actual affine image points. -/
 theorem dist_affineSimplex_le (v : Fin (n + 1) → Simplex p) {D : ℝ}

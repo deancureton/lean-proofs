@@ -107,14 +107,6 @@ variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E] [TopologicalSpace M] [ChartedSpace E M]
   [IsManifold 𝓘(ℝ, E) ∞ M] [T2Space M] [CompactSpace M]
 
-/-- Closed sublevels are homeomorphic if a slightly larger band has no critical points. -/
-theorem nonempty_regularSublevelHomeomorph {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) {c a b : ℝ} (hca : c < a) (hcb : c < b)
-    (hband : ∀ x, f x ∈ Icc c (max a b) → x ∉ ManifoldMorse.criticalPoints E f) :
-    Nonempty ({x : M // f x ≤ a} ≃ₜ {x : M // f x ≤ b}) := by
-  obtain ⟨F, hF⟩ := exists_heightTranslatingFlow hf hband
-  exact ⟨regularSublevelHomeomorphOfFlow F hF hf.continuous hca hcb
-    (le_max_left a b) (le_max_right a b)⟩
 
 /-- Construct the regular-sublevel homeomorphism with its exact boundary-level correspondence. -/
 theorem exists_regularSublevelHomeomorph_with_level {f : M → ℝ}

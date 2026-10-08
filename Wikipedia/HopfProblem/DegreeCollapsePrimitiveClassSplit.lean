@@ -117,8 +117,5 @@ def splitEquiv : H ≃ₗ[ℤ] (H ⧸ Submodule.span ℤ {a}) × ℤ := by
   let ea := E.toAddEquiv.trans P
   exact ea.toIntLinearEquiv
 
-theorem splitEquiv_symm_zero (k : ℤ) : (splitEquiv l a ha).symm (0, k) = k • a := by
-  change ((quotientEquivKer l a ha (0 : H ⧸ Submodule.span ℤ {a})) : H) + k • a = k • a
-  rw [map_zero, Submodule.coe_zero, zero_add]
 
 end Wikipedia.HopfProblem.DegreeCollapse.PrimitiveSplitting

@@ -78,11 +78,6 @@ theorem dimH_image_manifold_le [LindelofSpace M] {f : M → F} {s : Set M}
   rw [dimH_bUnion htcount]
   exact iSup_le (fun x ↦ iSup_le (fun _ ↦ dimH_image_chart_le hs hf x))
 
-/-- The same bound for the entire range of a smooth map from a Lindelöf manifold. -/
-theorem dimH_range_manifold_le [LindelofSpace M] {f : M → F}
-    (hf : ContMDiff I 𝓘(ℝ, F) ∞ f) : dimH (range f) ≤ finrank ℝ E := by
-  rw [← image_univ]
-  exact dimH_image_manifold_le isOpen_univ hf.contMDiffOn
 
 /-- In strictly higher Euclidean dimension, the complement of a smooth manifold image is dense. -/
 theorem dense_compl_manifold_image [LindelofSpace M] [FiniteDimensional ℝ F]

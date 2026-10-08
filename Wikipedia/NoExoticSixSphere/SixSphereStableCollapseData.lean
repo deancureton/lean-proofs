@@ -39,17 +39,5 @@ theorem exists_highCodimensionFramedEmbedding (h : M ≃ₜ Sphere 6) (c : ℕ) 
   exact ⟨e, (Nat.le_max_right 7 c).trans he,
     e.nonempty_normalFrame_of_homeomorph_sixSphere h ((Nat.le_max_left 7 c).trans he)⟩
 
-theorem exists_sixSphereStableCollapseData (h : M ≃ₜ Sphere 6) :
-    ∃ e : EuclideanEmbedding 6 M, ∃ hd : 8 ≤ e.ambientDimension,
-      ∃ a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel,
-        ∃ d : e.FramedCollapseData a,
-          (d.sixthStableClass hd = StableSixSphereMaps.nullClass ↔
-            ∃ r : ℕ, (SphereMapSuspension.iterate d.sphereMap r).Nullhomotopic) := by
-  let : CompactSpace M := compactSpace_of_homeomorph h
-  let : Nonempty M := h.toEquiv.nonempty
-  obtain ⟨e, he, ⟨a⟩⟩ := exists_highCodimensionFramedEmbedding h 7
-  have hd : 8 ≤ e.ambientDimension := by omega
-  let d := e.framedCollapseData a
-  exact ⟨e, hd, a, d, d.sixthStableClass_eq_null_iff hd⟩
 
 end NoExoticSixSphere

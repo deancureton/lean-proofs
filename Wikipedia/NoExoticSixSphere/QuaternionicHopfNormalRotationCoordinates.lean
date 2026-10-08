@@ -56,13 +56,6 @@ theorem southNormalRotationCoordinates_frame (t : ℝ) (q : Sphere 3) (v : South
   rw [← southRadialFrame_range t q]
   exact ⟨v, rfl⟩
 
-theorem southNormalRotationCoordinates_zero (q : Sphere 3) :
-    southNormalRotationCoordinates 0 q = ContinuousLinearEquiv.refl ℝ SouthNormalModel := by
-  apply ContinuousLinearEquiv.ext
-  funext v
-  rw [southNormalRotationCoordinates_apply, southRadialFrame_zero,
-    southNormalFrame.ambientInverse_ambient]
-  rfl
 
 theorem southNormalRotationCoordinates_symm_apply (t : ℝ) (q : Sphere 3)
     (v : SouthNormalModel) :

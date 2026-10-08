@@ -79,14 +79,6 @@ theorem boundary_disjoint_linkingBoundary :
   · exact (mem_sphere_zero_iff_norm.mp hx).not_gt hnorm.1
   · exact (mem_sphere_zero_iff_norm.mp hx).not_lt hnorm.2
 
-theorem protected_mem_puncturedAnnulus (r₀ r₁ : ℝ)
-    (hholes : P.closedHoles ⊆ {x | r₀ < ‖x‖ ∧ ‖x‖ < r₁})
-    (x : Vector 4) (hx : x ∈ domain 3) (hend : ‖x‖ ≤ r₀ ∨ r₁ ≤ ‖x‖) :
-    x ∈ P.puncturedAnnulus := by
-  refine ⟨hx, ?_⟩
-  intro hhole
-  have hactive := hholes (P.openHoles_subset_closedHoles hhole)
-  exact hend.elim (not_le_of_gt hactive.1) (not_le_of_gt hactive.2)
 
 def innerBoundary : C(Sphere 3, P.puncturedAnnulus) where
   toFun q := ⟨q.val, P.boundary_mem_puncturedAnnulus q.val (Or.inl q.property)⟩

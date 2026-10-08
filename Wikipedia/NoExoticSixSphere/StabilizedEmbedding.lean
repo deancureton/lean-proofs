@@ -74,11 +74,6 @@ theorem finrank_stabilizedNormalSpace [CompactSpace M] (k : ℕ) (x : M) :
   have h := e.dimension_le_ambient x
   omega
 
-/-- Any desired lower bound on the actual normal rank is attained by stabilization. -/
-theorem le_finrank_stabilizedNormalSpace [CompactSpace M] (k : ℕ) (x : M) :
-    k ≤ Module.finrank ℝ ((e.stabilize k).NormalSpace x) := by
-  rw [e.finrank_stabilizedNormalSpace]
-  exact Nat.le_add_left _ _
 
 end EuclideanEmbedding
 

@@ -56,18 +56,5 @@ variable {E : Type} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E] (n : ℕ) [Fact (Module.finrank ℝ E = (n + 2) + 1)]
   {M : Type} [TopologicalSpace M] [T2Space M] [ChartedSpace E M]
 
-/-- Every original neighborhood contains a compact neighborhood with a unique actual
-relative mod-two fundamental class. No class or evaluation isomorphism is an input. -/
-theorem exists_compact_fundamental_neighborhood (x : M) (U : Set M) (hU : U ∈ 𝓝 x) :
-    ∃ K : Set M, IsCompact K ∧ K ∈ 𝓝 x ∧ K ⊆ U ∧
-      ∃! c : Homology (ModuleCat.of ℤ (ZMod 2)) K (n + 3),
-        IsFundamentalOn (E := E) n K c := by
-  let e := chartAt E x
-  have hx : x ∈ e.source := mem_chart_source E x
-  obtain ⟨R, hR, hB, hKU⟩ := ChartClosedBall.exists_support_subset e x hx U hU
-  exact ⟨ChartClosedBall.support e (e x) R,
-    ChartClosedBall.support_isCompact e (e x) R hB,
-    ChartClosedBall.support_mem_nhds e x hx R hR hB, hKU,
-    ChartClosedBall.existsUnique_fundamentalClass n e (e x) R hR.le hB⟩
 
 end NoExoticSixSphere.SupportedRelativeHomology

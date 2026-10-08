@@ -72,21 +72,7 @@ omit [Module ℤ A] in
 @[simp] theorem signedFoldMap_apply (ac : A × A) :
     signedFoldMap A ac = (ac.1 + ac.2, -(ac.1 + ac.2)) := rfl
 
-/-- The signed fold and the coordinate sum have the same kernel. -/
-theorem signedFoldMap_ker :
-    LinearMap.ker (signedFoldMap A) = LinearMap.ker (pairSumMap A) := by
-  ext ac
-  change (ac.1 + ac.2, -(ac.1 + ac.2)) = 0 ↔ ac.1 + ac.2 = 0
-  constructor
-  · intro h
-    exact congrArg Prod.fst h
-  · intro h
-    exact Prod.ext h (h ▸ neg_zero)
 
-/-- Addition of the two coordinates is surjective. -/
-theorem pairSumMap_surjective : Function.Surjective (pairSumMap A) := by
-  intro a
-  exact ⟨(a, 0), add_zero a⟩
 
 variable {A} {B P : Type*} [AddCommGroup B] [AddCommGroup P]
   [Module ℤ B] [Module ℤ P]

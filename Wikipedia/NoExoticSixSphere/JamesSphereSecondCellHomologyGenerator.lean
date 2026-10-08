@@ -72,9 +72,5 @@ theorem multiple_coordinate_natAbs (k : ℤ) :
     Int.natAbs (wordIntegerEquiv (k • generator)) = Int.natAbs k := by
   rw [map_zsmul, Int.zsmul_eq_mul, Int.natAbs_mul, integer_coordinate_natAbs, mul_one]
 
-theorem attaching_coordinate_natAbs_of_multiple (k : ℤ)
-    (h : adjointClass SphereFourAttaching.attachingClass = k • generator) :
-    Int.natAbs SphereFiveEighth.relation.1.toAdd = Int.natAbs k := by
-  rw [attaching_coordinate, h, multiple_coordinate_natAbs]
 
 end NoExoticSixSphere.SphereFourHopfHomology.SecondCell

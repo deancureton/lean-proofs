@@ -99,15 +99,7 @@ theorem rightPartialDiffeomorph_apply [Nonempty Y] (y : Y) :
     letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
     rightPartialDiffeomorph e y = right e.toOpenPartialHomeomorph y := rfl
 
-theorem leftPartialDiffeomorph_symm_left [Nonempty X] (x : X) :
-    letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
-    (leftPartialDiffeomorph e).symm (left e.toOpenPartialHomeomorph x) = x := by
-  exact (leftPartialDiffeomorph e).left_inv (mem_univ x)
 
-theorem rightPartialDiffeomorph_symm_right [Nonempty Y] (y : Y) :
-    letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
-    (rightPartialDiffeomorph e).symm (right e.toOpenPartialHomeomorph y) = y := by
-  exact (rightPartialDiffeomorph e).left_inv (mem_univ y)
 
 theorem leftPartialDiffeomorph_source [Nonempty X] :
     letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
@@ -117,16 +109,6 @@ theorem rightPartialDiffeomorph_source [Nonempty Y] :
     letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
     (rightPartialDiffeomorph e).source = univ := rfl
 
-theorem leftPartialDiffeomorph_target [Nonempty X] :
-    letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
-    (leftPartialDiffeomorph e).target = range (left e.toOpenPartialHomeomorph) := by
-  exact IsOpenEmbedding.toOpenPartialHomeomorph_target
-    (left e.toOpenPartialHomeomorph) (left_isOpenEmbedding e.toOpenPartialHomeomorph)
 
-theorem rightPartialDiffeomorph_target [Nonempty Y] :
-    letI := chartedSpace (H := H) e.toOpenPartialHomeomorph
-    (rightPartialDiffeomorph e).target = range (right e.toOpenPartialHomeomorph) := by
-  exact IsOpenEmbedding.toOpenPartialHomeomorph_target
-    (right e.toOpenPartialHomeomorph) (right_isOpenEmbedding e.toOpenPartialHomeomorph)
 
 end Wikipedia.SmoothSixDPoincare.OpenGluing

@@ -93,9 +93,5 @@ theorem realCubeHomeomorph_mem_boundary_iff (n : ℕ) (v : ↥(realCubeSet n)) :
     · exact ⟨i, Or.inl (Subtype.ext hi)⟩
     · exact ⟨i, Or.inr (Subtype.ext hi)⟩
 
-theorem realCubeHomeomorph_symm_mem_frontier_iff (n : ℕ) (u : Fin n → I) :
-    ((realCubeHomeomorph n).symm u).val ∈ frontier (realCubeSet n) ↔
-      u ∈ Cube.boundary (Fin n) := by
-  rw [← realCubeHomeomorph_mem_boundary_iff, Homeomorph.apply_symm_apply]
 
 end Wikipedia.HopfProblem.HigherHurewicz

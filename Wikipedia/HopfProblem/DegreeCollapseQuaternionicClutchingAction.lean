@@ -94,18 +94,5 @@ theorem sphereClutching_six_surjective :
   obtain ⟨c, hc⟩ := hnative a
   exact ⟨c, (sphereClutching_map c).trans hc⟩
 
-theorem sphereClutching_generates :
-    Function.Surjective (fun k : ℤ ↦ (sphereClass sphereClutching) ^ k) := by
-  intro a
-  obtain ⟨c, hc⟩ := sphereClutching_six_surjective a
-  obtain ⟨k, hk⟩ := SphereSixCube.identity_generates c
-  change SphereSixCube.identityClass ^ k = c at hk
-  refine ⟨k, ?_⟩
-  calc
-    (sphereClass sphereClutching) ^ k =
-        (mapHom sphereClutching 6 SphereSixCube.identityClass) ^ k := rfl
-    _ = mapHom sphereClutching 6 (SphereSixCube.identityClass ^ k) :=
-      (map_zpow (mapHom sphereClutching 6) _ k).symm
-    _ = a := by rw [hk, hc]
 
 end Wikipedia.HopfProblem.DegreeCollapse.QuaternionicClutching

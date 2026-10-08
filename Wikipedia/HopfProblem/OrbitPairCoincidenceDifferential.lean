@@ -68,24 +68,5 @@ theorem chart_difference_derivative
   ext w
   exact (C.map_sub _ _).symm
 
-theorem transverseAt_iff_chart
-    (c : PartialDiffeomorph J 𝓘(ℝ, F) N F ∞) {u v : X → N} {x : X}
-    (hu : MDifferentiableAt I J u x) (hv : MDifferentiableAt I J v x)
-    (hxy : v x = u x) (hx : u x ∈ c.source) :
-    TransverseAt (I := I) (J := J) u v x ↔
-      Surjective (mfderiv I 𝓘(ℝ, F) (fun y => c (v y) - c (u y)) x) := by
-  let C : G →L[ℝ] F := chartDifferential c (u x)
-  let D : E →L[ℝ] G := differential (I := I) (J := J) u v x
-  let L : E →L[ℝ] F := mfderiv I 𝓘(ℝ, F) (fun y => c (v y) - c (u y)) x
-  have hL : L = C.comp D := chart_difference_derivative c hu hv hxy hx
-  change Surjective D ↔ Surjective L
-  rw [hL]
-  have hC : Bijective C := PartialChart.bijective_mfderiv c hx
-  constructor
-  · intro ht
-    exact hC.surjective.comp ht
-  · intro ht w
-    obtain ⟨z, hz⟩ := ht (C w)
-    exact ⟨z, hC.injective hz⟩
 
 end Wikipedia.HopfProblem.OrbitPair.Coincidence

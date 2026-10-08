@@ -41,12 +41,6 @@ def direction {n : ℕ} (J : Space n) : RealSymmetricMixing.DirectionSpace (Inde
 def minimumGenerator {n : ℕ} (J : Space n) : RealSymmetricMixing.DirectionSpace (Index n) :=
   Real.pi • direction J
 
-theorem minimumGenerator_injective (n : ℕ) :
-    Function.Injective
-      (minimumGenerator : Space n → RealSymmetricMixing.DirectionSpace (Index n)) := by
-  intro J K h
-  have he : Real.pi • J.val = Real.pi • K.val := congrArg Subtype.val h
-  exact Subtype.ext ((smul_right_injective _ Real.pi_ne_zero) he)
 
 theorem exponential_direction {n : ℕ} (J : Space n) (θ : ℝ) :
     QuaternionicSymmetricMatrices.exponential (θ • direction J) = rotation J θ := by

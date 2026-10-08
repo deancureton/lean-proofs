@@ -73,12 +73,6 @@ theorem productMap_infty
     (hf : f ∞ = ∞) (hg : g ∞ = ∞) : productMap f g hf hg ∞ = ∞ := by
   simpa [hf, hg] using productMap_apply f g hf hg (∞, ∞)
 
-theorem productMap_id :
-    productMap (ContinuousMap.id (OnePoint E)) (ContinuousMap.id (OnePoint F)) rfl rfl =
-      ContinuousMap.id (OnePoint (E × F)) := by
-  ext z
-  obtain ⟨p, rfl⟩ := map_surjective z
-  exact productMap_apply _ _ rfl rfl p
 
 omit [T2Space E] [T2Space F] [LocallyCompactSpace E] [LocallyCompactSpace F] in
 theorem map_swap (p : OnePoint E × OnePoint F) :

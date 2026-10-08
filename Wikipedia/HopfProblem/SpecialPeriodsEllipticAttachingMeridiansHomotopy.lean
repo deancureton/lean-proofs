@@ -114,16 +114,6 @@ theorem quotient_conjugate :
           (Path.Homotopic.Quotient.mk S.tail).symm) :=
   Path.Homotopic.Quotient.eq.mpr S.homotopic_conjugate
 
-/-- Mathlib's path-change isomorphism sends the initial loop class to
-the final loop class, with the orientation determined by the given square. -/
-theorem fundamentalGroup_pathChange :
-    FundamentalGroup.fundamentalGroupMulEquivOfPath S.tail
-        (FundamentalGroup.fromPath (Path.Homotopic.Quotient.mk p)) =
-      FundamentalGroup.fromPath (Path.Homotopic.Quotient.mk q) := by
-  change (Path.Homotopic.Quotient.mk S.tail).symm.trans
-    ((Path.Homotopic.Quotient.mk p).trans (Path.Homotopic.Quotient.mk S.tail)) = _
-  rw [S.quotient_boundary, ← Path.Homotopic.Quotient.trans_assoc,
-    Path.Homotopic.Quotient.symm_trans, Path.Homotopic.Quotient.refl_trans]
 
 end LoopSquare
 

@@ -53,16 +53,6 @@ theorem componentPositiveRetraction_surjective (p : Fiber d) (hp : 0 ≤ time d 
     Surjective (componentPositiveRetraction d p hp) :=
   fun q ↦ ⟨⟨q.val, q.property.1⟩, componentPositiveRetraction_retract d p hp q⟩
 
-theorem fiberFold_image_component (p : Fiber d) (hp : 0 ≤ time d p) :
-    fiberFold d '' connectedComponent p = connectedComponent p ∩ {q | 0 ≤ time d q} := by
-  apply Subset.antisymm
-  · rintro q ⟨r, hr, rfl⟩
-    refine ⟨fiberFold_mem_component d p hp hr, ?_⟩
-    change 0 ≤ time d (fiberFold d r)
-    rw [time_fiberFold]
-    exact abs_nonneg _
-  · intro q hq
-    exact ⟨q, hq.1, fiberFold_eq_self d q hq.2⟩
 
 theorem isPathConnected_component (k : ℕ) (hd : m = n + k) (p : Fiber d) :
     IsPathConnected (connectedComponent p) := by

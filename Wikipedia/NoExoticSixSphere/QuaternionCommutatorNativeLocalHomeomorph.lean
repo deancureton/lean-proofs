@@ -60,9 +60,6 @@ theorem localModel_eq_sphereMap : Set.EqOn localModel sphereMap localModel.sourc
 theorem localModel_sourcePoint : localModel sourcePoint = south :=
   (localModel_eq_sphereMap sourcePoint_mem_localModel).trans sourcePoint_map
 
-theorem south_mem_localModel_target : south ∈ localModel.target := by
-  have h := localModel.map_source sourcePoint_mem_localModel
-  rwa [localModel_sourcePoint] at h
 
 theorem sphereMap_fiber_iff (x : Sphere 7) : sphereMap x = south ↔ x = sourcePoint := by
   constructor

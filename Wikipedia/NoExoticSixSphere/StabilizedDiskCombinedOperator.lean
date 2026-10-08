@@ -54,10 +54,6 @@ theorem fderiv_eq_collar (s : Sphere 3) :
     Filter.mem_of_superset (hV.mem_nhds (hSV s.property)) heq
   exact he.fderiv_eq
 
-theorem combinedMap_collar (s : Sphere 3) :
-    (D.combinedMap hf a has ha s).val =
-      OperatorSum.operator (boundaryFrameOperator (a s).val) (fderiv ℝ (collar b f) s.val) := by
-  rw [D.combinedMap_value, D.fderiv_eq_collar]
 
 theorem parityOfDimension_zero_iff_combined_extension (hN : N = k + 6) :
     D.parityOfDimension hN hf a has ha = 0 ↔ Extends (D.combinedMap hf a has ha) := by

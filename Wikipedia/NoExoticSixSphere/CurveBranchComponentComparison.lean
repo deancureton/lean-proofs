@@ -43,12 +43,6 @@ theorem preconnected_subset_cutComponent_of_meets (S B : Set X) (hB : IsPreconne
   have hz := preconnected_subset_cutComponent S B hB hBS z hyB
   rwa [cutComponent_eq_of_mem S x z hyC] at hz
 
-theorem cutComponent_eq_of_inter_nonempty (S : Set X) (x y : {x : X // x ∉ S})
-    (h : (cutComponent S x ∩ cutComponent S y).Nonempty) :
-    cutComponent S x = cutComponent S y := by
-  obtain ⟨z, hzx, hzy⟩ := h
-  let w : {x : X // x ∉ S} := ⟨z, cutComponent_subset_compl S x hzx⟩
-  exact (cutComponent_eq_of_mem S x w hzx).symm.trans (cutComponent_eq_of_mem S y w hzy)
 
 theorem IntervalNeighborhood.incident_component_contains_branch
     (d : IntervalNeighborhood X) (v : X) (hv : v ∈ d.openSet) (S : Set X) (hvS : v ∈ S)

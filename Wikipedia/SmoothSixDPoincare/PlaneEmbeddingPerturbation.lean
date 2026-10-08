@@ -69,17 +69,5 @@ theorem exists_small_affine_injective_immersion {f : Plane → F} (hf : ContDiff
     rw [fderiv_perturb hf]
     exact injective_add_linearMap_of_not_bad f (fun h => hA (Or.inl h)) x
 
-/-- The same parameter gives a genuine closed embedding on any prescribed compact source set. -/
-theorem exists_small_affine_compact_embedding {f : Plane → F} (hf : ContDiff ℝ ∞ f)
-    (hdim : 5 ≤ Module.finrank ℝ F) {K : Set Plane} (hK : IsCompact K)
-    {ε : ℝ} (hε : 0 < ε) :
-    ∃ A : F × F, ‖A‖ < ε ∧ ContDiff ℝ ∞ (perturb f A) ∧
-      Topology.IsClosedEmbedding (fun x : K => perturb f A x) ∧
-        ∀ x, Function.Injective (fderiv ℝ (perturb f A) x) := by
-  obtain ⟨A, hA, hsmooth, hinj, hderiv⟩ := exists_small_affine_injective_immersion hf hdim hε
-  let : CompactSpace K := isCompact_iff_compactSpace.mp hK
-  exact ⟨A, hA, hsmooth,
-    (hsmooth.continuous.comp continuous_subtype_val).isClosedEmbedding
-      (hinj.comp Subtype.val_injective), hderiv⟩
 
 end Wikipedia.SmoothSixDPoincare.PlaneImmersion

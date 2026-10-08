@@ -49,18 +49,5 @@ def liftedHomotopy (n : ℕ) (smp₀ smp₁ : RelativeSimplex U (n + 1))
   · ext t
     exact H.eq_fst r (SimplexVertexCone.cone_boundary n t s hs)
 
-theorem fiberClass_eq_of_homotopyRel (n : ℕ) (smp₀ smp₁ : RelativeSimplex U (n + 3))
-    (hv₀ : smp₀.val (stdSimplex.vertex (S := ℝ) (0 : Fin (n + 4))) = a.val)
-    (hv₁ : smp₁.val (stdSimplex.vertex (S := ℝ) (0 : Fin (n + 4))) = a.val)
-    (H : smp₀.val.HomotopyRel smp₁.val (simplexBoundary (n + 3))) :
-    fiberClass U a n smp₁ hv₁ = fiberClass U a n smp₀ hv₀ := by
-  let K := liftedHomotopy U a (n + 2) smp₀ smp₁ hv₀ hv₁ H
-  unfold fiberClass
-  apply congrArg (fiberHomologyEquiv U a n).symm
-  apply homologyClass_eq_of_homotopy _ (n + 1) _ _ K.toHomotopy
-  intro t s hs
-  change K (t, s) ∈ RelativeFiberSubspacePaths.subspace U a
-  rw [K.eq_fst t hs]
-  exact liftedSimplex_boundary U a (n + 2) smp₀ hv₀ s hs
 
 end NoExoticSixSphere.RelativeSimplexFiberClass

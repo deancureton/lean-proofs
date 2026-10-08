@@ -92,25 +92,10 @@ theorem parity_reparametrize (f : X → Z) (g : Y → Z) (u : X' ≃ X) (v : Y' 
   unfold parity
   rw [pairs_ncard_reparametrize]
 
-theorem parity_eq_image_count (f : X → Z) (g : Y → Z)
-    (hf : Injective f) (hg : Injective g) :
-    parity f g = ((range f ∩ range g).ncard : ZMod 2) := by
-  unfold parity
-  rw [pairs_ncard_eq_image f g hf hg]
 
 variable {M : Type*} [TopologicalSpace M]
   [ChartedSpace (EuclideanSpace ℝ (Fin 6)) M] [IsManifold (𝓡 6) ∞ M]
   [T2Space M] [CompactSpace M]
 
-/-- Finiteness follows from the actual native tangent maps, not a count hypothesis. -/
-theorem finite_transverse_sphere_pairs {f g : Sphere 3 → M}
-    (hf : ContMDiff (𝓡 3) (𝓡 6) ∞ f) (hg : ContMDiff (𝓡 3) (𝓡 6) ∞ g)
-    (hi : Injective f) (hj : Injective g)
-    (ht : ∀ x y, f x = g y → Surjective
-      ((mfderiv (𝓡 3) (𝓡 6) f x).coprod (mfderiv (𝓡 3) (𝓡 6) g y))) :
-    (pairs f g).Finite := by
-  apply finite_pairs f g hi hj
-  exact Wikipedia.SmoothSixDPoincare.finite_transverse_intersections hf hg hi hj
-    (by simp) (fun x y h ↦ ht x y h.symm)
 
 end NoExoticSixSphere.MapIntersections

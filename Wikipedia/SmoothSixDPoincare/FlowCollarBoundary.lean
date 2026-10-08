@@ -189,13 +189,5 @@ theorem homeomorph_fixed_on_common_frontier [T2Space X] [CompactSpace B]
     (d.homeomorph x).val = x.val :=
   congrArg (fun y : B => y.val) (d.rescale_eq_self_of_mem_inner_frontier_outer x hxA hxB)
 
-theorem homeomorph_symm_fixed_on_common_frontier [T2Space X] [CompactSpace B]
-    (y : A) (hyB : y.val ∈ frontier B) : (d.homeomorph.symm y).val = y.val := by
-  let x : B := ⟨y.val, d.inner_subset y.property⟩
-  have heq : d.homeomorph x = y :=
-    Subtype.ext (d.homeomorph_fixed_on_common_frontier x y.property hyB)
-  have hh := congrArg d.homeomorph.symm heq
-  rw [d.homeomorph.symm_apply_apply] at hh
-  exact congrArg (fun z : B => z.val) hh.symm
 
 end Wikipedia.SmoothSixDPoincare.FlowConstruction.FlowCollarData

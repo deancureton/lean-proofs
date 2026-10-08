@@ -105,23 +105,5 @@ def pullbackDiffeomorph (e : M ≃ₜ N) :
 
 end Transport
 
-/-- Classification in the base universe suffices in every universe: transport the
-given atlas to the small standard sphere, classify that atlas, and transport back.
-This is only a universe reduction; its classification premise remains unproved. -/
-theorem sixSphereRigidity_universeLift (h : SixSphereRigidity.{0}) :
-    SixSphereRigidity.{u} := by
-  intro M _ _ _ he
-  obtain ⟨e⟩ := he
-  obtain ⟨d⟩ := h (Sphere 6) inferInstance (pullbackAtlas (n := 6) e.symm)
-    (pullback_isManifold (n := 6) e.symm) ⟨Homeomorph.refl _⟩
-  -- The two occurrences of `Sphere 6` have different atlases. Pass the charted-space
-  -- arguments explicitly, so typeclass inference cannot replace the transported one.
-  let inverse := @Diffeomorph.symm ℝ _
-    _ _ _  _ _ _  _ _  _ _  (𝓡 6) (𝓡 6)
-    (Sphere 6) _ (pullbackAtlas (n := 6) e.symm) M _ _ ∞
-    (pullbackDiffeomorph (n := 6) e.symm)
-  exact ⟨@Diffeomorph.trans ℝ _
-    _ _ _  _ _ _  _ _ _  _ _  _ _  _ _  (𝓡 6) (𝓡 6) (𝓡 6)
-    M _ _ (Sphere 6) _ (pullbackAtlas (n := 6) e.symm) (Sphere 6) _ _ ∞ inverse d⟩
 
 end NoExoticSixSphere

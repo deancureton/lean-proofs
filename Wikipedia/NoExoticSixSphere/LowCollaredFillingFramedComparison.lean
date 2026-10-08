@@ -48,42 +48,8 @@ def fillingOfComparison {S : LowCollaredSevenState B} {U : LowCollaredSevenState
   let := U.halfBoundaryAtlas
   exact { U.framedFilling with boundaryDiffeomorph := F.diffeomorph }
 
-theorem fillingOfComparison_boundary_point
-    {S : LowCollaredSevenState B} {U : LowCollaredSevenState B} {b : B}
-    (F : Comparison S U b) (p : S.Zero) :
-    letI := S.zeroAtlas; letI := U.halfBoundaryAtlas;
-    ((fillingOfComparison F).boundaryDiffeomorph p).val = (F.diffeomorph p).val := by
-  let := S.zeroAtlas
-  let := U.halfBoundaryAtlas
-  rfl
 
-theorem fillingOfComparison_frame
-    {S : LowCollaredSevenState B} {U : LowCollaredSevenState B} {b : B}
-    (F : Comparison S U b) (p : U.Half) :
-    letI := S.zeroAtlas; letI := U.halfChartedSpace;
-    letI := (fillingOfComparison F).topology; letI := (fillingOfComparison F).atlas;
-    (fillingOfComparison F).frame.ambient p = U.halfNormalFraming.ambient p := by
-  let := S.zeroAtlas
-  let := U.halfChartedSpace
-  let := (fillingOfComparison F).topology
-  let := (fillingOfComparison F).atlas
-  rfl
 
-theorem comparison_boundary_columns
-    {S : LowCollaredSevenState B} {U : LowCollaredSevenState B} {b : B}
-    (F : Comparison S U b) (p : S.Zero) :
-    letI := S.zeroAtlas; letI := U.halfBoundaryAtlas;
-    ∀ v : Vector ((S.embedding.ambientDimension - 6) + F.extra),
-      columns U (U.collar.zeroPoint b).val (F.diffeomorph p)
-        (EmbeddedTime.normalCoordinates (n := 6) U.embedding
-          (U.collar.zeroPoint b).val (F.normal v)) =
-      F.ambient (BlockSum.operator F.extra
-        ((CollaredZero.normalFrame S (CollaredZero.referencePoint S b)).ambient p) v) := by
-  let := S.zeroAtlas
-  let := U.halfBoundaryAtlas
-  intro v
-  exact (normalFrame_ambient U (U.collar.zeroPoint b).val (F.diffeomorph p)
-    (F.normal v)).symm.trans (F.frame_eq p v)
 
 variable (S : LowCollaredSevenState B)
 

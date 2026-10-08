@@ -62,13 +62,6 @@ theorem suspensionFlow_chart
   change Ψ ((Ψ.symm (Ψ p)).1, (Ψ.symm (Ψ p)).2 + t) = _
   rw [Ψ.symm_apply_apply]
 
-theorem contDiff_suspensionFlow
-    (Ψ : Diffeomorph 𝓘(ℝ, E × ℝ) 𝓘(ℝ, E × ℝ) (E × ℝ) (E × ℝ) ∞) :
-    ContDiff ℝ ∞ (fun q : ℝ × (E × ℝ) => suspensionFlow Ψ q.1 q.2) := by
-  have hΨ : ContDiff ℝ ∞ (Ψ : (E × ℝ) → E × ℝ) := Ψ.contMDiff.contDiff
-  have hΨinv : ContDiff ℝ ∞ (Ψ.symm : (E × ℝ) → E × ℝ) := Ψ.symm.contMDiff.contDiff
-  exact hΨ.comp (((hΨinv.comp contDiff_snd).fst).prodMk
-    (((hΨinv.comp contDiff_snd).snd).add contDiff_fst))
 
 /-- The suspended flow advances the actual retained coordinate by exactly elapsed time. -/
 theorem suspensionFlow_height

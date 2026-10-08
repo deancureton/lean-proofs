@@ -68,13 +68,6 @@ theorem fromCoordinates_coordinates (v w : Space n m) (hw : w ∈ (atVertices v)
   rw [fromCoordinates, coordinates, sub_add_cancel]
   exact (atVertices v).left_inv hw
 
-theorem coordinates_fromCoordinates (v : Space n m)
-    (K : Model n m) (hK : K ∈ coordinateDomain v) :
-    coordinates v (fromCoordinates v K) = K := by
-  have htarget : K + atVertices v v ∈ (atVertices v).target := hK
-  have hinv : atVertices v ((atVertices v).symm (K + atVertices v v)) = K + atVertices v v :=
-    (atVertices v).right_inv htarget
-  rw [coordinates, fromCoordinates, hinv, add_sub_cancel_right]
 
 theorem contMDiffOn_fromCoordinates (v : Space n m) :
     ContMDiffOn 𝓘(ℝ, Model n m) 𝓘(ℝ, Model n m) ∞

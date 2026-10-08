@@ -65,28 +65,6 @@ def referenceLinking :
   let := fiber_third_homology_finite_of_endpoint_sphere d eBoundary
   exact IntegralSevenLinking.linking (E := Vector 7) (Fiber d)
 
-theorem referenceLinking_symmetry (x y : SingularHomology (Fiber d) 3) :
-    referenceLinking d eBoundary hmiss hdim x y = referenceLinking d eBoundary hmiss hdim y x := by
-  let := fiberAtlas d 6 hdim
-  let := fiber_isManifold d 6 hdim
-  let := compactSpace_fiber d hmiss
-  let : Fact (Module.finrank ℝ (Vector 7) = 7) := ⟨finrank_euclideanSpace_fin⟩
-  let : SimplyConnectedSpace (EndpointFiber d) := simplyConnectedSpace_of_homeomorph eBoundary
-  let : SimplyConnectedSpace (Fiber d) := fiber_simplyConnected_of_half d
-  let := fiber_second_homology_of_endpoint_sphere d eBoundary
-  let := fiber_third_homology_finite_of_endpoint_sphere d eBoundary
-  exact IntegralSevenLinking.linking_symmetry (E := Vector 7) (Fiber d) x y
 
-theorem referenceLinking_left_nondegenerate (x : SingularHomology (Fiber d) 3)
-    (hx : ∀ y, referenceLinking d eBoundary hmiss hdim x y = 0) : x = 0 := by
-  let := fiberAtlas d 6 hdim
-  let := fiber_isManifold d 6 hdim
-  let := compactSpace_fiber d hmiss
-  let : Fact (Module.finrank ℝ (Vector 7) = 7) := ⟨finrank_euclideanSpace_fin⟩
-  let : SimplyConnectedSpace (EndpointFiber d) := simplyConnectedSpace_of_homeomorph eBoundary
-  let : SimplyConnectedSpace (Fiber d) := fiber_simplyConnected_of_half d
-  let := fiber_second_homology_of_endpoint_sphere d eBoundary
-  let := fiber_third_homology_finite_of_endpoint_sphere d eBoundary
-  exact IntegralSevenLinking.linking_left_nondegenerate (E := Vector 7) (Fiber d) x hx
 
 end Wikipedia.HopfProblem.DegreeCollapse.ReflectedCylinder

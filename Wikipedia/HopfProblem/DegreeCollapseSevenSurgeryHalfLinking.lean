@@ -59,25 +59,11 @@ theorem positiveHalfLinking_apply (x y : SingularHomology (PositiveHalf A hR T) 
       (singularHomologyMap (newHalfToClosed A hR T) 3 x)
       (singularHomologyMap (newHalfToClosed A hR T) 3 y) := rfl
 
-theorem positiveHalfLinking_symmetry (x y : SingularHomology (PositiveHalf A hR T) 3) :
-    positiveHalfLinking A hR T C x y = positiveHalfLinking A hR T C y x := by
-  let : Finite (SingularHomology (Target A hR) 3) := target_third_finite_of_half A hR T
-  exact (preservedTimeCollar A hR T C).halfLinking_symmetry (E := Vector 7) x y
 
 variable [Subsingleton (SingularHomology B 2)] [Subsingleton (SingularHomology B 3)]
   [Subsingleton (SingularHomology B 4)]
 
-theorem positiveHalfLinking_left_nondegenerate
-    (x : SingularHomology (PositiveHalf A hR T) 3)
-    (hx : ∀ y, positiveHalfLinking A hR T C x y = 0) : x = 0 := by
-  let : Finite (SingularHomology (Target A hR) 3) := target_third_finite_of_half A hR T
-  exact (preservedTimeCollar A hR T C).halfLinking_left_nondegenerate (E := Vector 7) x hx
 
-theorem positiveHalfLinking_right_nondegenerate
-    (y : SingularHomology (PositiveHalf A hR T) 3)
-    (hy : ∀ x, positiveHalfLinking A hR T C x y = 0) : y = 0 := by
-  let : Finite (SingularHomology (Target A hR) 3) := target_third_finite_of_half A hR T
-  exact (preservedTimeCollar A hR T C).halfLinking_right_nondegenerate (E := Vector 7) y hy
 
 theorem positiveHalfLinking_diagonal_dichotomy :
     (∃ x : SingularHomology (PositiveHalf A hR T) 3, positiveHalfLinking A hR T C x x ≠ 0) ∨

@@ -38,7 +38,6 @@ theorem sign_add (a b : F₂) : sign (a + b) = sign a * sign b := by
 @[simp] theorem sign_mul_self (a : F₂) : sign a * sign a = 1 := by
   fin_cases a <;> decide
 
-theorem sign_injective : Function.Injective sign := by decide
 
 def gaussSum {V : Type*} [Fintype V] (q : V → F₂) : ℤ := ∑ x, sign (q x)
 

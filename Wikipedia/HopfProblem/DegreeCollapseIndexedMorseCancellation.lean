@@ -98,16 +98,5 @@ theorem nativeMorseCount_adjacent_pair
   · intro j hj hj'
     simpa only [hip, hiq, if_neg (Ne.symm hj), if_neg (Ne.symm hj'), Nat.add_zero] using hc j
 
-theorem native_index_order_of_critical_germs
-    (horder : ∀ x ∈ criticalPoints E f, ∀ y ∈ criticalPoints E f,
-      f x ≤ f y → nativeMorseIndex E f x ≤ nativeMorseIndex E f y)
-    (hsub : criticalPoints E g ⊆ criticalPoints E f)
-    (hkeep : ∀ z ∈ criticalPoints E g, g =ᶠ[𝓝 z] f) :
-    ∀ x ∈ criticalPoints E g, ∀ y ∈ criticalPoints E g,
-      g x ≤ g y → nativeMorseIndex E g x ≤ nativeMorseIndex E g y := by
-  intro x hx y hy hxy
-  rw [nativeMorseIndex_congr_germ (hkeep x hx), nativeMorseIndex_congr_germ (hkeep y hy)]
-  apply horder x (hsub hx) y (hsub hy)
-  rwa [(hkeep x hx).self_of_nhds, (hkeep y hy).self_of_nhds] at hxy
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

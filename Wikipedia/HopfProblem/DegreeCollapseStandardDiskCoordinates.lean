@@ -58,13 +58,6 @@ def reparametrize (K : C(closedBall (0 : N) 1, M)) : C(Hemisphere.Ball n, M) :=
 theorem reparametrize_apply (K : C(closedBall (0 : N) 1, M)) (u : Hemisphere.Ball n) :
     reparametrize L K u = K (disk L u) := rfl
 
-theorem range_reparametrize (K : C(closedBall (0 : N) 1, M)) :
-    range (reparametrize L K) = range K := by
-  apply Set.Subset.antisymm
-  · rintro x ⟨u, rfl⟩
-    exact ⟨disk L u, rfl⟩
-  · rintro x ⟨v, rfl⟩
-    exact ⟨(disk L).symm v, congrArg K ((disk L).apply_symm_apply v)⟩
 
 theorem boundary_agrees (A B : C(closedBall (0 : N) 1, M))
     (h : ∀ z : sphere (0 : N) 1,

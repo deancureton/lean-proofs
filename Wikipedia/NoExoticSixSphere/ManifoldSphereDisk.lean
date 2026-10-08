@@ -66,13 +66,5 @@ theorem nonempty_sphereDiskData (b : Sphere 3) (hf : ContMDiff (𝓡 3) (𝓡 6)
     (hf.mdifferentiableAt (by simp))]
   exact (e.injective_mfderiv (f s)).comp (hd s)
 
-/-- Its boundary partial frame comes from the actual original normal frame and the five new axes. -/
-theorem normalFrameOnSphere_normal_disk {b : Sphere 3}
-    (hf : ContMDiff (𝓡 3) (𝓡 6) ∞ f) (D : DiskData b (e.toFun ∘ f)) (s : Sphere 3) :
-    (boundaryFrame (e.normalFrameOnSphere a f s)).val.range ≤
-      (fderiv ℝ D.toFun s.val).rangeᗮ := by
-  obtain ⟨V, hV, hSV, heq⟩ := D.collar_eq
-  exact boundaryFrame_normal_disk b (e.toFun ∘ f) (e.smooth.comp hf)
-    (e.normalFrameOnSphere a f) (e.normalFrameOnSphere_normal a f hf) hV hSV heq s
 
 end NoExoticSixSphere.EuclideanEmbedding

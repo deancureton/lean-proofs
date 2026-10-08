@@ -68,12 +68,6 @@ theorem adjustment_one (p : Loop y₀) : adjustment (1, p) = ofPath (toPath p) :
     change (toPath p).extend (t / oneDuration (1, p)) = (ofPath (toPath p)).curve t
     rw [oneDuration_one, div_one, curve_ofPath]
 
-theorem adjustment_ofPath (s : I) (c : Path y₀ y₀) : adjustment (s, ofPath c) = ofPath c := by
-  apply ext
-  · exact oneDuration_ofPath s c
-  · intro t
-    change (toPath (ofPath c)).extend (t / oneDuration (s, ofPath c)) = (ofPath c).curve t
-    rw [toPath_ofPath, oneDuration_ofPath, div_one, curve_ofPath]
 
 theorem normalization_adjustment (u : I × Loop y₀) : toPath (adjustment u) = toPath u.2 :=
   toPath_timed _ _ _ u (fun h ↦ toPath_eq_refl_of_duration_zero u.2

@@ -103,16 +103,6 @@ theorem action_source (n : ℕ) (x : Sphere n) (w : James.Space (Sphere n) (sphe
   rw [action_cylinder, cylinderFamily_one]
   rfl
 
-theorem action_preserves_source (n : ℕ) :
-    Set.MapsTo (action n)
-      (Set.univ ×ˢ Set.range (MappingCylinder.source (comparison n)))
-      (Set.range (MappingCylinder.source (comparison n))) := by
-  rintro ⟨x, p⟩ ⟨_, w, rfl⟩
-  exact ⟨James.letter (spherePole n) x * w, (action_source n x w).symm⟩
 
-theorem action_pole_source (n : ℕ) (w : James.Space (Sphere n) (spherePole n)) :
-    action n (spherePole n, MappingCylinder.source (comparison n) w) =
-      MappingCylinder.source (comparison n) w := by
-  rw [action_source, James.letter_basepoint, one_mul]
 
 end NoExoticSixSphere.JamesSphere.ComparisonCylinder

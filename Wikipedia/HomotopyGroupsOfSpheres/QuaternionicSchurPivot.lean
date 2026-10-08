@@ -90,18 +90,5 @@ theorem target_pivot_row (s t : ℝ) (B : Space (Fin 3))
   rw [firstColumnFormula_pivot, mul_assoc, (referenceSquare_unitary s t).1, mul_one] at he
   exact he
 
-theorem target_pivot_matrix_equation (s t : ℝ) (B : Space (Fin 3))
-    (h : firstColumnFormula s t B = targetColumn) :
-    (rotation s t B).val *ᵥ ![schurPivot s t B, 1, 0] =
-      ![(targetAlpha : ℍ) * referenceSquare s t, -schurPivot s t B,
-        (targetBeta : ℍ) * referenceSquare s t] := by
-  funext r
-  fin_cases r
-  · simpa [Matrix.mulVec, dotProduct, Fin.sum_univ_three, remainingRow,
-      targetColumn, Matrix.cons_val_two, add_comm] using target_pivot_row s t B h 0
-  · simpa [Matrix.mulVec, dotProduct, Fin.sum_univ_three, Matrix.cons_val_two] using
-      schurPivot_middle_row s t B
-  · simpa [Matrix.mulVec, dotProduct, Fin.sum_univ_three, remainingRow,
-      targetColumn, Matrix.cons_val_two, add_comm] using target_pivot_row s t B h 1
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

@@ -63,14 +63,5 @@ theorem projection_subsetMap {U V : Set X} (h : U ⊆ V) :
     projection R U ≫ subsetMap R h = projection R V := by
   rw [projection_mapChain, spaceMap_id, Category.id_comp]
 
-/-- The canonical comparison commutes with the actual subset map. -/
-theorem supportRelativeIso_subsetMap {U V : Set X} (h : U ⊆ V) :
-    (supportRelativeIso R U).hom ≫ SubcomplexRelative.mapChain R (support_mono h) =
-      subsetMap R h ≫ (supportRelativeIso R V).hom := by
-  apply (cancel_epi (cokernel.π (inclusion R U))).mp
-  change projection R U ≫ (_ ≫ _) = projection R U ≫ (_ ≫ _)
-  exact (projection_supportRelativeIso_assoc R U _).trans
-    ((SubcomplexRelative.projection_mapChain R (support_mono h)).trans
-      ((projection_subsetMap_assoc R h _).trans (projection_supportRelativeIso R V)).symm)
 
 end NoExoticSixSphere.RelativeCoefficients

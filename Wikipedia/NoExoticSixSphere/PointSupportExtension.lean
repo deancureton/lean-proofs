@@ -32,9 +32,6 @@ theorem pointTo_of_mem (K : Set X) (p : ℕ) (x : X) (hx : x ∈ K) :
   classical
   simp only [pointTo, dif_pos hx]
 
-theorem pointTo_of_not_mem (K : Set X) (p : ℕ) (x : X) (hx : x ∉ K) : pointTo K p x = 0 := by
-  classical
-  simp only [pointTo, dif_neg hx]
 
 /-- Enlarging support retains the actual singleton inclusion. -/
 theorem pointTo_transition {K L : Set X} (h : K ⊆ L) (p : ℕ) (x : X) (hx : x ∈ K)
@@ -54,14 +51,6 @@ theorem pointSum_add (s : Finset X) (p : ℕ) (a b : ∀ x : X, Cohomology ({x} 
     pointSum s p (a + b) = pointSum s p a + pointSum s p b := by
   simp only [pointSum, Pi.add_apply, map_add, Finset.sum_add_distrib]
 
-theorem pointSum_smul (s : Finset X) (p : ℕ) (z : ℤ)
-    (a : ∀ x : X, Cohomology ({x} : Set X) p) :
-    pointSum s p (z • a) = z • pointSum s p a := by
-  change (∑ x ∈ s, pointTo (s : Set X) p x (z • a x)) =
-    z • ∑ x ∈ s, pointTo (s : Set X) p x (a x)
-  exact (Finset.sum_congr rfl (fun x _ =>
-    (pointTo (s : Set X) p x).toAddMonoidHom.map_zsmul z (a x))).trans
-    (Finset.sum_zsmul (fun x => pointTo (s : Set X) p x (a x)) s z)
 
 /-- Inserting a new point is the original sum of singleton and old-support extensions. -/
 theorem pointSum_insert [DecidableEq X] (s : Finset X) (x : X) (hx : x ∉ s) (p : ℕ)

@@ -110,13 +110,6 @@ theorem divisionQuaternion_rightVector (x : Sphere 7) (q : ℍ) :
     Quaternion.coe_mul_eq_smul, Quaternion.coe_mul_eq_smul,
     ← add_smul, unit_normSq_sum, one_smul]
 
-theorem rightAction_injective (x : Sphere 7) : Function.Injective (rightAction x) := by
-  intro q r h
-  apply Subtype.ext
-  have he := congrArg (fun y : Sphere 7 ↦ divisionQuaternion x.val y.val) h
-  change divisionQuaternion x.val (rightVector x.val q.val) =
-    divisionQuaternion x.val (rightVector x.val r.val) at he
-  simpa only [divisionQuaternion_rightVector] using he
 
 def unitFiberPoint : C(FiberGroup, Sphere 7) := fiberPoint.comp sphereHomeomorph
 
@@ -157,14 +150,7 @@ theorem unitFiberPoint_coordinate (x : Sphere 7) (h : sphereMap x = spherePole 4
   rw [Homeomorph.apply_symm_apply]
   exact fiberPoint_fiberInverse ⟨x, h⟩
 
-theorem unitFiberCoordinate_point (q : FiberGroup) :
-    unitFiberCoordinate (unitFiberPoint q) (sphereMap_unitFiberPoint q) = q := by
-  apply unitFiberPoint_injective
-  exact unitFiberPoint_coordinate _ _
 
-theorem unitFiberCoordinate_pole : unitFiberCoordinate (spherePole 7) sphereMap_pole = 1 := by
-  apply unitFiberPoint_injective
-  rw [unitFiberPoint_coordinate, unitFiberPoint_one]
 
 theorem continuous_unitFiberCoordinate {X : Type*} [TopologicalSpace X]
     (a : C(X, Sphere 7)) (h : ∀ x, sphereMap (a x) = spherePole 4) :

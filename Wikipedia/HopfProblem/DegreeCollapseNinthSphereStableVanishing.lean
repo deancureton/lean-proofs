@@ -35,12 +35,6 @@ theorem stable_eq_one (x : π_ 9 (Sphere 3) (spherePole 3)) :
   rw [transition_eq_one, CubicalStableSix.ofNative_one] at h
   exact h.symm
 
-theorem product_iterate_nullhomotopic (f : Based 9 3) :
-    (IteratedProductSphere.iterate f 7).val.Nullhomotopic := by
-  apply (sphereClass_eq_one_iff_nullhomotopic (by decide : 0 < 16) _).mp
-  have h := transition_eq_one (sphereClass f)
-  rw [CubicalStableSix.transition_sphereClass] at h
-  exact h
 
 end Wikipedia.HopfProblem.DegreeCollapse.NinthSphereStableVanishing
 

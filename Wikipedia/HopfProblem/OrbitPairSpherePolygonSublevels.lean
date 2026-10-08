@@ -54,13 +54,6 @@ theorem admissible_inter_sublevel (a b : Sphere n) (τ : Fin (m + 2) → ℝ)
       {v : Space n m | energy a b τ v ≤ c} :=
   inter_eq_right.mpr (sublevel_subset_admissible a b τ hτ c hmesh)
 
-theorem isCompact_admissible_sublevel (a b : Sphere n) (τ : Fin (m + 2) → ℝ)
-    (hτ : StrictMono τ) (c : ℝ)
-    (hmesh : ∀ i : Fin (m + 1), c * (τ i.succ - τ i.castSucc) < Real.pi ^ 2) :
-    IsCompact (admissible (costDomain n) a b m ∩
-      {v : Space n m | energy a b τ v ≤ c}) := by
-  rw [admissible_inter_sublevel a b τ hτ c hmesh]
-  exact isCompact_sublevel a b τ c
 
 theorem contMDiffAt_energy_of_le (a b : Sphere n) (τ : Fin (m + 2) → ℝ)
     (hτ : StrictMono τ) (c : ℝ)

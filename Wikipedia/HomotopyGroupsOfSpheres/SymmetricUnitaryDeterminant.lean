@@ -62,10 +62,6 @@ def scale (z : Circle) (B : Space N) : Space N :=
   apply Subtype.ext
   exact one_smul ℂ B.val.val
 
-theorem scale_mul (z w : Circle) (B : Space N) : scale z (scale w B) = scale (z * w) B := by
-  apply Subtype.ext
-  apply Subtype.ext
-  exact smul_smul (z : ℂ) (w : ℂ) B.val.val
 
 theorem continuous_scale : Continuous (fun z : Circle × Space N ↦ scale z.1 z.2) := by
   have hz : Continuous (fun z : Circle × Space N ↦ (z.1 : ℂ)) :=

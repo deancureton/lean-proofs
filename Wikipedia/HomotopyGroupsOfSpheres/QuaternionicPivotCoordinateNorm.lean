@@ -72,15 +72,5 @@ theorem target_pivotCoordinate_normSq (s t : ℝ) (B : Space (Fin 3))
   linear_combination hd + hn / 4 + Quaternion.normSq (schurPivot s t B) * hp -
     Quaternion.normSq (schurPivot s t B) ^ 2 * hu
 
-theorem target_pivotComplex_normSq (s t : ℝ) (B : Space (Fin 3))
-    (h : firstColumnFormula s t B = targetColumn) :
-    Complex.normSq (pivotComplex s t B) =
-      Quaternion.normSq (schurPivot s t B) * (1 - Quaternion.normSq (schurPivot s t B)) +
-        Quaternion.normSq (schurPivot s t B) ^ 2 * Complex.normSq (angleComplex s t) := by
-  have hp : Complex.normSq (pivotComplex s t B) + Complex.normSq (pivotCoordinate s t B) =
-      Quaternion.normSq (schurPivot s t B) := (normSq_complex_pair _).symm
-  have hq := target_pivotCoordinate_normSq s t B h
-  have hu := angle_norm s t
-  linear_combination hp - hq - Quaternion.normSq (schurPivot s t B) ^ 2 * hu
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

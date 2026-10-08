@@ -44,18 +44,5 @@ theorem comparison_compactManifold_mapsLift (n : ℕ) (hn : 2 ≤ n)
     [T2Space M] [CompactSpace M] : FiniteCells.MapsLift (loopComparison n) M :=
   comparison_finiteCell_mapsLift n hn (MorseCells.built_of_compact_smooth_manifold (E := E))
 
-theorem comparison_threeSphereProduct_mapsLift (n : ℕ) (hn : 2 ≤ n) :
-    FiniteCells.MapsLift (loopComparison n) (Sphere 3 × Sphere 3) := by
-  let : Fact (Module.finrank ℝ (EuclideanSpace ℝ (Fin 4)) = 3 + 1) := ⟨by simp⟩
-  let : ChartedSpace (EuclideanSpace ℝ (Fin 3)) (Sphere 3) := inferInstance
-  let : IsManifold (𝓡 3) ∞ (Sphere 3) := inferInstance
-  let : ChartedSpace (EuclideanSpace ℝ (Fin 3) × EuclideanSpace ℝ (Fin 3))
-      (Sphere 3 × Sphere 3) := prodChartedSpace _ _ _ _
-  let : IsManifold 𝓘(ℝ, EuclideanSpace ℝ (Fin 3) × EuclideanSpace ℝ (Fin 3)) ∞
-      (Sphere 3 × Sphere 3) := by
-    rw [modelWithCornersSelf_prod]
-    exact IsManifold.prod (I := 𝓡 3) (I' := 𝓡 3) (Sphere 3) (Sphere 3)
-  exact comparison_compactManifold_mapsLift n hn
-    (E := EuclideanSpace ℝ (Fin 3) × EuclideanSpace ℝ (Fin 3))
 
 end NoExoticSixSphere.JamesSphere.HomotopyComparison

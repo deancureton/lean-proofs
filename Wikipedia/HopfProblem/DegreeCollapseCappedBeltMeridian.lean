@@ -31,9 +31,6 @@ def negativeHemisphere : Set (Hemisphere.Sphere 2) := {x | x.val 0 < 0}
 theorem negativeHemisphere_open : IsOpen negativeHemisphere :=
   isOpen_lt ((PiLp.continuous_apply 2 _ 0).comp continuous_subtype_val) continuous_const
 
-theorem pole_mem_negativeHemisphere : pole ∈ negativeHemisphere := by
-  change -Hemisphere.radius (⟨0, mem_closedBall_self zero_le_one⟩ : Hemisphere.Ball 2) < 0
-  simp [Hemisphere.radius]
 
 theorem smooth_tail : ContMDiff (𝓡 2) 𝓘(ℝ, Hemisphere.Ambient 2) ∞
     (Hemisphere.tail (n := 2)) := by

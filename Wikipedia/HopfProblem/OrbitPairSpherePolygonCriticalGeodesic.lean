@@ -130,22 +130,5 @@ theorem energy_eq_speed_sq_mul_of_stationary (a b : Sphere n) (τ : Fin (m + 2) 
     norm_outgoingLog_sq_eq_of_stationary a b τ v hv hstat]
   rw [← Finset.mul_sum, sum_steps]
 
-theorem realized_critical_geodesic (a b : Sphere n) (τ : Fin (m + 2) → ℝ)
-    (hτ : StrictMono τ) (hzero : τ 0 = 0) (hlast : τ (Fin.last (m + 1)) = 1)
-    (v : Space n m) (hv : v ∈ admissible (costDomain n) a b m)
-    (hstat : IsStationary a b τ v) :
-    ∃ γ : ℝ → Vector (n + 1), ContDiff ℝ ∞ γ ∧ (∀ t, ‖γ t‖ = 1) ∧
-      γ 0 = a.val ∧ γ 1 = b.val ∧
-      (∀ j : Fin (m + 2), γ (τ j) = (vertices a b v j).val) ∧
-      SpherePathEnergy.energy γ 0 1 = energy a b τ v := by
-  refine ⟨curve a.val (initialTangent a b τ v), contDiff_curve _ _,
-    norm_curve (ClosedHemisphere.unit_norm a) _, curve_zero _ _, ?_, ?_, ?_⟩
-  · have he := vertices_eq_curve_of_stationary a b τ hτ v hv hstat (Fin.last (m + 1))
-    simpa only [vertices_last, hzero, hlast, sub_zero] using he.symm
-  · intro j
-    simpa only [hzero, sub_zero] using (vertices_eq_curve_of_stationary a b τ hτ v hv hstat j).symm
-  · rw [energy_curve (ClosedHemisphere.unit_norm a),
-      energy_eq_speed_sq_mul_of_stationary a b τ hτ v hv hstat, hzero, hlast,
-      sub_zero, mul_one]
 
 end Wikipedia.HopfProblem.OrbitPair.SpherePolygonEnergy

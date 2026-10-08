@@ -57,19 +57,5 @@ theorem splitting_square (n d : ℕ) (hd : d ≠ 0)
   rw [LoopHomology.projectionActionEquiv_apply, WordHomology.projectionActionEquiv_apply]
   exact Prod.ext (projection_homology n d a) (action_homology n d a)
 
-theorem product_bijective_iff (n d : ℕ) (hd : d ≠ 0) :
-    Function.Bijective (singularHomologyMap (productComparison n) d) ↔
-      Function.Bijective (singularHomologyMap (loopComparison n) d) := by
-  let W := WordHomology.projectionActionEquiv n d hd
-  let L := LoopHomology.projectionActionEquiv n d hd
-  let f := singularHomologyMap (productComparison n) d
-  let g := singularHomologyMap (loopComparison n) d
-  have hs : L ∘ f = (Prod.map g g) ∘ W := funext (splitting_square n d hd)
-  have h₁ : Function.Bijective (L ∘ f) ↔ Function.Bijective f :=
-    Function.Bijective.of_comp_iff' L.bijective f
-  have h₂ : Function.Bijective ((Prod.map g g) ∘ W) ↔ Function.Bijective (Prod.map g g) :=
-    Function.Bijective.of_comp_iff (Prod.map g g) W.bijective
-  change Function.Bijective f ↔ Function.Bijective g
-  rw [← h₁, hs, h₂, Prod.map_bijective, and_self]
 
 end NoExoticSixSphere.JamesSphere.HomologyComparison

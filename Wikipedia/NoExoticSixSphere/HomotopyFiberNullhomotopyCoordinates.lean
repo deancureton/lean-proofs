@@ -24,10 +24,6 @@ open HomotopyFiber
 
 variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
 
-theorem mapCongr_val {f g : C(X, Y)} (h : f = g) (b : Y) (p : Space f b) :
-    (mapCongr h b p).val = p.val := by
-  subst g
-  rfl
 
 theorem mapCongr_symm_val {f g : C(X, Y)} (h : f = g) (b : Y) (p : Space g b) :
     ((mapCongr h b).symm p).val = p.val := by

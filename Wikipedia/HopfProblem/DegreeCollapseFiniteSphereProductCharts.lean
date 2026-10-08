@@ -52,10 +52,6 @@ theorem chart_apply (n : ℕ) (e : E ≃L[ℝ] V n) (x : Sphere n) :
   unfold chart Diffeomorph.toPartialDiffeomorph
   rfl
 
-theorem chart_symm_apply (n : ℕ) (e : E ≃L[ℝ] V n) (p : E) :
-    (chart n e).symm p = (sphereProjection n).symm (e p) := by
-  unfold chart Diffeomorph.toPartialDiffeomorph
-  rfl
 
 theorem chart_symm_coe (n : ℕ) (e : E ≃L[ℝ] V n) (p : E) :
     (chart n e).symm p = euclideanOnePointSphere n (↑(e p) : OnePoint (V n)) :=

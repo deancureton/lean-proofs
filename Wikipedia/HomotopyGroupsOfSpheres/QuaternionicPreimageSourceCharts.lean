@@ -29,11 +29,6 @@ theorem signSourceIsometry_det_pos (x y : Bool) :
   rw [LinearMap.det_comp]
   exact mul_pos rotationRealIsometry_det_pos (signRealIsometry_det_pos x y)
 
-theorem signSourceIsometry_sphere (x y : Bool) (z : UnitSphere) :
-    SphereCenteredCoordinates.sphereIsometry (signSourceIsometry x y) z =
-      rotationSphere (signSphere x y z) := by
-  apply Subtype.ext
-  rfl
 
 def preimageSourceIsometry (u : unitary ℂ) (b : Bool × Bool) : Ambient ≃ₗᵢ[ℝ] Ambient :=
   (signSourceIsometry b.1 b.2).trans (scalarRealIsometry (negativePhase u))
@@ -62,10 +57,6 @@ def preimageSourceChart (u : unitary ℂ) (b : Bool × Bool)
   SphereCenteredCoordinates.sphereIsometry (preimageSourceIsometry u b)
     (SphereCenteredCoordinates.inverse rotatedInput v)
 
-theorem preimageSourceChart_zero (u : unitary ℂ) (b : Bool × Bool) :
-    preimageSourceChart u b 0 = phaseInput u b := by
-  rw [preimageSourceChart, SphereCenteredCoordinates.inverse_zero,
-    preimageSourceIsometry_center]
 
 theorem preimageSourceChart_is_centered_chart (u : unitary ℂ) (b : Bool × Bool)
     (v : SphereCenteredCoordinates.Tangent rotatedInput) :
@@ -89,23 +80,7 @@ def preimageOutwardFrame (u : unitary ℂ) (b : Bool × Bool)
   (SphereCenteredCoordinates.outwardFrame rotatedInput v).map
     (preimageSourceIsometry u b).toLinearEquiv
 
-theorem preimageOutwardFrame_normal (u : unitary ℂ) (b : Bool × Bool)
-    (v : Module.Basis (Fin 5) ℝ (SphereCenteredCoordinates.Tangent rotatedInput)) :
-    preimageOutwardFrame u b v (Sum.inl ()) = (phaseInput u b).val := by
-  change preimageSourceIsometry u b
-    (SphereCenteredCoordinates.outwardFrame rotatedInput v (Sum.inl ())) = _
-  rw [SphereCenteredCoordinates.outwardFrame_normal]
-  exact congrArg Subtype.val (preimageSourceIsometry_center u b)
 
-theorem preimageOutwardFrame_tangent (u : unitary ℂ) (b : Bool × Bool)
-    (v : Module.Basis (Fin 5) ℝ (SphereCenteredCoordinates.Tangent rotatedInput)) (i : Fin 5) :
-    preimageOutwardFrame u b v (Sum.inr i) =
-      fderiv ℝ (fun w ↦ (preimageSourceChart u b w).val) 0 (v i) := by
-  rw [(hasFDerivAt_preimageSourceChart u b).fderiv]
-  change preimageSourceIsometry u b
-    (SphereCenteredCoordinates.outwardFrame rotatedInput v (Sum.inr i)) =
-      preimageSourceIsometry u b (v i).val
-  rw [SphereCenteredCoordinates.outwardFrame_tangent]
 
 /-- The actual normal-plus-chart-derivative frames have one common orientation. -/
 theorem preimageOutwardFrame_orientation (u : unitary ℂ) (b : Bool × Bool)

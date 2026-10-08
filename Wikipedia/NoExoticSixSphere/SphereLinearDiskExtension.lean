@@ -63,13 +63,5 @@ theorem extends_precomp_iff {X : Type*} [TopologicalSpace X] (f : C(Sphere 3, X)
     change F (diskMap L (DiskCylinder.boundaryToDisk s)) = f (sphereMap L s)
     rw [diskMap_boundary, hF]
 
-theorem operatorParity_precomp {N n : ℕ} (r : ℕ) (hN : N = 3 + (r + 2))
-    (hn : n = r + 2) (f : C(Sphere 3, Stiefel.Monomorphism.Space N n)) :
-    Stiefel.Monomorphism.sphereParityOfDimension r hN hn (f.comp (sphereMap L)) =
-      Stiefel.Monomorphism.sphereParityOfDimension r hN hn f := by
-  apply Stiefel.zmodTwo_eq_of_zero_iff
-  rw [Stiefel.Monomorphism.sphereParityOfDimension_zero_iff,
-    Stiefel.Monomorphism.sphereParityOfDimension_zero_iff]
-  exact extends_precomp_iff L f
 
 end NoExoticSixSphere.SphereLinearReparametrization

@@ -54,15 +54,5 @@ theorem exists_twoConnected_positive_state :
   intro w
   exact (SecondHurewicz.SimplyConnected.hurewiczPi2Equiv w).injective.subsingleton
 
-theorem exists_twoConnected_framed_filling :
-    ∃ U : LowCollaredSevenState B,
-      ∃ F : LowCollaredFillingBoundary.Comparison S U b,
-        letI := S.zeroAtlas;
-        let W := LowCollaredFillingBoundary.fillingOfComparison F;
-        letI := W.topology;
-        SimplyConnectedSpace W.W ∧ ∀ w : W.W, Subsingleton (π_ 2 W.W w) := by
-  obtain ⟨U, _, hU, _, hpi, hF⟩ := exists_twoConnected_positive_state S b
-  obtain ⟨F⟩ := hF
-  exact ⟨U, F, hU, hpi⟩
 
 end NoExoticSixSphere.LowCollaredFillingConnectivity

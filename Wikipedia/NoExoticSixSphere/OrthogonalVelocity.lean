@@ -66,11 +66,6 @@ theorem adjoint_velocity : ((inverse (a t)).1.1.comp A).adjoint =
 noncomputable def bodyVelocity : SkewOperators n :=
   ⟨(inverse (a t)).1.1.comp A, adjoint_velocity a A t h⟩
 
-theorem bodyVelocity_reconstruct : (a t).1.1.comp
-    (bodyVelocity a A t h : Vector n →L[ℝ] Vector n) = A := by
-  apply ContinuousLinearMap.ext
-  intro x
-  exact reconstruct_apply a A t x
 
 theorem squareNorm_bodyVelocity :
     squareNorm (bodyVelocity a A t h : Vector n →L[ℝ] Vector n) = squareNorm A :=

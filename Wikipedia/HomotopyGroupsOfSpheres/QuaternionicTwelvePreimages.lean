@@ -47,13 +47,6 @@ theorem parameterTargetPreimage_eq_image :
       constructor <;> linarith [Real.pi_pos]
     exact ⟨hmid, hmid, hz⟩
 
-theorem parameterTargetPreimage_finite : parameterTargetPreimage.Finite := by
-  rw [parameterTargetPreimage_eq_image]
-  exact midpointTargetPreimage_finite.image midpointParameterEmbedding
 
-theorem parameterTargetPreimage_ncard_eq_twelve : parameterTargetPreimage.ncard = 12 := by
-  rw [parameterTargetPreimage_eq_image,
-    Set.ncard_image_of_injective _ midpointParameterEmbedding.injective,
-    midpointTargetPreimage_ncard_eq_twelve]
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

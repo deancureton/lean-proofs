@@ -55,11 +55,6 @@ theorem point_difference (r : ℝ) (p : sphere (0 : Vector q) 1 × ℝ) :
     (GeneralRoundedHandleCorner.coordinates r (point χ r p)).2 = p.2
   rw [coordinates_point, graph_difference]
 
-theorem point_fst_ne_zero {r : ℝ} (hr : 0 < r)
-    (p : sphere (0 : Vector q) 1 × ℝ) : (point χ r p).1 ≠ 0 := by
-  apply norm_pos_iff.mp
-  rw [norm_point]
-  exact graphRadius_pos χ hr p.2
 
 theorem continuous_point {r : ℝ} (hr : 0 < r) : Continuous (point (q := q) χ r) :=
   (((contDiff_graphRadius χ hr).continuous.comp continuous_snd).smul

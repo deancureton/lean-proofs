@@ -71,14 +71,6 @@ theorem adjoint_commutator (K : SkewOperators n) (A : Vector n →L[ℝ] Vector 
     (K : Vector n →L[ℝ] Vector n) * star A - star A * (K : Vector n →L[ℝ] Vector n)
   rw [star_sub, star_mul, star_mul, K.2, mul_neg, neg_mul, neg_sub_neg]
 
-theorem commutator_mem_skew (K L : SkewOperators n) :
-    commutator (K : Vector n →L[ℝ] Vector n) (L : Vector n →L[ℝ] Vector n) ∈
-      skewAdjoint.submodule ℝ (Vector n →L[ℝ] Vector n) := by
-  change (commutator (K : Vector n →L[ℝ] Vector n)
-    (L : Vector n →L[ℝ] Vector n)).adjoint = -commutator _ _
-  rw [adjoint_commutator, adjoint_eq_neg]
-  simp only [commutator, ContinuousLinearMap.comp_neg, ContinuousLinearMap.neg_comp,
-    neg_sub_neg, neg_sub]
 
 theorem trace_commutator_mul (A B C : Vector n →L[ℝ] Vector n) :
     LinearMap.trace ℝ (Vector n) ((commutator A B).comp C).toLinearMap =

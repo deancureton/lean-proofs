@@ -43,12 +43,6 @@ theorem torsionParity_ne_zero : torsionParity ≠ 0 := by
   obtain ⟨a, ha⟩ := JamesSphere.ThreeRetraction.originalAttaching_square_iff_parity.mpr h
   exact JamesSphere.ThreeRetraction.originalAttaching_retraction_not_square a ha
 
-theorem torsionParity_eq_one : torsionParity = 1 := by
-  have hb (b : ZMod 2) : b = 0 ∨ b = 1 := by
-    fin_cases b
-    · exact Or.inl rfl
-    · exact Or.inr rfl
-  exact (hb torsionParity).resolve_left torsionParity_ne_zero
 
 theorem integerLift_twelfth_power_ne_one : integerLift ^ 12 ≠ 1 :=
   fun h ↦ torsionParity_ne_zero (integerLift_twelfth_power_iff_parity.mp h)

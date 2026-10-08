@@ -67,10 +67,6 @@ theorem encode_mem_core_iff (r : ℝ) (v : Fin n → ℝ) :
   rw [core, (encode_injective n U e).mem_set_image]
   exact mem_closedBall_zero_iff
 
-theorem encode_mem_openCore_iff (r : ℝ) (v : Fin n → ℝ) :
-    encode n U e v ∈ openCore n U e r ↔ ‖v‖ < r := by
-  rw [openCore, (encode_injective n U e).mem_set_image]
-  exact mem_ball_zero_iff
 
 def coordinates (f : C(D, X)) : C(f ⁻¹' (U : Set X), (Fin n → ℝ)) :=
   ⟨fun z ↦ e.symm ⟨f z.val, z.property⟩,

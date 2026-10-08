@@ -66,11 +66,6 @@ theorem firstComposite_hopf :
   exact (GroupSpherePrecomposition.compose_class_congr h
     (productBasedMap firstStemMap)).trans suspendedFirstStem_class
 
-theorem firstComposite_ne_one : sphereClass firstComposite ≠ 1 := by
-  intro h
-  exact FirstStemGroup.generator_ne_one 4
-    (firstComposite_hopf.symm.trans
-      ((congrArg (SuspensionComparison.orderedHopfHom 3 (by decide) 7) h).trans (map_one _)))
 
 theorem attachingHopf_coordinate_natAbs :
     Int.natAbs (Wikipedia.HomotopyGroupsOfSpheres.pi7_sphere_seven_mulEquiv (spherePole 7)

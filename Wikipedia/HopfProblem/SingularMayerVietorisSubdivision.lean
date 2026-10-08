@@ -112,17 +112,6 @@ theorem subdivision_add (k l n : ℕ) (c : Chains X n) :
     rw [← inducedChain_subdivision, subdivision_affineChainMap, Function.iterate_add_apply]
   exact LinearMap.congr_fun h c
 
-/-- The universal `k`-fold formula is literally the iterate of one subdivision. -/
-theorem subdivision_eq_iterate (k n : ℕ) (c : Chains X n) :
-    subdivision X k n c = (subdivision X 1 n)^[k] c := by
-  induction k with
-  | zero => simp
-  | succ k ih =>
-      calc
-        _ = subdivision X 1 n (subdivision X k n c) := by
-          rw [Nat.add_comm k 1, subdivision_add]
-        _ = (subdivision X 1 n)^[k + 1] c := by
-          rw [Function.iterate_succ_apply', ih]
 
 /-- Barycentric subdivision as an actual morphism of Mathlib's singular complex. -/
 def subdivisionChainMap (X : Type) [TopologicalSpace X] (k : ℕ) :
@@ -146,15 +135,5 @@ theorem subdivision_d (k i j : ℕ) (c : Chains X i) :
   congrArg (fun f : Chains X i ⟶ Chains X j => f.hom c)
     ((subdivisionChainMap X k).comm i j)
 
-/-- Naturality at the level of actual singular chain maps. -/
-theorem subdivisionChainMap_natural (f : C(X, Y)) (k : ℕ) :
-    subdivisionChainMap X k ≫ singularChainMap f =
-      singularChainMap f ≫ subdivisionChainMap Y k := by
-  apply HomologicalComplex.Hom.ext
-  funext n
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro c
-  exact inducedChain_subdivision f k n c
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

@@ -29,9 +29,6 @@ def fiberSixEquiv : HomotopyGroup (Fin 6) FiberGroup 1 ≃* Multiplicative (ZMod
   (homeomorphMulEquiv (N := Fin 6) sphereHomeomorph 1).trans
     (pi6_sphere_three_mulEquiv (sphereHomeomorph 1))
 
-theorem connectingSix_surjective : Function.Surjective (connectingHom 6) := by
-  intro a
-  exact (connecting_range_eq_kernel a).mpr (Subsingleton.elim _ _)
 
 theorem projection_range_eq_connecting_ker (n : ℕ) [NeZero n] :
     (projectionMap n).range = (connectingHom n).ker := by

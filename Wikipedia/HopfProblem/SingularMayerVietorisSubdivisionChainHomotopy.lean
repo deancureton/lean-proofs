@@ -88,12 +88,5 @@ def subdivisionHomotopyEquiv (X : Type) [TopologicalSpace X] (k : ℕ) :
   homotopyHomInvId := by simpa using (subdivisionChainHomotopy X k).symm
   homotopyInvHomId := by simpa using (subdivisionChainHomotopy X k).symm
 
-/-- In particular every actual subdivision is an unconditional quasi-isomorphism. -/
-theorem subdivision_quasiIso (X : Type) [TopologicalSpace X] (k : ℕ) :
-    QuasiIso (subdivisionChainMap X k) := by
-  rw [quasiIso_iff]
-  intro n
-  rw [quasiIsoAt_iff_isIso_homologyMap, subdivision_homologyMap]
-  infer_instance
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

@@ -64,27 +64,7 @@ theorem frontier_puncturedCylinder : frontier P.puncturedCylinder =
   simp only [mem_sdiff, mem_union]
   tauto
 
-theorem linkingBoundary_subset_puncturedCylinder :
-    P.linkingBoundary ⊆ P.puncturedCylinder := by
-  rw [← P.closedHoles_sdiff_openHoles]
-  intro q hq
-  have ht := P.closedHoles_subset_interiorTime hq.1
-  exact ⟨⟨⟨ht.1.1.le, ht.1.2.le⟩, ht.2⟩, hq.2⟩
 
-theorem endpoint_mem_puncturedCylinder (t : ℝ) (ht : t = 0 ∨ t = 1) (x : Sphere 3) :
-    (t, x) ∈ P.puncturedCylinder := by
-  apply P.isCompact_puncturedCylinder.isClosed.frontier_subset
-  rw [P.frontier_puncturedCylinder]
-  exact Or.inl ⟨ht, mem_univ x⟩
 
-theorem endpoint_disjoint_linkingBoundary :
-    Disjoint (({0, 1} : Set ℝ) ×ˢ (univ : Set (Sphere 3))) P.linkingBoundary := by
-  apply disjoint_left.mpr
-  intro q hq hlink
-  rw [← P.closedHoles_sdiff_openHoles] at hlink
-  have ht := (P.closedHoles_subset_interiorTime hlink.1).1
-  rcases hq.1 with hzero | hone
-  · exact (ne_of_gt ht.1) hzero
-  · exact (ne_of_lt ht.2) hone
 
 end NoExoticSixSphere.SphereFamily.ParityBallSystem

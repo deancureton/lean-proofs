@@ -42,12 +42,6 @@ theorem linking_symmetry (x y : SingularHomology M 3) :
   rw [hcapβ, hcapα, ← hα, ← hβ]
   exact torsionEvaluation_capSevenCycle_symmetry α β Ω
 
-theorem linking_right_nondegenerate (b : SingularHomology M 3)
-    (hb : ∀ a, linking (E := E) M a b = 0) : b = 0 := by
-  apply linking_left_nondegenerate (E := E) M b
-  intro a
-  rw [linking_symmetry]
-  exact hb a
 
 theorem add_self_eq_zero_of_zero_diagonal
     (hd : ∀ a : SingularHomology M 3, linking (E := E) M a a = 0)
@@ -60,12 +54,5 @@ theorem add_self_eq_zero_of_zero_diagonal
   rw [linking_symmetry (E := E) M b a] at he
   exact he
 
-theorem linking_diagonal_dichotomy :
-    (∃ a : SingularHomology M 3, linking (E := E) M a a ≠ 0) ∨
-      ∀ a : SingularHomology M 3, a + a = 0 := by
-  classical
-  by_cases h : ∀ a : SingularHomology M 3, linking (E := E) M a a = 0
-  · exact Or.inr (add_self_eq_zero_of_zero_diagonal (E := E) M h)
-  · exact Or.inl (not_forall.mp h)
 
 end Wikipedia.HopfProblem.DegreeCollapse.IntegralSevenLinking

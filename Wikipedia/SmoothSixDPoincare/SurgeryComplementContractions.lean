@@ -77,17 +77,5 @@ theorem beltComplement_circle_nullhomotopies_of_finrank_two
 
 end General
 
-/-- The standard two-dimensional-coordinate specialization. -/
-theorem beltComplement_circle_nullhomotopies
-    (d : SurgeryBoundaryPair (EuclideanSpace ℝ (Fin 2)) F R X Y)
-    (hattach : ContMDiff (𝓡 1) J ∞ d.attachingSphere)
-    (hdim : 3 < Module.finrank ℝ G)
-    (hnull : ∀ f : C(Hemisphere.Sphere 1, X),
-      ∃ c, f.Homotopic (ContinuousMap.const _ c)) :
-    ∀ f : C(Hemisphere.Sphere 1, d.NewComplement),
-      ∃ c, f.Homotopic (ContinuousMap.const _ c) := by
-  let _ : Fact (Module.finrank ℝ (EuclideanSpace ℝ (Fin 2)) = 1 + 1) :=
-    ⟨finrank_euclideanSpace_fin⟩
-  exact d.beltComplement_circle_nullhomotopies_of_finrank_two hattach hdim hnull
 
 end Wikipedia.SmoothSixDPoincare.SurgeryBoundaryPair

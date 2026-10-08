@@ -95,12 +95,6 @@ def sphereTwoPiTwoGenerator (x : UnitSphere 2) : Additive (π_ 2 (UnitSphere 2) 
     sphereTwoPiTwoEquiv x (sphereTwoPiTwoGenerator x) = 1 :=
   (sphereTwoPiTwoEquiv x).apply_symm_apply 1
 
-theorem sphereTwoPiTwoGenerator_hurewicz (x : UnitSphere 2) :
-    SecondHurewicz.hurewiczMap x (sphereTwoPiTwoGenerator x) = unitSphereTopClass 1 := by
-  apply (unitSphereHomologyTopEquiv 1).injective
-  change sphereTwoPiTwoEquiv x (sphereTwoPiTwoGenerator x) =
-    unitSphereHomologyTopEquiv 1 (unitSphereTopClass 1)
-  rw [sphereTwoPiTwoEquiv_generator, unitSphereHomologyTopEquiv_topClass]
 
 /-- The native second homotopy group of every sphere of dimension at least three is trivial. -/
 theorem unitSphere_piTwo_subsingleton (n : ℕ) (x : UnitSphere (n + 3)) :
@@ -108,18 +102,6 @@ theorem unitSphere_piTwo_subsingleton (n : ℕ) (x : UnitSphere (n + 3)) :
   let := unitSphere_homology_subsingleton (n + 2) 2 (by decide) (by omega)
   exact (SecondHurewicz.SimplyConnected.hurewiczPi2Equiv x).injective.subsingleton
 
-/-- Triviality also holds in the standard additive notation on that same native group. -/
-theorem unitSphere_additive_piTwo_subsingleton (n : ℕ) (x : UnitSphere (n + 3)) :
-    Subsingleton (Additive (π_ 2 (UnitSphere (n + 3)) x)) := by
-  let := unitSphere_piTwo_subsingleton n x
-  infer_instance
 
-/-- Every original based square in these higher spheres is
-nullhomotopic relative to its boundary. -/
-theorem unitSphere_genLoop_two_nullhomotopic (n : ℕ) (x : UnitSphere (n + 3))
-    (p : GenLoop (Fin 2) (UnitSphere (n + 3)) x) : GenLoop.Homotopic p GenLoop.const := by
-  exact Quotient.exact
-    (@Subsingleton.elim (π_ 2 (UnitSphere (n + 3)) x)
-      (unitSphere_piTwo_subsingleton n x) ⟦p⟧ ⟦GenLoop.const⟧)
 
 end Wikipedia.HopfProblem.SphereHomology

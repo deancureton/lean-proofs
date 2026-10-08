@@ -75,10 +75,5 @@ theorem southPairedRawTube_core (p : Sphere 3 × Sphere 3) :
     southPairedFrameTube 1 (p, 0) = southPairDoubledAmbient p :=
   southPairedFrameTube_core 1 p
 
-theorem hasFDerivAt_southPairedRawTube_normal (p : Sphere 3 × Sphere 3) :
-    HasFDerivAt (fun v : SouthPairNormalModel ↦ southPairedFrameTube 1 (p, v))
-      (southPairDoubledNormalFrame.ambient p) 0 := by
-  rw [southPairDoubledNormalFrame_ambient]
-  exact hasFDerivAt_southPairedFrameTube_one p
 
 end NoExoticSixSphere.QuaternionicHopf

@@ -39,19 +39,6 @@ def partialHomeomorphEquiv (e : OpenPartialHomeomorph X Y) (x : X) (hx : x ∈ e
     (localHomeomorphEquiv e.toHomeomorphSourceTarget ⟨x, hx⟩ n)).trans
     (neighborhoodEquiv e.target e.open_target (e.toHomeomorphSourceTarget ⟨x, hx⟩) n)
 
-/-- Before inversion of the source inclusion, the map is exactly the original chart's
-source-target map followed by the target inclusion. -/
-theorem partialHomeomorphEquiv_source (e : OpenPartialHomeomorph X Y) (x : X)
-    (hx : x ∈ e.source) (n : ℕ) (a : LocalHomology (⟨x, hx⟩ : e.source) n) :
-    partialHomeomorphEquiv e x hx n (neighborhoodMap e.source ⟨x, hx⟩ n a) =
-      neighborhoodMap e.target (e.toHomeomorphSourceTarget ⟨x, hx⟩) n
-        (localHomeomorphEquiv e.toHomeomorphSourceTarget ⟨x, hx⟩ n a) := by
-  change neighborhoodEquiv e.target e.open_target _ n
-    (localHomeomorphEquiv e.toHomeomorphSourceTarget ⟨x, hx⟩ n
-      ((neighborhoodEquiv e.source e.open_source ⟨x, hx⟩ n).symm
-        ((neighborhoodEquiv e.source e.open_source ⟨x, hx⟩ n) a))) = _
-  rw [LinearEquiv.symm_apply_apply]
-  rfl
 
 end NoExoticSixSphere.RelativeSingularHomology
 

@@ -117,11 +117,5 @@ theorem fderiv_level_diagonal (p : ℝ × ℝ) : fderiv ℝ (level χ) p (1, 1) 
   rw [sub_self, map_zero]
   norm_num
 
-theorem surjective_fderiv_level (p : ℝ × ℝ) : Surjective (fderiv ℝ (level χ) p) := by
-  intro y
-  refine ⟨(y / 2) • (1, 1), ?_⟩
-  rw [map_smul, fderiv_level_diagonal]
-  change (y / 2) * 2 = y
-  ring
 
 end NoExoticSixSphere.SmoothCornerRounding

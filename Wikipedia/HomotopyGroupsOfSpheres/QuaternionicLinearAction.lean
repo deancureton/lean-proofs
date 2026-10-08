@@ -58,16 +58,7 @@ theorem lpAction_apply (n : ℕ) (A : Matrix (Fin (n + 1)) (Fin (n + 1)) ℍ)
     (v : QuaternionSpace n) :
     lpAction n A v = WithLp.toLp 2 (A *ᵥ WithLp.ofLp v) := rfl
 
-theorem lpAction_one (n : ℕ) : lpAction n 1 = LinearMap.id := by
-  apply LinearMap.ext
-  intro v
-  simp only [lpAction_apply, Matrix.one_mulVec, WithLp.toLp_ofLp, LinearMap.id_apply]
 
-theorem lpAction_mul (n : ℕ) (A B : Matrix (Fin (n + 1)) (Fin (n + 1)) ℍ) :
-    lpAction n (A * B) = (lpAction n A).comp (lpAction n B) := by
-  apply LinearMap.ext
-  intro v
-  simp only [LinearMap.comp_apply, lpAction_apply, Matrix.mulVec_mulVec]
 
 theorem lpAction_norm (n : ℕ) (A : SpGroup (Fin (n + 1))) (v : QuaternionSpace n) :
     ‖lpAction n A.val v‖ = ‖v‖ :=

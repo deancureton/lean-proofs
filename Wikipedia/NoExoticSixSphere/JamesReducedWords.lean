@@ -57,19 +57,12 @@ theorem word_append (l r : List X) : word x₀ (l ++ r) = word x₀ l * word x�
 theorem word_basepoint_cons (l : List X) : word x₀ (x₀ :: l) = word x₀ l := by
   rw [word_cons, letter_basepoint, one_mul]
 
-theorem word_delete_basepoint (l r : List X) :
-    word x₀ (l ++ x₀ :: r) = word x₀ (l ++ r) := by
-  rw [word_append, word_basepoint_cons, word_append]
 
 def letters (w : Space X x₀) : List X :=
   (FreeMonoid.toList w).map Subtype.val
 
 theorem letters_one : letters x₀ 1 = [] := rfl
 
-theorem letters_mul (v w : Space X x₀) :
-    letters x₀ (v * w) = letters x₀ v ++ letters x₀ w := by
-  change (FreeMonoid.toList v ++ FreeMonoid.toList w).map Subtype.val = _
-  exact List.map_append
 
 theorem letters_letter_mul {x : X} (h : x ≠ x₀) (w : Space X x₀) :
     letters x₀ (letter x₀ x * w) = x :: letters x₀ w := by
@@ -103,11 +96,6 @@ theorem lift_letter (f : X → N) (hf : f x₀ = 1) (x : X) :
   · rw [letter_of_ne x₀ hx]
     exact FreeMonoid.lift_eval_of _ _
 
-theorem lift_word (f : X → N) (hf : f x₀ = 1) (l : List X) :
-    lift x₀ f (word x₀ l) = (l.map f).prod := by
-  induction l with
-  | nil => exact map_one _
-  | cons x l ih => rw [word_cons, map_mul, lift_letter x₀ f hf, ih]; rfl
 
 theorem hom_ext (f g : Space X x₀ →* N)
     (h : ∀ x, f (letter x₀ x) = g (letter x₀ x)) : f = g := by

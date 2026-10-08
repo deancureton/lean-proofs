@@ -57,32 +57,5 @@ theorem pair_connecting_capInDegree {p q n : ℕ} (h : p + q = n)
   subst n
   exact pair_connecting_cap U p q a F
 
-theorem pair_connecting_cap_kernel {p q n : ℕ} (h : p + q = n)
-    (a : ModTwoCapProduct.Cohomology U p)
-    (F : (RelativeCoefficients.complex Coefficient U).homology (n + 1))
-    (hi : Function.Injective (fun b : RelativeModTwoCochains.Cohomology U (p + 1) ↦
-      capProductInDegree U (p := p + 1) (q := q) (n := n + 1) (by omega) b F)) :
-    modHomologyMap 2 (subtypeInclusion U) q
-        (ModTwoCapProduct.capProductInDegree U h a
-          (RelativeCoefficients.connecting Coefficient U n F)) = 0 ↔
-      ∃ b : ModTwoCapProduct.Cohomology X p,
-        ModTwoCapProduct.cohomologyPullback (subtypeInclusion U) p b = a := by
-  rw [← pair_connecting_capInDegree U h a F]
-  have hz : capProductInDegree U (p := p + 1) (q := q) (n := n + 1) (by omega) 0 F = 0 :=
-    congrArg (fun f ↦ f F)
-      (capProductInDegree U (p := p + 1) (q := q) (n := n + 1) (by omega)).map_zero
-  constructor
-  · intro ha
-    have hδ : a ∈ LinearMap.ker (RelativeModTwoCochains.connecting U p) :=
-      hi (ha.trans hz.symm)
-    rw [← RelativeModTwoCochains.exact_at_subspace] at hδ
-    exact hδ
-  · intro ha
-    have hδ : a ∈ LinearMap.range
-        (ModTwoCapProduct.cohomologyPullback (subtypeInclusion U) p) := ha
-    rw [RelativeModTwoCochains.exact_at_subspace] at hδ
-    change RelativeModTwoCochains.connecting U p a = 0 at hδ
-    rw [hδ]
-    exact hz
 
 end NoExoticSixSphere.RelativeModTwoCap

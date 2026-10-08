@@ -39,10 +39,6 @@ def southStabilizedBasePartial :
     (Diffeomorph.refl 𝓘(ℝ, V 4 × ℝ) (V 4 × ℝ) ∞)).toPartialDiffeomorph.trans
       (OpenFiberCollapse.productTubePartial southChartTube.tube southChartTube.source_univ)
 
-theorem southStabilizedBasePartial_apply (p : Sphere 3 × (V 4 × ℝ)) :
-    southStabilizedBasePartial p = southStabilizedBaseTube p := by
-  unfold southStabilizedBasePartial
-  rfl
 
 theorem southStabilizedBasePartial_source : southStabilizedBasePartial.source = Set.univ :=
   partialDiffeomorph_trans_source_univ _ _ rfl
@@ -54,10 +50,6 @@ def southStabilizedPartial :
   southStabilizedBasePartial.trans
     (StereographicEquator.stabilizedEquiv 7).toDiffeomorph.toPartialDiffeomorph
 
-theorem southStabilizedPartial_apply (p : Sphere 3 × (V 4 × ℝ)) :
-    southStabilizedPartial p = southStabilizedTube p := by
-  unfold southStabilizedPartial
-  rfl
 
 theorem southStabilizedPartial_source : southStabilizedPartial.source = Set.univ :=
   partialDiffeomorph_trans_source_univ _ _ southStabilizedBasePartial_source rfl
@@ -74,10 +66,6 @@ def southNormalizedPartial :
       (Sphere 3 × SouthNormalModel) (V 8) ∞ :=
   southNormalizingDiffeomorph.toPartialDiffeomorph.trans southStabilizedPartial
 
-theorem southNormalizedPartial_apply (p : Sphere 3 × SouthNormalModel) :
-    southNormalizedPartial p = southNormalizedTube p := by
-  unfold southNormalizedPartial
-  rfl
 
 theorem southNormalizedPartial_source : southNormalizedPartial.source = Set.univ :=
   partialDiffeomorph_trans_source_univ _ _ rfl southStabilizedPartial_source

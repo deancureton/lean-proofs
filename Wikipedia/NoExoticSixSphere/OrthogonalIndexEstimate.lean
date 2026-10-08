@@ -74,14 +74,6 @@ theorem hasDerivAt_deriv_energy_testField (b : OrthogonalOperators n) (K A : Ske
   rw [integral_density_field] at hd
   exact hd
 
-theorem negative_index_of_commutator (K A : SkewOperators n)
-    (h : 4 * Real.pi ^ 2 * squareNorm (A : Vector n →L[ℝ] Vector n) <
-      squareNorm (commutator (K : Vector n →L[ℝ] Vector n)
-        (A : Vector n →L[ℝ] Vector n))) :
-    (2 * ∫ t : ℝ in 0..1, density K (field K A t : Vector n →L[ℝ] Vector n)
-      ((deriv (field K A) t : SkewOperators n) : Vector n →L[ℝ] Vector n)) < 0 := by
-  rw [integral_density_field]
-  linarith
 
 /-- Under the commutator bound, the constructed family's actual second energy
 derivative is negative. -/

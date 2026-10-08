@@ -74,18 +74,5 @@ theorem exists_small_velocity_transverse (A B : ℝ × E →L[ℝ] G)
     exact hu
   exact (not_le_of_gt hdim) (LinearMap.finrank_le_finrank_of_surjective hsurj)
 
-theorem injective_curve_branch_difference (B : ℝ × E →L[ℝ] G)
-    (hB : Injective B) {w : G} (hw : w ∉ LinearMap.range B.toLinearMap) :
-    Injective ((B.comp (ContinuousLinearMap.snd ℝ ℝ (ℝ × E))) -
-      (ContinuousLinearMap.fst ℝ ℝ (ℝ × E)).smulRight w) := by
-  apply (injective_iff_map_eq_zero _).mpr
-  intro q hq
-  have heq : B q.2 = q.1 • w := sub_eq_zero.mp hq
-  have ht : q.1 = 0 := by
-    by_contra ht
-    apply hw
-    exact ((LinearMap.range B.toLinearMap).smul_mem_iff ht).mp ⟨q.2, heq⟩
-  have hv : q.2 = 0 := (injective_iff_map_eq_zero B).mp hB q.2 (by simpa [ht] using heq)
-  exact Prod.ext ht hv
 
 end Wikipedia.HopfProblem.OrbitPair.GuidingVelocity

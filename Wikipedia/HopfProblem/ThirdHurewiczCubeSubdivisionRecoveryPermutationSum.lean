@@ -38,18 +38,7 @@ theorem nativeCubeRecoveryPermutation_injective :
     Function.Injective nativeCubeRecoveryPermutation :=
   nativeCubeRecoveryPermutation_bijective.injective
 
-/-- Every actual input permutation appears in the displayed list. -/
-theorem nativeCubeRecoveryPermutation_exhaustive (e : Equiv.Perm (Fin 3)) :
-    e = 1 ∨ e = Equiv.swap 1 2 ∨ e = nativeCubeCycle201 ∨
-      e = Equiv.swap 0 1 ∨ e = nativeCubeCycle120 ∨ e = Equiv.swap 0 2 := by
-  obtain ⟨i, rfl⟩ := nativeCubeRecoveryPermutation_bijective.surjective e
-  fin_cases i <;> simp [nativeCubeRecoveryPermutation_apply]
 
-/-- The alternating signs in recovery order are the actual permutation signs. -/
-theorem cubeOrientation_nativeCubeRecoveryPermutation (i : Fin 6) :
-    cubeOrientation (nativeCubeRecoveryPermutation i) = ![1, -1, 1, -1, 1, -1] i := by
-  simp only [nativeCubeRecoveryPermutation, Function.comp_apply, cubeOrientation_cubePermutation]
-  fin_cases i <;> rfl
 
 @[simp] theorem cubeOrientation_nativeCubeCycle120 :
     cubeOrientation nativeCubeCycle120 = 1 := by
@@ -77,34 +66,16 @@ theorem sum_oriented_nativeCubeRecoveryPermutations {A : Type*} [AddCommGroup A]
   simp [cubeOrientation, nativeCubeCycle120, nativeCubeCycle201,
     Equiv.Perm.sign_swap', sub_eq_add_neg]
 
-theorem nativeCubeSwap01_mul_cycle201 :
-    Equiv.swap (0 : Fin 3) 1 * nativeCubeCycle201 = Equiv.swap 0 2 := by
-  decide
 
-theorem nativeCubeSwap01_mul_cycle120 :
-    Equiv.swap (0 : Fin 3) 1 * nativeCubeCycle120 = Equiv.swap 1 2 := by
-  decide
 
 theorem nativeCubeSwap01_mul_swap12 :
     Equiv.swap (0 : Fin 3) 1 * Equiv.swap 1 2 = nativeCubeCycle120 := rfl
 
-theorem nativeCubeSwap01_mul_swap02 :
-    Equiv.swap (0 : Fin 3) 1 * Equiv.swap 0 2 = nativeCubeCycle201 := by
-  decide
 
-theorem nativeCubeSwap12_mul_cycle120 :
-    Equiv.swap (1 : Fin 3) 2 * nativeCubeCycle120 = Equiv.swap 0 2 := by
-  decide
 
-theorem nativeCubeSwap12_mul_cycle201 :
-    Equiv.swap (1 : Fin 3) 2 * nativeCubeCycle201 = Equiv.swap 0 1 := by
-  decide
 
 theorem nativeCubeSwap12_mul_swap01 :
     Equiv.swap (1 : Fin 3) 2 * Equiv.swap 0 1 = nativeCubeCycle201 := rfl
 
-theorem nativeCubeSwap12_mul_swap02 :
-    Equiv.swap (1 : Fin 3) 2 * Equiv.swap 0 2 = nativeCubeCycle120 := by
-  decide
 
 end Wikipedia.HopfProblem.ThirdHurewicz

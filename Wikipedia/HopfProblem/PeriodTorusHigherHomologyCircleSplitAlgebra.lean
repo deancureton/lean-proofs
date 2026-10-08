@@ -106,22 +106,6 @@ variable (i : A →ₗ[ℤ] B) (p : B →ₗ[ℤ] A) (d : B →ₗ[ℤ] C)
   apply (splitExactEquiv i p d hpi hex hsurj).injective
   rw [LinearEquiv.apply_symm_apply, splitExactEquiv_apply_inclusion]
 
-/-- The image of the section is identified with the first product factor. -/
-theorem splitExactEquiv_image_range_inclusion :
-    splitExactEquiv i p d hpi hex hsurj '' Set.range i = {ac : A × C | ac.2 = 0} := by
-  ext ac
-  constructor
-  · rintro ⟨b, ⟨a, rfl⟩, rfl⟩
-    exact congrArg Prod.snd (splitExactEquiv_apply_inclusion i p d hpi hex hsurj a)
-  · intro hac
-    refine ⟨i ac.1, ⟨ac.1, rfl⟩, ?_⟩
-    rw [splitExactEquiv_apply_inclusion]
-    exact Prod.ext rfl hac.symm
 
-/-- The quotient coordinate vanishes precisely on the image of the section. -/
-theorem splitExactEquiv_mem_range_inclusion_iff (b : B) :
-    b ∈ LinearMap.range i ↔ (splitExactEquiv i p d hpi hex hsurj b).2 = 0 := by
-  rw [hex]
-  rfl
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

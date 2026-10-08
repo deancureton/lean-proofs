@@ -105,10 +105,5 @@ theorem twist_column_homology (v : UnitSphere (Vector 4))
   exact SphereReflection.negative_homology_of_quaternion_isometry
     Quaternion.linearIsometryEquivTuple.symm v a
 
-theorem marked_twist_column_homology (v : UnitSphere (Vector 4))
-    (e : SingularHomology (UnitSphere (Vector 4)) 3 ≃ₗ[ℤ] ℤ)
-    (a : SingularHomology (UnitSphere (Vector 4)) 3) :
-    e (singularHomologyMap (column v (twist v)) 3 a) = 2 * e a := by
-  rw [twist_column_homology, map_add, two_mul]
 
 end Wikipedia.HopfProblem.DegreeCollapse.ReflectionFrameTwist

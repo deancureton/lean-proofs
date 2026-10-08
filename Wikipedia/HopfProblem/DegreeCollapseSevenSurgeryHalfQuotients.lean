@@ -71,14 +71,6 @@ def newHalfQuotientEquiv :
     map_add' := fun x y ↦ e.map_add' x y }
   exact ea.toIntLinearEquiv
 
-theorem newHalfQuotientEquiv_mk (x : SingularHomology (PositiveHalf A hR T) 3) :
-    newHalfQuotientEquiv A hR T (Submodule.Quotient.mk x) =
-      singularHomologyMap (newHalfInclusion A hR T) 3 x := by
-  change (singularHomologyMap (newHalfInclusion A hR T) 3).quotKerEquivOfSurjective
-    (newHalf_surjective_three A hR T)
-    (Submodule.quotEquivOfEq _ _ (half_exact_at_new A hR T 3 (by decide))
-      (Submodule.Quotient.mk x)) = _
-  rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
 def halfQuotientEquiv :
     (SingularHomology (OldPositiveHalf A T) 3 ⧸
@@ -87,12 +79,6 @@ def halfQuotientEquiv :
       LinearMap.range (singularHomologyMap (halfBeltSphere A hR T) 3)) :=
   (oldHalfQuotientEquiv A hR T).trans (newHalfQuotientEquiv A hR T).symm
 
-theorem halfQuotientEquiv_body (x : SingularHomology (OldPositiveHalf A T) 3) :
-    newHalfQuotientEquiv A hR T (halfQuotientEquiv A hR T (Submodule.Quotient.mk x)) =
-      singularHomologyMap (oldHalfInclusion A hR T) 3 x := by
-  change newHalfQuotientEquiv A hR T ((newHalfQuotientEquiv A hR T).symm
-    (oldHalfQuotientEquiv A hR T (Submodule.Quotient.mk x))) = _
-  rw [LinearEquiv.apply_symm_apply, oldHalfQuotientEquiv_mk]
 
 theorem oldHalf_bijective_other (k : ℕ) (hk : 0 < k)
     (hk3 : k + 1 ≠ 3) (hk4 : k + 1 ≠ 4) :

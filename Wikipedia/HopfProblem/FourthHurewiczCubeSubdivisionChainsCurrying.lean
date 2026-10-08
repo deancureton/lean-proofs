@@ -83,17 +83,5 @@ theorem cubeChain_eq_sum_prisms (p : GenLoop (Fin 4) X x) :
     ThirdHurewicz.CubeSubdivision.cubeChain_eq_sum_tetrahedra]
   simp only [map_sum, map_zsmul, intervalTetrahedronChain]
 
-/-- The same equality with all six genuine interval-tetrahedron prisms displayed. -/
-theorem cubeChain_six_prisms (p : GenLoop (Fin 4) X x) :
-    cubeChain p =
-      intervalTetrahedronChain p 1 -
-        intervalTetrahedronChain p (Equiv.swap 0 1) +
-        intervalTetrahedronChain p ((Equiv.swap 1 2).trans (Equiv.swap 0 1)) -
-        intervalTetrahedronChain p (Equiv.swap 1 2) +
-        intervalTetrahedronChain p ((Equiv.swap 0 1).trans (Equiv.swap 1 2)) -
-        intervalTetrahedronChain p (Equiv.swap 0 2) := by
-  rw [cubeChain_eq_curriedCrossProduct,
-    ThirdHurewicz.CubeSubdivision.cubeChain_six_tetrahedra]
-  simp only [map_add, map_sub, intervalTetrahedronChain]
 
 end Wikipedia.HopfProblem.FourthHurewicz.CubeSubdivision

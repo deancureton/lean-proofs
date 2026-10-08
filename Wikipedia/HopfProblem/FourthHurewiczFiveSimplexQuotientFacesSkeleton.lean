@@ -25,9 +25,6 @@ open FirstHurewicz CubicalBoundary SecondHurewicz.SimplyConnected
 def simplexTwoBoundary (n : ℕ) : Set (Simplex n) :=
   {s | ∃ i j : Fin (n + 1), i ≠ j ∧ s i = 0 ∧ s j = 0}
 
-theorem simplexTwoBoundary_subset (n : ℕ) : simplexTwoBoundary n ⊆ simplexBoundary n := by
-  rintro s ⟨i, j, _, hi, _⟩
-  exact ⟨i, hi⟩
 
 theorem simplexFace_simplexBoundary (n : ℕ) (i : Fin (n + 2)) (s : Simplex n)
     (hs : s ∈ simplexBoundary n) : simplexFace n i s ∈ simplexTwoBoundary (n + 1) := by

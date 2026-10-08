@@ -77,14 +77,6 @@ theorem referenceComplementChart_inversion {w : F} (hw : w ≠ 0) :
     referenceComplementChart F n hdim w = referenceChart F n hdim ((‖w‖ ^ 2)⁻¹ • w) :=
   (referenceChart_inversion F n hdim hw).symm
 
-theorem referenceComplementChart_boundary {w : F} (hw : ‖w‖ = 1) :
-    referenceComplementChart F n hdim w = referenceChart F n hdim w := by
-  have hw₀ : w ≠ 0 := norm_ne_zero_iff.mp (hw ▸ one_ne_zero)
-  rw [referenceComplementChart_inversion F n hdim hw₀, hw, one_pow, inv_one, one_smul]
 
-theorem referenceComplementChart_contMDiff :
-    ContMDiff 𝓘(ℝ, F) (𝓡 n) ∞ (referenceComplementChart F n hdim) := by
-  rw [← contMDiffOn_univ, ← referenceComplementChart_source F n hdim]
-  exact (referenceComplementChart F n hdim).contMDiffOn_toFun
 
 end Wikipedia.SmoothSixDPoincare.SphereCoordinates

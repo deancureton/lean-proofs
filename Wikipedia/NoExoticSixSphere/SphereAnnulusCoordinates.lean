@@ -130,39 +130,10 @@ def homeomorph {n : ℕ} (b : Sphere n) : domain n ≃ₜ unitInterval × Sphere
   continuous_toFun := (toCylinder b).continuous
   continuous_invFun := (fromCylinder n).continuous
 
-theorem fromCylinder_zero_val {n : ℕ} (q : Sphere n) : (fromCylinder n (0, q)).val = q.val := by
-  rw [fromCylinder_val]
-  have hr : radius 0 = 1 := by norm_num [radius]
-  rw [hr, one_smul]
 
-theorem fromCylinder_one_val {n : ℕ} (q : Sphere n) :
-    (fromCylinder n (1, q)).val = (2 : ℝ) • q.val := by
-  rw [fromCylinder_val]
-  have hr : radius 1 = 2 := by
-    have hs := radius_sq (1 : unitInterval)
-    have hp := radius_pos (1 : unitInterval)
-    norm_num at hs
-    nlinarith
-  rw [hr]
 
-theorem time_pos_iff {n : ℕ} (x : domain n) : 0 < (time x : ℝ) ↔ 1 < ‖x.val‖ := by
-  rw [time_val]
-  have hx : 1 ≤ ‖x.val‖ ∧ ‖x.val‖ ≤ 2 := x.property
-  constructor <;> intro h <;> nlinarith
 
-theorem time_lt_one_iff {n : ℕ} (x : domain n) : (time x : ℝ) < 1 ↔ ‖x.val‖ < 2 := by
-  rw [time_val]
-  have hx : 1 ≤ ‖x.val‖ ∧ ‖x.val‖ ≤ 2 := x.property
-  constructor <;> intro h <;> nlinarith
 
-theorem time_le_third_iff {n : ℕ} (x : domain n) :
-    (time x : ℝ) ≤ 1 / 3 ↔ ‖x.val‖ ^ 2 ≤ 2 := by
-  rw [time_val]
-  constructor <;> intro h <;> linarith
 
-theorem two_thirds_le_time_iff {n : ℕ} (x : domain n) :
-    2 / 3 ≤ (time x : ℝ) ↔ 3 ≤ ‖x.val‖ ^ 2 := by
-  rw [time_val]
-  constructor <;> intro h <;> linarith
 
 end NoExoticSixSphere.SphereAnnulus

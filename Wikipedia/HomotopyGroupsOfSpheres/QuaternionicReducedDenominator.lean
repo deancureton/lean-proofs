@@ -51,11 +51,5 @@ theorem rotation_one_zero (s t : ℝ) (B : Space (Fin 3)) :
   rw [rotation_val, matrix_apply]
   norm_num
 
-theorem rotation_denominator_inverse (s t : ℝ) (B : Space (Fin 3)) :
-    (1 + (rotation s t B).val 1 0)⁻¹ =
-      (realDenominator s t B)⁻¹ • (1 - (Real.sin s * Real.sin t) • embed (B.val.val 1 0)) := by
-  rw [inverse_one_add_of_re_zero _ (rotation_offDiagonal_re s t B 1 0 (by decide)),
-    rotation_one_zero, Quaternion.normSq_smul, normSq_embed]
-  rfl
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

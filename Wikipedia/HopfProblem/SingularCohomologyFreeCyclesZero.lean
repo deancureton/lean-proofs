@@ -106,15 +106,6 @@ theorem zeroDifferentialHomologyEquiv_naturality (n : ℕ) (a : K.homology n) :
   rw [homologyMap_cocycleClass, zeroDifferentialHomologyEquiv_cocycleClass,
     zeroDifferentialHomologyEquiv_cocycleClass, mapCocycles_val]
 
-/-- The inverse coordinate identifications preserve the same actual
-cochain-map and homology-map diagram. -/
-theorem zeroDifferentialHomologyEquiv_symm_naturality (n : ℕ) (x : K.X n) :
-    (HomologicalComplex.homologyMap f n).hom
-      ((zeroDifferentialHomologyEquiv K hK n).symm x) =
-      (zeroDifferentialHomologyEquiv L hL n).symm ((f.f n).hom x) := by
-  apply (zeroDifferentialHomologyEquiv L hL n).injective
-  rw [zeroDifferentialHomologyEquiv_naturality hK hL f,
-    LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
 
 end Naturality
 

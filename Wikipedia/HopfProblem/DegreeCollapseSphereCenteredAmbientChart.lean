@@ -88,10 +88,6 @@ theorem tangentLift_linearPart (z : Sphere n) (v : V (n + 1)) :
   simp only [inner_neg_left, neg_smul, smul_neg, neg_neg]
   rfl
 
-theorem linearPart_tangentProjection (z : Sphere n) (v : V (n + 1)) :
-    linearPart z (SphereRadialDifferential.tangentProjection z v) = linearPart z v := by
-  rw [SphereRadialDifferential.tangentProjection_apply, map_sub, map_smul,
-    linearPart_radial, smul_zero, sub_zero]
 
 def split (z : Sphere n) : V (n + 1) →L[ℝ] WithLp 2 (ℝ × V n) :=
   (WithLp.prodContinuousLinearEquiv 2 ℝ ℝ (V n)).symm.toContinuousLinearMap.comp

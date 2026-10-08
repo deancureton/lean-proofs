@@ -63,18 +63,7 @@ theorem native_card_le_two (k : ℕ) (hk : 6 ≤ k) :
     Nat.card (StableSixSphereMaps.NativeStage k) ≤ 2 :=
   (Nat.card_congr (stableMulEquiv k hk).toEquiv).trans_le card_le_two
 
-theorem native_pow_two (k : ℕ) (hk : 6 ≤ k) (c : StableSixSphereMaps.NativeStage k) :
-    c ^ 2 = 1 := by
-  apply (stableMulEquiv k hk).injective
-  rw [map_pow, map_one]
-  exact stable_pow_two _
 
-theorem native_eq_one_or_square (k : ℕ) (c : StableSixSphereMaps.NativeStage (k + 6)) :
-    c = 1 ∨ c = squareClass k := by
-  rcases stable_eq_one_or_square (ofNative c) with h | h
-  · exact Or.inl ((ofNative_eq_one_iff_native (by omega) c).mp h)
-  · exact Or.inr ((ofNative_injective (by omega))
-      (h.trans (stableSquare_eq_stage k).symm))
 
 theorem polynomial_square_stable :
     ofNative QuaternionicHopf.suspendedSmashClass = stableSquare := by
@@ -89,11 +78,6 @@ theorem stable_eq_one_or_polynomial_square (z : CubicalStableSix.Group) :
   rw [polynomial_square_stable]
   exact stable_eq_one_or_square z
 
-theorem native_eight_eq_one_or_polynomial_square (c : StableSixSphereMaps.NativeStage 8) :
-    c = 1 ∨ c = QuaternionicHopf.suspendedSmashClass := by
-  rcases stable_eq_one_or_polynomial_square (ofNative c) with h | h
-  · exact Or.inl ((ofNative_eq_one_iff_native (by decide) c).mp h)
-  · exact Or.inr ((ofNative_injective (by decide)) h)
 
 
 end Wikipedia.HopfProblem.DegreeCollapse.SixthStemTwoValues

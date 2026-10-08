@@ -68,22 +68,6 @@ theorem middlePresentation_succ_map
             ((S.middlePresentation hf r htwo c (Nat.lt_of_succ_lt hc)
               (S.indexThreeBlock_mono (Nat.le_succ c) hthree)).map v)) := rfl
 
-theorem middlePresentation_succ_column_zero
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (r c : ℕ)
-    (htwo : S.HasIndexTwoPrefix r) (hc : r + (c + 1) < S.count)
-    (hthree : S.HasIndexThreeBlock r (c + 1)) :
-    (S.consecutiveBandData hf ⟨r + c, Nat.lt_of_succ_lt hc⟩
-      ⟨r + (c + 1), hc⟩ rfl).homologyEquiv 2
-        ((S.middlePresentation hf r htwo c (Nat.lt_of_succ_lt hc)
-          (S.indexThreeBlock_mono (Nat.le_succ c) hthree)).map
-            ((S.middlePresentation hf r htwo (c + 1) hc hthree).columns 0)) =
-      (S.data (S.point ⟨r + (c + 1), hc⟩)).indexThreeAttachingClass
-        (S.indexThreeBlock_last r c hc hthree) := by
-  let P := S.middlePresentation hf r htwo c (Nat.lt_of_succ_lt hc)
-    (S.indexThreeBlock_mono (Nat.le_succ c) hthree)
-  let B := S.consecutiveBandData hf ⟨r + c, Nat.lt_of_succ_lt hc⟩ ⟨r + (c + 1), hc⟩ rfl
-  exact (S.data (S.point ⟨r + (c + 1), hc⟩)).indexThreePresentation_column_zero
-    hf.continuous (S.indexThreeBlock_last r c hc hthree) (P.transport (B.homologyEquiv 2))
 
 theorem middlePresentation_succ_column_succ
     (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (r c : ℕ)

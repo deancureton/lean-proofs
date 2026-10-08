@@ -77,12 +77,5 @@ theorem projection_eq_const_iff_exists_loop_class (f : C(X, Y)) (x : X)
     intro q
     rfl
 
-theorem loopInclusion_range_eq_projection_ker [DecidableEq N] [Nonempty N]
-    (f : C(X, Y)) (x : X) :
-    (HigherHomotopy.mapMonoidHom (N := N) (loopInclusion f x)
-      (loopInclusion_base f x)).range =
-        (HigherHomotopy.mapMonoidHom (N := N) (projection f (f x)) rfl).ker := by
-  ext c
-  exact (projection_eq_const_iff_exists_loop_class f x c).symm
 
 end Wikipedia.HopfProblem.OrbitPair.HomotopyFiber

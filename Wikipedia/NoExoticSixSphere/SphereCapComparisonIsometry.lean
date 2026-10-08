@@ -84,11 +84,5 @@ theorem capComparisonDiffeomorph_apply (x : Sphere 3) :
   apply Subtype.ext
   exact (capPinchComparison_two_val x).symm
 
-theorem contMDiff_capPinchComparison_two :
-    ContMDiff (𝓡 3) (𝓡 3) ∞ (capPinchComparison 2 (by norm_num)) := by
-  have he : (capPinchComparison 2 (by norm_num) : Sphere 3 → Sphere 3) =
-      capComparisonDiffeomorph := funext fun x ↦ (capComparisonDiffeomorph_apply x).symm
-  rw [he]
-  exact capComparisonDiffeomorph.contMDiff_toFun
 
 end NoExoticSixSphere.SphereSumNeck

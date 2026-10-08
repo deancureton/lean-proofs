@@ -41,13 +41,5 @@ theorem boundary_bijective (d : ℕ) [NeZero d] :
     apply (projection_eq_const_iff_exists_boundary_class d f x c).mp
     exact @Subsingleton.elim (π_ d X x) inferInstance _ _
 
-theorem loopInclusion_map_bijective (d : ℕ) [NeZero d] :
-    Function.Bijective (HigherHomotopy.map (N := Fin d) (loopInclusion f x)
-      (loopInclusion_base f x)) := by
-  have hb : Function.Bijective (HigherHomotopy.map (N := Fin d) (loopInclusion f x)
-      (loopInclusion_base f x) ∘ (GeneralizedLoopCurrying.homotopyEquiv d (f x)).symm) :=
-    boundary_bijective f x d
-  exact (Function.Bijective.of_comp_iff _
-    (GeneralizedLoopCurrying.homotopyEquiv d (f x)).symm.bijective).mp hb
 
 end NoExoticSixSphere.HomotopyFiberContractibleSource

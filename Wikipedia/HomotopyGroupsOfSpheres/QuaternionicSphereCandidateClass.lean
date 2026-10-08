@@ -32,14 +32,5 @@ theorem sphereCandidateClass_projectionDegree :
   projectionDegree_pointed_sphereMap sphereCandidate sphereCandidateBasepoint
     sphereCandidateBasepoint_image
 
-/-- The global map retains the exact matrix formula of the previously constructed native cubes. -/
-theorem sphereCandidate_reducedSevenCubeSum (p : GenLoop (Fin 5) UnitSphere axis)
-    (u : Fin 5 → I) (v : Fin 2 → I) :
-    sphereCandidate (sphereSourcePoint (v 0) (v 1) (p u)) =
-      reducedSevenCubeSum p (Sum.elim u v) := by
-  rw [sphereCandidate_sourcePoint, reducedSevenCubeSum_apply]
-  congr 1
-  funext i
-  fin_cases i <;> rfl
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

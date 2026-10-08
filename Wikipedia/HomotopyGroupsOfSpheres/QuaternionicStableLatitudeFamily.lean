@@ -55,11 +55,6 @@ def operatorSphereCandidate : C(Sphere 7, symplecticSubgroup 11) :=
   (symplecticHomeomorph 11 : C(SpGroup (Fin 12), symplecticSubgroup 11)).comp
     (stableSphereCandidate 9)
 
-theorem operatorSphereCandidate_basepoint :
-    operatorSphereCandidate sphereCandidateBasepoint = 1 := by
-  change symplecticHomeomorph 11 (stableSphereCandidate 9 sphereCandidateBasepoint) = 1
-  rw [stableSphereCandidate_basepoint]
-  exact (symplecticMulEquiv 11).map_one
 
 def stableOperatorFamily : DoubleFamily 5 (symplecticSubgroup 11) 1 :=
   (unreducedSphereFamily.reparametrize sphereParameterChange).postcompose
@@ -88,20 +83,6 @@ theorem stableOperatorFamily_nativeCube :
   rw [stableOperatorFamily_apply, stableBottCube_apply]
   rfl
 
-theorem stableOperatorFamily_nativeClass :
-    stableOperatorFamily.nativeClass stableOperatorFamily_parameter_point =
-      stableBottInputMulEquiv (stableInputClass 9) := by
-  rw [stableBottInputMulEquiv_class]
-  change (⟦stableOperatorFamily.nativeCube stableOperatorFamily_parameter_point⟧ :
-    π_ 7 (symplecticSubgroup 11) 1) = ⟦stableBottCube⟧
-  rw [stableOperatorFamily_nativeCube]
 
-theorem stableOperatorFamily_toSphereMap :
-    stableOperatorFamily.toSphereMap =
-      operatorSphereCandidate.comp (parameterSourceHomeomorph : C(_, _)) := by
-  rw [stableOperatorFamily, DoubleFamily.postcompose_toSphereMap,
-    DoubleFamily.reparametrize_toSphereMap]
-  simp only [operatorSphereCandidate, stableSphereCandidate, operatorStabilizationMap,
-    unreducedSphereCandidate, parameterSourceHomeomorph, ContinuousMap.comp_assoc]
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

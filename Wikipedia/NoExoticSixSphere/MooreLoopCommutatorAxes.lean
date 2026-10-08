@@ -31,9 +31,6 @@ theorem commutator_one_left (p : Loop y₀) : commutatorMap (1, p) = p * reverse
   change (1 : Loop y₀) * p * reverse 1 * reverse p = p * reverse p
   rw [one_mul, reverse_one, mul_one]
 
-theorem commutator_one_right (p : Loop y₀) : commutatorMap (p, 1) = p * reverse p := by
-  change p * (1 : Loop y₀) * reverse p * reverse 1 = p * reverse p
-  rw [mul_one, reverse_one, mul_one]
 
 abbrev Axes (y₀ : Y) := {p : Loop y₀ × Loop y₀ // p.1 = 1 ∨ p.2 = 1}
 

@@ -118,17 +118,5 @@ theorem exists_smoothing_patch_step_within_target {ι : Type*} [Finite ι]
     · exact ChartMapPerturbation.contMDiffAt_smoothedMap_on_plateau (p i).chart hinner
         (p i).nested ((p i).plateau_eventually_one hplateau) hg.contMDiffAt (hvalid _ (har x))
 
-/-- Forgetting target containment retains the original local smoothing API. -/
-theorem exists_smoothing_patch_step {ι : Type*} [Finite ι]
-    (p : ι → MapSmoothingPatch I J (X := X) (N := N)) (i : ι)
-    (f : C(X, N)) (hcompatible : ∀ j, (p j).Compatible f)
-    {C U : Set X} (hC : IsClosed C) (hU : IsOpen U) (hCU : C ⊆ U)
-    (hfU : ContMDiffOn I J ∞ f U) :
-    ∃ f' : C(X, N), (∀ j, (p j).Compatible f') ∧ f.HomotopicRel f' C ∧
-      ∀ x, ContMDiffAt I J ∞ f x ∨ x ∈ (p i).plateau → ContMDiffAt I J ∞ f' x := by
-  obtain ⟨f', hc, hrel, hsm⟩ :=
-    exists_smoothing_patch_step_within_target p i f hcompatible hC hU hCU hfU
-      (subset_univ _) (mapsTo_univ f univ)
-  exact ⟨f', hc, hrel.homotopicRel, hsm⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldSmoothing

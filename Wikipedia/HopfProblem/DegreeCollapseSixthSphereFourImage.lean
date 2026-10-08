@@ -56,15 +56,5 @@ theorem stable_pow_two (x : π_ 10 (Sphere 4) (spherePole 4)) :
   · rw [h, one_pow]
   · rw [h, StableThirdComposition.stableSquare_pow_two]
 
-theorem transition_eq_one_or_square (x : π_ 10 (Sphere 4) (spherePole 4)) :
-    CubicalStableSix.transition 2 8 (by decide) x = 1 ∨
-      CubicalStableSix.transition 2 8 (by decide) x = StableThirdComposition.squareClass 2 := by
-  have he := CubicalStableSix.ofNative_transition (by decide : 2 ≤ 8) x
-  rcases stable_eq_one_or_square x with h | h
-  · exact Or.inl ((CubicalStableSix.ofNative_eq_one_iff_native (by decide : 6 ≤ 8) _).mp
-      (he.trans h))
-  · apply Or.inr
-    apply CubicalStableSix.ofNative_injective (by decide : 6 ≤ 8)
-    exact he.trans (h.trans (StableThirdComposition.stableSquare_eq_stage 2).symm)
 
 end Wikipedia.HopfProblem.DegreeCollapse.SixthSphereFourImage

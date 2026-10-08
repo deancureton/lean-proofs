@@ -60,11 +60,6 @@ def whiskerMap (n : ℕ) : C((Fin (n + 1) → I) × I, Fin (n + 2) → I) where
     whiskerMap n (u, 1) = Fin.cons 1 (Fin.snoc (Fin.init u) 0) := by
   simp
 
-/-- On the upper rectangle edge, the last cube coordinate is unchanged. -/
-theorem whiskerMap_radius_one (n : ℕ) (u : Fin (n + 1) → I) (s : I)
-    (hs : (whiskerTrack s).2 = 1) :
-    whiskerMap n (u, s) = Fin.cons (whiskerTrack s).1 u := by
-  simp [hs]
 
 /-- The lower last-coordinate facet remains a lower last-coordinate facet. -/
 theorem whiskerMap_last_zero (n : ℕ) (u : Fin (n + 1) → I) (s : I)

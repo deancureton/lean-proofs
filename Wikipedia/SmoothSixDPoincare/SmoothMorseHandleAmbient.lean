@@ -75,10 +75,6 @@ theorem norm_ambientInverse_fst_of_lower {ρ : ℝ} (hρ : 0 < ρ) (z : N × P)
   rw [norm_smul, Real.norm_eq_abs, abs_of_pos (inv_pos.mpr hA), hn,
     inv_mul_cancel₀ hA.ne']
 
-theorem norm_ambientInverse_snd_lt_one {ρ : ℝ} (hρ : 0 < ρ) (z : N × P) :
-    ‖(ambientInverse ρ z).2‖ < 1 ↔ ‖z.2‖ < ρ := by
-  change ‖ρ⁻¹ • z.2‖ < 1 ↔ _
-  rw [norm_smul, Real.norm_eq_abs, abs_of_pos (inv_pos.mpr hρ), inv_mul_lt_one₀ hρ]
 
 end Coordinates
 

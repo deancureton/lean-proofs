@@ -59,15 +59,6 @@ theorem suspensionLeftHomologyMap_zero_injective :
     Function.Injective (leftHomologyMap U V 0) :=
   leftHomologyMap_zero_injective U V
 
-/-- The two actual augmentation coordinates have the precise Mayer--Vietoris difference sign. -/
-theorem suspensionLeftHomologyMap_zero_coordinates
-    (a : SingularHomology (Suspension.middleBand X) 0) :
-    (connectedHomologyZeroEquiv U (leftHomologyMap U V 0 a).1,
-        connectedHomologyZeroEquiv V (leftHomologyMap U V 0 a).2) =
-      (suspensionMiddleBandHomologyZeroEquiv X a,
-        -suspensionMiddleBandHomologyZeroEquiv X a) := by
-  simpa only [suspensionMiddleBandHomologyZeroEquiv_eq_connectedHomologyZeroEquiv] using
-    leftHomologyMap_zero_coordinates U V a
 
 theorem suspensionLeftHomologyMap_zero_ker :
     LinearMap.ker (leftHomologyMap U V 0) = ⊥ :=
@@ -82,9 +73,6 @@ theorem suspension_homology_one_subsingleton :
     infer_instance
   exact (suspensionHomologyOneEquivKernel X).injective.subsingleton
 
-theorem suspension_homology_one_isZero : IsZero (SingularHomology (Suspension X) 1) := by
-  let := suspension_homology_one_subsingleton X
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- The actual first homology is explicitly equivalent to the zero free coefficient module. -/
 def suspensionHomologyOneEquivZero :

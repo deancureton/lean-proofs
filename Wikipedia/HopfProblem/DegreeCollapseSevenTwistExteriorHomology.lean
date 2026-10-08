@@ -82,15 +82,5 @@ theorem section_homology_twist (v s : Sphere 3) (c : SingularHomology (Sphere 3)
     ← LinearMap.comp_apply, ← singularHomologyMap_comp]
   rfl
 
-/-- This is an equality in the actual original exterior's integral homology, including torsion. -/
-theorem section_homology_twist_of_multiplier (v s : Sphere 3) (j : ℤ)
-    (hρ : ∀ c : SingularHomology (Sphere 3) 3,
-      singularHomologyMap (column v ρ) 3 c = j • c)
-    (c : SingularHomology (Sphere 3) 3) :
-    singularHomologyMap (exteriorHomeomorph A hA B hB ρ ht : C(_, _)) 3
-      (singularHomologyMap (sectionMap B hB v) 3 c) =
-        singularHomologyMap (sectionMap A hA v) 3 c +
-          j • singularHomologyMap (meridianMap A hA s) 3 c := by
-  rw [section_homology_twist A hA B hB ρ ht v s, hρ, map_zsmul]
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery.FramedAttachingProduct.UnitSurgery.ExteriorTwist

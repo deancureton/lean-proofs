@@ -124,14 +124,6 @@ theorem cubeTetrahedron_sorted (e : Equiv.Perm (Fin 3)) (s : Simplex 3) :
   · change (cubeTetrahedron e s (e 2) : ℝ) = s 3
     exact cubeTetrahedron_coordinate_two e s
 
-theorem cubeTetrahedron_range (e : Equiv.Perm (Fin 3)) :
-    Set.range (cubeTetrahedron e) = cubeOrderedRegion e := by
-  ext u
-  constructor
-  · rintro ⟨s, rfl⟩
-    exact cubeTetrahedron_sorted e s
-  · intro hu
-    exact ⟨cubeTetrahedronInverse e ⟨u, hu⟩, cubeTetrahedron_inverse e ⟨u, hu⟩⟩
 
 theorem cubeTetrahedron_injective (e : Equiv.Perm (Fin 3)) :
     Function.Injective (cubeTetrahedron e) := by

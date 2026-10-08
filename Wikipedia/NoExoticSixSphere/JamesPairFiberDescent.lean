@@ -69,10 +69,5 @@ theorem fiberHomologyMap_apply_eq_zero (n : ℕ) (a : sourceImage (n + 2))
     (c : Homology (sourceImage (n + 2)) 3) : fiberHomologyMap n a c = 0 := by
   rw [relative_homology_eq_zero (n + 2) 3 (by omega) c, map_zero]
 
-theorem assignedPrism_eq_zero (n : ℕ) (a : sourceImage (n + 2))
-    (c : ModuleHomology.Cycle (singularComplex (SourceFiber (n + 2) a)) 2) :
-    fiberClassOperator n a
-      (RelativeFiberHomology.ambientPrism (sourceImage (n + 2)) a 2 c.val) = 0 := by
-  rw [← fiberHomologyMap_transgression_cycle, fiberHomologyMap_apply_eq_zero]
 
 end NoExoticSixSphere.JamesSphere.PairNormalization

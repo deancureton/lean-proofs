@@ -73,16 +73,5 @@ theorem comparisonPiEquiv_apply (n d : ℕ) [NeZero d]
     comparisonPiEquiv n d x c =
       HigherHomotopy.map (N := Fin d) (loopComparison (n + 2)) (y := x) rfl c := rfl
 
-theorem comparison_fiber_pi (n d : ℕ) (hd : 0 < d)
-    (x : WordHomology.Words (n + 2)) (p : ComparisonFiber.Space (n + 2) x) :
-    Subsingleton (π_ d (ComparisonFiber.Space (n + 2) x) p) := by
-  let := ComparisonFiber.simplyConnectedSpace n x
-  let : Subsingleton (π_ d (ComparisonFiber.Space (n + 2) x)
-      (ComparisonFiber.basepoint (n + 2) x)) :=
-    HomotopyFiberConnectivity.homotopy_subsingleton_of_maps d (loopComparison (n + 2)) x
-      (comparison_pi_bijective n d x).injective
-      (comparison_pi_bijective n (d + 1) x).surjective
-  exact NativeHomotopyBasepointVanishing.subsingleton d hd
-    (ComparisonFiber.basepoint (n + 2) x) p
 
 end NoExoticSixSphere.JamesSphere.HomotopyComparison

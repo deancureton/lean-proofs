@@ -65,11 +65,6 @@ theorem hasFDerivAt_southTubeFrameTube_normal (t : I) (q : Sphere 3) :
   rw [hefun]
   simpa only [Function.comp_def] using h
 
-theorem hasFDerivAt_southTubeFrameTube_one (q : Sphere 3) :
-    HasFDerivAt (fun v : SouthNormalModel ↦ southTubeFrameTube 1 (q, v))
-      (southNormalFrame.ambient q) 0 := by
-  simpa only [Set.Icc.coe_one, sub_self, southRadialFrame_zero] using
-    hasFDerivAt_southTubeFrameTube_normal 1 q
 
 def southTubeFrameCollapseAt (t : I) : C(OnePoint (V 8), OnePoint SouthNormalModel) :=
   OpenFiberCollapse.coordinateCollapseMap southNormalizedTube southTubeFiberHomeomorph
@@ -93,11 +88,5 @@ theorem southTubeFrameCollapseHomotopy_infty (t : I) :
     southTubeFrameCollapseHomotopy (t, OnePoint.infty) = OnePoint.infty := by
   rw [southTubeFrameCollapseHomotopy_apply, OpenFiberCollapse.collapseOnePoint_infty]
 
-theorem southTubeFrameCollapseHomotopy_zero (z : OnePoint (V 8)) :
-    southTubeFrameCollapseHomotopy (0, z) =
-      southChosenNormalCoordinates.toHomeomorph.onePointCongr
-        (OpenFiberCollapse.collapseOnePoint southStabilizedTube z) := by
-  rw [southTubeFrameCollapseHomotopy_apply, southTubeFrameTube_zero]
-  exact southNormalizedTube_collapse z
 
 end NoExoticSixSphere.QuaternionicHopf

@@ -21,11 +21,6 @@ namespace NoExoticSixSphere.QuaternionicHopf
 def radialSouthEquations (a : Sphere 7) : V 8 → SouthNormalModel :=
   SphereLevelEquations.equations a (fun y : Sphere 7 ↦ tailCoordinates (sphereMap y))
 
-theorem contDiffAt_radialSouthEquations (a x : Sphere 7) :
-    ContDiffAt ℝ ∞ (radialSouthEquations a) x.val := by
-  let : Fact (Module.finrank ℝ (V 8) = 7 + 1) := ⟨finrank_euclideanSpace_fin⟩
-  exact SphereLevelEquations.contDiffAt_equations a
-    ((contMDiff_tailCoordinates.comp contMDiff_sphereMap) x)
 
 theorem radialSouthEquations_derivative (a x : Sphere 7) (hx : first x.val = 0) :
     fderiv ℝ (radialSouthEquations a) x.val = fderiv ℝ southNormalEquations x.val := by

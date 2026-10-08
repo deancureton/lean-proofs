@@ -83,10 +83,6 @@ theorem endpoint_ncard (t : unitInterval) :
     (range (endpoint f g t)).ncard = (pairs (f t) (g t)).ncard :=
   ncard_range_of_injective (endpoint_injective f g t)
 
-theorem finite_ends (h0 : (pairs (f 0) (g 0)).Finite)
-    (h1 : (pairs (f 1) (g 1)).Finite) : (ends f g).Finite := by
-  rw [ends_eq_union]
-  exact (finite_endpoint f g 0 h0).union (finite_endpoint f g 1 h1)
 
 theorem ends_ncard (h0 : (pairs (f 0) (g 0)).Finite)
     (h1 : (pairs (f 1) (g 1)).Finite) :
@@ -127,18 +123,5 @@ theorem isClosed_ends : IsClosed (ends f g) :=
   (isClosed_eq continuous_subtype_val.fst continuous_const).union
     (isClosed_eq continuous_subtype_val.fst continuous_const)
 
-/-- A genuine half-line atlas on the actual trace, with precisely the time ends
-as its zero locus, implies equality of the actual endpoint intersection counts. -/
-theorem parity_eq_of_halfLine_atlas [CompactSpace X] [CompactSpace Y]
-    [T2Space X] [T2Space Y]
-    (hf : Continuous (uncurry f)) (hg : Continuous (uncurry g))
-    (h0 : (pairs (f 0) (g 0)).Finite) (h1 : (pairs (f 1) (g 1)).Finite)
-    (e : space f g → OpenPartialHomeomorph (space f g) HalfLine)
-    (he : ∀ p, p ∈ (e p).source)
-    (hB : ∀ p, ∀ q ∈ (e p).source, (e p q).val = 0 ↔ q ∈ ends f g) :
-    parity (f 0) (g 0) = parity (f 1) (g 1) := by
-  let := compactSpace_space f g hf hg
-  have h := CurveDecomposition.finite_even_boundary_of_compact_atlas (ends f g) e he hB
-  exact parity_eq_of_even_ends f g h0 h1 h.2
 
 end NoExoticSixSphere.IntersectionTrace

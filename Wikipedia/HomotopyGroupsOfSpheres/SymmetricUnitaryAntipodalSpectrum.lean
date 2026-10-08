@@ -83,31 +83,6 @@ namespace BalancedRealInvolutions
 
 open ImaginarySymmetricMatrices
 
-theorem exists_antipodal_imaginary_commutator_family (n : ℕ)
-    (A : Matrix (Index n) (Index n) ℝ) (hsym : A.transpose = A) (htrace : A.trace = 0)
-    (hexp : NormedSpace.exp (imaginary A) = -1)
-    (hmin : A * A ≠ Real.pi ^ 2 • (1 : Matrix (Index n) (Index n) ℝ)) :
-    ∃ L : (Fin n → ℝ) →ₗ[ℝ] Matrix (Index n) (Index n) ℂ, Function.Injective L ∧
-      (∀ c, (L c).transpose = L c ∧ star (L c) = -L c ∧ (L c).trace = 0) ∧
-      ∀ c, c ≠ 0 → 4 * Real.pi ^ 2 * squareNorm (L c) <
-        squareNorm (commutator (imaginary A) (L c)) := by
-  obtain ⟨U, m, hA, htr⟩ := antipodal_diagonalization A hsym hexp
-  have hsum : ∑ a, (2 * (m a : ℝ) + 1) = 0 := by
-    have he : Real.pi * (∑ a, (2 * (m a : ℝ) + 1)) = 0 := by
-      rw [Finset.mul_sum]
-      exact htr.symm.trans htrace
-    exact (mul_eq_zero.mp he).resolve_left Real.pi_ne_zero
-  have hfast : ∃ a, m a ≠ 0 ∧ m a ≠ -1 := by
-    by_contra h
-    push Not at h
-    have hm (a : Index n) : m a = 0 ∨ m a = -1 := by
-      by_cases ha : m a = 0
-      · exact Or.inl ha
-      · exact Or.inr (h a ha)
-    apply hmin
-    rw [hA]
-    exact minimal_odd_conjugate_square U m hm
-  simpa only [← hA] using exists_balanced_imaginary_commutator_family n m hsum hfast U
 
 end BalancedRealInvolutions
 

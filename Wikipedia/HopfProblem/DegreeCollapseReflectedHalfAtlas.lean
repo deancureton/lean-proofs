@@ -89,11 +89,6 @@ theorem half_boundary_iff (p : NonnegativeHalf d) : letI := fiberAtlas d k hd;
   let := fiberAtlas d k hd
   exact (halfAtlas d k hd).isBoundaryPoint_iff p
 
-theorem half_interior_iff (p : NonnegativeHalf d) : letI := fiberAtlas d k hd;
-    letI := halfChartedSpace d k hd;
-    (ProductHalfSpace.model (Vector k)).IsInteriorPoint p ↔ 0 < time d p.val := by
-  let := fiberAtlas d k hd
-  exact (halfAtlas d k hd).isInteriorPoint_iff p
 
 theorem compactSpace_half (hmiss : ∀ x, d.rightMap x ≠ b) :
     CompactSpace (NonnegativeHalf d) := by
@@ -101,29 +96,7 @@ theorem compactSpace_half (hmiss : ∀ x, d.rightMap x ≠ b) :
   exact isCompact_iff_compactSpace.mp
     (isClosed_le continuous_const (continuous_time d)).isCompact
 
-theorem contMDiff_half_inclusion : letI := fiberAtlas d k hd;
-    letI := halfChartedSpace d k hd;
-    ContMDiff (ProductHalfSpace.model (Vector k)) (𝓡 (k + 1)) ∞
-      (Subtype.val : NonnegativeHalf d → Fiber d) := by
-  let := fiberAtlas d k hd
-  exact (halfAtlas d k hd).contMDiff_subtype_val
 
-theorem bijective_mfderiv_half_inclusion (p : NonnegativeHalf d) :
-    letI := fiberAtlas d k hd; letI := halfChartedSpace d k hd;
-    Bijective (mfderiv (ProductHalfSpace.model (Vector k)) (𝓡 (k + 1))
-      (Subtype.val : NonnegativeHalf d → Fiber d) p) := by
-  let := fiberAtlas d k hd
-  exact (halfAtlas d k hd).bijective_mfderiv_subtype_val p
 
-theorem contMDiff_originalHalfHomeomorph (hmiss : ∀ x, d.rightMap x ≠ b)
-    (a : Sphere m) (A : d.FramedSlabData k hd a) :
-    letI := A.atlas; letI := fiberAtlas d k hd; letI := halfChartedSpace d k hd;
-    ContMDiff ((𝓡∂ 1).prod (𝓡 k)) (ProductHalfSpace.model (Vector k)) ∞
-      (originalHalfHomeomorph d hmiss) := by
-  let := A.atlas
-  let := fiberAtlas d k hd
-  let := halfChartedSpace d k hd
-  exact ((halfAtlas d k hd).contMDiff_iff_ambient (originalHalfHomeomorph d hmiss)).mpr
-    (contMDiff_originalSlabPoint d k hd a A)
 
 end Wikipedia.HopfProblem.DegreeCollapse.ReflectedCylinder

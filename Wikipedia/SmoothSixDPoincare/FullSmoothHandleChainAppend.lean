@@ -63,35 +63,7 @@ theorem append_sourceMap (c : FullSmoothHandleChain J dimension U V k)
   | @cap U V W k N _ _ _ j hj hopen hdim r c ih =>
       exact ih tail (r.body (FaceAttachment.oldMap (U.capFaceMap j) x))
 
-theorem appendOldPiece_map (c : FullSmoothHandleChain J dimension U V k)
-    (tail : FullSmoothHandleChain J dimension V W l) (z : c.pieces) :
-    (c.append tail).piecesMap (c.appendOldPiece tail z) = tail.sourceMap (c.piecesMap z) := by
-  induction c with
-  | nil r => exact PEmpty.elim z
-  | birth D hdim r c ih =>
-      cases z with
-      | inl z => exact c.append_sourceMap tail (r.body (Sum.inr z))
-      | inr z => exact ih tail z
-  | @interior U V W k E F _ _ _ _ _ _ m n _ _ A P hdim r c ih =>
-      cases z with
-      | inl z =>
-          exact c.append_sourceMap tail
-            (r.body (FaceAttachment.handleMap (FramedSurgery.bodyFaceMap A U.inclusion) z))
-      | inr z => exact ih tail z
-  | @cap U V W k N _ _ _ j hj hopen hdim r c ih =>
-      cases z with
-      | inl z =>
-          exact c.append_sourceMap tail (r.body (FaceAttachment.handleMap (U.capFaceMap j) z))
-      | inr z => exact ih tail z
 
-theorem appendTailPiece_map (c : FullSmoothHandleChain J dimension U V k)
-    (tail : FullSmoothHandleChain J dimension V W l) (z : tail.pieces) :
-    (c.append tail).piecesMap (c.appendTailPiece tail z) = tail.piecesMap z := by
-  induction c with
-  | nil r => exact tail.rebase_piecesMap r.symm z
-  | birth D hdim r c ih => exact ih tail z
-  | interior A P hdim r c ih => exact ih tail z
-  | cap j hj hopen hdim r c ih => exact ih tail z
 
 theorem append_indices (c : FullSmoothHandleChain J dimension U V k)
     (tail : FullSmoothHandleChain J dimension V W l) :

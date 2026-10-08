@@ -105,17 +105,5 @@ theorem inclusion_eq_one_iff_projection (n d : ℕ) [NeZero d]
   rw [he]
   exact HomotopyFiber.map_eq_const_iff_exists_fiber_class (inclusion n) (spherePole n) c
 
-theorem quotient_eq_one_iff_of_hom_injective (n d : ℕ) [NeZero d]
-    (hi : Function.Injective (hom n d)) (c : π_ (d + 1) (WordHomology.Words n) 1) :
-    HigherHomotopy.map (N := Fin (d + 1)) (FirstStageQuotient.quotientMap n) rfl c = 1 ↔
-      ∃ a : π_ (d + 1) (Sphere n) (spherePole n),
-        HigherHomotopy.map (N := Fin (d + 1)) (inclusion n)
-          (NativeHopf.inclusion_pole n) a = c := by
-  rw [← hom_boundaryHom, ← boundaryHom_eq_one_iff]
-  constructor
-  · intro h
-    exact hi (h.trans (map_one (hom n d)).symm)
-  · intro h
-    exact (congrArg (hom n d) h).trans (map_one (hom n d))
 
 end NoExoticSixSphere.JamesSphere.FiberQuotient

@@ -73,11 +73,6 @@ theorem stable_map_eq_one_or_square (f : Based 7 4)
   rw [← hc, stable_map_eq_late_composition]
   exact MixedSixthComposition.stable_composition_eq_one_or_square (productBasedMap f) g
 
-theorem stable_map_pow_two (f : Based 7 4) (c : π_ 10 (Sphere 7) (spherePole 7)) :
-    CubicalStableSix.ofNative (k := 2) (mapHom f 10 c) ^ 2 = 1 := by
-  rcases stable_map_eq_one_or_square f c with h | h
-  · rw [h, one_pow]
-  · rw [h, StableThirdComposition.stableSquare_pow_two]
 
 theorem stable_hopf_kernel_eq_one_or_square
     (x : π_ 10 (Sphere 4) (spherePole 4)) (hx : QuaternionicHopf.connecting 9 x = 1) :
@@ -86,12 +81,6 @@ theorem stable_hopf_kernel_eq_one_or_square
   obtain ⟨c, rfl⟩ := (QuaternionicHopf.projectionMap_range_eq_connecting_kernel x).mpr hx
   exact stable_map_eq_one_or_square QuaternionicHopf.basedMap c
 
-theorem stable_hopf_kernel_pow_two
-    (x : π_ 10 (Sphere 4) (spherePole 4)) (hx : QuaternionicHopf.connecting 9 x = 1) :
-    CubicalStableSix.ofNative (k := 2) x ^ 2 = 1 := by
-  rcases stable_hopf_kernel_eq_one_or_square x hx with h | h
-  · rw [h, one_pow]
-  · rw [h, StableThirdComposition.stableSquare_pow_two]
 
 end Wikipedia.HopfProblem.DegreeCollapse.SixthHopfKernel
 

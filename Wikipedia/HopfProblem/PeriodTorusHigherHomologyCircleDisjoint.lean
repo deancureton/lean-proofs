@@ -307,11 +307,5 @@ theorem sumHomologyEquiv_fold (n : ℕ) (a : SingularHomology (X ⊕ X) n) :
       (sumHomologyEquiv X X n a).1 + (sumHomologyEquiv X X n a).2 := by
   rw [sumHomologyEquiv_sumElim, disjointHomology_id_apply, disjointHomology_id_apply]
 
-/-- The fold formula applied to the inverse disjoint-union homology equivalence. -/
-theorem sumHomologyEquiv_fold_symm (n : ℕ)
-    (a : SingularHomology X n × SingularHomology X n) :
-    singularHomologyMap (sumElimMap (ContinuousMap.id X) (ContinuousMap.id X)) n
-      ((sumHomologyEquiv X X n).symm a) = a.1 + a.2 := by
-  rw [sumHomologyEquiv_sumElim_symm, disjointHomology_id_apply, disjointHomology_id_apply]
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

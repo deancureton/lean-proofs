@@ -70,12 +70,6 @@ def collisionEquiv (F : ℝ × M → N) (e : ℝ → M ≃ M) :
     unorderedDoublePoints (changedFamily F e) ≃ unorderedDoublePoints F :=
   (unorderedEquiv e).subtypeEquiv (mem_unordered_iff F e)
 
-theorem unordered_times_injective {F : ℝ × M → N} (e : ℝ → M ≃ M)
-    (hsep : InjOn Prod.fst (unorderedDoublePoints F)) :
-    InjOn Prod.fst (unorderedDoublePoints (changedFamily F e)) := by
-  intro p hp q hq heq
-  apply (unorderedEquiv e).injective
-  exact hsep ((mem_unordered_iff F e p).mp hp) ((mem_unordered_iff F e q).mp hq) heq
 
 theorem triplePoints_eq_empty {F : ℝ × M → N} (e : ℝ → M ≃ M)
     (hno : triplePoints F = ∅) : triplePoints (changedFamily F e) = ∅ := by
@@ -87,18 +81,6 @@ theorem triplePoints_eq_empty {F : ℝ × M → N} (e : ℝ → M ≃ M)
   rw [hno] at htr
   exact htr
 
-theorem collisionEvents_eq (F : ℝ × M → N) (e : ℝ → M ≃ M) :
-    collisionEvents (changedFamily F e) = collisionEvents F := by
-  apply subset_antisymm
-  · rintro _ ⟨p, hp, rfl⟩
-    exact ⟨pairEquiv e p, (mem_doublePoints_iff F e p).mp hp, rfl⟩
-  · rintro _ ⟨p, hp, rfl⟩
-    refine ⟨(pairEquiv e).symm p, ?_, ?_⟩
-    · apply (mem_doublePoints_iff F e _).mpr
-      simpa only [Equiv.apply_symm_apply] using hp
-    · rcases p with ⟨t, x, y⟩
-      change (t, F (t, e t ((e t).symm x))) = (t, F (t, x))
-      rw [Equiv.apply_symm_apply]
 
 theorem mem_collisionSources_iff (F : ℝ × M → N) (e : ℝ → M ≃ M) (p : ℝ × M) :
     p ∈ collisionSources (changedFamily F e) ↔ sourceEquiv e p ∈ collisionSources F := by

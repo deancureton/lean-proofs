@@ -33,9 +33,5 @@ theorem finite_collisionEvents {F : ℝ × M → N} (hF : (doublePoints F).Finit
 theorem eventProjection_mem {F : ℝ × M → N} {p : ℝ × (M × M)} (hp : p ∈ doublePoints F) :
     eventProjection F p ∈ collisionEvents F := mem_image_of_mem _ hp
 
-theorem collision_event_times (F : ℝ × M → N) :
-    Prod.fst '' collisionEvents F = Prod.fst '' doublePoints F := by
-  rw [collisionEvents, image_image]
-  rfl
 
 end Wikipedia.HopfProblem.OrbitPair.FamilyDoublePoints

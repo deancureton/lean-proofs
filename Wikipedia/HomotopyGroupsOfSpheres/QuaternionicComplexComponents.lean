@@ -32,17 +32,6 @@ theorem complexPart_add (q r : ℍ) : complexPart (q + r) = complexPart q + comp
 
 theorem coordinate_add (q r : ℍ) : coordinate (q + r) = coordinate q + coordinate r := rfl
 
-theorem coeComplex_add_embed (q : ℍ) : (complexPart q : ℍ) + embed (coordinate q) = q := by
-  rw [embed_eq_mk]
-  apply Quaternion.ext
-  · change q.re + 0 = q.re
-    exact add_zero _
-  · change q.imI + 0 = q.imI
-    exact add_zero _
-  · change 0 + q.imJ = q.imJ
-    exact zero_add _
-  · change 0 + q.imK = q.imK
-    exact zero_add _
 
 theorem embed_sub (z w : ℂ) : embed (z - w) = embed z - embed w := by
   change Quaternion.ofComplex (z - w) * j = _

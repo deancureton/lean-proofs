@@ -201,20 +201,5 @@ theorem continuous_sourceJacobianEquiv (u : Sphere 3 → Sphere 3) (U : Set (Sph
   exact (continuousAt_sourceJacobian u x.val (hu x).contMDiffAt).comp
     continuous_subtype_val.continuousAt
 
-theorem continuous_inverse_sourceJacobianEquiv (u : Sphere 3 → Sphere 3) (U : Set (Sphere 3))
-    (hu : ∀ x : U, IsLocalDiffeomorphAt (𝓡 3) (𝓡 3) ∞ u x.val) :
-    Continuous (fun x : U ↦
-      (sourceJacobianEquiv u x.val (hu x)).symm.toContinuousLinearMap) := by
-  have he (x : U) : (sourceJacobianEquiv u x.val (hu x)).symm.toContinuousLinearMap =
-      (sourceJacobian u x.val).inverse :=
-    (ContinuousLinearMap.inverse_equiv (sourceJacobianEquiv u x.val (hu x))).symm
-  simp_rw [he]
-  rw [continuous_iff_continuousAt]
-  intro x
-  have hi : (sourceJacobian u x.val).IsInvertible := ⟨sourceJacobianEquiv u x.val (hu x), rfl⟩
-  have hc : ContinuousAt (fun y : U ↦ sourceJacobian u y.val) x :=
-    (continuous_sourceJacobianEquiv u U hu).continuousAt
-  exact (hi.contDiffAt_map_inverse (n := ∞)).continuousAt.comp
-    (f := fun y : U ↦ sourceJacobian u y.val) hc
 
 end NoExoticSixSphere.SphereThreeTangentFrame

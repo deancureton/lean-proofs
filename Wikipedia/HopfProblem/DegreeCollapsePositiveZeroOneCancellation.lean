@@ -155,18 +155,5 @@ theorem no_positive_index_zero_of_minimal (eBoundary : B ≃ₜ Sphere 6)
 
 end ExcellentMorsePresentation
 
-theorem exists_minimal_ordered_presentation_without_positive_births
-    (S : CollaredSevenState B) (eBoundary : B ≃ₜ Sphere 6) :
-    ∃ P : S.ExcellentMorsePresentation,
-      (∀ p q : criticalPoints (Vector 7) P.function,
-        0 < P.function p → P.function p < P.function q →
-          nativeMorseIndex (Vector 7) P.function p ≤ nativeMorseIndex (Vector 7) P.function q) ∧
-      (∀ Q : S.ExcellentMorsePresentation,
-        (criticalPoints (Vector 7) P.function).ncard ≤
-          (criticalPoints (Vector 7) Q.function).ncard) ∧
-      ∀ p : criticalPoints (Vector 7) P.function, 0 < P.function p →
-        nativeMorseIndex (Vector 7) P.function p ≠ 0 := by
-  obtain ⟨P, horder, hminimal⟩ := S.exists_minimal_positive_index_ordered_presentation
-  exact ⟨P, horder, hminimal, P.no_positive_index_zero_of_minimal eBoundary hminimal⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.CollaredSevenState

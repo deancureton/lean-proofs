@@ -39,11 +39,6 @@ theorem map_subcomplex (f : X ⟶ Y) (x : X.N) :
   (SSet.S.subcomplex_toN (x.toS.map f)).trans
     (SSet.Subcomplex.image_ofSimplex x.simplex f).symm
 
-theorem map_toN (f : X ⟶ Y) (x : X.S) :
-    map f x.toN = (x.map f).toN := by
-  apply SSet.N.subcomplex_injective
-  rw [map_subcomplex, SSet.S.subcomplex_toN, SSet.S.subcomplex_toN]
-  exact SSet.Subcomplex.image_ofSimplex x.simplex f
 
 theorem map_id (x : X.N) : map (𝟙 X) x = x := by
   apply SSet.N.subcomplex_injective

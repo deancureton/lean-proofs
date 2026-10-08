@@ -44,11 +44,6 @@ def form (_h : M ≃ₜ Sphere 6) : QuadraticForm (ZMod 2) (ModHomology 2 M 3) :
 
 theorem form_apply (h : M ≃ₜ Sphere 6) (x : ModHomology 2 M 3) : form h x = 0 := rfl
 
-theorem form_unique (h : M ≃ₜ Sphere 6)
-    (q : QuadraticForm (ZMod 2) (ModHomology 2 M 3)) : q = form h := by
-  let : Subsingleton (ModHomology 2 M 3) := sixSphere_middleModTwoHomology_subsingleton h
-  ext x
-  rw [Subsingleton.elim x 0, map_zero, map_zero]
 
 theorem form_polar_nondegenerate (h : M ≃ₜ Sphere 6) :
     (form h).polarBilin.Nondegenerate := by
@@ -61,10 +56,6 @@ def arf (h : M ≃ₜ Sphere 6) : ZMod 2 := by
   let : Fintype (ModHomology 2 M 3) := Fintype.ofSubsingleton 0
   exact Arf.invariant (form h) (form_polar_nondegenerate h)
 
-theorem arf_zero (h : M ≃ₜ Sphere 6) : arf h = 0 := by
-  let : Subsingleton (ModHomology 2 M 3) := sixSphere_middleModTwoHomology_subsingleton h
-  let : Fintype (ModHomology 2 M 3) := Fintype.ofSubsingleton 0
-  exact Arf.invariant_subsingleton (form h) (form_polar_nondegenerate h)
 
 variable [ChartedSpace (Vector 6) M] [IsManifold (𝓡 6) ∞ M]
   (e : EuclideanEmbedding 6 M)

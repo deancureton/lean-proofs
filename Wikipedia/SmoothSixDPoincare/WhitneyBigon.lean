@@ -116,17 +116,7 @@ theorem contDiff_bigonEmbedding : ContDiff ℝ ∞ bigonEmbedding := by
   unfold bigonEmbedding
   fun_prop
 
-theorem isClosedEmbedding_bigonEmbedding : IsClosedEmbedding bigonEmbedding := by
-  have hleft : LeftInverse Prod.fst bigonEmbedding := fun _ => rfl
-  exact hleft.isClosedEmbedding continuous_fst contDiff_bigonEmbedding.continuous
 
-theorem injective_fderiv_bigonEmbedding (p : ℝ × ℝ) :
-    Injective (fderiv ℝ bigonEmbedding p) := by
-  let L : (ℝ × ℝ) →L[ℝ] Space := (ContinuousLinearMap.id ℝ (ℝ × ℝ)).prod 0
-  have hd : HasFDerivAt bigonEmbedding L p := L.hasFDerivAt
-  rw [hd.fderiv]
-  have hleft : LeftInverse Prod.fst L := fun _ => rfl
-  exact hleft.injective
 
 theorem bigonEmbedding_mem_firstSheet_iff (p : ℝ × ℝ) :
     bigonEmbedding p ∈ range firstSheet ↔ p.2 = 0 := by
@@ -169,13 +159,6 @@ theorem bigonEmbedding_lowerArc (s : ℝ) : bigonEmbedding (s, 0) = firstSheet (
 theorem bigonEmbedding_upperArc (h s : ℝ) :
     bigonEmbedding (s, h * (1 - s ^ 2)) = secondSheet h (s, 0) := rfl
 
-/-- Points strictly between the two arcs miss both full sheet images. -/
-theorem bigonEmbedding_avoids_sheets (h : ℝ) (p : ℝ × ℝ)
-    (hlower : 0 < p.2) (hupper : p.2 < h * (1 - p.1 ^ 2)) :
-    bigonEmbedding p ∉ range firstSheet ∪ range (secondSheet h) := by
-  rintro (hp | hp)
-  · exact hlower.ne' ((bigonEmbedding_mem_firstSheet_iff p).mp hp)
-  · exact hupper.ne ((bigonEmbedding_mem_secondSheet_iff h p).mp hp)
 
 /-- For small positive height, the complete bigon is in the cutoff plateau. -/
 theorem cutoff_bigonEmbedding {h : ℝ} (hh : 0 < h) (hsmall : h ≤ 1)

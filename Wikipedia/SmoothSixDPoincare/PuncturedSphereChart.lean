@@ -91,25 +91,5 @@ theorem exists_punctured_sphere_extension
   obtain ⟨Ξ, hΞs, hΞt, hgerm⟩ := exists_full_source_extension Φ c' hzero hcsource hc₀
   exact ⟨Ξ, hΞs, hΞt.trans hctarget, hgerm⟩
 
-/-- The extension compactifies to the entire sphere and retains the original local germ. -/
-theorem exists_sphere_compactification_of_germ
-    (Φ : PartialDiffeomorph 𝓘(ℝ, E) (𝓡 n) E (sphere (0 : V) 1) ∞)
-    (hzero : (0 : E) ∈ Φ.source) (hdim : Module.finrank ℝ E = n) :
-    ∃ e : OnePoint E ≃ₜ sphere (0 : V) 1,
-      e OnePoint.infty = -Φ 0 ∧
-      (fun x : E => e (x : OnePoint E)) =ᶠ[𝓝 (0 : E)] Φ := by
-  obtain ⟨Ξ, hΞs, hΞt, hgerm⟩ := exists_punctured_sphere_extension Φ hzero hdim
-  have hemb : Topology.IsEmbedding (Ξ : E → sphere (0 : V) 1) :=
-    Ξ.toOpenPartialHomeomorph.isEmbedding hΞs
-  have hrange : range (Ξ : E → sphere (0 : V) 1) = {-Φ 0}ᶜ := by
-    rw [← hΞt]
-    ext y
-    constructor
-    · rintro ⟨x, rfl⟩
-      exact Ξ.map_source' (hΞs ▸ mem_univ x)
-    · intro hy
-      exact ⟨Ξ.symm y, Ξ.right_inv' hy⟩
-  let e := OnePoint.equivOfIsEmbeddingOfRangeEq (-Φ 0) Ξ hemb hrange
-  exact ⟨e, rfl, hgerm⟩
 
 end Wikipedia.SmoothSixDPoincare.PartialChart

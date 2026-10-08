@@ -60,15 +60,6 @@ theorem normalize_inclusion {N n : ℕ} (A : Stiefel.Space N n) :
   apply Subtype.ext
   exact Orthonormalization.operator_eq_self Subtype.val (inclusion N n A) A.property
 
-theorem normalizationHomotopy_fixed {N n : ℕ} (A : Stiefel.Space N n) (t : I) :
-    normalizationHomotopy N n (t, inclusion N n A) = inclusion N n A := by
-  apply Subtype.ext
-  change (1 - (t : ℝ)) • A.val + (t : ℝ) •
-    Orthonormalization.operator Subtype.val (inclusion N n A) = A.val
-  rw [Orthonormalization.operator_eq_self Subtype.val (inclusion N n A) A.property]
-  change (1 - (t : ℝ)) • A.val + (t : ℝ) • A.val = A.val
-  rw [← add_smul]
-  simp only [sub_add_cancel, one_smul]
 
 end Monomorphism
 

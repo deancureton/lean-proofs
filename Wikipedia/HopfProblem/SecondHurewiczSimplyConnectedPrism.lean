@@ -52,14 +52,6 @@ def prismOperator (n : ℕ) (H : C(I × A, X)) : Chains A n →ₗ[ℤ] Chains X
     prismOperator n H c =
       inducedChain H (n + 1) (crossProductEdge I A n intervalChain c) := rfl
 
-theorem prismOperator_boundary_zero (H : C(I × A, X)) (c : Chains A 0) :
-    boundaryOne X (prismOperator 0 H c) =
-      inducedChain (timeSlice H 1) 0 c - inducedChain (timeSlice H 0) 0 c := by
-  change ((singularComplex X).d 1 0).hom (prismOperator 0 H c) = _
-  rw [prismOperator_apply, ← inducedChain_boundary, crossProductEdge_boundary_zero]
-  change inducedChain H 0 (crossProductZeroLeft I A 0 (boundaryOne I intervalChain) c) = _
-  simp only [intervalChain_boundary, map_sub, LinearMap.sub_apply,
-    crossPoint_left, inducedChain_timeSlice]
 
 /-- The exact signed prism formula, before passing to any homology group. -/
 theorem prismOperator_boundary (n : ℕ) (H : C(I × A, X)) (c : Chains A (n + 1)) :

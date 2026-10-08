@@ -92,23 +92,7 @@ theorem endpointColumns_eq_originalFrame (x : EndpointFiber d) :
           (normalModelCoordinates d hmiss k hd v)))
   rw [ContinuousLinearEquiv.apply_symm_apply]
 
-theorem endpointColumns_injective (x : EndpointFiber d) :
-    Function.Injective (endpointColumns d hmiss k hd a x) := by
-  let := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left k (by simpa using hd)
-  rw [endpointColumns_eq_originalFrame]
-  exact ((RegularSphereFiber.frame d.leftMap d.smooth_left b d.regular_left k hd a
-    ).ambient_injective x).comp (endpointColumnChange d hmiss k hd).injective
 
-theorem endpointColumns_range (x : EndpointFiber d) :
-    letI := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left k (by simpa using hd);
-    (endpointColumns d hmiss k hd a x).range =
-      ((RegularSphereFiber.embedding d.leftMap d.smooth_left b d.regular_left k hd
-        ).normalProjection x).range := by
-  let := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left k (by simpa using hd)
-  rw [endpointColumns_eq_originalFrame]
-  exact (LinearMap.range_comp_of_range_eq_top _
-    (LinearMap.range_eq_top.mpr (endpointColumnChange d hmiss k hd).surjective)).trans
-      ((RegularSphereFiber.frame d.leftMap d.smooth_left b d.regular_left k hd a).ambient_range x)
 
 theorem frame_seamCollar (s : ℝ) (hs : s ∈ seamCollarTimes d) (x : EndpointFiber d) :
     letI := fiberAtlas d k hd;

@@ -107,11 +107,6 @@ theorem boundaryTwo_simplex (σ : SingularSimplex X 2) :
         simplexChain X 1 (σ.comp (simplexFace 1 2)) := by
   simpa [Fin.sum_univ_succ, sub_eq_add_neg, add_assoc] using boundary_simplex X 1 σ
 
-theorem boundaryOne_boundaryTwo (c : Chains X 2) : boundaryOne X (boundaryTwo X c) = 0 := by
-  have h := congrArg (fun f : Chains X 2 ⟶ Chains X 0 => f.hom c)
-    ((singularComplex X).d_comp_d 2 1 0)
-  simpa only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_zero,
-    LinearMap.zero_apply] using h
 
 /-- The coproduct universal map determined by the values on singular simplices. -/
 def chainLift (n : ℕ) {M : Type} [AddCommGroup M] [Module ℤ M]

@@ -67,18 +67,6 @@ theorem pushoutIso_inclusion (hi : IsClosedEmbedding i) (hj : IsClosedEmbedding 
   · rw [← Category.assoc, pushoutIso_inr, canonicalMap_inr]
     rfl
 
-theorem canonicalMap_isClosedEmbedding (hi : IsClosedEmbedding i) (hj : IsClosedEmbedding j) :
-    IsClosedEmbedding (canonicalMap i j) := by
-  rw [← pushoutIso_inclusion i j hi hj]
-  exact (inclusion_isClosedEmbedding i j hi hj).comp
-    (TopCat.homeoOfIso (pushoutIso i j hi hj)).isClosedEmbedding
 
-theorem canonicalMap_hasHomotopyExtension
-    (hi : HomotopyExtension.HasHomotopyExtension i) (hj : HomotopyExtension.HasHomotopyExtension j)
-    (hci : IsClosedEmbedding i) (hcj : IsClosedEmbedding j) :
-    HomotopyExtension.HasHomotopyExtension (canonicalMap i j) := by
-  rw [← pushoutIso_inclusion i j hci hcj]
-  exact HomotopyExtension.comp _ _ (HomotopyExtension.of_isIso _)
-    (of_closed_homotopyExtension hi hj hci hcj)
 
 end Wikipedia.HopfProblem.OrbitPair.NeighborhoodProduct

@@ -67,36 +67,6 @@ theorem SignedMorseChart.circle_nullhomotopies_before_next_critical
 
 variable [Nonempty M]
 
-/-- Supply the initial regular level and its contractions from an original excellent
-Morse function. -/
-theorem exists_initial_level_circle_nullhomotopies {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (hm : IsMorse E f)
-    (hinj : InjOn f (criticalPoints E f)) (hdim : Module.finrank ℝ E = 6) :
-    ∃ p ∈ criticalPoints E f, (∀ x, f x ≤ f p → x = p) ∧
-      ∃ a > f p, (∀ x, f p < f x → f x ≤ a → x ∉ criticalPoints E f) ∧
-        (∀ g : C(Hemisphere.Sphere 1, {x : M // f x = a}),
-          ∃ q, g.Homotopic (ContinuousMap.const _ q)) := by
-  obtain ⟨p, -, hmin⟩ := isCompact_univ.exists_isMinOn univ_nonempty hf.continuous.continuousOn
-  have hglobal : ∀ x, f p ≤ f x := fun x => hmin (mem_univ x)
-  have hp : p ∈ criticalPoints E f :=
-    mem_criticalPoints_of_localMin hf (Eventually.of_forall hglobal)
-  have hunique : ∀ x, f x ≤ f p → x = p := by
-    intro x hx
-    have hxcrit : x ∈ criticalPoints E f := mem_criticalPoints_of_localMin hf
-      (Eventually.of_forall (fun y => hx.trans (hglobal y)))
-    exact hinj hxcrit hp (le_antisymm hx (hglobal x))
-  obtain ⟨ρ, hρ, -, hband⟩ := exists_isolating_radius (finite_criticalPoints hf hm) p
-    (fun x hx hval => hinj hx hp hval) zero_lt_one
-  let a := f p + ρ ^ 2
-  have ha : f p < a := by dsimp [a]; linarith [sq_pos_of_pos hρ]
-  have hregular : ∀ x, f p < f x → f x ≤ a → x ∉ criticalPoints E f := by
-    intro x hxlo hxhi hxcrit
-    have hxp := hband x hxcrit ⟨by linarith [sq_nonneg ρ], hxhi⟩
-    rw [hxp] at hxlo
-    exact lt_irrefl _ hxlo
-  obtain ⟨c⟩ := nonempty_signedMorseChart hf hm p hp
-  exact ⟨p, hp, hunique, a, ha, hregular,
-    c.circle_nullhomotopies_before_next_critical hf hunique ha hregular hdim (by norm_num)⟩
 
 end ManifoldMorse
 

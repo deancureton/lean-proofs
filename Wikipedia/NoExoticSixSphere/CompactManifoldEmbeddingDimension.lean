@@ -31,15 +31,6 @@ theorem EuclideanEmbedding.compress_dimension [CompactSpace M]
     (e : EuclideanEmbedding n M) (q : ℕ) (hq : 2 * n < q) :
     (e.compress q hq).ambientDimension = q := rfl
 
-theorem EuclideanEmbedding.exists_linear_compression [CompactSpace M]
-    (e : EuclideanEmbedding n M) (q : ℕ) (hq : 2 * n < q) :
-    ∃ L : EuclideanSpace ℝ (Fin e.ambientDimension) →L[ℝ] EuclideanSpace ℝ (Fin q),
-      ContMDiff (𝓡 n) (𝓡 q) ∞ (L ∘ e.toFun) ∧
-      Topology.IsClosedEmbedding (L ∘ e.toFun) ∧
-      ∀ x, Function.Injective (mfderiv (𝓡 n) (𝓡 q) (L ∘ e.toFun) x) := by
-  obtain ⟨L, hL, _⟩ := LinearProjection.exists_good_near e hq 0 zero_lt_one
-  let e' := LinearProjection.embedding e L hL
-  exact ⟨L, e'.smooth, e'.closedEmbedding, e'.injective_mfderiv⟩
 
 theorem exists_euclideanEmbedding_dimension [CompactSpace M] [T2Space M]
     (q : ℕ) (hq : 2 * n < q) :

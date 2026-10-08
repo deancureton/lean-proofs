@@ -106,42 +106,8 @@ omit hε hprod in
 theorem chartOpening_zero_middle (s : Sphere 2) : chartOpening Φ ε (0, (0, s)) = Φ 0 := by
   simp only [chartOpening, openingPair_zero_middle, smul_zero]
 
-theorem chartOpening_zero_right {f : Vector 3 → M}
-    (haxis : ∀ x, (x, 0) ∈ Φ.source → Φ (x, 0) = f x)
-    (t : ℝ) (s : Sphere 2) (ht : 0 ≤ t) :
-    chartOpening Φ ε (0, (t, s)) = f ((ε * profile (t - 1)) • s.val) := by
-  have he : ε • openingPair (0, (t, s)) = ((ε * profile (t - 1)) • s.val, 0) := by
-    rw [openingPair_zero_right t s ht]
-    simp [smul_smul]
-  have hsource := hprod (scaled_openingPair_mem_product hε (0, (t, s)))
-  rw [he] at hsource
-  exact (congrArg Φ he).trans (haxis _ hsource)
 
-theorem chartOpening_zero_left {g : Vector 3 → M}
-    (haxis : ∀ x, (0, x) ∈ Φ.source → Φ (0, x) = g x)
-    (t : ℝ) (s : Sphere 2) (ht : t ≤ 0) :
-    chartOpening Φ ε (0, (t, s)) = g ((ε * profile (-t - 1)) • s.val) := by
-  have he : ε • openingPair (0, (t, s)) = (0, (ε * profile (-t - 1)) • s.val) := by
-    rw [openingPair_zero_left t s ht]
-    simp [smul_smul]
-  have hsource := hprod (scaled_openingPair_mem_product hε (0, (t, s)))
-  rw [he] at hsource
-  exact (congrArg Φ he).trans (haxis _ hsource)
 
-theorem chartOpening_zero_mem_sheets {f g : Vector 3 → M} {U V : Set (Vector 3)}
-    (hclean : ∀ z ∈ Φ.source,
-      (Φ z ∈ f '' U ↔ z.2 = 0) ∧ (Φ z ∈ g '' V ↔ z.1 = 0)) (q : Parameter) :
-    chartOpening Φ ε (0, q) ∈ f '' U ∪ g '' V := by
-  have hs := hclean _ (hprod (scaled_openingPair_mem_product hε (0, q)))
-  rcases le_total 0 q.1 with ht | ht
-  · left
-    apply hs.1.mpr
-    rw [show openingPair (0, q) = _ from openingPair_zero_right q.1 q.2 ht]
-    simp
-  · right
-    apply hs.2.mpr
-    rw [show openingPair (0, q) = _ from openingPair_zero_left q.1 q.2 ht]
-    simp
 
 def collapsedNeckMap : C(Parameter, M) :=
   ⟨fun q ↦ chartOpening Φ ε (0, q),

@@ -78,8 +78,6 @@ def pathPrimitiveCLM : C(PathTime, E) →L[ℝ] C(PathTime, E) :=
 
 theorem pathPrimitiveCLM_apply (u : C(PathTime, E)) : pathPrimitiveCLM u = pathPrimitive u := rfl
 
-theorem pathPrimitive_zero (u : C(PathTime, E)) : pathPrimitive u ⟨0, by norm_num⟩ = 0 := by
-  exact intervalIntegral.integral_same
 
 theorem hasDerivAt_pathPrimitive (u : C(PathTime, E)) (t : ℝ) :
     HasDerivAt (fun r : ℝ => ∫ s in (0 : ℝ)..r, pathExtend u s) (pathExtend u t) t :=

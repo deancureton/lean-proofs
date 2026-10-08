@@ -65,11 +65,5 @@ theorem inclusionRegular_homology_injective (n : ℕ) :
 def regularSphereInclusion (i : BoundaryIndex g) : C(Sphere 3, RegularParameters g) :=
   P.inclusionRegular.comp (P.sphereInclusion i)
 
-theorem retraction_sphereInclusion (R : C(RegularParameters g, P.puncturedCylinder))
-    (hR : R.comp P.inclusionRegular = ContinuousMap.id P.puncturedCylinder)
-    (i : BoundaryIndex g) : R.comp (P.regularSphereInclusion i) = P.sphereInclusion i := by
-  change R.comp (P.inclusionRegular.comp (P.sphereInclusion i)) = _
-  rw [← ContinuousMap.comp_assoc, hR]
-  rfl
 
 end NoExoticSixSphere.SphereFamily.ParityBallSystem

@@ -88,40 +88,6 @@ theorem map_eq_iff (t : ℝ) (x y : Vector 3) :
       fin_cases i <;> simp [map, axis]
       ring
 
-theorem injective_map_iff (t : ℝ) : Injective (map t) ↔ t ≤ 0 := by
-  constructor
-  · intro hi
-    by_contra ht
-    have ht₀ : 0 < t := lt_of_not_ge ht
-    have hz : Real.sqrt t ≠ 0 := ne_of_gt (Real.sqrt_pos.mpr ht₀)
-    have he : map t (axis (Real.sqrt t)) = map t (axis (-Real.sqrt t)) :=
-      (map_eq_iff t _ _).mpr (Or.inr ⟨Real.sqrt t, hz, Real.sq_sqrt ht₀.le, rfl, rfl⟩)
-    exact axis_ne_neg hz (hi he)
-  · intro ht x y h
-    rcases (map_eq_iff t x y).mp h with he | ⟨z, hz, hzt, _, _⟩
-    · exact he
-    · have hp : 0 < z ^ 2 := sq_pos_of_ne_zero hz
-      exfalso
-      linarith
 
-theorem double_points_iff_of_pos (t : ℝ) (ht : 0 < t) (x y : Vector 3) :
-    map t x = map t y ∧ x ≠ y ↔
-      (x = axis (Real.sqrt t) ∧ y = axis (-Real.sqrt t)) ∨
-      (x = axis (-Real.sqrt t) ∧ y = axis (Real.sqrt t)) := by
-  have hz : Real.sqrt t ≠ 0 := ne_of_gt (Real.sqrt_pos.mpr ht)
-  have he : map t (axis (Real.sqrt t)) = map t (axis (-Real.sqrt t)) :=
-    (map_eq_iff t _ _).mpr (Or.inr ⟨Real.sqrt t, hz, Real.sq_sqrt ht.le, rfl, rfl⟩)
-  constructor
-  · rintro ⟨h, hxy⟩
-    rcases (map_eq_iff t x y).mp h with h' | ⟨z, _, hzt, hx, hy⟩
-    · exact (hxy h').elim
-    · have hs : z ^ 2 = Real.sqrt t ^ 2 := hzt.trans (Real.sq_sqrt ht.le).symm
-      rcases sq_eq_sq_iff_eq_or_eq_neg.mp hs with rfl | hneg
-      · exact Or.inl ⟨hx, hy⟩
-      · right
-        simpa only [hneg, neg_neg] using And.intro hx hy
-  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩)
-    · exact ⟨he, axis_ne_neg hz⟩
-    · exact ⟨he.symm, (axis_ne_neg hz).symm⟩
 
 end NoExoticSixSphere.WhitneyCusp

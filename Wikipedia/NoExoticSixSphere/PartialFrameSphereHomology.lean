@@ -76,14 +76,6 @@ theorem sphereThirdObstruction_precomp_homeomorph (r : ℕ)
   · intro h
     rw [h, LinearMap.zero_comp]
 
-theorem sphereThirdObstruction_eq_of_homology {X : Type} [TopologicalSpace X]
-    (r : ℕ) (F : C(X, Space (3 + (r + 2)) (r + 2))) (f g : C(Sphere 3, X))
-    (h : singularHomologyMap f 3 sphereThirdClass =
-      singularHomologyMap g 3 sphereThirdClass) :
-    sphereThirdObstruction r (F.comp f) = sphereThirdObstruction r (F.comp g) := by
-  rw [sphereThirdObstruction_eq_homology, sphereThirdObstruction_eq_homology,
-    singularHomologyMap_comp, singularHomologyMap_comp, LinearMap.comp_apply,
-    LinearMap.comp_apply, h]
 
 theorem sphereThirdObstruction_sum_of_homology {X : Type} [TopologicalSpace X]
     {ι : Type*} [Fintype ι] (r : ℕ) (F : C(X, Space (3 + (r + 2)) (r + 2)))

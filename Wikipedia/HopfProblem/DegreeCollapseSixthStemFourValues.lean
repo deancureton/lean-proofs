@@ -122,10 +122,5 @@ theorem native_card_le_four (k : ℕ) (hk : 6 ≤ k) :
     Nat.card (StableSixSphereMaps.NativeStage k) ≤ 4 :=
   (Nat.card_congr (stableMulEquiv k hk).toEquiv).trans_le card_le_four
 
-theorem native_pow_four (k : ℕ) (hk : 6 ≤ k) (c : StableSixSphereMaps.NativeStage k) :
-    c ^ 4 = 1 := by
-  apply (stableMulEquiv k hk).injective
-  rw [map_pow, map_one]
-  exact stable_pow_four _
 
 end Wikipedia.HopfProblem.DegreeCollapse.SixthStemFourValues

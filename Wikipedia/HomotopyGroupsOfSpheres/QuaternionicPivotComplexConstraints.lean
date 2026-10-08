@@ -15,10 +15,6 @@ open QuaternionicComplexPlane QuaternionicSymmetricMatrices
 def pivotComplex (s t : ℝ) (B : Space (Fin 3)) : ℂ := complexPart (schurPivot s t B)
 def pivotCoordinate (s t : ℝ) (B : Space (Fin 3)) : ℂ := coordinate (schurPivot s t B)
 
-theorem pivot_parts_bound (s t : ℝ) (B : Space (Fin 3)) :
-    Complex.normSq (pivotComplex s t B) + Complex.normSq (pivotCoordinate s t B) ≤ 1 := by
-  rw [pivotComplex, pivotCoordinate, ← normSq_complex_pair]
-  exact schurPivot_normSq_le_one s t B
 
 theorem target_pivot_complex_zero (s t : ℝ) (B : Space (Fin 3))
     (h : firstColumnFormula s t B = targetColumn) :

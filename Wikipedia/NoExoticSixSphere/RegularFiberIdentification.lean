@@ -63,11 +63,5 @@ noncomputable def diffeomorphToRegularFiber (e : P → M)
   rw [hc]
   exact congrArg (mfderiv (𝓡 k) I (Subtype.val : {x : M // f x = b} → M) (q x)) hvw
 
-theorem diffeomorphToRegularFiber_val (e : P → M)
-    (he : ContMDiff (𝓡 k) I ∞ e) (hei : Function.Injective e)
-    (heimm : ∀ x, Function.Injective (mfderiv (𝓡 k) I e x))
-    (hfiber : ∀ y, f y = b ↔ ∃ x, e x = y) (x : P) :
-    letI := regularFiberAtlas f hf b hreg k hd;
-    (diffeomorphToRegularFiber f hf b hreg k hd e he hei heimm hfiber x).val = e x := by rfl
 
 end NoExoticSixSphere

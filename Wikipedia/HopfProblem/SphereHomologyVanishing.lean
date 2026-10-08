@@ -49,10 +49,6 @@ theorem unitSphere_homology_subsingleton (n k : ℕ) (hk : k ≠ 0) (hkn : k ≠
         let := ih (k + 1) (Nat.succ_ne_zero _) (by omega)
         exact (unitSphereHomologySuspensionEquiv (n + 1) k).injective.subsingleton
 
-theorem unitSphere_homology_isZero (n k : ℕ) (hk : k ≠ 0) (hkn : k ≠ n + 1) :
-    IsZero (SingularHomology (UnitSphere (n + 1)) k) := by
-  let := unitSphere_homology_subsingleton n k hk hkn
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- An explicit zero-module equivalence for every other degree. -/
 def unitSphereHomologyEquivZero (n k : ℕ) (hk : k ≠ 0) (hkn : k ≠ n + 1) :
@@ -86,17 +82,5 @@ instance unitSphere_homology_finite (n k : ℕ) :
   exact Module.Finite.of_surjective (unitSphereHomologyEquivZero n k hk hkn).symm.toLinearMap
     (unitSphereHomologyEquivZero n k hk hkn).symm.surjective
 
-/-- The two nonzero groups have rank one; every other group has rank zero. -/
-theorem unitSphere_homology_finrank (n k : ℕ) :
-    Module.finrank ℤ (SingularHomology (UnitSphere (n + 1)) k) =
-      if k = 0 ∨ k = n + 1 then 1 else 0 := by
-  by_cases hk : k = 0
-  · subst k
-    simpa using (unitSphereHomologyZeroEquiv n).finrank_eq
-  by_cases hkn : k = n + 1
-  · subst k
-    simpa using (unitSphereHomologyTopEquiv n).finrank_eq
-  let := unitSphere_homology_subsingleton n k hk hkn
-  simp [hk, hkn, Module.finrank_zero_of_subsingleton]
 
 end Wikipedia.HopfProblem.SphereHomology

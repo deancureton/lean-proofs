@@ -62,12 +62,6 @@ def coreBoundaryMap : C(PuncturedHandle.UnitSphere N, R) :=
   (cellOldHomeomorph r h hr hh hface).symm.toHomotopyEquiv.toFun.comp
     (cellPresentation r h hr hh hface).attachingSphere
 
-theorem cell_attaching_eq : (cellPresentation r h hr hh hface).attachingSphere =
-    (cellOldHomeomorph r h hr hh hface).toHomotopyEquiv.toFun.comp
-      (coreBoundaryMap r h hr hh hface) := by
-  apply ContinuousMap.ext
-  intro u
-  exact ((cellOldHomeomorph r h hr hh hface).apply_symm_apply _).symm
 
 theorem coreBoundaryMap_point (u : PuncturedHandle.UnitSphere N) :
     r (coreBoundaryMap r h hr hh hface u) =

@@ -33,12 +33,6 @@ theorem fst_pair (n : ℕ) (a : K.X n) (b : L.X n) :
   exact (((biprod.fst : K ⊞ L ⟶ K).f n).hom.map_add _ _).trans
     ((congrArg₂ (fun x y => x + y) h₁ h₂).trans (add_zero a))
 
-theorem snd_pair (n : ℕ) (a : K.X n) (b : L.X n) :
-    ((biprod.snd : K ⊞ L ⟶ L).f n).hom (pair n a b) = b := by
-  have h₁ := congrArg (fun f : K ⟶ L => (f.f n).hom a) (biprod.inl_snd (X := K) (Y := L))
-  have h₂ := congrArg (fun f : L ⟶ L => (f.f n).hom b) (biprod.inr_snd (X := K) (Y := L))
-  exact (((biprod.snd : K ⊞ L ⟶ L).f n).hom.map_add _ _).trans
-    ((congrArg₂ (fun x y => x + y) h₁ h₂).trans (zero_add b))
 
 /-- The original sum map acts by the two supplied original chain maps. -/
 theorem desc_pair (f : K ⟶ N) (g : L ⟶ N) (n : ℕ) (a : K.X n) (b : L.X n) :

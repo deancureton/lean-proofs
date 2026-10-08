@@ -81,26 +81,5 @@ theorem exists_regular_source_coordinates (f : ℝ → V → W)
         ((sourceEquiv c).symm p)) :=
   exists_source_coordinates_of_regular_residual f hf p (hreg.residual_regular p hp)
 
-theorem exists_flattened_germ_of_regular_three_six (f : ℝ → V → W)
-    (hf : ContDiff ℝ ∞ (uncurry f))
-    (hreg : RegularThreeSix (fun q : ℝ × V ↦ fderiv ℝ (f q.1) q.2))
-    (p : ℝ × V) (hp : ¬ Injective (fderiv ℝ (f p.1) p.2)) :
-    ∃ c : RankTwoCoordinates V W, ∃ d : Data (family c f),
-      (sourceEquiv c).symm p ∈ d.coord.source ∧
-      ∃ g : (ℝ × EuclideanSpace ℝ (Fin 2)) × ℝ → EuclideanSpace ℝ (Fin 4),
-        ContDiff ℝ ∞ g ∧ g =ᶠ[𝓝 (d.forward ((sourceEquiv c).symm p))] d.flattened ∧
-        vertical g (d.forward ((sourceEquiv c).symm p)) = 0 ∧
-        Bijective (fderiv ℝ (vertical g) (d.forward ((sourceEquiv c).symm p))) := by
-  obtain ⟨c, d, hd, hz, hb⟩ := exists_regular_source_coordinates f hf hreg p hp
-  have hr := d.forward_mem_target hd
-  have hfc := contDiff_family c f hf
-  obtain ⟨g, hg, he, hv, hD⟩ := exists_global_representative d.target.isOpen hr
-    (d.contDiffOn_flattened hfc)
-  refine ⟨c, d, hd, g, hg, he, ?_, ?_⟩
-  · rw [hv, d.vertical_flattened_eq hfc hr, d.inverse_forward hd]
-    exact hz
-  · rw [hD]
-    apply d.bijective_fderiv_vertical hfc hr
-    simpa only [d.inverse_forward hd] using hb
 
 end NoExoticSixSphere.FamilyLinearCoordinates

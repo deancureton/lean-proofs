@@ -59,14 +59,6 @@ theorem inclusion_piThree_surjective (n : ℕ) (a : sourceImage (n + 2)) :
   exact (HomotopyFiber.boundary_eq_const_iff_exists_source_class 2
     (subtypeInclusion (sourceImage (n + 2))) a z).mp (Subsingleton.elim _ _)
 
-theorem transgression_injective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Injective (RelativeFiberHomology.transgression (sourceImage (n + 2)) a 2) := by
-  let := fiber_homologyTwo_subsingleton n a
-  exact Function.injective_of_subsingleton _
 
-theorem prismHurewiczThree_injective (n : ℕ) (a : sourceImage (n + 2)) :
-    Function.Injective (prismHurewiczThree (n + 2) a) := by
-  let := fiber_piTwo_subsingleton n a (sourceFiberBasepoint (n + 2) a)
-  exact Function.injective_of_subsingleton _
 
 end NoExoticSixSphere.JamesSphere.PairNormalization

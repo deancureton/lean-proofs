@@ -108,30 +108,7 @@ theorem targetEquiv_symm_join (p : WithLp 2 (ℝ × V 4)) :
   apply congrArg (SphereCylinder.join 3)
   apply Prod.ext <;> simp
 
-theorem sphereRightInverse_apply (q : Sphere 3) (p : WithLp 2 (ℝ × V 4)) :
-    sphereRightInverse q p = (1 / 2 : ℝ) • (p.fst • inclusion q) +
-      (1 / 2 : ℝ) • QuaternionicHopfSouthNormal.frame q (targetTail p.snd) := by
-  change rightInverse q (targetEquiv.symm p) = _
-  rw [targetEquiv_symm_join]
-  change rawRightInverse q ((SphereCylinder.join 3).symm
-    (SphereCylinder.join 3 (-p.fst, targetTail p.snd))) = _
-  rw [ContinuousLinearEquiv.symm_apply_apply, rawRightInverse_apply]
-  congr 1
-  rw [smul_smul, smul_smul]
-  congr 1
-  ring
 
-theorem sphereFrame_formula (a : Sphere 7) (q : Sphere 3) :
-    letI := regularFiberAtlas sphereMap contMDiff_sphereMap QuaternionicHopfSouthFiber.point
-      QuaternionicHopfSouthRegularity.south_regular 3 (by simp);
-    (SphereFiberNormalFrame.normalFrame sphereMap contMDiff_sphereMap
-      QuaternionicHopfSouthFiber.point
-      QuaternionicHopfSouthRegularity.south_regular 3 (by decide) a).ambient
-        (QuaternionicHopfSouthRegularity.fiberDiffeomorph q) = sphereRightInverse q := by
-  let := regularFiberAtlas sphereMap contMDiff_sphereMap QuaternionicHopfSouthFiber.point
-    QuaternionicHopfSouthRegularity.south_regular 3 (by simp)
-  rw [SphereFiberNormalFrame.normalFrame_ambient]
-  exact canonical_equations a q
 
 
 theorem targetTail_norm (w : V 4) : ‖targetTail w‖ = ‖w‖ := by

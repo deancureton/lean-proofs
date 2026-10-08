@@ -41,12 +41,6 @@ theorem target_pivotCoordinate_ne_zero (s t : ℝ) (B : Space (Fin 3))
   have hc : angleReal s t = 0 := Complex.ofReal_eq_zero.mp hc'
   exact target_angleReal_ne_zero s t B h hc
 
-theorem target_schurPivot_normSq_pos (s t : ℝ) (B : Space (Fin 3))
-    (h : firstColumnFormula s t B = targetColumn) : 0 < Quaternion.normSq (schurPivot s t B) := by
-  rw [normSq_complex_pair]
-  change 0 < Complex.normSq (pivotComplex s t B) + Complex.normSq (pivotCoordinate s t B)
-  exact add_pos_of_nonneg_of_pos (Complex.normSq_nonneg _)
-    (Complex.normSq_pos.mpr (target_pivotCoordinate_ne_zero s t B h))
 
 theorem referenceSquare_eq_one_of_cos_zero (s t : ℝ) (hs : Real.cos s = 0) :
     referenceSquare s t = 1 := by
@@ -86,16 +80,6 @@ theorem target_angleComplex_zero_of_cos_zero (s t : ℝ) (B : Space (Fin 3))
   · have he := target_pivot_cross s t B h
     simpa only [href, hcp, hcj, mul_zero, zero_mul, zero_sub, neg_zero, zero_add, mul_one] using he
 
-theorem target_second_midpoint_of_first_midpoint (t : ℝ) (B : Space (Fin 3))
-    (ht : t ∈ Set.Icc 0 Real.pi)
-    (h : firstColumnFormula (Real.pi / 2) t B = targetColumn) : t = Real.pi / 2 := by
-  have hw := target_angleComplex_zero_of_cos_zero (Real.pi / 2) t B Real.cos_pi_div_two h
-  have hi := congrArg Complex.im hw
-  change Real.sin (Real.pi / 2) * Real.cos t = 0 at hi
-  rw [Real.sin_pi_div_two, one_mul] at hi
-  apply Real.strictAntiOn_cos.injOn ht
-  · constructor <;> linarith [Real.pi_pos]
-  · exact hi.trans Real.cos_pi_div_two.symm
 
 theorem target_referenceCoordinate_ne_zero_away (s t : ℝ) (B : Space (Fin 3))
     (h : firstColumnFormula s t B = targetColumn) (hcos : Real.cos s ≠ 0) :
@@ -104,14 +88,5 @@ theorem target_referenceCoordinate_ne_zero_away (s t : ℝ) (B : Space (Fin 3))
   apply Complex.ofReal_ne_zero.mpr
   exact mul_ne_zero (mul_ne_zero (by norm_num) hcos) (target_angleReal_ne_zero s t B h)
 
-theorem target_pivot_coordinate_formula_away (s t : ℝ) (B : Space (Fin 3))
-    (h : firstColumnFormula s t B = targetColumn) (hcos : Real.cos s ≠ 0) :
-    star (pivotCoordinate s t B) =
-      (angleComplex s t * (1 + ((Quaternion.normSq (schurPivot s t B) : ℝ) : ℂ)) +
-        pivotComplex s t B - targetAlpha * complexPart (referenceSquare s t) *
-          star (pivotComplex s t B)) / (targetAlpha * coordinate (referenceSquare s t)) := by
-  have hα : targetAlpha ≠ 0 := by norm_num [targetAlpha]
-  apply (eq_div_iff (mul_ne_zero hα (target_referenceCoordinate_ne_zero_away s t B h hcos))).mpr
-  linear_combination -(target_pivot_symmetry s t B h)
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

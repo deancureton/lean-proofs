@@ -25,20 +25,7 @@ open Subdivision
 
 variable (X : SSet.{u}) (k : ℕ)
 
-theorem sd_projection_surjective :
-    Function.Surjective
-      (projection SimplexCategory.sd.{u} SSet.sd SSet.stdSimplex.sdIso.inv X k) := by
-  letI : SSet.stdSimplex.{u}.HasPointwiseLeftKanExtension SimplexCategory.sd.{u} :=
-    inferInstanceAs (Functor.HasPointwiseLeftKanExtension uliftYoneda.{u} SimplexCategory.sd.{u})
-  exact projection_surjective SimplexCategory.sd SSet.sd SSet.stdSimplex.sdIso.inv X k
 
-theorem sd_projection_eq_iff (a b : Parameters SimplexCategory.sd.{u} X k) :
-    projection SimplexCategory.sd SSet.sd SSet.stdSimplex.sdIso.inv X k a =
-      projection SimplexCategory.sd SSet.sd SSet.stdSimplex.sdIso.inv X k b ↔
-        Relation.EqvGen (Glue SimplexCategory.sd X k) a b := by
-  letI : SSet.stdSimplex.{u}.HasPointwiseLeftKanExtension SimplexCategory.sd.{u} :=
-    inferInstanceAs (Functor.HasPointwiseLeftKanExtension uliftYoneda.{u} SimplexCategory.sd.{u})
-  exact projection_eq_iff SimplexCategory.sd SSet.sd SSet.stdSimplex.sdIso.inv X k a b
 
 theorem dual_projection_surjective :
     Function.Surjective (projection dualStandard.{u} dualSd dualSdIso.inv X k) :=

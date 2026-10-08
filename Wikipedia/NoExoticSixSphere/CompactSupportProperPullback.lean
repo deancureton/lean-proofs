@@ -69,15 +69,5 @@ theorem properPullback_comp (f : C(X, Y)) (hf : IsProperMap f)
   exact congrArg (of X p (preimageCompact f hf (preimageCompact g hg K)))
     (SupportedModTwoCohomology.pullback_comp f g (K : Set Z) p b)
 
-/-- On compact spaces, this is precisely original absolute cohomology pullback. -/
-theorem absoluteEquiv_properPullback [CompactSpace X] [CompactSpace Y]
-    (f : C(X, Y)) (hf : IsProperMap f) (p : ℕ) (a : Cohomology Y p) :
-    absoluteEquiv X p (properPullback f hf p a) =
-      ModTwoCapProduct.cohomologyPullback f p (absoluteEquiv Y p a) := by
-  obtain ⟨K, b, rfl⟩ := exists_representative Y p a
-  exact (absoluteEquiv_of X p (preimageCompact f hf K)
-    (SupportedModTwoCohomology.pullback f (K : Set Y) p b)).trans
-      ((SupportedModTwoCohomology.toAbsolute_pullback f (K : Set Y) p b).trans
-        (congrArg (ModTwoCapProduct.cohomologyPullback f p) (absoluteEquiv_of Y p K b).symm))
 
 end NoExoticSixSphere.CompactSupportCohomology

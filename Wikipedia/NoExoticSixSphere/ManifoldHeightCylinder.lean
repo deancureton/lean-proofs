@@ -73,19 +73,5 @@ theorem closedEmbedding_heightCylinder_slab (l u : ℝ) :
     ((IsClosedEmbedding.id : IsClosedEmbedding (id : M → M)).prodMap
       isClosed_Icc.isClosedEmbedding_subtypeVal)
 
-theorem isClosedEmbedding_heightSlice (t : ℝ) :
-    IsClosedEmbedding (fun m : M ↦ e.heightCylinder (m, t)) := by
-  have hj : IsClosedEmbedding (fun m : M ↦ (m, t)) := by
-    refine ⟨isEmbedding_prodMkLeft _, ?_⟩
-    have he : range (fun m : M ↦ (m, t)) = {p : M × ℝ | p.2 = t} := by
-      ext p
-      constructor
-      · rintro ⟨m, rfl⟩
-        rfl
-      · intro hp
-        exact ⟨p.1, Prod.ext rfl hp.symm⟩
-    rw [he]
-    exact isClosed_eq continuous_snd continuous_const
-  exact e.isClosedEmbedding_heightCylinder.comp hj
 
 end NoExoticSixSphere.EuclideanEmbedding

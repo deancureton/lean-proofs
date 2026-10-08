@@ -52,15 +52,6 @@ theorem deformation_cylinder (t s : I) (a : A) :
     (TopCat.ofHom (ContinuousMap.snd : C(I × A, A)))
     (target_projection f) (cylinder_projection f) (cylinderDeformation A) t (s, a)
 
-theorem deformation_source (t : I) (a : A) :
-    deformation f (t, source f a) = cylinder f (σ t, a) := by
-  change deformation f (t, cylinder f (1, a)) = _
-  rw [deformation_cylinder, mul_one]
 
-theorem projection_deformation (t : I) (m : space f) :
-    projection f (deformation f (t, m)) = projection f m := by
-  obtain (⟨b, rfl⟩ | ⟨p, rfl⟩) := PushoutHomotopy.jointly_surjective (square f) m
-  · rw [deformation_target]
-  · rw [deformation_cylinder, projection_cylinder, projection_cylinder]
 
 end Wikipedia.HopfProblem.OrbitPair.MappingCylinder

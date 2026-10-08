@@ -56,11 +56,6 @@ theorem contDiff_value : ContDiff ℝ ∞ (uncurry (value (E := E) (F := F))) :=
 theorem fderiv_value (p : Parameters E F) (x : E) : fderiv ℝ (value p) x = p.1 :=
   (p.1.hasFDerivAt.add_const p.2).fderiv
 
-theorem exists_value_derivative (x : E) (v : F) (L : E →L[ℝ] F) :
-    ∃ p : Parameters E F, value p x = v ∧ fderiv ℝ (value p) x = L := by
-  refine ⟨(L, v - L x), ?_, fderiv_value _ x⟩
-  simp only [value]
-  abel
 
 theorem norm_value_le (p : Parameters E F) {x : E} (hx : ‖x‖ ≤ 1) :
     ‖value p x‖ ≤ 2 * ‖p‖ := by

@@ -24,16 +24,6 @@ variable {X Y : Type} [TopologicalSpace X] [TopologicalSpace Y]
   (f : C(X, Y)) (U V : Set X) (U' V' : Set Y)
   (hfU : Set.MapsTo f U U') (hfV : Set.MapsTo f V V')
 
-/-- The actual small-chain homology map commutes with the actual ambient comparison. -/
-theorem smallHomologyComparison_naturality (n : ℕ) :
-    (smallHomologyComparison U' V' n).comp
-        (homologyLinearMap (smallMapOfMapsTo f U V U' V' hfU hfV) n) =
-      (singularHomologyMap f n).comp (smallHomologyComparison U V n) := by
-  apply LinearMap.ext
-  intro a
-  exact smallHomologyComparison_naturality_of_comm f U V U' V'
-    (smallMapOfMapsTo f U V U' V' hfU hfV)
-    (smallMapOfMapsTo_inclusion f U V U' V' hfU hfV) n a
 
 variable (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = Set.univ)
   (hU' : IsOpen U') (hV' : IsOpen V') (hcover' : U' ∪ V' = Set.univ)

@@ -30,13 +30,6 @@ variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 7) M] [CompactSp
 
 def boundaryTargetInclusion (p : PositiveBoundary A hR T) : Target A hR := p.val.val
 
-theorem contMDiff_boundaryTargetInclusion : letI := targetChartedSpace A hR;
-    letI := positiveBoundaryAtlas A hR T;
-    ContMDiff (𝓡 6) (𝓡 7) ∞ (boundaryTargetInclusion A hR T) := by
-  let := targetChartedSpace A hR
-  let := positiveHalfChartedSpace A hR T
-  let := positiveBoundaryAtlas A hR T
-  exact (contMDiff_positiveHalfInclusion A hR T).comp (contMDiff_positiveBoundaryInclusion A hR T)
 
 theorem injective_mfderiv_boundaryTargetInclusion (p : PositiveBoundary A hR T) :
     letI := targetChartedSpace A hR; letI := positiveBoundaryAtlas A hR T;

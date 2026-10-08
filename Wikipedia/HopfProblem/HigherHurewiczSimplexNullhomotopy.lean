@@ -100,10 +100,5 @@ theorem simplexNullHomotopy_boundary (τ : BasedSimplex n x) (t : I) (s : Simple
   rw [simplexNullHomotopy_constant]
   rfl
 
-theorem simplexNullHomotopy_stationary_of_val_eq_const (τ : BasedSimplex n x)
-    (hτ : τ.val = ContinuousMap.const (Simplex n) x) :
-    (simplexNullHomotopy τ).toContinuousMap = ContinuousMap.const (I × Simplex n) x := by
-  have h : τ = constantBasedSimplex n x := Subtype.ext hτ
-  rw [h, simplexNullHomotopy_constant_toContinuousMap]
 
 end Wikipedia.HopfProblem.HigherHurewicz

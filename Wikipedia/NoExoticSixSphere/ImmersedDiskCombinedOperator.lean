@@ -38,15 +38,5 @@ theorem parity_zero_iff_combined_extension :
   DiskNormal.parity_zero_iff_combined_extension r (differential r f hf)
     (differential_injective r f hf hi) a ha
 
-theorem parity_eq_of_combined_homotopic (g : Vector 4 → Vector (r + 9))
-    (hg : ∀ x ∈ Metric.closedBall (0 : Vector 4) 1, ContDiffAt ℝ ∞ g x)
-    (hgi : ∀ x ∈ Metric.closedBall (0 : Vector 4) 1, Function.Injective (fderiv ℝ g x))
-    (b : C(Sphere 3, Space (r + 9) (r + 2)))
-    (hb : ∀ s, (b s).val.range ≤ (fderiv ℝ g s.val).rangeᗮ)
-    (H : (combinedMap r f hf hi a ha).Homotopic (combinedMap r g hg hgi b hb)) :
-    parity r f hf hi a ha = parity r g hg hgi b hb := by
-  apply zmodTwo_eq_of_zero_iff
-  rw [parity_zero_iff_combined_extension, parity_zero_iff_combined_extension]
-  exact extends_homotopic_iff H
 
 end NoExoticSixSphere.Stiefel.ImmersedDisk

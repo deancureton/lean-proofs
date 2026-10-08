@@ -57,14 +57,6 @@ theorem mfderiv_coordinate_surjective {y : Y} (hy : y ∈ Φ.target) :
   change (mfderiv J (I.prod 𝓘(ℝ, K)) Φ.symm y w).2 = v
   exact congrArg Prod.snd hw
 
-theorem collapse_eq_coordinate (hsource : Φ.source = univ) {y : Y}
-    (hy : y ∈ Φ.target) :
-    OpenFiberCollapse.collapse Φ y = (↑(coordinate Φ y) : OnePoint K) := by
-  have hΦ := Φ.toOpenPartialHomeomorph.isOpenEmbedding hsource
-  have h := OpenFiberCollapse.collapse_apply Φ hΦ.injective (Φ.symm y)
-  have hright : Φ (Φ.symm y) = y := Φ.right_inv' hy
-  rw [hright] at h
-  exact h
 
 theorem collapseOnePoint_eq_coordinate (hsource : Φ.source = univ) {y : Y}
     (hy : y ∈ Φ.target) :

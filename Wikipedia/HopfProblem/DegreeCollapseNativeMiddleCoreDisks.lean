@@ -117,14 +117,6 @@ theorem positive_boundary (u : sphere (0 : d.chart.PositiveCoordinates) 1) :
   rw [d.belt_eq, d.chart.beltCoreMap_coe]
   rfl
 
-theorem negativeDisk_eq_coreMap : negativeDisk d = d.coreMap := by
-  apply ContinuousMap.ext
-  intro u
-  change d.chart.splitChart.symm (d.radius • u.val, 0) =
-    d.chart.splitChart.symm
-      ((d.radius * Real.sqrt (1 + ‖(0 : d.chart.PositiveCoordinates)‖ ^ 2)) • u.val,
-        d.radius • (0 : d.chart.PositiveCoordinates))
-  simp
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation.MiddleDuality.CoreDisks
 

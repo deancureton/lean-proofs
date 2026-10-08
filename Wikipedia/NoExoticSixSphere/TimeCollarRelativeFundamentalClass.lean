@@ -77,10 +77,5 @@ theorem relativeFundamentalClass_eq_onCore :
   exact relativeFundamentalClassOnCore_independent C (C.width / 2) (half_pos C.width_pos)
     (half_lt_self C.width_pos).le δ hδ hδw
 
-theorem relativeFundamentalClass_core :
-    (coreToBoundaryModEquiv C δ hδ hδw 2 (by decide) 7).symm (relativeFundamentalClass C) =
-      coreFundamentalClass C δ hδ := by
-  rw [relativeFundamentalClass_eq_onCore C δ hδ hδw]
-  exact LinearEquiv.symm_apply_apply _ _
 
 end NoExoticSixSphere.TimeCollarDuality

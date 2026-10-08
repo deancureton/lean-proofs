@@ -97,13 +97,5 @@ theorem cubic_transverseNegation {m : ℕ} (σ : Fin m → ℝ) (t : ℝ) (p : M
     cubic σ t (transverseNegation p) = cubic σ t p := by
   simp [cubic, transverseNegation_apply]
 
-/-- Every original cubic equation is retained on the reflected chart's actual source. -/
-theorem negateTransverseChart_cubic {m : ℕ} (σ : Fin m → ℝ) (t b : ℝ)
-    (Φ : PartialDiffeomorph 𝓘(ℝ, Model m) 𝓘(ℝ, E) (Model m) M ∞)
-    {f : M → ℝ} (hf : ∀ p ∈ Φ.source, f (Φ p) = b + cubic σ t p)
-    {p : Model m} (hp : p ∈ (negateTransverseChart Φ).source) :
-    f (negateTransverseChart Φ p) = b + cubic σ t p := by
-  have hp' : transverseNegation p ∈ Φ.source := hp.2
-  rw [negateTransverseChart_apply, hf _ hp', cubic_transverseNegation]
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

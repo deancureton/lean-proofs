@@ -81,16 +81,5 @@ namespace NoExoticSixSphere
 
 universe u
 
-theorem sixSphereRigidity_of_stableMap_dichotomy
-    (hgen : ∀ c : StableSixSphereMaps.Class,
-      c = StableSixSphereMaps.nullClass ∨
-        c = StableSixSphereMaps.ofMap (k := 8)
-          QuaternionicHopf.southPairSmoothCollapseBasedMap.val) : SixSphereRigidity.{u} := by
-  intro M t a s ⟨h⟩
-  have hz : StableSixSphereMaps.ofMap (k := 5) (SixSphereThirteen.sphereMap h) =
-      StableSixSphereMaps.nullClass :=
-    (hgen _).resolve_right (SixSphereThirteen.sphereMapClass_ne_Hopf h)
-  apply SixSphereThirteen.nonempty_diffeomorph_of_stableClass_eq_one h
-  exact (CubicalStableSix.ofNative_sphereClass_eq_one_iff (SixSphereThirteen.basedMap h)).mpr hz
 
 end NoExoticSixSphere

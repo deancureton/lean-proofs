@@ -29,19 +29,6 @@ theorem southPairEuclideanTube_isOpenEmbedding :
       ((Homeomorph.refl (Sphere 3 × Sphere 3)).prodCongr
         southPairNormalEuclideanCoordinates.symm.toHomeomorph).isOpenEmbedding
 
-theorem contMDiff_southPairEuclideanTube :
-    letI := southPairEuclideanAtlas;
-    ContMDiff ((𝓡 6).prod (𝓡 10)) (𝓡 16) ∞ southPairEuclideanTube := by
-  let _ := southPairEuclideanAtlas
-  have hp : ContMDiff ((𝓡 6).prod (𝓡 10))
-      (((𝓡 3).prod (𝓡 3)).prod 𝓘(ℝ, SouthPairNormalModel)) ∞
-      (fun p : (Sphere 3 × Sphere 3) × V 10 ↦
-        (p.1, southPairNormalEuclideanCoordinates.symm p.2)) :=
-    (southPairEuclideanToProduct.contMDiff.comp contMDiff_fst).prodMk
-      (southPairNormalEuclideanCoordinates.symm.contDiff.contMDiff.comp contMDiff_snd)
-  have ht := (contMDiff_southPairedFrameTube 1).comp hp
-  have h := southPairAmbientEuclideanCoordinates.toContinuousLinearEquiv.contDiff.contMDiff.comp ht
-  exact h
 
 theorem southPairEuclideanTube_core (p : Sphere 3 × Sphere 3) :
     letI := southPairEuclideanAtlas;

@@ -58,20 +58,5 @@ theorem closure_doublePoints_equal_image (f : P → E → F)
       (hf.continuous.comp (continuous_fst.prodMk (continuous_snd.comp continuous_snd)))
   exact (closure_minimal (fun _ h ↦ h.2) hc) hq
 
-theorem closure_doublePoints_subset (f : P → E → F)
-    (hf : ContDiff ℝ ∞ (uncurry f)) :
-    closure (doublePoints f) ⊆ doublePoints f ∪
-      {q | q.2.1 = q.2.2 ∧ ¬ Injective (fderiv ℝ (f q.1) q.2.1)} := by
-  intro q hq
-  by_cases he : q.2.1 = q.2.2
-  · right
-    refine ⟨he, ?_⟩
-    intro hi
-    have h := diagonal_not_mem_closure_doublePoints f hf q.1 q.2.1 hi
-    apply h
-    have hdiag : q = (q.1, (q.2.1, q.2.1)) := by
-      exact Prod.ext rfl (Prod.ext rfl he.symm)
-    rwa [← hdiag]
-  · exact Or.inl ⟨he, closure_doublePoints_equal_image f hf hq⟩
 
 end NoExoticSixSphere.FamilyEmbedding

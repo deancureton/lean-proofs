@@ -66,27 +66,7 @@ theorem commonBaseRealization_handle (l : L) :
 def interchangedRealization : Space ((oldMap b₂).comp b₁) ≃ₜ Z :=
   (commute b₁ b₂).symm.trans (commonBaseRealization b₁ b₂ c r₁ r₂ h)
 
-theorem interchangedRealization_old (x : X) :
-    interchangedRealization b₁ b₂ c r₁ r₂ h
-        (oldMap ((oldMap b₂).comp b₁) (oldMap b₂ x)) =
-      r₂ (oldMap c (r₁ (oldMap b₁ x))) := by
-  change commonBaseRealization b₁ b₂ c r₁ r₂ h
-    (commute b₂ b₁ (oldMap ((oldMap b₂).comp b₁) (oldMap b₂ x))) = _
-  rw [commute_old, commonBaseRealization_old]
 
-theorem interchangedRealization_first (k : K) :
-    interchangedRealization b₁ b₂ c r₁ r₂ h (handleMap ((oldMap b₂).comp b₁) k) =
-      r₂ (oldMap c (r₁ (handleMap b₁ k))) := by
-  change commonBaseRealization b₁ b₂ c r₁ r₂ h
-    (commute b₂ b₁ (handleMap ((oldMap b₂).comp b₁) k)) = _
-  rw [commute_second, commonBaseRealization_old]
 
-theorem interchangedRealization_second (l : L) :
-    interchangedRealization b₁ b₂ c r₁ r₂ h
-        (oldMap ((oldMap b₂).comp b₁) (handleMap b₂ l)) =
-      r₂ (handleMap c l) := by
-  change commonBaseRealization b₁ b₂ c r₁ r₂ h
-    (commute b₂ b₁ (oldMap ((oldMap b₂).comp b₁) (handleMap b₂ l))) = _
-  rw [commute_first, commonBaseRealization_handle]
 
 end Wikipedia.SmoothSixDPoincare.FaceAttachment

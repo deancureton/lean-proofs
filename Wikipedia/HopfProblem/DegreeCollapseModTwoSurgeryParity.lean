@@ -71,39 +71,6 @@ theorem modTwoSurgeryMap_parity :
   exact (congrArg ((UnitSurgery.inducedEmbedding A hR).modTwoHomologyParity
     (UnitSurgery.normalFraming A hR) r' m') hF).trans (hr.trans (hn.trans ho.symm))
 
-theorem modTwoSurgeryMap_intersection :
-    letI := UnitSurgery.targetChartedSpace A hR;
-    letI := UnitSurgery.target_isManifold A hR;
-    letI := UnitSurgery.compactSpace_target A hR;
-    letI : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-      (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1;
-    ∀ (r' : TubularRetraction (UnitSurgery.inducedEmbedding A hR)) (m' : UnitSurgery.Target A hR),
-      letI : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-        (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m';
-      ∀ x y : LinearMap.ker (orthogonalFunctional e r m f),
-        (UnitSurgery.inducedEmbedding A hR).modTwoHomologyIntersection r' m'
-          (modTwoSurgeryMap e a r m f A hR d hd x) (modTwoSurgeryMap e a r m f A hR d hd y) =
-        e.modTwoHomologyIntersection r m x y := by
-  let := UnitSurgery.targetChartedSpace A hR
-  let := UnitSurgery.target_isManifold A hR
-  let := UnitSurgery.compactSpace_target A hR
-  let : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1
-  intro r' m'
-  let : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m'
-  intro x y
-  obtain ⟨c, rfl⟩ := kernelReduction_surjective e a r m f A hR d hd x
-  obtain ⟨k, rfl⟩ := kernelReduction_surjective e a r m f A hR d hd y
-  have hF := modTwoSurgeryMap_reduction e a r m f A hR d hd c
-  have hG := modTwoSurgeryMap_reduction e a r m f A hR d hd k
-  have hn := nativeLift_intersection f A hR d hd r m r' m' c k
-  have hr := (UnitSurgery.inducedEmbedding A hR).modTwoHomologyIntersection_reduction r' m'
-    (nativeLift f A hR d hd c) (nativeLift f A hR d hd k)
-  have ho := e.modTwoHomologyIntersection_reduction r m c.val k.val
-  exact (congrArg₂ (fun u v : ModHomology 2 (UnitSurgery.Target A hR) 3 ↦
-    (UnitSurgery.inducedEmbedding A hR).modTwoHomologyIntersection r' m' u v) hF hG).trans
-    (hr.trans (hn.trans ho.symm))
 
 include A hR d hd in
 theorem modTwoParity_eq_of_surgeryMap_eq (x y : LinearMap.ker (orthogonalFunctional e r m f))

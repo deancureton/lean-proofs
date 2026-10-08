@@ -122,14 +122,5 @@ def chainTensorLift (f : SingularSimplex X p → SingularSimplex Y q → M) :
     chainTensorLift X Y p q f (simplexChain X p σ ⊗ₜ[ℤ] simplexChain Y q τ) = f σ τ := by
   rw [chainTensorLift_tmul, chainBilinearLift_simplex]
 
-/-- Tensor-product maps are determined by tensor products of simplex generators. -/
-theorem chainTensorMap_ext
-    {F G : Chains X p ⊗[ℤ] Chains Y q →ₗ[ℤ] M}
-    (h : ∀ σ τ, F (simplexChain X p σ ⊗ₜ[ℤ] simplexChain Y q τ) =
-      G (simplexChain X p σ ⊗ₜ[ℤ] simplexChain Y q τ)) : F = G := by
-  apply TensorProduct.ext
-  apply chainBilinearMap_ext X Y p q
-  intro σ τ
-  exact h σ τ
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

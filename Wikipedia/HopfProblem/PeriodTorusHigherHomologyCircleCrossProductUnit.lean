@@ -73,12 +73,5 @@ theorem crossProductEdge_zero_simplex_right (a : Chains X 1)
   rw [crossProductHomology_cycleClass, crossProductCycles_pointCycle_right]
   exact (homologyMap_cycleClass (singularChainMap (crossInsertRight y)) 1 c).symm
 
-/-- Linear-map form of the actual right-point unit on degree-one homology. -/
-theorem crossProductHomology_pointClass_right_linearMap (y : Y) :
-    integerBilinearRightApply (crossProductHomology X Y 0) (pointClass y) =
-      singularHomologyMap (crossInsertRight y) 1 := by
-  apply LinearMap.ext
-  intro a
-  exact crossProductHomology_pointClass_right X Y a y
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

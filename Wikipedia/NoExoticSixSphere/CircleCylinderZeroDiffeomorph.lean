@@ -69,10 +69,5 @@ def endpointsDiffeomorph (k : ℕ) (hd : m = n + k) :
     (contMDiff_endpointsMap d k hd) (endpointsMap_injective d)
     (mfderiv_endpointsMap_injective d k hd) (time_eq_zero_iff_endpoints d)
 
-theorem endpointsDiffeomorph_val (k : ℕ) (hd : m = n + k) (p : Endpoints d) :
-    letI := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left k (by simpa using hd);
-    letI := regularFiberAtlas d.rightMap d.smooth_right b d.regular_right k (by simpa using hd);
-    letI := timeZeroAtlas d k hd;
-    (endpointsDiffeomorph d k hd p).val = endpointsMap d p := by rfl
 
 end NoExoticSixSphere.CircleCylinder

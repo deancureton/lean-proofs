@@ -71,20 +71,5 @@ theorem half_fourth_homology_of_endpoint_sphere (hmiss : ∀ x, d.rightMap x ≠
     fiber_fourth_homology_subsingleton d hmiss hd
   exact half_homology_subsingleton d 4
 
-theorem originalSlab_fourth_homology_of_endpoint_sphere (hmiss : ∀ x, d.rightMap x ≠ b)
-    (hd : m = n + 6) (e : EndpointFiber d ≃ₜ Sphere 6)
-    [SimplyConnectedSpace (CylinderFiberSlab.slab d.map b 0 1)]
-    [Subsingleton (SingularHomology (CylinderFiberSlab.slab d.map b 0 1) 2)]
-    [Finite (SingularHomology (CylinderFiberSlab.slab d.map b 0 1) 3)] :
-    Subsingleton (SingularHomology (CylinderFiberSlab.slab d.map b 0 1) 4) := by
-  let q := (originalHalfHomeomorph d hmiss).toHomotopyEquiv
-  let : SimplyConnectedSpace (NonnegativeHalf d) := q.symm.simplyConnectedSpace
-  let : Subsingleton (SingularHomology (NonnegativeHalf d) 2) :=
-    (homotopyEquivHomologyEquiv q.symm 2).injective.subsingleton
-  let : Finite (SingularHomology (NonnegativeHalf d) 3) :=
-    Finite.of_injective _ (homotopyEquivHomologyEquiv q.symm 3).injective
-  let : Subsingleton (SingularHomology (NonnegativeHalf d) 4) :=
-    half_fourth_homology_of_endpoint_sphere d hmiss hd e
-  exact (homotopyEquivHomologyEquiv q 4).injective.subsingleton
 
 end Wikipedia.HopfProblem.DegreeCollapse.ReflectedCylinder

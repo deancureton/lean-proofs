@@ -99,18 +99,6 @@ theorem southPairRightSphere_framedDerivative (s : Sphere 3) :
   rw [he]
   exact framedDerivative_affine _ _ s
 
-theorem southPairLeftSphere_framedDerivative_apply (s : Sphere 3) (v : V 3) :
-    framedDerivative (southPairEuclideanAmbient ∘ southPairLeftSphere) s v =
-      southPairAmbientEuclideanCoordinates
-        ((2 : ℝ) • WithLp.toLp 2 (southAxis (operator s.val v), (0 : V 8))) := by
-  rw [southPairLeftSphere_framedDerivative]
-  rfl
 
-theorem southPairRightSphere_framedDerivative_apply (s : Sphere 3) (v : V 3) :
-    framedDerivative (southPairEuclideanAmbient ∘ southPairRightSphere) s v =
-      southPairAmbientEuclideanCoordinates
-        ((2 : ℝ) • WithLp.toLp 2 ((0 : V 8), southAxis (operator s.val v))) := by
-  rw [southPairRightSphere_framedDerivative]
-  rfl
 
 end NoExoticSixSphere.QuaternionicHopf

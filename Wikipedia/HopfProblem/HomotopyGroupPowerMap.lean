@@ -137,11 +137,5 @@ theorem class_powLoop (p : GenLoop N G 1) (m : ℕ) :
       rw [powLoop_succ, class_mulLoop, ih]
       exact (pow_succ (M := HomotopyGroup N G 1) ⟦p⟧ m).symm
 
-/-- An explicitly supplied exponent yields an actual relative null-homotopy.
-This does not assert that any particular sphere has this exponent. -/
-theorem powLoop_homotopic_const_of_exponent (m : ℕ)
-    (hexp : ∀ a : HomotopyGroup N G 1, a ^ m = 1) (p : GenLoop N G 1) :
-    GenLoop.Homotopic (powLoop p m) GenLoop.const := by
-  exact Quotient.exact ((class_powLoop p m).trans (hexp ⟦p⟧))
 
 end Wikipedia.HopfProblem.HomotopyGroupPowerMap

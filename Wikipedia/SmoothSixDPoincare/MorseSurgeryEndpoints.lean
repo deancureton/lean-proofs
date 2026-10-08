@@ -81,11 +81,6 @@ theorem unique_last (h : 0 < S.count) (x : M) (hx : f (S.last h) ≤ f x) :
     (Eventually.of_forall (fun y => (S.last_globalMax hf h y).trans hx))
   exact S.distinct hxcrit (S.last h).property (le_antisymm (S.last_globalMax hf h x) hx)
 
-theorem first_lower_empty (h : 0 < S.count) :
-    {x : M | f x ≤ S.lower (S.first h)} = ∅ := by
-  apply Set.eq_empty_iff_forall_notMem.mpr
-  intro x hx
-  exact (not_le_of_gt (S.lower_lt_value (S.first h))) ((S.first_globalMin hf h x).trans hx)
 
 theorem last_upper_univ (h : 0 < S.count) :
     {x : M | f x ≤ S.upper (S.last h)} = univ := by

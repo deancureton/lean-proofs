@@ -85,15 +85,5 @@ theorem nonempty_faceDescent (hd : d.HasSmoothExterior hf) (n : ℕ)
     chart_target := htarget
     face_eq := hmap }⟩
 
-theorem nonempty_faceDescent_of_index (hd : d.HasSmoothExterior hf)
-    (hindex : Module.finrank ℝ G < Module.finrank ℝ d.chart.NegativeCoordinates)
-    (hmax : Module.finrank ℝ d.chart.NegativeCoordinates < Module.finrank ℝ E)
-    (x₀ : X) (g : d.UpperSmoothFace hf I X N) : Nonempty (d.FaceDescent hf I X N g) := by
-  have hsplit := d.chart.finrank_negative_add_positive
-  let n := Module.finrank ℝ d.chart.PositiveCoordinates - 1
-  let _ : Fact (Module.finrank ℝ d.chart.PositiveCoordinates = n + 1) := ⟨by dsimp [n]; omega⟩
-  apply d.nonempty_faceDescent hf I X N hd n _ x₀ g
-  dsimp [n]
-  omega
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse.MorseSurgeryData

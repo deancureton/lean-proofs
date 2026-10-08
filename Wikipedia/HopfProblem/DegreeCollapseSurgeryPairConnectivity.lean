@@ -59,12 +59,5 @@ def lowHomologyEquiv : SingularHomology X (k + 1) ≃ₗ[ℤ] SingularHomology Y
       ⟨(newHandleData d).old_injective (k + 1) (Nat.succ_ne_zero k),
         (newHandleData d).old_surjective k⟩).symm
 
-theorem lowHomologyEquiv_inclusions (x : SingularHomology X (k + 1)) :
-    singularHomologyMap (newMap d) (k + 1) (lowHomologyEquiv d k x) =
-      singularHomologyMap (oldMap d) (k + 1) x := by
-  let e := LinearEquiv.ofBijective (singularHomologyMap (newMap d) (k + 1))
-    ⟨(newHandleData d).old_injective (k + 1) (Nat.succ_ne_zero k),
-      (newHandleData d).old_surjective k⟩
-  exact e.apply_symm_apply (singularHomologyMap (oldMap d) (k + 1) x)
 
 end Wikipedia.HopfProblem.DegreeCollapse.SurgeryPairBody

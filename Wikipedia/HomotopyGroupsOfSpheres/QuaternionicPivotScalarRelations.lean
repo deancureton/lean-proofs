@@ -30,23 +30,7 @@ theorem referenceSquare_coordinate_star (s t : ℝ) :
   rw [referenceSquare_coordinate_real]
   exact Complex.conj_ofReal _
 
-theorem referenceSquare_mixed_identity (s t : ℝ) :
-    complexPart (referenceSquare s t) * star (angleComplex s t) +
-      (angleReal s t : ℂ) * coordinate (referenceSquare s t) = -angleComplex s t := by
-  rw [referenceSquare_complexPart, referenceSquare_coordinate]
-  calc
-    _ = -angleComplex s t *
-        (star (angleComplex s t) * angleComplex s t + (angleReal s t : ℂ) ^ 2) := by ring
-    _ = _ := by rw [angle_unit_complex, mul_one]
 
-theorem referenceSquare_second_mixed_identity (s t : ℝ) :
-    angleComplex s t * coordinate (referenceSquare s t) -
-      (angleReal s t : ℂ) * complexPart (referenceSquare s t) = -(angleReal s t : ℂ) := by
-  rw [referenceSquare_complexPart, referenceSquare_coordinate]
-  calc
-    _ = -(angleReal s t : ℂ) *
-        (star (angleComplex s t) * angleComplex s t + (angleReal s t : ℂ) ^ 2) := by ring
-    _ = _ := by rw [angle_unit_complex, mul_one]
 
 theorem referenceSquare_complex_unit (s t : ℝ) :
     complexPart (referenceSquare s t) * star (complexPart (referenceSquare s t)) +

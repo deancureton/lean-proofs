@@ -94,14 +94,5 @@ theorem eq_zero_of_pairing_right (b : ModHomology 2 M 3)
 theorem pairing_nondegenerate : (pairing (E := E) m).Nondegenerate :=
   ⟨eq_zero_of_pairing_left (E := E) m, eq_zero_of_pairing_right (E := E) m⟩
 
-/-- The basepoint used to prove the coefficient comparison does not affect this pairing. -/
-theorem pairing_basepoint_independent (m' : M) [Subsingleton (π_ 2 M m')] :
-    pairing (E := E) m = pairing (E := E) m' := by
-  apply LinearMap.ext
-  intro a
-  apply LinearMap.ext
-  intro b
-  exact congrArg (fun f => f ((ManifoldCapMap.dualityEquiv (E := E) 3 M 3 3 rfl).symm a) b)
-    (NativeModTwoMiddleEvaluation.evaluation_basepoint_independent m m')
 
 end NoExoticSixSphere.MiddleCapEvaluation

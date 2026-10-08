@@ -64,19 +64,5 @@ theorem updateBoundary_twice (hb : Injective b)
   rw [image_union, image_image, image_image]
   rfl
 
-theorem commute_updateBoundary (hb : Injective b) (hc : Injective c)
-    (S U W : Set X) (V : Set K) (Z : Set L)
-    (hU : Disjoint U (range c)) (hW : Disjoint W (range b)) :
-    commute b c ''
-      updateBoundary ((oldMap b).comp c) (updateBoundary b S U V) (oldMap b '' W) Z =
-    updateBoundary ((oldMap c).comp b) (updateBoundary c S W Z) (oldMap c '' U) V := by
-  rw [updateBoundary_twice b c hb S U W V Z hW,
-    updateBoundary_twice c b hc S W U Z V hU]
-  rw [image_union, image_union, image_image, image_image, image_image]
-  change (oldMap ((oldMap c).comp b) ∘ oldMap c) '' (S \ (U ∪ W)) ∪
-      handleMap ((oldMap c).comp b) '' V ∪
-        (oldMap ((oldMap c).comp b) ∘ handleMap c) '' Z = _
-  rw [union_comm U W]
-  exact union_right_comm _ _ _
 
 end Wikipedia.SmoothSixDPoincare.FaceAttachment

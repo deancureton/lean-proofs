@@ -62,16 +62,6 @@ theorem sphereCandidateDegreeMap_fiber :
   · intro h
     exact Subtype.ext (h.trans sphereCandidateProjection_seed.symm)
 
-/-- The fiber count concerns the literal self-map whose degree occurs in the exact sequence. -/
-theorem sphereCandidateDegreeMap_fiber_ncard :
-    {x | sphereCandidateDegreeMap x = sphereCandidateTarget}.ncard = 12 := by
-  rw [sphereCandidateDegreeMap_fiber, sphereCandidateTargetPreimage_ncard_eq_twelve]
 
-/-- The remaining generator issue is retained explicitly in the degree formula. -/
-theorem sphereCandidateDegree_eq_coordinate_mul_generator :
-    sphereSevenDegree sphereCandidateDegreeMap =
-      (piSevenSpTwoMulEquiv sphereCandidateClass).toAdd * generatorProjectionDegree := by
-  rw [← sphereCandidateClass_projectionDegree]
-  exact projectionDegree_toAdd sphereCandidateClass
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

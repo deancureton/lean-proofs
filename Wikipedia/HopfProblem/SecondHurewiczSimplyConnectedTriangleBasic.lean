@@ -107,11 +107,6 @@ theorem squareMap_basedTriangleLoop (τ : BasedTriangle x) :
 def basedTriangleClass (τ : BasedTriangle x) : Additive (π_ 2 X x) :=
   Additive.ofMul (⟦basedTriangleLoop τ⟧ : π_ 2 X x)
 
-/-- Every actual face of a based triangle is the constant singular edge. -/
-theorem basedTriangle_face (τ : BasedTriangle x) (i : Fin 3) :
-    τ.val.comp (simplexFace 1 i) = ContinuousMap.const (Simplex 1) x := by
-  ext s
-  exact τ.property _ ⟨i, simplexFace_apply_self 1 i s⟩
 
 /-- Constant triangles are based without further topological assumptions. -/
 def constantBasedTriangle (x : X) : BasedTriangle x :=

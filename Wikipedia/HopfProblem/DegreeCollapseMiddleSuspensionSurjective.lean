@@ -42,9 +42,6 @@ theorem ninth_suspension_eq_one (c : π_ 9 (Sphere 5) (spherePole 5)) :
   · exact map_one _
   · exact generator_suspension
 
-theorem sixth_sphere_tenth_eq_one (c : π_ 10 (Sphere 6) (spherePole 6)) : c = 1 := by
-  obtain ⟨b, rfl⟩ := hom_surjective (by decide : 9 + 2 < 2 * (5 + 1)) c
-  exact ninth_suspension_eq_one b
 
 theorem attaching_nine_surjective :
     Function.Surjective (EHPCell.attachingHom 5 (by decide) 9) := by

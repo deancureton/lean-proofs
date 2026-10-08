@@ -156,8 +156,5 @@ theorem compactSpace_capDomain (d : ℕ) : CompactSpace (CapDomain d) := by
   let := compactSpace_unitBall (d + 1)
   infer_instance
 
-theorem isClosedEmbedding_capPoint (hR : A.radius = 2) : IsClosedEmbedding (capPoint A) := by
-  let := compactSpace_capDomain d
-  exact (continuous_capPoint A hR).isClosedEmbedding (capPoint_injective A hR)
 
 end Wikipedia.HopfProblem.DegreeCollapse.LowSurgery.FramedAttachingProduct.SurgeryPair

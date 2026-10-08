@@ -34,24 +34,6 @@ theorem closure_doublePoints_equal_image_of_continuous [TopologicalSpace F] [T2S
       (hf.comp (continuous_fst.prodMk (continuous_snd.comp continuous_snd)))
   exact closure_minimal (fun _ hy ↦ hy.2) heq hq
 
-theorem isOpenEmbedding_orderedInclusion [T2Space E] [TopologicalSpace F] [T2Space F]
-    (f : P → E → F) (hf : Continuous (uncurry f)) :
-    IsOpenEmbedding (orderedInclusion f) := by
-  apply IsOpenEmbedding.inclusion subset_closure
-  have heq : IsClosed {q : P × (E × E) | f q.1 q.2.1 = f q.1 q.2.2} :=
-    isClosed_eq (hf.comp (continuous_fst.prodMk (continuous_fst.comp continuous_snd)))
-      (hf.comp (continuous_fst.prodMk (continuous_snd.comp continuous_snd)))
-  have he : (Subtype.val ⁻¹' doublePoints f) =
-      {q : closure (doublePoints f) | q.val.2.1 ≠ q.val.2.2} := by
-    ext q
-    constructor
-    · exact fun h ↦ h.1
-    · intro h
-      exact ⟨h, closure_minimal (fun _ hy ↦ hy.2) heq q.property⟩
-  rw [he]
-  exact (isClosed_eq
-    (continuous_fst.comp (continuous_snd.comp continuous_subtype_val))
-    (continuous_snd.comp (continuous_snd.comp continuous_subtype_val))).isOpen_compl
 
 def diagonalOrbits (f : P → E → F) : Set (UnorderedClosedDoublePoints f) :=
   unorderedProj f '' {r : closure (doublePoints f) | r.val.2.1 = r.val.2.2}

@@ -55,13 +55,7 @@ def transition : OpenPartialHomeomorph (oldPatch A) (NewPatch E F) := by
   let _ := nonempty_overlap (E := E) (F := F) m n
   exact OpenGluing.overlapTransition (oldOverlap_isOpenEmbedding A) (newOverlap_isOpenEmbedding m n)
 
-theorem transition_source : (transition A n).source = range (oldOverlap A) := by
-  let _ := nonempty_overlap (E := E) (F := F) m n
-  exact OpenGluing.overlapTransition_source _ _
 
-theorem transition_target : (transition A n).target = range (newOverlap (E := E) (F := F) m n) := by
-  let _ := nonempty_overlap (E := E) (F := F) m n
-  exact OpenGluing.overlapTransition_target _ _
 
 theorem transition_apply (z : Overlap E F) :
     transition A n (oldOverlap A z) = newOverlap m n z := by

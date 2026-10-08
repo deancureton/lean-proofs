@@ -78,19 +78,6 @@ theorem original_southNormalFrame_parametrized (a : Sphere 7) (q : Sphere 3) :
     (by simp only [finrank_euclideanSpace_fin])
   rw [original_southNormalFrame_ambient, southFiberDiffeomorph_val, southNormalFrame_ambient]
 
-theorem original_southNormalFrame_transverse (a : Sphere 7) (q : Sphere 3) (w : ℍ) :
-    letI := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-      (by simp only [finrank_euclideanSpace_fin]);
-    (SphereFiberNormalFrame.normalFrame sphereMap contMDiff_sphereMap south south_regular
-      3 (by decide) a).ambient (southFiberDiffeomorph q)
-        (augmentedTargetChange (WithLp.toLp 2 (0, (2 : ℝ) • w))) =
-      firstAxis (w * Quaternion.linearIsometryEquivTuple.symm q.val) := by
-  let := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-    (by simp only [finrank_euclideanSpace_fin])
-  rw [original_southNormalFrame_parametrized]
-  change southNormalFrame.ambient q (augmentedTargetChange.symm
-    (augmentedTargetChange (WithLp.toLp 2 (0, (2 : ℝ) • w)))) = _
-  rw [ContinuousLinearEquiv.symm_apply_apply, southNormalFrame_transverse]
 
 theorem southNormalFrame_radial (q : Sphere 3) :
     southNormalFrame.ambient q (WithLp.toLp 2 (2, (0 : ℍ))) = southFiberAmbient q := by
@@ -106,18 +93,5 @@ theorem southNormalFrame_radial (q : Sphere 3) :
     norm_num only
     exact one_smul ℝ _
 
-theorem original_southNormalFrame_radial (a : Sphere 7) (q : Sphere 3) :
-    letI := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-      (by simp only [finrank_euclideanSpace_fin]);
-    (SphereFiberNormalFrame.normalFrame sphereMap contMDiff_sphereMap south south_regular
-      3 (by decide) a).ambient (southFiberDiffeomorph q)
-        (WithLp.toLp 2 (2, (0 : V 4))) = southFiberAmbient q := by
-  let := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-    (by simp only [finrank_euclideanSpace_fin])
-  rw [original_southNormalFrame_parametrized]
-  change southNormalFrame.ambient q (augmentedTargetChange.symm
-    (WithLp.toLp 2 (2, (0 : V 4)))) = _
-  rw [augmentedTargetChange_symm_apply, map_zero]
-  exact southNormalFrame_radial q
 
 end NoExoticSixSphere.QuaternionicHopf

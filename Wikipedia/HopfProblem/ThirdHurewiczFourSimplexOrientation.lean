@@ -37,10 +37,6 @@ def threeSimplexSwapFirst : C(Simplex 3, Simplex 3) :=
 @[simp] theorem threeSimplexSwapFirst_three (s : Simplex 3) :
     threeSimplexSwapFirst s 3 = s 3 := rfl
 
-theorem threeSimplexSwapFirst_coefficients (s : Simplex 3) :
-    (threeSimplexSwapFirst s : Fin 4 → ℝ) = ![s 1, s 0, s 2, s 3] := by
-  funext i
-  fin_cases i <;> rfl
 
 theorem threeSimplexSwapFirst_boundary (s : Simplex 3)
     (hs : s ∈ threeSimplexBoundary) : threeSimplexSwapFirst s ∈ threeSimplexBoundary :=
@@ -64,10 +60,6 @@ def threeSimplexVertexOrder1302 : C(Simplex 3, Simplex 3) :=
 @[simp] theorem threeSimplexVertexOrder1302_three (s : Simplex 3) :
     threeSimplexVertexOrder1302 s 3 = s 1 := rfl
 
-theorem threeSimplexVertexOrder1302_coefficients (s : Simplex 3) :
-    (threeSimplexVertexOrder1302 s : Fin 4 → ℝ) = ![s 2, s 0, s 3, s 1] := by
-  funext i
-  fin_cases i <;> rfl
 
 theorem threeSimplexVertexOrder1302_boundary (s : Simplex 3)
     (hs : s ∈ threeSimplexBoundary) :

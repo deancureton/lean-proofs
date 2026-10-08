@@ -59,34 +59,5 @@ theorem exists_supported_pointMoving {x : E} (hx : x ∈ Φ.source) :
 
 variable [CompactSpace M]
 
-/-- On the original compact manifold these supported motions give an actual ambient isotopy:
-a time-preserving cylinder homeomorphism through smooth diffeomorphisms,
-starting at the identity. -/
-theorem exists_supported_pointMoving_cylinder {x : E} (hx : x ∈ Φ.source) :
-    ∃ ε : ℝ, 0 < ε ∧ Metric.ball x ε ⊆ Φ.source ∧ ∀ y ∈ Metric.ball x ε,
-      ∃ F : (unitInterval × M) ≃ₜ (unitInterval × M),
-        (∀ p, (F p).1 = p.1) ∧ (∀ z, F (0, z) = (0, z)) ∧
-        (∀ t : unitInterval, ∃ d : Diffeomorph J J M M ∞, ∀ z, F (t, z) = (t, d z)) ∧
-        (∀ p, p.2 ∉ Φ.target → F p = p) ∧ F (1, Φ x) = (1, Φ y) := by
-  obtain ⟨ε, hε, hsource, hmove⟩ := exists_supported_pointMoving Φ hx
-  refine ⟨ε, hε, hsource, ?_⟩
-  intro y hy
-  obtain ⟨A, hA, hzero, hdiff, hfix, hend⟩ := hmove y hy
-  have hbij : ∀ t, Function.Bijective (fun z => A (t, z)) := by
-    intro t
-    obtain ⟨d, hd⟩ := hdiff t
-    have heq : (fun z => A (t, z)) = d := funext hd
-    rw [heq]
-    exact d.bijective
-  let F := AmbientIsotopy.cylinderHomeomorph A hA.continuous hbij
-  refine ⟨F, fun _ => rfl, ?_, ?_, ?_, ?_⟩
-  · intro z
-    exact Prod.ext rfl (hzero z)
-  · intro t
-    obtain ⟨d, hd⟩ := hdiff t
-    exact ⟨d, fun z => Prod.ext rfl (hd z)⟩
-  · rintro ⟨t, z⟩ hz
-    exact Prod.ext rfl (hfix t z hz)
-  · exact Prod.ext rfl hend
 
 end Wikipedia.SmoothSixDPoincare.SupportedDiffeomorph

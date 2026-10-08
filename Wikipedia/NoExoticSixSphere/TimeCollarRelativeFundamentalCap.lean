@@ -60,12 +60,6 @@ theorem cap_relativeFundamentalClassOnCore (p q : ℕ) (h : p + q = 7)
   rw [interiorCapMap_boundaryCompactSupportMap, boundaryCoreEquiv_collar, hE]
   exact h₁.trans h₂.symm
 
-theorem boundaryCompactSupportCanonical_eq_map (p : ℕ) :
-    (boundaryCompactSupportCanonical C p).toLinearMap =
-      boundaryCompactSupportMap C δ hδ hδw p := by
-  unfold boundaryCompactSupportCanonical
-  exact boundaryCompactSupportMap_independent C (C.width / 2) (half_pos C.width_pos)
-    (half_lt_self C.width_pos).le δ hδ hδw p
 
 theorem cap_relativeFundamentalClass (p q : ℕ) (h : p + q = 7)
     (c : Cohomology (boundary t) p) :
@@ -74,13 +68,5 @@ theorem cap_relativeFundamentalClass (p q : ℕ) (h : p + q = 7)
   cap_relativeFundamentalClassOnCore C (C.width / 2) (half_pos C.width_pos)
     (half_lt_self C.width_pos).le p q h c
 
-theorem cap_relativeFundamentalClass_bijective (p q : ℕ) (h : p + q = 7) :
-    Bijective (fun c : Cohomology (boundary t) p ↦
-      RelativeModTwoCap.capProductInDegree (boundary t) h c (relativeFundamentalClass C)) := by
-  have he : (fun c : Cohomology (boundary t) p ↦
-      RelativeModTwoCap.capProductInDegree (boundary t) h c (relativeFundamentalClass C)) =
-      boundaryDualityMap C p q h := funext (cap_relativeFundamentalClass C p q h)
-  rw [he]
-  exact boundaryDualityMap_bijective C p q h
 
 end NoExoticSixSphere.TimeCollarDuality

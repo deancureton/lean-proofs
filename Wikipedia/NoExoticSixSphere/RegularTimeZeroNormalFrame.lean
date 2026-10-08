@@ -82,16 +82,5 @@ theorem zeroNormalFrame_norm (m : M) (p : {x : M // t x = 0}) :
   exact (zeroColumns_norm e r t ht hreg a p (normalCoordinates e m v)).trans
     ((normalCoordinates e m).norm_map v)
 
-theorem zeroNormalFrame_retraction_independent (r' : e.TubularRetraction) (m : M) :
-    letI := zeroAtlas t ht hreg;
-    zeroNormalFrame e r' t ht hreg a m = zeroNormalFrame e r t ht hreg a m := by
-  let := zeroAtlas t ht hreg
-  apply SmoothRangeFrame.eq_of_ambient_eq
-  intro p
-  apply ContinuousLinearMap.ext
-  intro v
-  rw [zeroNormalFrame_ambient, zeroNormalFrame_ambient]
-  simp only [zeroColumns, outwardNormal, gradient_retraction_independent e r t r' ht p.val]
-  rfl
 
 end NoExoticSixSphere.EmbeddedTime

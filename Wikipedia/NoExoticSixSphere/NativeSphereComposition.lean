@@ -58,12 +58,5 @@ theorem productBasedMap_comp {l m n : ℕ} (f : Based m n) (g : Based l m) :
   rw [productSphereMap_product_formula, productSphereMap_product_formula,
     productSphereMap_product_formula, compactMap_comp]
 
-theorem suspension_mapHom {m n : ℕ} (f : Based m n) (d : ℕ) [NeZero d]
-    (c : π_ d (Sphere m) (spherePole m)) :
-    hom d n (mapHom f d c) =
-      mapHom (productBasedMap f) (d + 1) (hom d m c) := by
-  obtain ⟨g, rfl⟩ := sphereClass_surjective (Nat.pos_of_neZero d) c
-  rw [mapHom_sphereClass, hom_sphereClass, hom_sphereClass,
-    mapHom_sphereClass, productBasedMap_comp]
 
 end NoExoticSixSphere.SphereComposition

@@ -59,14 +59,5 @@ theorem cylinderHomeomorph_fst (A : ℝ × M → M) (hA : Continuous A)
     (hbij : ∀ t, Bijective (fun x => A (t, x))) (p : unitInterval × M) :
     (cylinderHomeomorph A hA hbij p).1 = p.1 := rfl
 
-/-- The inverse homeomorphism also preserves the actual time coordinate. -/
-theorem cylinderHomeomorph_symm_fst (A : ℝ × M → M) (hA : Continuous A)
-    (hbij : ∀ t, Bijective (fun x => A (t, x))) (p : unitInterval × M) :
-    ((cylinderHomeomorph A hA hbij).symm p).1 = p.1 := by
-  calc
-    ((cylinderHomeomorph A hA hbij).symm p).1 =
-        (cylinderHomeomorph A hA hbij ((cylinderHomeomorph A hA hbij).symm p)).1 :=
-      (cylinderHomeomorph_fst A hA hbij _).symm
-    _ = p.1 := congrArg Prod.fst ((cylinderHomeomorph A hA hbij).apply_symm_apply p)
 
 end Wikipedia.SmoothSixDPoincare.AmbientIsotopy

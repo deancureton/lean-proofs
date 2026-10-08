@@ -83,18 +83,5 @@ theorem nativeTarget_twoConnected_of_belt_zero
   exact ⟨inferInstance, fun x =>
     (SecondHurewicz.SimplyConnected.hurewiczPi2Equiv x).injective.subsingleton⟩
 
-theorem nativeTarget_twoConnected_of_single_dual
-    [SimplyConnectedSpace M] [Subsingleton (SingularHomology M 2)]
-    (g : C(Sphere 3, M)) (hg : ContMDiff (𝓡 3) (𝓡 6) ∞ g)
-    (q s : Sphere 3) (hpoint : g q = f s)
-    (hunique : ∀ x, g x ∈ range f → x = q)
-    (htrans : Surjective ((mfderiv (𝓡 3) (𝓡 6) g q).coprod
-      (mfderiv (𝓡 3) (𝓡 6) f s))) :
-    SimplyConnectedSpace (UnitSurgery.Target A hR) ∧
-      ∀ x : UnitSurgery.Target A hR, Subsingleton (π_ 2 (UnitSurgery.Target A hR) x) := by
-  apply nativeTarget_twoConnected_of_belt_zero f A hR
-  have h := nativeBelt_homology_zero_of_single_dual f A hR g hg q s hpoint hunique htrans
-  change singularHomologyMap (nativeBeltMap A hR) 2 (unitSphereTopClass 1) = 0
-  rw [h, LinearMap.zero_apply]
 
 end Wikipedia.HopfProblem.DegreeCollapse.TraceBody

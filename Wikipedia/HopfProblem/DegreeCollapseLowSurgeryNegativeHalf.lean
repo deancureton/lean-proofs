@@ -120,15 +120,5 @@ theorem negativeHalf_homology_subsingleton (k : ℕ)
       (TimeCollar.NonnegativeHalf (fun p ↦ -timeFunction A hR T p)) k) :=
   (negativeHalfHomologyEquiv A hR T k).symm.injective.subsingleton
 
-theorem negativeHalf_simplyConnected_iff :
-    SimplyConnectedSpace (TimeCollar.NonnegativeHalf (fun p ↦ -timeFunction A hR T p)) ↔
-      SimplyConnectedSpace (TimeCollar.NonnegativeHalf (fun p ↦ -T.time p)) := by
-  constructor
-  · intro h
-    let := h
-    exact (negativeHalfHomeomorph A hR T).toHomotopyEquiv.simplyConnectedSpace
-  · intro h
-    let := h
-    exact (negativeHalfHomeomorph A hR T).symm.toHomotopyEquiv.simplyConnectedSpace
 
 end Wikipedia.HopfProblem.DegreeCollapse.LowSurgery.FramedAttachingProduct.NativeSurgery

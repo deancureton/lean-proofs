@@ -125,22 +125,5 @@ theorem exists_tubularNeighborhood_in_open_of_embedded_starConvex_with_global_ze
     rintro _ ⟨p, hp, rfl⟩
     exact hp.2
 
-/-- The zero-section identity restricted to the specified compact source region. -/
-theorem exists_tubularNeighborhood_in_open_of_embedded_starConvex {f : D → M}
-    (hf : ContMDiff 𝓘(ℝ, D) 𝓘(ℝ, E) ∞ f) {K : Set D}
-    (hK : IsCompact K) (hz : (0 : D) ∈ K) (hstar : StarConvex ℝ (0 : D) K)
-    (hinj : InjOn f K)
-    (hi : ∀ x ∈ K, Injective (mfderiv 𝓘(ℝ, D) 𝓘(ℝ, E) f x))
-    (n : ℕ) (hcodim : finrank ℝ D + n = finrank ℝ E)
-    {O : Set M} (hO : IsOpen O) (hfO : MapsTo f K O) :
-    ∃ ε : ℝ, 0 < ε ∧
-      ∃ Φ : PartialDiffeomorph 𝓘(ℝ, D × EuclideanSpace ℝ (Fin n)) 𝓘(ℝ, E)
-          (D × EuclideanSpace ℝ (Fin n)) M ∞,
-        K ×ˢ Metric.closedBall 0 ε ⊆ Φ.source ∧
-        (∀ x ∈ K, Φ (x, 0) = f x) ∧ Φ.target ⊆ O := by
-  obtain ⟨ε, hε, Φ, hsource, hzero, htarget⟩ :=
-    exists_tubularNeighborhood_in_open_of_embedded_starConvex_with_global_zero
-      hf hK hz hstar hinj hi n hcodim hO hfO
-  exact ⟨ε, hε, Φ, hsource, fun x _ => hzero x, htarget⟩
 
 end Wikipedia.SmoothSixDPoincare

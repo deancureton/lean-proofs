@@ -144,10 +144,5 @@ theorem piMulEquiv_apply (n : ℕ) (v : Total) (c : π_ (n + 3) (Total) v) :
     piMulEquiv n v c =
       map (N := Fin (n + 3)) (sphereMap) v c := rfl
 
-theorem piMulEquiv_zero (v : Total) :
-    piMulEquiv 0 v = hopfPi3MulEquiv v := by
-  apply MulEquiv.ext
-  intro c
-  rfl
 
 end NoExoticSixSphere.HigherHopf

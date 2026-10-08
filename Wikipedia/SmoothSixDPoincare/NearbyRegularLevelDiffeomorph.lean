@@ -103,30 +103,5 @@ theorem exists_nearby_level_diffeomorphs_of_nonempty [Nonempty {x : M // f x = b
     Ψ hsource hheight hband
   exact ⟨e⟩
 
-/-- Nearby regular levels are diffeomorphic, also when the original level is empty. -/
-theorem exists_nearby_level_diffeomorphs :
-    ∃ ε : ℝ, 0 < ε ∧ ∀ t : ℝ, |t| < ε →
-      ∀ hregt : ∀ x, f x = b + t → x ∉ ManifoldMorse.criticalPoints E f,
-        letI := chartedSpace hf hreg
-        letI := chartedSpace hf hregt
-        Nonempty (Diffeomorph 𝓘(ℝ, Model E) 𝓘(ℝ, Model E)
-          {x : M // f x = b} {x : M // f x = b + t} ∞) := by
-  classical
-  by_cases hb : Nonempty {x : M // f x = b}
-  · let _ := hb
-    exact exists_nearby_level_diffeomorphs_of_nonempty hf hreg
-  · let _ : IsEmpty {x : M // f x = b} := not_nonempty_iff.mp hb
-    have hlevel : ∀ x, f x = b → x ∈ (∅ : Set M) :=
-      fun x hx => (hb ⟨⟨x, hx⟩⟩).elim
-    obtain ⟨ε, hε, hband⟩ := exists_heightBand_subset_open hf.continuous isOpen_empty hlevel
-    refine ⟨ε, hε, ?_⟩
-    intro t ht hregt
-    let _ := chartedSpace hf hreg
-    let _ := chartedSpace hf hregt
-    let _ : IsEmpty {x : M // f x = b + t} := ⟨fun x => by
-      apply hband
-      change dist (f x) b < ε
-      simpa only [x.property, Real.dist_eq, add_sub_cancel_left] using ht⟩
-    exact ⟨Diffeomorph.empty⟩
 
 end Wikipedia.SmoothSixDPoincare.RegularLevel

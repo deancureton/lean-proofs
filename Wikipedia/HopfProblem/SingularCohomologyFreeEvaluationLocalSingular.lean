@@ -76,18 +76,6 @@ theorem singularEvaluationSuccEquiv_symm_evaluate (n : ℕ)
     singularEvaluation X (n + 1) ((singularEvaluationSuccEquiv X n).symm φ) b = φ b :=
   LinearMap.congr_fun ((singularEvaluationSuccEquiv X n).apply_symm_apply φ) b
 
-/-- Equality of actual cohomology classes can be detected by evaluation,
-without hypotheses on any other homology degree. -/
-theorem singularCohomology_succ_eq_iff_evaluation (n : ℕ)
-    [Module.Projective ℤ (SingularHomology X n)]
-    (a b : SingularCohomology X (n + 1)) :
-    a = b ↔ ∀ z : SingularHomology X (n + 1),
-      singularEvaluation X (n + 1) a z = singularEvaluation X (n + 1) b z := by
-  constructor
-  · rintro rfl z
-    rfl
-  · intro h
-    exact (singularEvaluation_succ_injective X n) (LinearMap.ext h)
 
 section Naturality
 
@@ -103,16 +91,6 @@ theorem singularEvaluationSuccEquiv_naturality (a : SingularCohomology Y (n + 1)
       singularEvaluationSuccEquiv Y n a (singularHomologyMap f (n + 1) b) :=
   singularEvaluation_naturality f (n + 1) a b
 
-/-- The inverse sends precomposition with actual homology maps to the actual cohomology pullback. -/
-theorem singularEvaluationSuccEquiv_symm_naturality
-    (φ : SingularHomology Y (n + 1) →ₗ[ℤ] ℤ) :
-    singularCohomologyPullback f (n + 1) ((singularEvaluationSuccEquiv Y n).symm φ) =
-      (singularEvaluationSuccEquiv X n).symm (φ.comp (singularHomologyMap f (n + 1))) := by
-  apply (singularEvaluationSuccEquiv X n).injective
-  ext b
-  rw [singularEvaluationSuccEquiv_naturality, LinearEquiv.apply_symm_apply,
-    LinearEquiv.apply_symm_apply]
-  rfl
 
 end Naturality
 

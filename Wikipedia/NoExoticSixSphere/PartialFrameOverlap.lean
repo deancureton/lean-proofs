@@ -75,10 +75,6 @@ def overlapLeft : C(Overlap v c d, Patch v c) :=
 def overlapRight : C(Overlap v c d, Patch v d) :=
   ContinuousMap.inclusion inter_subset_right
 
-theorem overlapLeft_fiber (p : ↥(baseSet c ∩ baseSet d) × Space n r) :
-    patchFiber v c (overlapLeft v c d ((overlapHomeomorph v c d).symm p)) = p.2 := by
-  change (toCoordinates v c (fromCoordinates v c (p.1.val, p.2))).2 = p.2
-  rw [toCoordinates_fromCoordinates]
 
 theorem overlapRight_fiber (p : ↥(baseSet c ∩ baseSet d) × Space n r) :
     patchFiber v d (overlapRight v c d ((overlapHomeomorph v c d).symm p)) =

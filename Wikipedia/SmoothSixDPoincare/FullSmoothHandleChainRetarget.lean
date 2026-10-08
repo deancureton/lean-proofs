@@ -48,25 +48,6 @@ theorem retarget_sourceMap (c : FullSmoothHandleChain J dimension U V k)
   | @cap U V W k N _ _ _ j hj hopen hdim r c ih =>
       exact ih e (r.body (FaceAttachment.oldMap (U.capFaceMap j) x))
 
-theorem retarget_piecesMap (c : FullSmoothHandleChain J dimension U V k)
-    (e : SmoothBoundaryBody.Equiv V W) (z : c.pieces) :
-    (c.retarget e).piecesMap (c.retargetPieces e z) = e.body (c.piecesMap z) := by
-  induction c with
-  | nil r => exact PEmpty.elim z
-  | birth D hdim r c ih =>
-      cases z with
-      | inl z => exact c.retarget_sourceMap e (r.body (Sum.inr z))
-      | inr z => exact ih e z
-  | @interior U V W k E F _ _ _ _ _ _ m n _ _ A P hdim r c ih =>
-      cases z with
-      | inl z =>
-          exact c.retarget_sourceMap e
-            (r.body (FaceAttachment.handleMap (FramedSurgery.bodyFaceMap A U.inclusion) z))
-      | inr z => exact ih e z
-  | @cap U V W k N _ _ _ j hj hopen hdim r c ih =>
-      cases z with
-      | inl z => exact c.retarget_sourceMap e (r.body (FaceAttachment.handleMap (U.capFaceMap j) z))
-      | inr z => exact ih e z
 
 theorem retarget_indices (c : FullSmoothHandleChain J dimension U V k)
     (e : SmoothBoundaryBody.Equiv V W) : (c.retarget e).indices = c.indices := by

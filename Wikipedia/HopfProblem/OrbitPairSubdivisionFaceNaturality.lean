@@ -54,17 +54,5 @@ theorem barycentricHomeomorph_naturality {m n : ℕ} (f : ⦋m⦌ ⟶ ⦋n⦌) [
   congrArg (fun g : C(SSet.toTop.obj (SimplexCategory.sd.{u}.obj ⦋m⦌), Simplex n) ↦ g z)
     (barycentricMap_naturality f)
 
-theorem stdSimplexSubdivisionHomeomorph_naturality {m n : ℕ}
-    (f : ⦋m⦌ ⟶ ⦋n⦌) [Mono f]
-    (z : SSet.toTop.obj (SSet.sd.obj (SSet.stdSimplex.{u}.obj ⦋m⦌))) :
-    stdSimplexSubdivisionHomeomorph n ((SSet.toTop.map (SSet.sd.map (SSet.stdSimplex.map f))) z) =
-      stdSimplex.map f.toOrderHom (stdSimplexSubdivisionHomeomorph m z) := by
-  have h := congrArg
-    (fun g : SSet.sd.obj (SSet.stdSimplex.{u}.obj ⦋m⦌) ⟶ SimplexCategory.sd.obj ⦋n⦌ ↦
-      (SSet.toTop.map g) z) (SSet.stdSimplex.sdIso.hom.naturality f)
-  simp only [Functor.map_comp, CategoryTheory.comp_apply] at h
-  exact (congrArg (barycentricHomeomorph n) h).trans
-    (barycentricHomeomorph_naturality f
-      ((SSet.toTop.map (SSet.stdSimplex.sdIso.hom.app ⦋m⦌)) z))
 
 end Wikipedia.HopfProblem.OrbitPair.Subdivision

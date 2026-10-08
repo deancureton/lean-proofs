@@ -36,9 +36,6 @@ theorem initialInjective_of_nonsingular {X : SSet.{u}} [X.Nonsingular] {n : ℕ}
   intro l f g _ h
   exact SSet.Nonsingular.injective_map z hz h
 
-theorem regular_of_nonsingular (X : SSet.{u}) [X.Nonsingular] : Regular X := by
-  intro n z hz
-  exact pushout z (initialInjective_of_nonsingular z hz)
 
 theorem realized_pushout {X : SSet.{u}} {n : ℕ} (z : X _⦋n + 1⦌)
     (hz : InitialInjective z) :
@@ -56,9 +53,6 @@ theorem dual_initialInjective (X : SSet.{u}) {n : ℕ} (z : (dualSd.obj X) _⦋n
   intro l f g hf h
   exact dual_map_injective_at_initial X z hz f g hf h
 
-theorem dual_regular (X : SSet.{u}) : InitialFace.Regular (dualSd.obj X) := by
-  intro n z hz
-  exact InitialFace.pushout z (dual_initialInjective X z hz)
 
 theorem dual_realized_regular_pushout (X : SSet.{u}) {n : ℕ}
     (z : (dualSd.obj X) _⦋n + 1⦌) (hz : z ∈ (dualSd.obj X).nonDegenerate (n + 1)) :

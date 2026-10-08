@@ -39,12 +39,6 @@ theorem generator_step (k : ℕ) : StableThirdAttaching.stepHom k (generator k) 
   apply (StableThirdAttaching.groupEquiv (k + 1)).injective
   rw [StableThirdAttaching.groupEquiv_stepHom, generator_coordinate, generator_coordinate]
 
-theorem orderOf_generator (k : ℕ) : orderOf (generator k) = 24 := by
-  rw [← orderOf_injective (StableThirdAttaching.groupEquiv k).toMonoidHom
-    (StableThirdAttaching.groupEquiv k).injective (generator k)]
-  change orderOf (StableThirdAttaching.groupEquiv k (generator k)) = 24
-  rw [generator_coordinate]
-  exact ZMod.addOrderOf_one 24
 
 def representative : (k : ℕ) → Based (k + 8) (k + 5)
   | 0 => (sphereClass_surjective (by decide : 0 < 8) (generator 0)).choose
@@ -97,9 +91,6 @@ theorem stableSquare_eq_stage (k : ℕ) :
     rw [← squareClass_step, CubicalStableSix.ofNative_stepHom]
     exact ih
 
-theorem stableSquare_pow_twentyFour : stableSquare ^ 24 = 1 := by
-  change CubicalStableSix.ofNativeHom 6 (squareClass 0) ^ 24 = 1
-  rw [← map_pow, squareClass_pow_twentyFour, map_one]
 
 theorem stableSquare_eq_one_iff : stableSquare = 1 ↔ squareClass 0 = 1 :=
   CubicalStableSix.ofNative_eq_one_iff_native (by decide) (squareClass 0)

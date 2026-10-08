@@ -104,14 +104,6 @@ theorem cubeSimplex_sorted {n : ℕ} (e : Equiv.Perm (Fin n)) (s : Simplex n) :
         simpa only [← Fin.castSucc_succ, cubeBarycentric_inner]
           using cubeSimplex_adjacent_difference e s i
 
-theorem cubeSimplex_range {n : ℕ} (e : Equiv.Perm (Fin n)) :
-    Set.range (cubeSimplex e) = cubeOrderedRegion e := by
-  ext u
-  constructor
-  · rintro ⟨s, rfl⟩
-    exact cubeSimplex_sorted e s
-  · intro hu
-    exact ⟨cubeSimplexInverse e ⟨u, hu⟩, cubeSimplex_inverse e ⟨u, hu⟩⟩
 
 theorem cubeSimplex_injective {n : ℕ} (e : Equiv.Perm (Fin n)) :
     Function.Injective (cubeSimplex e) := by

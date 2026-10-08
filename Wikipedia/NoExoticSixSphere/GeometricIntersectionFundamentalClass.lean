@@ -69,13 +69,6 @@ theorem modTwoHomologyIntersection_standardSphereClass (f g : C(Sphere 3, M)) :
   exact (modTwoHomologyIntersection_standardBasedClass e r m F G).trans
     (sphereIntersectionNumber_homotopic e r f F.val g G.val hF hG).symm
 
-theorem modTwoHomologyIntersection_basepoint_independent
-    (m' : M) [Subsingleton (π_ 2 M m')] :
-    modTwoHomologyIntersection e r m = modTwoHomologyIntersection e r m' := by
-  apply modTwoHomologyIntersection_unique e r m'
-  intro f g
-  rw [modTwoSphereClass_eq_standard f, modTwoSphereClass_eq_standard g]
-  exact modTwoHomologyIntersection_standardSphereClass e r m f.val g.val
 
 include m h₂ in
 theorem sphereIntersectionNumber_eq_of_homologyClass_eq

@@ -89,32 +89,7 @@ def indices (c : FullSmoothHandleChain J dimension U V k) : List ℕ := by
       exact Module.finrank ℝ E :: ih
   | @cap U V W k N _ _ _ j hj hopen _ r _ ih => exact Module.finrank ℝ N :: ih
 
-theorem indices_length (c : FullSmoothHandleChain J dimension U V k) : c.indices.length = k := by
-  induction c with
-  | nil _ => rfl
-  | birth _ _ _ _ ih => exact congrArg Nat.succ ih
-  | interior _ _ _ _ _ ih => exact congrArg Nat.succ ih
-  | cap _ _ _ _ _ _ ih => exact congrArg Nat.succ ih
 
-theorem indices_le_dimension (c : FullSmoothHandleChain J dimension U V k) :
-    ∀ a ∈ c.indices, a ≤ dimension := by
-  induction c with
-  | nil _ => simp only [indices, List.not_mem_nil, false_implies, implies_true]
-  | birth D hdim r tail ih =>
-      intro a ha
-      rcases List.mem_cons.mp ha with h | h
-      · exact h ▸ Nat.zero_le dimension
-      · exact ih a h
-  | @interior U V W k E F _ _ _ _ _ _ m n _ _ A P hdim r tail ih =>
-      intro a ha
-      rcases List.mem_cons.mp ha with h | h
-      · omega
-      · exact ih a h
-  | @cap U V W k N _ _ _ j hj hopen hdim r tail ih =>
-      intro a ha
-      rcases List.mem_cons.mp ha with h | h
-      · exact h ▸ hdim.le
-      · exact ih a h
 
 end FullSmoothHandleChain
 end Wikipedia.SmoothSixDPoincare

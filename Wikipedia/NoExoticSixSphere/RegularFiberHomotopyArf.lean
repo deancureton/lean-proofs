@@ -49,19 +49,5 @@ theorem geometricArf_eq_zero_of_homotopic_sixSphere_fiber
   exact CircleCylinder.leftEndpointArf_eq_zero_of_right_sixSphere d hd
     (Classical.choice (inferInstance : Nonempty (Sphere 1)), a) x hX
 
-theorem not_homotopic_sixSphere_fiber_of_geometricArf_ne_zero
-    (hX : {x : Sphere m // g x = b} ≃ₜ Sphere 6) :
-    letI := regularFiberAtlas f hf b hregf 6 (by simpa using hd);
-    letI := regularFiber_isManifold f hf b hregf 6 _;
-    letI := fiber_compact f b;
-    ∀ r : (embedding f hf b hregf 6 hd).TubularRetraction,
-      GeometricArf.invariant (embedding f hf b hregf 6 hd) (frame f hf b hregf 6 hd a) r x ≠ 0 →
-        ¬ f.Homotopic g := by
-  let := regularFiberAtlas f hf b hregf 6 (by simpa using hd)
-  let := regularFiber_isManifold f hf b hregf 6 (by simpa using hd)
-  let := fiber_compact f b
-  intro r hArf hH
-  exact hArf (geometricArf_eq_zero_of_homotopic_sixSphere_fiber
-    f g hf hg b hregf hregg hd a x hX hH r)
 
 end NoExoticSixSphere.RegularSphereFiber

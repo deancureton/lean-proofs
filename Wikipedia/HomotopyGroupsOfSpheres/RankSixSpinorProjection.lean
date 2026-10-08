@@ -90,14 +90,5 @@ theorem exists_unit_fixed (J : OrthogonalComplexStructures.Space 6) :
   rw [map_smul]
   exact congrArg (fun w : Spinor ↦ ‖v‖⁻¹ • w) hfix
 
-theorem range_fromSpinor :
-    Set.range fromSpinor = {J | pfaffian (matrix J) = -1} := by
-  ext J
-  constructor
-  · rintro ⟨q, rfl⟩
-    exact pfaffian_fromSpinor q
-  · intro hJ
-    obtain ⟨q, hq⟩ := exists_unit_fixed J
-    exact ⟨q, fromSpinor_eq_of_fixed J hJ q hq⟩
 
 end NoExoticSixSphere.RankSixComplexProjection

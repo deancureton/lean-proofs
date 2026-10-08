@@ -113,21 +113,5 @@ theorem endpoint_map_eq_iff (β : Cutoff) (x y : Vector 3) :
     · exact axis_crossing β
     · exact (axis_crossing β).symm
 
-theorem endpoint_pairs (β : Cutoff) :
-    {p : Vector 3 × Vector 3 | p.1 ≠ p.2 ∧ map β.value 1 p.1 = map β.value 1 p.2} =
-      {(axis 1, axis (-1)), (axis (-1), axis 1)} := by
-  have hne : axis (1 : ℝ) ≠ axis (-1) := axis_ne_neg (by norm_num)
-  ext p
-  rcases p with ⟨x, y⟩
-  simp only [mem_setOf_eq, endpoint_map_eq_iff, mem_insert_iff, mem_singleton_iff,
-    Prod.mk.injEq]
-  constructor
-  · rintro ⟨hne', h | h | h⟩
-    · exact (hne' h).elim
-    · exact Or.inl h
-    · exact Or.inr h
-  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩)
-    · exact ⟨hne, Or.inr (Or.inl ⟨rfl, rfl⟩)⟩
-    · exact ⟨hne.symm, Or.inr (Or.inr ⟨rfl, rfl⟩)⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.SupportedCusp

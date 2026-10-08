@@ -65,13 +65,5 @@ theorem kernel_eq_span {L : BlockMap E F} (hL : L ∈ chart) (hr : residual L = 
     have hx := congrArg Prod.fst ha
     simpa only [Prod.smul_fst, smul_neg, neg_smul] using hx.symm
 
-theorem finrank_range_of_singular {L : BlockMap E F} (hL : L ∈ chart)
-    (hr : residual L = 0) : finrank ℝ L.range = finrank ℝ E := by
-  have hn : (-(leading L).inverse (column L).1, (1 : ℝ)) ≠ 0 := by
-    intro h
-    exact one_ne_zero (congrArg Prod.snd h)
-  have h := L.toLinearMap.finrank_range_add_finrank_ker
-  rw [kernel_eq_span hL hr, finrank_span_singleton hn, finrank_prod, finrank_self] at h
-  omega
 
 end NoExoticSixSphere.CorankOne

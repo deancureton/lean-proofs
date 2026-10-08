@@ -55,14 +55,6 @@ theorem exists_separating_patch_in_open (f : C(E, N)) {C : Set E} (hC : IsClosed
   refine ⟨p, (fun _ ht => (hβ ht).1), β.eq_one, ?_, fun _ hz => hz.2⟩
   exact image_eq_zero_of_notMem_tsupport (fun ht => (hβ ht).2 (Or.inr rfl))
 
-/-- A separating patch without a target-open constraint. -/
-theorem exists_separating_patch (f : C(E, N)) {C : Set E} (hC : IsClosed C)
-    {x y : E} (hx : x ∉ C) (hxy : x ≠ y) :
-    ∃ p : MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C,
-      p.Compatible f ∧ p.cutoff x = 1 ∧ p.cutoff y = 0 := by
-  obtain ⟨p, hc, hx, hy, _⟩ :=
-    exists_separating_patch_in_open (J := J) f hC hx hxy isOpen_univ (mem_univ _)
-  exact ⟨p, hc, hx, hy⟩
 
 /-- Move an unfixed member using a chart contained in the prescribed open target. -/
 theorem exists_separating_patch_of_not_both_fixed_in_open (f : C(E, N)) {C : Set E}
@@ -79,14 +71,5 @@ theorem exists_separating_patch_of_not_both_fixed_in_open (f : C(E, N)) {C : Set
       exists_separating_patch_in_open (J := J) f hC hx hxy hO (hxO hx)
     exact ⟨p, hp, by rw [hpx, hpy]; exact one_ne_zero, hs⟩
 
-/-- If a pair is not entirely fixed, one orientation supplies a separating patch. -/
-theorem exists_separating_patch_of_not_both_fixed (f : C(E, N)) {C : Set E}
-    (hC : IsClosed C) {x y : E} (hxy : x ≠ y) (hfixed : ¬ (x ∈ C ∧ y ∈ C)) :
-    ∃ p : MapAvoidancePatch 𝓘(ℝ, E) J (N := N) C,
-      p.Compatible f ∧ p.cutoff x ≠ p.cutoff y := by
-  obtain ⟨p, hc, hne, _⟩ :=
-    exists_separating_patch_of_not_both_fixed_in_open (J := J) f hC hxy hfixed
-      isOpen_univ (fun _ => mem_univ _) (fun _ => mem_univ _)
-  exact ⟨p, hc, hne⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

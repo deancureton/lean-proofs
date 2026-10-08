@@ -71,10 +71,6 @@ theorem iterationAffineMap_coordinateVertex (P : PartOrd.{u}) [Fintype P] (r : �
   letI : Fintype P := Fintype.ofFinite P
   exact affineValue_coordinateVertex P (coordinates P (iterationHomeomorph P r z))
 
-theorem iteratedCoordinateMap_isClosedEmbedding (P : PartOrd.{u}) [Finite P] (r : ℕ) :
-    IsClosedEmbedding (iteratedCoordinateMap P r) := by
-  letI : Fintype P := Fintype.ofFinite P
-  exact (coordinateMap_isClosedEmbedding P).comp (iterationHomeomorph P r).isClosedEmbedding
 
 theorem iteratedCoordinateMap_mesh (P : PartOrd.{u}) [Fintype P] (r k : ℕ)
     (x : (nerve ((iteratedChains r).obj P)) _⦋k⦌) (t s : Simplex k) :
@@ -91,21 +87,5 @@ theorem iteratedCoordinateMap_mesh (P : PartOrd.{u}) [Fintype P] (r k : ℕ)
       (characteristic (nerve ((iteratedChains r).obj P)) k x s))
   exact he.symm.le.trans (by simpa only [mul_one] using h)
 
-theorem exists_iteratedCoordinateMap_mesh_lt (P : PartOrd.{u}) [Fintype P]
-    (ε : ℝ) (hε : 0 < ε) :
-    ∃ R : ℕ, ∀ r ≥ R, ∀ k : ℕ, ∀ x : (nerve ((iteratedChains r).obj P)) _⦋k⦌,
-      ∀ t s : Simplex k,
-        dist (iteratedCoordinateMap P r
-          (characteristic (nerve ((iteratedChains r).obj P)) k x t))
-          (iteratedCoordinateMap P r
-            (characteristic (nerve ((iteratedChains r).obj P)) k x s)) < ε := by
-  obtain ⟨R, hR⟩ := exists_iterationAffineMap_mesh_lt P (coordinateVertex P) (Fintype.card P)
-    (chainCardBound_finite P) 1 (by norm_num) (coordinateVertex_dist_le P) ε hε
-  refine ⟨R, fun r hr k x t s ↦ ?_⟩
-  have he := congrArg₂ dist (iterationAffineMap_coordinateVertex P r
-    (characteristic (nerve ((iteratedChains r).obj P)) k x t))
-    (iterationAffineMap_coordinateVertex P r
-      (characteristic (nerve ((iteratedChains r).obj P)) k x s))
-  exact he.symm.trans_lt (hR r hr k x t s)
 
 end Wikipedia.HopfProblem.OrbitPair.FinitePoset

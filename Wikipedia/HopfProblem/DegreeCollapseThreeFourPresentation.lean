@@ -71,22 +71,6 @@ theorem presentation_succ_map
             ((presentation S hf r hthree c (Nat.lt_of_succ_lt hc)
               (indexFourBlock_mono S (Nat.le_succ c) hfour)).map v)) := rfl
 
-theorem presentation_succ_column_zero
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (r c : ℕ)
-    (hthree : S.HasIndexThreeBlock 0 r) (hc : r + (c + 1) < S.count)
-    (hfour : HasIndexFourBlock S r (c + 1)) :
-    (S.consecutiveBandData hf ⟨r + c, Nat.lt_of_succ_lt hc⟩
-      ⟨r + (c + 1), hc⟩ rfl).homologyEquiv 3
-        ((presentation S hf r hthree c (Nat.lt_of_succ_lt hc)
-          (indexFourBlock_mono S (Nat.le_succ c) hfour)).map
-            ((presentation S hf r hthree (c + 1) hc hfour).columns 0)) =
-      IndexFour.indexFourAttachingClass (S.data (S.point ⟨r + (c + 1), hc⟩))
-        (indexFourBlock_last S r c hc hfour) := by
-  let P := presentation S hf r hthree c (Nat.lt_of_succ_lt hc)
-    (indexFourBlock_mono S (Nat.le_succ c) hfour)
-  let B := S.consecutiveBandData hf ⟨r + c, Nat.lt_of_succ_lt hc⟩ ⟨r + (c + 1), hc⟩ rfl
-  exact IndexFour.indexFourPresentation_column_zero (S.data (S.point ⟨r + (c + 1), hc⟩))
-    hf.continuous (indexFourBlock_last S r c hc hfour) (P.transport (B.homologyEquiv 3))
 
 theorem presentation_succ_column_succ
     (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (r c : ℕ)

@@ -41,16 +41,6 @@ theorem projectionDegree_toAdd (a : π_ 7 SpTwo 1) :
   change (piSevenSpTwoMulEquiv a).toAdd • generatorProjectionDegree = _
   exact zsmul_eq_mul _ _
 
-theorem projectionDegree_range_eq_zpowers_generator :
-    projectionDegree.range = Subgroup.zpowers (Multiplicative.ofAdd generatorProjectionDegree) := by
-  ext k
-  constructor
-  · rintro ⟨a, rfl⟩
-    rw [projectionDegree_eq_generator_zpow]
-    exact Subgroup.zpow_mem_zpowers _ _
-  · intro hk
-    obtain ⟨l, rfl⟩ := Subgroup.mem_zpowers_iff.mp hk
-    exact ⟨piSevenSpTwoGenerator ^ l, map_zpow projectionDegree _ _⟩
 
 theorem projected_degree_iff_generator_dvd (k : ℤ) :
     (∃ a : π_ 7 SpTwo 1, projectionDegree a = Multiplicative.ofAdd k) ↔

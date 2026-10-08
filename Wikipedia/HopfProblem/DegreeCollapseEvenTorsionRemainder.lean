@@ -50,23 +50,5 @@ theorem strict_even_remainder (l p : ℤ) (hl : 0 < l) (hp : ¬ l ∣ p) :
     simpa only [Int.natCast_natAbs] using ha
   exact_mod_cast hc
 
-theorem exists_strict_even_quotient {G : Type*} [AddCommGroup G] (ε μ : G)
-    (hμ : Function.Injective (fun k : ℤ ↦ k • μ)) (l p : ℤ) (hl : 0 < l)
-    (hp : ¬ l ∣ p) (h : l • ε + p • μ = 0) (hfinite : (AddSubgroup.zmultiples μ).index ≠ 0) :
-    ∃ j : ℤ, (AddSubgroup.zmultiples (ε + (2 * j) • μ)).index ≠ 0 ∧
-      (AddSubgroup.zmultiples (ε + (2 * j) • μ)).index < (AddSubgroup.zmultiples μ).index := by
-  obtain ⟨j, hne, hsmall⟩ := strict_even_remainder l p hl hp
-  refine ⟨j, strict_index_decrease (ε + (2 * j) • μ) μ hμ l
-    (p - 2 * l * j) hne hsmall ?_ hfinite⟩
-  calc
-    l • (ε + (2 * j) • μ) + (p - 2 * l * j) • μ = l • ε + p • μ := by
-      rw [zsmul_add, sub_zsmul]
-      have he : l • ((2 * j) • μ) = (2 * l * j) • μ := by
-        rw [← mul_zsmul]
-        congr 1
-        ring
-      rw [he]
-      abel
-    _ = 0 := h
 
 end Wikipedia.HopfProblem.DegreeCollapse.CyclicSurgeryIndex

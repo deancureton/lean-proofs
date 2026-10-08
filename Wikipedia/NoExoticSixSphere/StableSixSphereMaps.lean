@@ -30,15 +30,6 @@ theorem nullClass_eq_stage (k : ℕ) :
   change transition 0 k (Nat.zero_le k) (stageZero 0) = transition k k le_rfl (stageZero k)
   rw [transition_stageZero, transition_self]
 
-theorem ofMap_suspend {k : ℕ} (f : StageMap k) :
-    ofMap (SphereMapSuspension.map f) = ofMap f := by
-  have h := DirectLimit.eq_of_le (f := transitionHom) ⟨k, classOf f⟩ (k + 1) (Nat.le_succ k)
-  have ht : transition k (k + 1) (Nat.le_succ k) (classOf f) =
-      classOf (SphereMapSuspension.map f) := Nat.leRecOn_succ' (classOf f)
-  change ofMap f = (Quotient.mk _ ⟨k + 1,
-    transition k (k + 1) (Nat.le_succ k) (classOf f)⟩ : Class) at h
-  rw [ht] at h
-  exact h.symm
 
 theorem ofMap_eq_nullClass_iff_lift {k : ℕ} (f : StageMap k) :
     ofMap f = nullClass ↔ ∃ (l : ℕ) (h : k ≤ l), (liftMap h f).Nullhomotopic := by

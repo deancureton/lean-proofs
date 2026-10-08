@@ -90,24 +90,5 @@ theorem smallConnectingMap_cycleClass (n : ℕ) (c : Cycle (smallComplex U V) (n
       cycleClass (singularComplex (U ∩ V : Set X)) n z₁ :=
   connectingMap_cycleClass (chainSequence_shortExact U V) n c z₂ hz₂ z₁ hz₁
 
-/-- The full open-cover connecting map has the same concrete lift--boundary
-formula on the actual ambient class of a small singular cycle. -/
-theorem connectingHomomorphism_cycleClass
-    (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = Set.univ)
-    (n : ℕ) (c : Cycle (smallComplex U V) (n + 1))
-    (z₂ : (middleComplex U V).X (n + 1))
-    (hz₂ : ((rightMap U V).f (n + 1)).hom z₂ = c.1)
-    (z₁ : Cycle (singularComplex (U ∩ V : Set X)) n)
-    (hz₁ : ((leftMap U V).f n).hom z₁.1 =
-      ((middleComplex U V).d (n + 1) n).hom z₂) :
-    connectingHomomorphism U V hU hV hcover n
-        (cycleClass (singularComplex X) (n + 1)
-          (mapCycles (smallInclusion U V) (n + 1) c)) =
-      cycleClass (singularComplex (U ∩ V : Set X)) n z₁ := by
-  rw [← homologyMap_cycleClass]
-  change connectingHomomorphism U V hU hV hcover n
-    (smallHomologyComparison U V (n + 1) (cycleClass (smallComplex U V) (n + 1) c)) = _
-  rw [connectingHomomorphism_comparison]
-  exact smallConnectingMap_cycleClass U V n c z₂ hz₂ z₁ hz₁
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

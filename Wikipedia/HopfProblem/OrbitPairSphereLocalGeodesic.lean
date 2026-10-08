@@ -75,19 +75,6 @@ theorem log_base : d.log x = 0 := by
 
 def segmentTo (y : Vector n) (l u t : ℝ) : Vector n := segment x (d.log y) l u t
 
-theorem contDiffOn_segmentTo_family (l u : ℝ) :
-    ContDiffOn ℝ ∞ (fun p : ℝ × Vector n => d.segmentTo p.2 l u p.1)
-      (univ ×ˢ d.domain) := by
-  have hs : ContDiffOn ℝ ∞ (Prod.snd : ℝ × Vector n → Vector n) (univ ×ˢ d.domain) :=
-    contDiff_snd.contDiffOn
-  have hl : ContDiffOn ℝ ∞ (fun p : ℝ × Vector n => d.log p.2) (univ ×ˢ d.domain) :=
-    d.contDiffOn_log.comp hs (fun p hp => hp.2)
-  have hp : ContDiffOn ℝ ∞ (fun p : ℝ × Vector n => (p.1, d.log p.2))
-      (univ ×ˢ d.domain) := contDiffOn_fst.prodMk hl
-  have h := (contDiff_segment_family x l u).comp_contDiffOn hp
-  change ContDiffOn ℝ ∞ (fun p : ℝ × Vector n => segment x (d.log p.2) l u p.1)
-    (univ ×ˢ d.domain)
-  exact h
 
 theorem segmentTo_start (y : Vector n) (l u : ℝ) : d.segmentTo y l u l = x :=
   segment_start x _ l u
@@ -102,15 +89,6 @@ theorem segmentTo_base (l u t : ℝ) : d.segmentTo x l u t = x := by
 theorem norm_segmentTo (hx : ‖x‖ = 1) (y : Vector n) (l u t : ℝ) :
     ‖d.segmentTo y l u t‖ = 1 := norm_segment hx _ l u t
 
-theorem segmentTo_energy_angle (hx : ‖x‖ = 1) (hε : ε ≤ Real.pi / 2)
-    {y : Vector n} (hunit : ‖y‖ = 1) (hy : y ∈ d.domain) (l u : ℝ) :
-    SpherePathEnergy.energy (d.segmentTo y l u) l u =
-      Real.arccos (inner ℝ x y) ^ 2 / (u - l) := by
-  change SpherePathEnergy.energy (segment x (d.log y) l u) l u = _
-  rw [energy_segment hx]
-  have h := endpoint_angle_sq hx (d.log y) ((d.norm_log_lt hy).le.trans hε)
-  rw [d.curve_log hx hunit hy] at h
-  rw [h]
 
 theorem segmentTo_energy_le (hx : ‖x‖ = 1) (hε : ε ≤ Real.pi / 2)
     {γ : ℝ → Vector n} (hγ : ContDiff ℝ ∞ γ) (hunit : ∀ t, ‖γ t‖ = 1)

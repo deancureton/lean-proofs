@@ -39,14 +39,6 @@ def oldZeroInclusion : {x : M // t x = 0} → {x : M // τ x = 0} :=
 theorem oldZeroInclusion_val (p : {x : M // t x = 0}) :
     (oldZeroInclusion Φ hΦ t τ hpos hout p).val = p.val := rfl
 
-theorem range_oldZeroInclusion : range (oldZeroInclusion Φ hΦ t τ hpos hout) =
-    {q : {x : M // τ x = 0} | t q.val = 0} := by
-  ext q
-  constructor
-  · rintro ⟨p, rfl⟩
-    exact p.property
-  · intro hq
-    exact ⟨⟨q.val, hq⟩, Subtype.ext rfl⟩
 
 variable (ht : ContMDiff (𝓡 7) 𝓘(ℝ, ℝ) ∞ t)
   (hτ : ContMDiff (𝓡 7) 𝓘(ℝ, ℝ) ∞ τ)

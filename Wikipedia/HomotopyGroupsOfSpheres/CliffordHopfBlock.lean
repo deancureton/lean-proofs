@@ -98,15 +98,6 @@ theorem boundaryUnitary_val (q : EquatorSphere) :
 theorem boundaryUnitary_equatorPole : boundaryUnitary equatorPole = 1 :=
   mul_inv_cancel _
 
-theorem boundaryUnitary_det (q : EquatorSphere) : (boundaryUnitary q).val.det = 1 := by
-  have hq : ∑ k, q.val k ^ 2 = 1 := by
-    rw [← EuclideanSpace.real_norm_sq_eq, mem_sphere_zero_iff_norm.mp q.property]
-    norm_num
-  simp only [Fin.sum_univ_succ, Fin.sum_univ_zero, add_zero] at hq
-  change q.val 0 ^ 2 + (q.val 1 ^ 2 + (q.val 2 ^ 2 + q.val 3 ^ 2)) = 1 at hq
-  rw [boundaryUnitary_val]
-  apply Complex.ext <;>
-    norm_num [Matrix.det_fin_two, Complex.mul_re, Complex.mul_im] <;> nlinarith [hq]
 
 theorem continuous_boundaryUnitary : Continuous boundaryUnitary :=
   continuous_const.mul continuous_offDiagonalUnitary.inv

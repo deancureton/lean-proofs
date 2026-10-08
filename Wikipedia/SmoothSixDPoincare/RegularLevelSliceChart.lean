@@ -90,12 +90,5 @@ variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E] [TopologicalSpace M] [ChartedSpace E M]
   [IsManifold 𝓘(ℝ, E) ∞ M]
 
-/-- Every point of a regular level has a genuine chart on that level's subspace topology. -/
-theorem exists_level_chart {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) {b : ℝ} (x : {x : M // f x = b})
-    (hx : (x : M) ∉ ManifoldMorse.criticalPoints E f) :
-    ∃ c : OpenPartialHomeomorph {x : M // f x = b} (Model E), x ∈ c.source := by
-  obtain ⟨Φ, hΦ, he, -⟩ := exists_native_height_chart hf hx
-  exact ⟨sliceChart Φ.toOpenPartialHomeomorph he x, hΦ⟩
 
 end Wikipedia.SmoothSixDPoincare.RegularLevel

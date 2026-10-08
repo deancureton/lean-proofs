@@ -52,11 +52,6 @@ theorem closure_region [T2Space X] (e : OpenPartialHomeomorph X Y) {V : Set Y}
   apply ((isImage_region e V).closure (e.map_target (ht hy))).mp
   simpa only [e.right_inv (ht hy)] using hy
 
-theorem isCompact_closure_region [T2Space X] (e : OpenPartialHomeomorph X Y)
-    {V : Set Y} (hcomp : IsCompact (closure V)) (ht : closure V ⊆ e.target) :
-    IsCompact (closure (region e V)) := by
-  rw [closure_region e hcomp ht]
-  exact hcomp.image_of_continuousOn (e.continuousOn_symm.mono ht)
 
 theorem closure_region_subset_source [T2Space X] (e : OpenPartialHomeomorph X Y)
     {V : Set Y} (hcomp : IsCompact (closure V)) (ht : closure V ⊆ e.target) :
@@ -78,10 +73,5 @@ theorem frontier_region [T2Space X] (e : OpenPartialHomeomorph X Y) {V : Set Y}
     apply ((isImage_region e V).frontier (e.map_target hyt)).mp
     simpa only [e.right_inv hyt] using hy
 
-theorem finite_frontier_region [T2Space X] (e : OpenPartialHomeomorph X Y) {V : Set Y}
-    (hcomp : IsCompact (closure V)) (ht : closure V ⊆ e.target)
-    (hfin : (frontier V).Finite) : (frontier (region e V)).Finite := by
-  rw [frontier_region e hcomp ht]
-  exact hfin.image e.symm
 
 end NoExoticSixSphere.CurveChart

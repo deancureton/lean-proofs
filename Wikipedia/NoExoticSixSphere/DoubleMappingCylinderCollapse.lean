@@ -52,9 +52,6 @@ theorem boundaryMotion_zero (a : A) : boundaryMotion e f (0, a) = left e f (e a)
   change tube e f (σ 0, a) = _
   rw [symm_zero, tube_one]
 
-theorem boundaryMotion_one (a : A) : boundaryMotion e f (1, a) = right e f (f a) := by
-  change tube e f (σ 1, a) = _
-  rw [symm_one, tube_zero]
 
 theorem exists_extension (he : HomotopyExtension.HasHomotopyExtension e) :
     ∃ K : C(I × X, space e f), (∀ x, K (0, x) = left e f x) ∧

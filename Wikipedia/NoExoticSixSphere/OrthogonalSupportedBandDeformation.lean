@@ -79,33 +79,5 @@ theorem exists_supported_band_deformation (a b : OrthogonalOperators n)
     exact hlow (inc z)
   exact UpperEnergyHomotopyCutoff.exists_extension f l k u v E huv hvE H hzero hfixed hEnergy hLower
 
-theorem exists_supported_band_family {M : Type*} [TopologicalSpace M]
-    (a b : OrthogonalOperators n) (τ : Fin (m + 2) → ℝ)
-    (l k u v E : ℝ) (hlk : l < k) (huv : u < v) (hvE : v < E)
-    (hcompact : IsCompact (energySublevel a b τ E))
-    (hn : ∀ z ∈ energyBand a b τ l E,
-      mfderiv 𝓘(ℝ, Model n m) 𝓘(ℝ, ℝ) (energy a b τ) z ≠ 0)
-    (p : C(M, Space n m)) (hp : ∀ x, p x ∈ admissible a b m) :
-    ∃ q : C(M, Space n m),
-      ∃ G : ContinuousMap.HomotopyRel p q
-        {x | energy a b τ (p x) ≤ l ∨ v ≤ energy a b τ (p x)},
-        (∀ t x, G (t, x) ∈ admissible a b m ∧
-          energy a b τ (G (t, x)) ≤ energy a b τ (p x)) ∧
-        ∀ x, energy a b τ (p x) ≤ u → energy a b τ (q x) ≤ k := by
-  obtain ⟨F, H, hle, hlow⟩ := exists_supported_band_deformation a b τ l k u v E
-    hlk huv hvE hcompact hn
-  let p' : C(M, admissible a b m) := ⟨fun x ↦ ⟨p x, hp x⟩, p.continuous.subtype_mk _⟩
-  let q : C(M, Space n m) := ⟨fun x ↦ (F (p' x)).1,
-    continuous_subtype_val.comp (F.continuous.comp p'.continuous)⟩
-  let G : ContinuousMap.HomotopyRel p q
-      {x | energy a b τ (p x) ≤ l ∨ v ≤ energy a b τ (p x)} :=
-    { toFun := fun tx ↦ (H (tx.1, p' tx.2)).1
-      continuous_toFun := continuous_subtype_val.comp
-        (H.continuous.comp (continuous_fst.prodMk (p'.continuous.comp continuous_snd)))
-      map_zero_left := fun x ↦ congrArg (fun z : admissible a b m ↦ z.1) (H.apply_zero (p' x))
-      map_one_left := fun x ↦ congrArg (fun z : admissible a b m ↦ z.1) (H.apply_one (p' x))
-      prop' := fun t x hx ↦ congrArg (fun z : admissible a b m ↦ z.1)
-        (H.eq_fst t (x := p' x) hx) }
-  exact ⟨q, G, fun t x ↦ ⟨(H (t, p' x)).2, hle t (p' x)⟩, fun x hx ↦ hlow (p' x) hx⟩
 
 end NoExoticSixSphere.OrthogonalPolygon

@@ -54,11 +54,5 @@ theorem immersedSphereFrameParity_eq_of_frameHomotopic
     e.immersedSphereFrameParity a f hf hd = e.immersedSphereFrameParity a g hg hgd :=
   Monomorphism.sphereParityOfDimension_homotopic _ _ _ (twistedBlockMap_homotopic H)
 
-theorem immersedSphereFrameParity_congr {g : Sphere 3 → M} (hfg : f = g)
-    (hg : ContMDiff (𝓡 3) (𝓡 6) ∞ g)
-    (hgd : ∀ s, Injective (mfderiv (𝓡 3) (𝓡 6) g s)) :
-    e.immersedSphereFrameParity a f hf hd = e.immersedSphereFrameParity a g hg hgd := by
-  subst g
-  rfl
 
 end NoExoticSixSphere.EuclideanEmbedding

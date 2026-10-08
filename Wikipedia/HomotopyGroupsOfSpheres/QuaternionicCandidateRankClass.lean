@@ -68,21 +68,5 @@ theorem candidateRankMulEquiv_candidate :
   rw [stabilizationPiSevenMulEquiv_apply, stabilization_sphereCandidateClass,
     MulEquiv.symm_apply_apply]
 
-theorem sphereCandidate_generates_iff_unreduced :
-    Function.Surjective (fun k : ℤ ↦ sphereCandidateClass ^ k) ↔
-      Function.Surjective (fun k : ℤ ↦ unreducedSphereCandidateClass ^ k) := by
-  constructor
-  · intro h a
-    obtain ⟨k, hk⟩ := h (candidateRankMulEquiv.symm a)
-    refine ⟨k, ?_⟩
-    change unreducedSphereCandidateClass ^ k = a
-    change sphereCandidateClass ^ k = candidateRankMulEquiv.symm a at hk
-    rw [← candidateRankMulEquiv_candidate, ← map_zpow, hk, MulEquiv.apply_symm_apply]
-  · intro h a
-    obtain ⟨k, hk⟩ := h (candidateRankMulEquiv a)
-    refine ⟨k, candidateRankMulEquiv.injective ?_⟩
-    change candidateRankMulEquiv (sphereCandidateClass ^ k) = candidateRankMulEquiv a
-    rw [map_zpow, candidateRankMulEquiv_candidate]
-    exact hk
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

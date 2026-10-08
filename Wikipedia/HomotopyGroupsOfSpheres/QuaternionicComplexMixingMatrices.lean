@@ -72,10 +72,6 @@ def complexMixingLinear (n : ℕ) : (Fin n → ℝ) →ₗ[ℝ] SkewSpace n wher
     exact (congrArg (realAction n) (mixingMatrix_smul QuaternionicScalars.k r c)).trans
       (realAction_smul n r _)
 
-theorem complexMixingLinear_injective (n : ℕ) : Function.Injective (complexMixingLinear n) := by
-  intro c d h
-  apply mixingMatrix_injective QuaternionicScalars.k QuaternionicScalars.k_ne_zero
-  exact realAction_injective n (congrArg Subtype.val h)
 
 theorem j_complexMixing_anticommute (c : Fin n → ℝ) :
     Matrix.diagonal (fun _ : Fin (n + 1) ↦ QuaternionicScalars.j) *

@@ -49,11 +49,6 @@ def lowStateZeroDiffeomorph :
   let := timeZeroAtlas d 6 hd
   exact endpointsDiffeomorph d 6 hd
 
-theorem lowStateZeroDiffeomorph_val (p : Endpoints d) :
-    letI := regularFiberAtlas d.leftMap d.smooth_left b d.regular_left 6 (by simpa using hd);
-    letI := regularFiberAtlas d.rightMap d.smooth_right b d.regular_right 6 (by simpa using hd);
-    letI := (lowCollaredState d hd a).zeroAtlas;
-    (lowStateZeroDiffeomorph d hd a p).val = endpointsMap d p := by rfl
 
 theorem lowCollaredState_zeroPoint (p : Endpoints d) :
     ((lowCollaredState d hd a).collar.zeroPoint p).val = endpointsMap d p :=

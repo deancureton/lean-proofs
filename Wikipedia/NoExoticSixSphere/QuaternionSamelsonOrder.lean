@@ -38,9 +38,6 @@ theorem orderOf_nu : orderOf nu = 12 :=
 theorem nu_pow_eq_one_iff_dvd (k : ℕ) : nu ^ k = 1 ↔ 12 ∣ k := by
   rw [← orderOf_dvd_iff_pow_eq_one, orderOf_nu]
 
-theorem nu_zpow_eq_one_iff_dvd (k : ℤ) : nu ^ k = 1 ↔ (12 : ℤ) ∣ k := by
-  rw [← orderOf_dvd_iff_zpow_eq_one, orderOf_nu]
-  norm_num
 
 theorem nu_pow_twelve : nu ^ 12 = 1 :=
   (nu_pow_eq_one_iff_dvd 12).mpr (dvd_refl 12)

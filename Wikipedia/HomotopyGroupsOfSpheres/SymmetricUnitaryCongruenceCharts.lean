@@ -91,9 +91,6 @@ theorem atPoint_self (B : SpecialSpace N) : atPoint B B = 0 := by
   change chart N ((translation B).symm B) = 0
   rw [translation_symm_self, chart_identity]
 
-theorem zero_mem_atPoint_target (B : SpecialSpace N) :
-    (0 : DirectionSpace N) ∈ (atPoint B).target := by
-  refine ⟨zero_mem_target, mem_univ _⟩
 
 theorem contDiff_exponential_matrix :
     ContDiff ℝ ∞ (fun A : DirectionSpace N ↦ matrix (exponential A)) := by

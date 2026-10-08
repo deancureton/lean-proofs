@@ -69,13 +69,6 @@ theorem midpoint_square (B : Matrix N N ℂ)
   rw [action_mul, hn, hB]
   exact J.property
 
-theorem recover_midpoint (B : QuaternionicSymmetricMatrices.Space N)
-    (J : NoExoticSixSphere.OrthogonalComplexStructures.Space (2 * Fintype.card N))
-    (hB : action B.val.val = J.val.val) :
-    ∃ A : Matrix N N ℝ, A.transpose = A ∧ A * A = 1 ∧ imaginary A = B.val.val := by
-  refine ⟨B.val.val.map Complex.im, map_im_transpose _ B.property, ?_, ?_⟩
-  · exact map_im_square _ B.property (midpoint_skew _ J hB) (midpoint_square _ J hB)
-  · exact imaginary_map_im _ B.property (midpoint_skew _ J hB)
 
 end ComplexMatrixRealRepresentation
 

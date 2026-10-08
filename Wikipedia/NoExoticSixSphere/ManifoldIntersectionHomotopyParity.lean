@@ -102,21 +102,5 @@ theorem intersectionParity_homotopic (f₀ f₁ g₀ g₁ : C(Sphere 3, M))
   have he := (e.intersectionParity_eq_of_smooth_families r f g hF hG ht).2.2
   rwa [hf0, hf1, hg0, hg1] at he
 
-/-- For a framed manifold, the tubular retraction is constructed internally. -/
-theorem intersectionParity_homotopic_of_normalFrame
-    (a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel)
-    (f₀ f₁ g₀ g₁ : C(Sphere 3, M))
-    (hf₀ : ContMDiff (𝓡 3) (𝓡 6) ∞ f₀) (hf₁ : ContMDiff (𝓡 3) (𝓡 6) ∞ f₁)
-    (hg₀ : ContMDiff (𝓡 3) (𝓡 6) ∞ g₀) (hg₁ : ContMDiff (𝓡 3) (𝓡 6) ∞ g₁)
-    (ht₀ : ∀ x y, f₀ x = g₀ y → Surjective
-      ((mfderiv (𝓡 3) (𝓡 6) f₀ x).coprod (mfderiv (𝓡 3) (𝓡 6) g₀ y)))
-    (ht₁ : ∀ x y, f₁ x = g₁ y → Surjective
-      ((mfderiv (𝓡 3) (𝓡 6) f₁ x).coprod (mfderiv (𝓡 3) (𝓡 6) g₁ y)))
-    (Hf : f₀.Homotopic f₁) (Hg : g₀.Homotopic g₁) :
-    parity f₀ g₀ = parity f₁ g₁ := by
-  let : Nonempty M := ⟨f₀ (Classical.choice
-    (NormedSpace.sphere_nonempty_rclike ℝ zero_le_one))⟩
-  obtain ⟨r⟩ := e.nonempty_tubularRetraction a
-  exact e.intersectionParity_homotopic r f₀ f₁ g₀ g₁ hf₀ hf₁ hg₀ hg₁ ht₀ ht₁ Hf Hg
 
 end NoExoticSixSphere.EuclideanEmbedding

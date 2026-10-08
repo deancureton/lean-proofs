@@ -25,25 +25,6 @@ namespace NoExoticSixSphere
 
 open GLOrthonormalization
 
-theorem fderiv_eq_of_closedBall_collar {n : ℕ} {F : Type*}
-    [NormedAddCommGroup F] [NormedSpace ℝ F]
-    (H G : Vector n → F) (r : ℝ)
-    (heq : ∀ y ∈ closedBall (0 : Vector n) 1, r ≤ ‖y‖ → H y = G y)
-    {x : Vector n} (hx : x ∈ closedBall (0 : Vector n) 1) (hxr : r < ‖x‖)
-    (hH : DifferentiableAt ℝ H x) (hG : DifferentiableAt ℝ G x) :
-    fderiv ℝ H x = fderiv ℝ G x := by
-  have hs : UniqueDiffOn ℝ (closedBall (0 : Vector n) 1) :=
-    uniqueDiffOn_convex (convex_closedBall _ _)
-      ⟨0, mem_interior_iff_mem_nhds.mpr (closedBall_mem_nhds 0 (by norm_num))⟩
-  have hn : {y : Vector n | r < ‖y‖} ∈ 𝓝 x :=
-    (isOpen_lt continuous_const continuous_norm).mem_nhds hxr
-  have he : H =ᶠ[𝓝[closedBall 0 1] x] G := by
-    filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds hn] with y hy hyr
-    exact heq y hy hyr.le
-  have hd : fderivWithin ℝ H (closedBall 0 1) x = fderivWithin ℝ G (closedBall 0 1) x :=
-    he.fderivWithin_eq_of_mem hx
-  rw [fderivWithin_eq_fderiv (hs x hx) hH, fderivWithin_eq_fderiv (hs x hx) hG] at hd
-  exact hd
 
 theorem uniqueDiffOn_closedDiskProduct {d : ℕ} :
     UniqueDiffOn ℝ (closedBall (0 : Vector 4) 1 ×ˢ (univ : Set (Vector d))) := by

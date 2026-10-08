@@ -49,11 +49,5 @@ theorem sphereFrameOperator_glued_south
   e.sphereFrameOperator_eq_of_germ ν
     (gluedSphere_eventuallyEq_south Φ F G hε ha hprod hright hx)
 
-theorem sphereFrameOperator_glued_middle {x : Sphere 3} (hx : x ∈ neckRegion) :
-    e.sphereFrameOperator ν (gluedSphere Φ ε a F G) x =
-      e.sphereFrameOperator ν (middlePiece Φ ε a) x := by
-  apply e.sphereFrameOperator_eq_of_germ ν
-  filter_upwards [isOpen_neckRegion.mem_nhds hx] with y hy
-  exact gluedSphere_middle Φ F G hy
 
 end NoExoticSixSphere.EuclideanEmbedding

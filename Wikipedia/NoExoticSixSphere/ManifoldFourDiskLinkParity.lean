@@ -30,12 +30,6 @@ variable {M : Type*} [TopologicalSpace M] [ChartedSpace (Vector 7) M]
   (hg : ∀ x ∈ closedBall 0 1, ContMDiffAt (𝓡 4) (𝓡 7) ∞ g x)
   (P : GenericFourDisk.ParityBallSystem g)
 
-theorem puncturedFourDiskOperatorMap_link (x : DiskDoublePoints.singularSet g) :
-    (e.puncturedFourDiskOperatorMap a g hg P).comp (P.linkingSphere x) =
-      (P.ball x).globalOperatorLink e a hg := by
-  apply ContinuousMap.ext
-  intro s
-  rfl
 
 theorem puncturedFourDiskFrameMap_link (x : DiskDoublePoints.singularSet g) :
     (e.puncturedFourDiskFrameMap a g hg P).comp (P.linkingSphere x) =

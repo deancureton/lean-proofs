@@ -88,20 +88,5 @@ theorem retained_normalFrameOnSphere (s : Sphere 3) :
     UnitSurgery.normalFraming_ambient, roundedFace_core, UnitSurgery.inducedNormalFrame_exterior]
   rfl
 
-theorem retained_sphereFrameOperator (s : Sphere 3) :
-    letI := UnitSurgery.targetChartedSpace A hR;
-    (UnitSurgery.inducedEmbedding A hR).sphereFrameOperator (UnitSurgery.normalFraming A hR)
-      (FramedSurgery.coreMap (E := Vector 4) (roundedFace A hR B hB)) s =
-      OperatorSum.operator
-        ((OrthogonalFrameAppend.operator
-          (boundaryFrameOperator (a.orthonormal (FramedSurgery.coreMap (E := Vector 4) B s)).val)
-          (-heightUnit e.ambientDimension)).comp
-            (UnitSurgery.normalModelCoordinates A hR).toContinuousLinearMap)
-        ((appendZeroMap e.ambientDimension 6).comp
-          (framedDerivative (e.toFun ∘ FramedSurgery.coreMap (E := Vector 4) B) s)) := by
-  let := UnitSurgery.targetChartedSpace A hR
-  change OperatorSum.operator _ _ = _
-  rw [retained_normalFrameOnSphere, retained_framedDerivative]
-  rfl
 
 end Wikipedia.HopfProblem.DegreeCollapse.FramedRepresentative.NativeRetention

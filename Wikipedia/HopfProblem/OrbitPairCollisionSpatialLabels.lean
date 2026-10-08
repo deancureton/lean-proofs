@@ -104,16 +104,5 @@ theorem unorderedProjection_relocateCollision
     change s(q.2.1, q.2.2) ≠ s(p.2.1, p.2.2) at hlabel
     simp [relocateCollision, unorderedProjection, replaceUnorderedTime, hvalue, hlabel]
 
-theorem unorderedDoublePoints_eq_replaceTime_image
-    {F F' : ℝ × M → N}
-    (hglobal : ∀ p ∈ doublePoints F, HasGlobalProjectedCollisionFiber F p)
-    (hspace : InjOn Prod.snd (collisionSources F))
-    {p : ℝ × (M × M)} (hp : p ∈ doublePoints F) {t₁ : ℝ}
-    (hD : doublePoints F' = relocateCollision F p (t₁ - p.1) '' doublePoints F) :
-    unorderedDoublePoints F' =
-      replaceUnorderedTime (unorderedProjection p).2 t₁ '' unorderedDoublePoints F := by
-  unfold unorderedDoublePoints
-  rw [hD, image_image, image_image]
-  exact image_congr (fun q hq => unorderedProjection_relocateCollision hglobal hspace hp hq t₁)
 
 end Wikipedia.HopfProblem.OrbitPair.TargetClock

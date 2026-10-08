@@ -88,19 +88,6 @@ theorem southStabilizedTube_formula (q : Sphere 3) (v : V 4) (u : ℝ) :
   exact hfirst.trans (hsecond.trans ((add_assoc _ _ _).trans
     (congrArg₂ (fun x y : V 8 ↦ x + y) hc hf.symm)))
 
-theorem southStabilizedTube_collapse (z : OnePoint (V 7 × ℝ)) :
-    OpenFiberCollapse.collapseOnePoint southStabilizedTube
-        ((StereographicEquator.stabilizedEquiv 7).toHomeomorph.onePointCongr z) =
-      OpenFiberCollapse.collapseOnePoint
-        (OpenFiberCollapse.productTube (T := ℝ) southChartTube.tube) z := by
-  have ha := OpenFiberCollapse.collapseOnePoint_ambientEquiv southStabilizedBaseTube
-    (StereographicEquator.stabilizedEquiv 7).toHomeomorph
-    southStabilizedBaseTube_isOpenEmbedding.injective z
-  have hb := OpenFiberCollapse.collapseOnePoint_baseEquiv
-    (OpenFiberCollapse.productTube (T := ℝ) southChartTube.tube)
-    southFiberDiffeomorph.toEquiv
-    (OpenFiberCollapse.productTube_injective _ southChartTube.isOpenEmbedding.injective) z
-  exact ha.trans hb
 
 def southStabilizedPairTube
     (p : (Sphere 3 × Sphere 3) × ((V 4 × ℝ) × (V 4 × ℝ))) : SouthPairAmbientModel :=
@@ -113,11 +100,6 @@ theorem southStabilizedPairTube_isOpenEmbedding :
     (OpenFiberCollapse.pairedTube_isOpenEmbedding southStabilizedTube southStabilizedTube
       southStabilizedTube_isOpenEmbedding southStabilizedTube_isOpenEmbedding)
 
-theorem southStabilizedPairTube_zero (p : Sphere 3 × Sphere 3) :
-    southStabilizedPairTube (p, 0) = (2 : ℝ) • southPairAmbient p := by
-  change WithLp.toLp 2 (southStabilizedTube (p.1, 0), southStabilizedTube (p.2, 0)) = _
-  rw [southStabilizedTube_zero, southStabilizedTube_zero]
-  rfl
 
 theorem southStabilizedPairTube_collapse
     (z : OnePoint ((V 7 × ℝ) × (V 7 × ℝ))) :

@@ -28,9 +28,5 @@ theorem castLength_indices (c : FullSmoothHandleChain J dimension U V k) (h : k 
 def castLengthPieces (c : FullSmoothHandleChain J dimension U V k) (h : k = l) :
     c.pieces ≃ₜ (c.castLength h).pieces := by subst l; exact Homeomorph.refl _
 
-theorem castLength_piecesMap (c : FullSmoothHandleChain J dimension U V k) (h : k = l)
-    (z : c.pieces) : (c.castLength h).piecesMap (c.castLengthPieces h z) = c.piecesMap z := by
-  subst l
-  rfl
 
 end Wikipedia.SmoothSixDPoincare.FullSmoothHandleChain

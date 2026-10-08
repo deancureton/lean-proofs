@@ -51,10 +51,6 @@ theorem continuous_letter_action [LocallyCompactSpace X] :
 def letterAction [LocallyCompactSpace X] : C(X × Space X x₀, Space X x₀) :=
   ⟨fun p ↦ letter x₀ p.1 * p.2, continuous_letter_action x₀⟩
 
-theorem letterAction_basepoint [LocallyCompactSpace X] (w : Space X x₀) :
-    letterAction x₀ (x₀, w) = w := by
-  change letter x₀ x₀ * w = w
-  rw [letter_basepoint, one_mul]
 
 theorem letterAction_one [LocallyCompactSpace X] (x : X) :
     letterAction x₀ (x, 1) = letter x₀ x := mul_one _

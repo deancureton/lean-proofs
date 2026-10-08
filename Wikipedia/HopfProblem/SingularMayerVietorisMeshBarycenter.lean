@@ -124,13 +124,5 @@ theorem dist_convexHull_range_le (v : Fin (n + 1) → E) {D : ℝ}
   obtain ⟨_, ⟨i, rfl⟩, _, ⟨j, rfl⟩, h⟩ := convexHull_exists_dist_ge2 hx hy
   exact h.trans (hpair i j)
 
-/-- The actual metric diameter of the convex hull has the same pairwise bound. -/
-theorem convexHull_range_diam_le (v : Fin (n + 1) → E) {D : ℝ}
-    (hpair : ∀ i j, dist (v i) (v j) ≤ D) :
-    diam (convexHull ℝ (range v)) ≤ D := by
-  rw [convexHull_diam]
-  apply diam_le_of_forall_dist_le_of_nonempty (range_nonempty v)
-  rintro _ ⟨i, rfl⟩ _ ⟨j, rfl⟩
-  exact hpair i j
 
 end Wikipedia.HopfProblem.SingularMayerVietoris

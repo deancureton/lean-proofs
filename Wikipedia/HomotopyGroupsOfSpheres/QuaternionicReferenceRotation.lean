@@ -88,8 +88,5 @@ theorem conjugator_rotation (J : Space J₀) (θ : ℝ) :
   rw [ComplexStructures.exp_smul, ComplexStructures.exp_smul, Real.cos_neg, Real.sin_neg]
   exact hrot
 
-theorem conjugator_pi (J : Space J₀) :
-    ComplexStructures.conjugate (conjugator J Real.pi) J₀ =
-      ComplexStructures.negative J₀ := by rw [conjugator_rotation, rotation_pi]
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns.AnticommutingStructures

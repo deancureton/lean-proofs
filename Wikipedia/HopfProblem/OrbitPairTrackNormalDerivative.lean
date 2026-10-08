@@ -71,20 +71,5 @@ theorem mfderiv_spatial_eq {F : P × M → N} (q : P × M)
 
 variable [FiniteDimensional ℝ E] [FiniteDimensional ℝ G]
 
-theorem exists_track_normal_columns {F : P × M → N} (q : P × M)
-    (hF : MDifferentiableAt (𝓘(ℝ, P).prod I) J F q)
-    (hi : Injective (mfderiv I J (fun x => F (q.1, x)) q.2))
-    (n : ℕ) (hdim : Module.finrank ℝ E + n = Module.finrank ℝ G) :
-    ∃ B : EuclideanSpace ℝ (Fin n) →L[ℝ] G,
-      Surjective (((ContinuousLinearMap.fst ℝ P E).prod
-        (mfderiv (𝓘(ℝ, P).prod I) J F q : P × E →L[ℝ] G)).coprod
-          ((0 : EuclideanSpace ℝ (Fin n) →L[ℝ] P).prod B)) := by
-  let D : P × E →L[ℝ] G := mfderiv (𝓘(ℝ, P).prod I) J F q
-  let S : E →L[ℝ] G := mfderiv I J (fun x => F (q.1, x)) q.2
-  obtain ⟨B, hB⟩ := LinearNormal.exists_complement S hi n hdim
-  have hS : S = D.comp (ContinuousLinearMap.inr ℝ P E) := mfderiv_spatial_eq q hF
-  refine ⟨B, surjective_track_normal_coprod D B ?_⟩
-  rw [← hS]
-  exact hB.surjective
 
 end Wikipedia.HopfProblem.OrbitPair.NativeFamily

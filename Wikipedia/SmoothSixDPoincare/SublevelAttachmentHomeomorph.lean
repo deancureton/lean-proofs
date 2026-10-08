@@ -122,23 +122,5 @@ theorem exists_absorbingSublevelHomeomorph_with_frontier
     hf hV hdesc F hcurve hmono hA hlower hupper hcover hforward hentry htop
   exact ⟨e, he⟩
 
-/-- An actual critical attachment is homeomorphic to the whole upper sublevel. -/
-theorem nonempty_absorbingSublevelHomeomorph
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hV : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    (hdesc : ∀ x, x ∉ ManifoldMorse.criticalPoints E f → mvfderiv 𝓘(ℝ, E) f x (V x) < 0)
-    (F : Flow ℝ M) (hcurve : ∀ x, IsMIntegralCurve (fun t => F t x) V)
-    (hmono : ∀ x, Antitone (fun t => f (F t x)))
-    {a b : ℝ} {A : Set M} (hA : IsClosed A)
-    (hlower : {x | f x ≤ a} ⊆ A) (hupper : A ⊆ {x | f x ≤ b})
-    (hcover : ∀ x ∈ ManifoldMorse.criticalPoints E f, f x ∈ Icc a b → x ∈ interior A)
-    (hforward : ∀ x ∈ A, ∀ t : ℝ, 0 ≤ t → F t x ∈ A)
-    (hentry : ∀ x ∈ A, ∀ t : ℝ, 0 < t → F t x ∈ interior A)
-    (htop : ∀ x, f x = b → ∀ t : ℝ, 0 < t → f (F t x) < b) :
-    Nonempty ({x : M // f x ≤ b} ≃ₜ A) := by
-  obtain ⟨e, -⟩ := exists_absorbingSublevelHomeomorph_with_frontier hf hV hdesc F hcurve
-    hmono hA hlower hupper hcover hforward hentry htop
-  exact ⟨e⟩
 
 end Wikipedia.SmoothSixDPoincare.FlowConstruction

@@ -92,12 +92,5 @@ def joinedSphereMap (f : C(Sphere m, Sphere n)) : C(Sphere (m + 1), Sphere (n + 
   (coordinates n : C(_, _)).comp
     ((RadialSphereJoin.sphereMap (G := ℝ) f).comp ((coordinates m).symm : C(_, _)))
 
-theorem joinedSphereMap_eq_suspension (f : C(Sphere m, Sphere n)) :
-    joinedSphereMap f = SphereMapSuspension.map f := by
-  apply ContinuousMap.ext
-  intro x
-  change coordinates n (RadialSphereJoin.sphereMap (G := ℝ) f ((coordinates m).symm x)) =
-    SphereMapSuspension.map f x
-  simpa only [Homeomorph.apply_symm_apply] using map_coordinates f ((coordinates m).symm x)
 
 end Wikipedia.HopfProblem.DegreeCollapse.RadialJoinSuspension

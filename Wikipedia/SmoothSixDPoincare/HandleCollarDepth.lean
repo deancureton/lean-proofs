@@ -89,11 +89,6 @@ theorem radius_le_one (t : ℝ) {d : ℝ} (hd : 0 ≤ d) : radius t d ≤ 1 := b
   exact (div_le_one (by linarith : 0 < 1 + depth t d)).mpr
     (by linarith [depth_ge_left t hd])
 
-theorem radius_reconstruct (t : ℝ) {d : ℝ} (hd : 0 ≤ d) :
-    radius t d * (1 + depth t d) - 1 = t := by
-  have hw := depth_nonneg t hd
-  rw [radius, div_mul_cancel₀ _ (by linarith : 1 + depth t d ≠ 0)]
-  ring
 
 theorem deficit_reconstruct (t : ℝ) {d : ℝ} (hd : 0 ≤ d) :
     depth t d * (1 - radius t d) = d := by

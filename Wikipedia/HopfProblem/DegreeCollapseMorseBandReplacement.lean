@@ -101,25 +101,5 @@ theorem remove_morse_band_pair {f : M → ℝ}
   rw [heq, ← ncard_pair hpq]
   exact ncard_sdiff_add_ncard_of_subset hsub (finite_criticalPoints hf hm)
 
-/-- Uniform finite residence and strict boundary derivatives suffice: the
-complete flow, directed crossing, and global replacement are all constructed. -/
-theorem remove_morse_band_pair_of_finite_passage {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (hm : IsMorse E f)
-    (hV : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    {c d : ℝ} (hcd : c < d)
-    (hc : ∀ x, f x = c → mvfderiv 𝓘(ℝ, E) f x (V x) < 0)
-    (hd : ∀ x, f x = d → mvfderiv 𝓘(ℝ, E) f x (V x) < 0)
-    (hpass : ∃ T : ℝ, 0 < T ∧ ∀ γ : ℝ → M, IsMIntegralCurve γ V →
-      ∃ t ∈ Icc (0 : ℝ) T, f (γ t) ∉ Icc c d)
-    {p q : M} (hpq : p ≠ q) (hp : p ∈ criticalPoints E f) (hq : q ∈ criticalPoints E f)
-    (hpc : f p ∈ Icc c d) (hqc : f q ∈ Icc c d)
-    (hpair : ∀ x ∈ criticalPoints E f, f x ∈ Icc c d → x = p ∨ x = q) :
-    ∃ g : M → ℝ, ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ g ∧ IsMorse E g ∧
-      (criticalPoints E g).ncard + 2 = (criticalPoints E f).ncard ∧
-      (∀ x, x ∈ criticalPoints E g ↔ x ∈ criticalPoints E f ∧ x ≠ p ∧ x ≠ q) ∧
-      ∀ x, f x ∉ Ioo c d → g =ᶠ[𝓝 x] f := by
-  obtain ⟨F, hcurve, hcross, -⟩ := exists_native_flow_band_crossing hf hV hc hd hpass
-  exact remove_morse_band_pair hf hm hV F hcurve hcd hc hd hcross hpq hp hq hpc hqc hpair
 
 end Wikipedia.HopfProblem.DegreeCollapse.FlowCancellation

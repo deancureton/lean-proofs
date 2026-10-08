@@ -116,25 +116,6 @@ theorem block_extends (z : UnitSphere (Vector (n + 1)))
           rw [hF]
           exact Stiefel.BlockSum.frame_succ (j + 1) (forget (a s))
 
-/-- Smooth disk operators retain every prescribed boundary block exactly. -/
-theorem exists_smooth_block_extension (z : UnitSphere (Vector (n + 1)))
-    (a : C(Sphere 3, OrthogonalOperators n))
-    (ha : ContMDiff (𝓡 3) 𝓘(ℝ, Vector n →L[ℝ] Vector n) ∞ (fun s ↦ (a s).1.1))
-    (h : (stabilizeMap z a).Homotopic (ContinuousMap.const _ (identity (n + 1))))
-    (k : ℕ) (hk : 0 < k) :
-    ∃ Q : Vector 4 → Vector (n + k) →L[ℝ] Vector (n + k),
-      (∀ x ∈ Metric.closedBall (0 : Vector 4) 1, ContDiffAt ℝ ∞ Q x) ∧
-      (∀ x ∈ Metric.closedBall (0 : Vector 4) 1, ∀ w, ‖Q x w‖ = ‖w‖) ∧
-      ∀ s : Sphere 3, Q s.val = Stiefel.BlockSum.operator k (a s).1.1 := by
-  obtain ⟨F, hF⟩ := block_extends z a h k hk
-  obtain ⟨Q, hQs, hQn, -, hQb⟩ := Stiefel.exists_smoothDiskFrame_extension
-    (fun _ : Vector 4 ↦ ContinuousLinearMap.id ℝ (Vector (n + k)))
-    (fun _ _ ↦ by
-      change (1 : Vector (n + k) →L[ℝ] Vector (n + k)) * 1 = 1
-      exact one_mul _) (fun _ _ ↦ contDiffAt_const)
-    (blockFamily k a) (contMDiff_blockFamily k a ha) F
-    (fun _ ↦ by simp) hF
-  exact ⟨Q, hQs, hQn, hQb⟩
 
 /-- The extension can retain the precise radial block on a whole inner collar. -/
 theorem exists_smooth_block_collar_extension (b : Sphere 3)

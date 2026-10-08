@@ -34,9 +34,6 @@ theorem overlapTransition_apply (o : O) : overlapTransition hi hj (i o) = j o :=
   change j (hi.toOpenPartialHomeomorph.symm (i o)) = j o
   rw [hi.toOpenPartialHomeomorph_left_inv]
 
-theorem overlapTransition_symm_apply (o : O) : (overlapTransition hi hj).symm (j o) = i o := by
-  change i (hj.toOpenPartialHomeomorph.symm (j o)) = i o
-  rw [hj.toOpenPartialHomeomorph_left_inv]
 
 theorem overlapTransition_graph (x : X) (y : Y) :
     (x ∈ (overlapTransition hi hj).source ∧ overlapTransition hi hj x = y) ↔

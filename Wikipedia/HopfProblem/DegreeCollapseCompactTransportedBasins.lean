@@ -42,13 +42,6 @@ theorem image_flow_invariant_section {X A B : Type*} [TopologicalSpace X]
     apply (hP t (ι (e.symm y))).mp
     rwa [ht]
 
-theorem isCompact_flow_invariant_section {X A B : Type*} [TopologicalSpace X]
-    [TopologicalSpace A] [TopologicalSpace B] (F : Flow ℝ X) (e : A ≃ₜ B)
-    (ι : A → X) (κ : B → X) (horbit : ∀ x, ∃ t, F t (ι x) = κ (e x))
-    {P : X → Prop} (hP : ∀ t x, P (F t x) ↔ P x)
-    (hcompact : IsCompact {x : A | P (ι x)}) : IsCompact {y : B | P (κ y)} := by
-  rw [← image_flow_invariant_section F e ι κ horbit hP]
-  exact hcompact.image e.continuous
 
 theorem isCompact_flow_invariant_section_iff {X A B : Type*} [TopologicalSpace X]
     [TopologicalSpace A] [TopologicalSpace B] (F : Flow ℝ X) (e : A ≃ₜ B)

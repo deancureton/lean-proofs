@@ -25,28 +25,8 @@ open SpecialPeriods.EllipticAttachingMeridians
 
 variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
 
-theorem loopOnCircle_refl (x : X) :
-    loopOnCircle (Path.refl x) = ContinuousMap.const LoopCircle x := by
-  ext z
-  obtain ⟨t, rfl⟩ := loopUnitCircle_surjective z
-  rw [loopOnCircle_unit]
-  rfl
 
-theorem loopOnCircle_map (f : C(X, Y)) {x : X} (p : Path x x) :
-    loopOnCircle (p.map f.continuous) = f.comp (loopOnCircle p) := by
-  ext z
-  obtain ⟨t, rfl⟩ := loopUnitCircle_surjective z
-  simp only [ContinuousMap.comp_apply, loopOnCircle_unit, Path.map_coe, Function.comp_apply]
 
-theorem loopOnCircle_homotopic_of_path_homotopic {x : X} {p q : Path x x}
-    (h : p.Homotopic q) : (loopOnCircle p).Homotopic (loopOnCircle q) := by
-  obtain ⟨H⟩ := h
-  let S : LoopSquare p q := {
-    map := ⟨H, H.continuous⟩
-    initial := fun t => H.map_zero_left t
-    final := fun t => H.map_one_left t
-    closed := fun t => (Path.Homotopy.source H t).trans (Path.Homotopy.target H t).symm }
-  exact ⟨circleHomotopy S⟩
 
 /-- An unbased contraction of the genuine circle map contracts the original based loop. -/
 theorem path_nullhomotopic_of_loopOnCircle_nullhomotopic {x c : X} (p : Path x x)

@@ -84,19 +84,5 @@ def cellHandleHomotopyEquiv (hf : Continuous f) :
 
 variable [FiniteDimensional ℝ E] [IsManifold 𝓘(ℝ, E) ∞ M]
 
-/-- The actual Morse function supplies every geometric input of its core-cell attachment. -/
-theorem exists_morse_cell_attachment
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (hm : IsMorse E f)
-    (hp : p ∈ criticalPoints E f)
-    (hunique : ∀ x ∈ criticalPoints E f, f x = f p → x = p) :
-    ∃ (ρ : ℝ) (hρ : 0 < ρ), ∃ c : SignedMorseChart (E := E) f p,
-      ∃ hblock : closedBall (0 : c.NegativeCoordinates) (2 * ρ) ×ˢ
-        closedBall (0 : c.PositiveCoordinates) (2 * ρ) ⊆ c.splitChart.target,
-      Nonempty (ClosedAttachment.Space {x : M | f x ≤ f p - ρ ^ 2}
-        {u : MorseHandle.UnitDisk c.NegativeCoordinates | ‖(u : c.NegativeCoordinates)‖ = 1}
-        (coreCellMap c ρ hρ hblock) ≃ₕ
-          {x : M // f x ≤ f p + ρ ^ 2}) := by
-  obtain ⟨ρ, hρ, c, hblock, ⟨e⟩⟩ := exists_morse_attachment hf hm hp hunique
-  exact ⟨ρ, hρ, c, hblock, ⟨(cellHandleHomotopyEquiv c ρ hρ hblock hf.continuous).trans e⟩⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCells

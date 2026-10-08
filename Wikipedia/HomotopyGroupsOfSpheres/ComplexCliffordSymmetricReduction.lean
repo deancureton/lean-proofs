@@ -76,9 +76,5 @@ theorem blockSymmetricClifford_axis : blockSymmetricClifford axis = identity := 
   change unitaryProjection (blockCliffordMap axis) = identity
   rw [hb, unitaryProjection_one]
 
-theorem blockSymmetricReduced_axis : blockSymmetricReduced axis = identity := by
-  have h := symmetricReductionHomotopy.eq_fst 1 (Set.mem_singleton axis)
-  rw [symmetricReductionHomotopy.apply_one] at h
-  exact h.trans blockSymmetricClifford_axis
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCliffordFive

@@ -42,17 +42,6 @@ def lowerExteriorChart :
   intro Θ y₀
   exact Θ.trans (OpenDiffeomorph.partialDiffeomorph (R.openExteriorDiffeomorph hf hR).symm y₀)
 
-theorem lowerExteriorChart_source :
-    letI := RegularLevel.chartedSpace hf d.lower_regular
-    letI := RegularLevel.chartedSpace hf d.upper_regular
-    ∀ (Θ : PartialDiffeomorph I 𝓘(ℝ, RegularLevel.Model E) X d.UpperLevel ∞)
-      (y₀ : R.surgery.newOpenExterior),
-      (R.lowerExteriorChart hf hR I Θ y₀).source =
-        Θ.source ∩ {x | Θ x ∉ range R.surgery.newPiece} := by
-  let _ := RegularLevel.chartedSpace hf d.lower_regular
-  let _ := RegularLevel.chartedSpace hf d.upper_regular
-  intro Θ y₀
-  rfl
 
 include hR in
 theorem exists_lowerExteriorChart {Z : Type*} (j : Z → X) (z₀ : Z) (L : Z → d.LowerLevel) :

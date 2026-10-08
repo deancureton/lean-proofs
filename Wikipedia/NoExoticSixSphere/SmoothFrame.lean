@@ -49,16 +49,5 @@ noncomputable def smoothFrameOfConstantTransport {P₀ : F →L[ℝ] F} {Q : M �
 variable [CompleteSpace F] [CompactSpace M]
   {T : Type*} [TopologicalSpace T] [PreconnectedSpace T]
 
-/-- A projection homotopy from a constant family yields a global smooth frame at its endpoint. -/
-theorem nonempty_smoothRangeFrame_of_homotopy (P : T → M → F →L[ℝ] F)
-    (hP : ∀ t x, IsIdempotentElem (P t x))
-    (hc : Continuous (fun p : T × M ↦ P p.1 p.2))
-    (hs : ∀ t, ContMDiff I 𝓘(ℝ, F →L[ℝ] F) ∞ (P t))
-    (s t : T) (P₀ : F →L[ℝ] F) (hstart : P s = fun _ ↦ P₀)
-    (q : K ≃L[ℝ] P₀.range) : Nonempty (SmoothRangeFrame I (P t) K) := by
-  have ha : Nonempty (SmoothRangeTransport I (fun _ ↦ P₀) (P t)) := by
-    simpa only [hstart] using nonempty_smoothRangeTransport_of_homotopy P hP hc hs s t
-  obtain ⟨a⟩ := ha
-  exact ⟨smoothFrameOfConstantTransport a q⟩
 
 end NoExoticSixSphere

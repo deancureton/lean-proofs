@@ -88,11 +88,5 @@ def stabilizationPiSixMulEquiv (n : ℕ) (hn : 2 ≤ n) :
   let := unitColumn_piSeven_subsingleton n hn (axisColumn 0)
   exact stabilizationMulEquiv n 6
 
-theorem stabilizationPiSixMulEquiv_apply (n : ℕ) (hn : 2 ≤ n)
-    (a : π_ 6 (SpGroup (Fin n)) 1) :
-    stabilizationPiSixMulEquiv n hn a = stabilizationMap n 6 a := by
-  let := unitColumn_piSix_subsingleton n hn (axisColumn 0)
-  let := unitColumn_piSeven_subsingleton n hn (axisColumn 0)
-  exact stabilizationMulEquiv_apply n 6 a
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns

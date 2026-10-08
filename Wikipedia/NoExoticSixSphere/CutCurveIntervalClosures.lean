@@ -51,12 +51,5 @@ theorem exists_cutComponent_interval_in_chart (t : Finset ι) (N : ι → Interv
     exact congrArg Subtype.val (h.injective heq)
   exact ⟨i, hi, hchart, a, b, hlt, h, hh⟩
 
-theorem exists_cutComponent_interval (t : Finset ι) (N : ι → IntervalNeighborhood X)
-    (hcov : univ ⊆ ⋃ i ∈ t, (N i).openSet) (x : {x : X // x ∉ cutSet t N}) :
-    ∃ i ∈ t, ∃ a b : ℝ, a < b ∧
-      ∃ h : closure (cutComponent (cutSet t N) x) ≃ₜ Icc a b,
-        ∀ y, (h y).val = CurveChart.realCoordinate (N i).chart y.val := by
-  obtain ⟨i, hi, hs, h⟩ := exists_cutComponent_interval_in_chart t N hcov x
-  exact ⟨i, hi, h⟩
 
 end NoExoticSixSphere.CurveDecomposition

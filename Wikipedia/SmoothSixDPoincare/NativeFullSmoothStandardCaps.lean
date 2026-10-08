@@ -182,13 +182,5 @@ end SurgeryWindows
 
 variable (E M) [Nonempty M]
 
-theorem exists_fullSmoothHandleDecomposition_standardCaps (hdim : 0 < Module.finrank ℝ E) :
-    ∃ (k : ℕ) (c : FullSmoothHandleChain 𝓘(ℝ, RegularLevel.Model E) (Module.finrank ℝ E)
-        (SmoothBoundaryBody.empty 𝓘(ℝ, RegularLevel.Model E))
-        (SmoothBoundaryBody.closed 𝓘(ℝ, RegularLevel.Model E) M) k),
-      2 ≤ k ∧ c.HasStandardCaps := by
-  obtain ⟨f, hf, _, S, hs⟩ := exists_morse_function_with_smoothSurgeryWindows E M
-  obtain ⟨c, hcs, -⟩ := S.exists_fullSmoothDecomposition_standardCaps hf hs (S.count_pos hf)
-  exact ⟨S.count, c, S.two_le_count hf hdim, hcs⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse

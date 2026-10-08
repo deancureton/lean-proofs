@@ -65,26 +65,6 @@ theorem bandSublevel_transportedCore (T : M ≃ₜ M)
   exact (he _).symm.trans
     (congrArg Subtype.val (d.transportedAttachingSphere_apply d' n e x))
 
-theorem transportedCore_homology_surjective (hf : Continuous f) (T : M ≃ₜ M)
-    (hT : T '' {y : M | f y ≤ f p + d.radius ^ 2} =
-      {y : M | f y ≤ f q - d'.radius ^ 2})
-    (he : ∀ x : d.UpperLevel, (e x : M) = T x) (k : ℕ) (hk : k ≠ 0)
-    [Subsingleton (SingularHomology {y : M // f y ≤ f q + d'.radius ^ 2} k)] :
-    Surjective (singularHomologyMap (d.transportedCoreBoundary d' n e) k) := by
-  let H := homeomorphHomologyEquiv (d.bandSublevelHomeomorph d' T hT) k
-  let S := homeomorphHomologyEquiv
-    (SphereCoordinates.standardParametrization d'.chart.NegativeCoordinates n).toHomeomorph k
-  intro a
-  obtain ⟨b, hb⟩ := d'.coreBoundaryHomology_surjective_of_upper hf k hk (H a)
-  obtain ⟨c, hc⟩ := S.surjective b
-  refine ⟨c, H.injective ?_⟩
-  change singularHomologyMap (d.bandSublevelHomeomorph d' T hT).toHomotopyEquiv.toFun k
-    (singularHomologyMap (d.transportedCoreBoundary d' n e) k c) = H a
-  rw [← LinearMap.comp_apply, ← singularHomologyMap_comp,
-    d.bandSublevel_transportedCore d' n e T hT he, singularHomologyMap_comp]
-  change d'.coreBoundaryHomologyMap k (S c) = H a
-  rw [hc]
-  exact hb
 
 theorem attachingCollapse_transportedCore (hf : Continuous f) :
     d.attachingCollapse hf n (d.transportedAttachingSphere d' n e) =

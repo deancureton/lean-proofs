@@ -56,20 +56,7 @@ theorem not_isExoticSphere_iff (h : Nonempty (M ≃ₜ Sphere n)) :
   classical
   simp only [IsExoticSphere, h, true_and, not_isEmpty_iff]
 
-/-- Diffeomorphism, not just homeomorphism, preserves exoticity. -/
-theorem isExoticSphere_iff_of_diffeomorph (e : M ≃ₘ⟮𝓡 n, 𝓡 n⟯ N) :
-    IsExoticSphere n M ↔ IsExoticSphere n N := by
-  constructor
-  · rintro ⟨⟨h⟩, hd⟩
-    exact ⟨⟨e.symm.toHomeomorph.trans h⟩, ⟨fun d ↦ hd.false (e.trans d)⟩⟩
-  · rintro ⟨⟨h⟩, hd⟩
-    exact ⟨⟨e.toHomeomorph.trans h⟩, ⟨fun d ↦ hd.false (e.symm.trans d)⟩⟩
 
-/-- The standard smooth sphere itself is not exotic. This is not a uniqueness theorem
-for other smooth structures on its underlying topological space. -/
-theorem standardSphere_not_exotic (n : ℕ) : ¬ IsExoticSphere n (Sphere n) := by
-  intro h
-  exact h.2.false (Diffeomorph.refl (𝓡 n) (Sphere n) ∞)
 
 end Elementary
 
@@ -104,11 +91,6 @@ theorem secondCountableTopology_of_homeomorph (h : M ≃ₜ Sphere n) :
     SecondCountableTopology M :=
   h.secondCountableTopology
 
-/-- A candidate exotic sphere is a homotopy sphere at the level of topological spaces. -/
-theorem homotopyEquiv_of_homeomorph (h : Nonempty (M ≃ₜ Sphere n)) :
-    Nonempty (ContinuousMap.HomotopyEquiv M (Sphere n)) := by
-  obtain ⟨e⟩ := h
-  exact ⟨e.toHomotopyEquiv⟩
 
 end Topology
 

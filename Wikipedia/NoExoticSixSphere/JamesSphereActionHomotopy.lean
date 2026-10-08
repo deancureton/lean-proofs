@@ -52,11 +52,6 @@ def actionHomotopy (n : ℕ) :
     rw [toPath_mooreGenerator]
     rfl
 
-theorem actionHomotopy_basepoint (n : ℕ) (s : I) :
-    actionHomotopy n (s, (spherePole n, 1)) = Path.refl (spherePole (n + 1)) := by
-  change Moore.Loop.multiplicationHomotopy
-    (s, (mooreGenerator n (spherePole n), mooreComparison n 1)) = _
-  rw [mooreGenerator_pole, mooreComparison_one, Moore.Loop.multiplicationHomotopy_one]
 
 theorem loopComparison_action_homotopic (n : ℕ) :
     ((loopComparison n).comp (James.letterAction (spherePole n))).Homotopic (loopAction n) :=

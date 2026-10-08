@@ -127,30 +127,5 @@ theorem localize_crossing_controlled (e : OpenPartialHomeomorph Y E) (hinv : Con
     exists_relational_localization_neighborhood (M := M) e hinv hzero W hW hcenter
   exact ⟨V, hV, hcenterV, hVW, hlocal energy admissible l k cap (fun _ y ↦ y ∈ control) hcross⟩
 
-theorem localize_crossing (e : OpenPartialHomeomorph Y E) (hinv : Continuous e.symm)
-    (hzero : (0 : E) ∈ e.target) (energy : Y → ℝ) (admissible W : Set Y)
-    (hW : IsOpen W) (hcenter : e.symm 0 ∈ W)
-    (l k cap : ℝ)
-    (hcross : ∀ (p : C(M, Y)), (∀ x, p x ∈ W) →
-      ∀ (S : Set M), IsCompact S → (∀ x ∈ S, energy (p x) ≤ l) →
-        ∃ q : C(M, Y), (∀ x, energy (q x) < k) ∧
-          ∃ H : ContinuousMap.HomotopyRel p q S,
-            ∀ t x, H (t, x) ∈ admissible ∧ energy (H (t, x)) < cap) :
-    ∃ V : Set Y, IsOpen V ∧ e.symm 0 ∈ V ∧ V ⊆ W ∧
-      ∀ (p : C(M, Y)), (∀ x, p x ∈ admissible) →
-        ∀ (K : Set M), IsCompact K → K ⊆ p ⁻¹' V →
-          ∀ (S : Set M), IsCompact S → (∀ x ∈ S, energy (p x) ≤ l) →
-            ∃ q : C(M, Y), (∀ x ∈ K, energy (q x) < k) ∧
-              ∃ H : ContinuousMap.HomotopyRel p q (S ∪ (p ⁻¹' V)ᶜ),
-                ∀ t x, H (t, x) ∈ admissible ∧
-                  energy (H (t, x)) ≤ max (energy (p x)) cap := by
-  obtain ⟨V, hV, hcenterV, hVW, hlocal⟩ := localize_crossing_controlled e hinv hzero energy
-    admissible W univ hW hcenter l k cap (fun p hp S hS hLow ↦ by
-      obtain ⟨q, hq, H, hH⟩ := hcross p hp S hS hLow
-      exact ⟨q, hq, H, fun t x ↦ ⟨(hH t x).1, (hH t x).2, mem_univ _⟩⟩)
-  refine ⟨V, hV, hcenterV, hVW, ?_⟩
-  intro p hp K hK hKV S hS hLow
-  obtain ⟨q, hq, H, hH⟩ := hlocal p hp K hK hKV S hS hLow
-  exact ⟨q, hq, H, fun t x ↦ ⟨(hH t x).1, (hH t x).2.1⟩⟩
 
 end NoExoticSixSphere

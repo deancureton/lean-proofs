@@ -74,25 +74,7 @@ theorem nuLoop_class : (⟦nuLoop⟧ : π_ 6 UnitQuaternions 1) = nu := by
   rw [fundamentalLoop_class]
   rfl
 
-/-- Exact torsion of the distinguished class is a statement about actual relative homotopies. -/
-theorem nu_pow_eq_one_iff (k : ℕ) : nu ^ k = 1 ↔
-    GenLoop.Homotopic (HopfProblem.HomotopyGroupPowerMap.powLoop nuLoop k) GenLoop.const := by
-  have hclass := HopfProblem.HomotopyGroupPowerMap.class_powLoop nuLoop k
-  rw [nuLoop_class] at hclass
-  constructor
-  · intro h
-    exact Quotient.exact (hclass.trans h)
-  · intro h
-    exact hclass.symm.trans (Quotient.sound h)
 
-/-- This uses an actual commutator null-homotopy; it does not supply that geometric input. -/
-theorem nu_pow_eq_one_of_commutator_nullhomotopy (k : ℕ)
-    (h : (Samelson.commutatorMap (G := UnitQuaternions) ^ k).Homotopic
-      (ContinuousMap.const _ 1)) : nu ^ k = 1 := by
-  have hh := Samelson.product_pow_eq_one_of_nullhomotopy k h fundamentalClass fundamentalClass
-  change sixCoordinates (Samelson.product fundamentalClass fundamentalClass) ^ k = 1
-  exact (map_pow sixCoordinates _ k).symm.trans
-    ((congrArg sixCoordinates hh).trans (map_one sixCoordinates))
 
 theorem pairing_zpow_zpow (a b : π_ 3 UnitQuaternions 1) (k l : ℤ) :
     pairing (a ^ k) (b ^ l) = pairing a b ^ (k * l) := by
@@ -123,14 +105,5 @@ theorem nu_zpow_eq_pairing (k : ℤ) :
   simpa only [nu, zpow_one, mul_one] using
     (pairing_zpow_zpow fundamentalClass fundamentalClass k 1).symm
 
-/-- This identifies precisely the part of `π₆(S³)` already controlled by bilinearity. -/
-theorem mem_samelsonSubgroup_iff (c : π_ 6 UnitQuaternions 1) :
-    c ∈ samelsonSubgroup ↔ ∃ a b : π_ 3 UnitQuaternions 1, pairing a b = c := by
-  constructor
-  · intro hc
-    obtain ⟨k, hk⟩ := Subgroup.mem_zpowers_iff.mp hc
-    exact ⟨fundamentalClass ^ k, fundamentalClass, (nu_zpow_eq_pairing k).symm.trans hk⟩
-  · rintro ⟨a, b, rfl⟩
-    exact pairing_mem_samelsonSubgroup a b
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionSamelson

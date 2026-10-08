@@ -50,19 +50,5 @@ theorem two_sphere_map_unit_of_homology_bijective {Y : Type} [TopologicalSpace Y
 variable {F : Type} [NormedAddCommGroup F] [InnerProductSpace ℝ F] [FiniteDimensional ℝ F]
   [Fact (Module.finrank ℝ F = 2 + 1)]
 
-theorem normalized_boundary_map_unit {f : P₃ → F} {L : P₃ ≃L[ℝ] F} {s : Set P₃}
-    (b : LocalDegree.BoundaryData f L s) :
-    ∃ k : ℤ, (k = 1 ∨ k = -1) ∧
-      singularHomologyMap b.normalizedMap 2 =
-        k • singularHomologyMap ((SphereCoordinates.standardParametrization F 2).toHomeomorph :
-          C(S₂, sphere (0 : F) 1)) 2 := by
-  apply two_sphere_map_unit_of_homology_bijective
-    (SphereCoordinates.standardParametrization F 2).toHomeomorph b.normalizedMap
-  have heq : (b.normalizedHomologyEquiv 2 :
-      SingularHomology S₂ 2 → SingularHomology (sphere (0 : F) 1) 2) =
-      singularHomologyMap b.normalizedMap 2 :=
-    funext (fun a => b.normalizedHomologyEquiv_apply 2 a)
-  rw [← heq]
-  exact (b.normalizedHomologyEquiv 2).bijective
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

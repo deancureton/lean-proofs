@@ -82,18 +82,6 @@ def sphereEquivalence : SingularHomology (Sphere 3 × Sphere 3) 3 ≃ₗ[ℤ] �
       (Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2).toAddEquiv
         ).toIntLinearEquiv
 
-theorem sphereEquivalence_fst (a : SingularHomology (Sphere 3 × Sphere 3) 3) :
-    (sphereEquivalence a).1 = Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2
-      (singularHomologyMap ContinuousMap.fst 3 a) := by
-  change Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2
-    ((equivalence (spherePole 3) (spherePole 3) a).1) = _
-  rw [equivalence_fst]
 
-theorem sphereEquivalence_snd (a : SingularHomology (Sphere 3 × Sphere 3) 3) :
-    (sphereEquivalence a).2 = Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2
-      (singularHomologyMap ContinuousMap.snd 3 a) := by
-  change Wikipedia.HopfProblem.SphereHomology.unitSphereHomologyTopEquiv 2
-    ((equivalence (spherePole 3) (spherePole 3) a).2) = _
-  rw [equivalence_snd]
 
 end NoExoticSixSphere.ProductThirdHomology

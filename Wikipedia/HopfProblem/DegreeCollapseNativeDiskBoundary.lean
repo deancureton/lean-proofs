@@ -98,15 +98,5 @@ def nativeBoundaryTransition (L : NativeSublevelDisk (n + 1) E f a)
     contMDiff_toFun := hFs.codRestrict_sphere hF
     contMDiff_invFun := hGs.codRestrict_sphere hG }
 
-theorem nativeBoundaryTransition_match (L : NativeSublevelDisk (n + 1) E f a)
-    (R : NativeSublevelDisk (n + 1) E g b)
-    (hlevel : {x : M | f x = a} = {x : M | g x = b}) (v : Hemisphere.Sphere n) :
-    R.chart (nativeBoundaryTransition L R hlevel v).val = L.chart v.val := by
-  have hh : g (L.chart v.val) = b := by
-    have hh : L.chart v.val ∈ {x : M | f x = a} := by
-      rw [← L.image_sphere]
-      exact ⟨v.val, v.property, rfl⟩
-    rwa [hlevel] at hh
-  exact R.chart.right_inv' (R.mem_target_of_level hh)
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

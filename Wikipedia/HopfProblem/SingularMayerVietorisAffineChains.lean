@@ -86,13 +86,6 @@ theorem affineSimplex_preserves_center {n p : ℕ} (v : Fin (n + 1) → Simplex 
     affineSimplex v (simplexCenter n m w) = simplexCenter p m (affineSimplex v ∘ w) :=
   affineSimplex_simplexBarycenter v w
 
-/-- In particular, actual standard face maps preserve the chosen centers. -/
-theorem simplexFace_preserves_center (n : ℕ) (i : Fin (n + 2))
-    (m : ℕ) (v : Fin (m + 1) → Simplex n) :
-    simplexFace n i (simplexCenter n m v) =
-      simplexCenter (n + 1) m (simplexFace n i ∘ v) := by
-  rw [← affineSimplex_faceVertices]
-  exact affineSimplex_preserves_center (faceVertices n i) m v
 
 theorem simplexFace_stdVertices (n : ℕ) (i : Fin (n + 2)) :
     simplexFace n i ∘ stdVertices n = faceVertices n i := by
@@ -100,17 +93,6 @@ theorem simplexFace_stdVertices (n : ℕ) (i : Fin (n + 2)) :
   simp only [Function.comp_apply, stdVertices, simplexFace_apply, stdSimplex.map_vertex,
     faceVertices]
 
-/-- The boundary of the formal standard simplex is the alternating sum of
-the actual face images of the lower-dimensional standard simplex. -/
-theorem formalBoundary_stdVertices (n : ℕ) :
-    formalBoundary (n + 1) (formalSimplex (stdVertices (n + 1))) =
-      ∑ i : Fin (n + 2), (-1 : ℤ) ^ i.val •
-        formalMap (simplexFace n i) (n + 1) (formalSimplex (stdVertices n)) := by
-  rw [formalBoundary_simplex]
-  apply Finset.sum_congr rfl
-  intro i hi
-  rw [formalMap_simplex, simplexFace_stdVertices]
-  rfl
 
 /-- Subdivision is natural under an actual affine simplex map. -/
 theorem formalSubdivision_affine_natural {n p : ℕ} (v : Fin (n + 1) → Simplex p)

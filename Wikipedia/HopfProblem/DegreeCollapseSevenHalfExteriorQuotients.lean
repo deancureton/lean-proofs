@@ -104,25 +104,7 @@ def halfExteriorNewQuotientEquiv (v : Sphere 3) :
     { toEquiv := q.toEquiv, map_add' := fun x y ↦ q.map_add' x y }
   exact qa.toIntLinearEquiv
 
-theorem halfExteriorOldQuotientEquiv_mk (s : Sphere 3)
-    (c : SingularHomology (HalfExterior A hA T) 3) :
-    halfExteriorOldQuotientEquiv A hA T s (Submodule.Quotient.mk c) =
-      singularHomologyMap (halfOldInclusion A hA T) 3 c := by
-  change (singularHomologyMap (halfOldInclusion A hA T) 3).quotKerEquivOfSurjective
-    (halfOldInclusion_surjective A hA T)
-    (Submodule.quotEquivOfEq _ _ (halfMeridian_range_eq_old_kernel A hA T s)
-      (Submodule.Quotient.mk c)) = _
-  rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
-theorem halfExteriorNewQuotientEquiv_mk (v : Sphere 3)
-    (c : SingularHomology (HalfExterior A hA T) 3) :
-    halfExteriorNewQuotientEquiv A hA T v (Submodule.Quotient.mk c) =
-      singularHomologyMap (halfNewInclusion A hA T) 3 c := by
-  change (singularHomologyMap (halfNewInclusion A hA T) 3).quotKerEquivOfSurjective
-    (halfNewInclusion_surjective A hA T)
-    (Submodule.quotEquivOfEq _ _ (halfSection_range_eq_new_kernel A hA T v)
-      (Submodule.Quotient.mk c)) = _
-  rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
 theorem halfMeridian_injective [Subsingleton (SingularHomology (OldPositiveHalf A T) 4)]
     (s : Sphere 3) : Injective (singularHomologyMap (halfMeridianMap A hA T s) 3) :=

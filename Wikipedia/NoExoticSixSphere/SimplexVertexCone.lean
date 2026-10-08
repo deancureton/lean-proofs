@@ -85,20 +85,5 @@ theorem firstVertex_mem_boundary (n : ℕ) :
   refine ⟨(0 : Fin (n + 1)).succ, ?_⟩
   simp [stdSimplex.vertex]
 
-theorem cone_face (n : ℕ) (i : Fin (n + 2)) (t : I) (s : Simplex n) :
-    cone (n + 1) (t, simplexFace n i s) =
-      simplexFace (n + 1) i.succ (cone n (t, s)) := by
-  have hf : simplexFace (n + 1) i.succ (simplexFace n 0 s) =
-      simplexFace (n + 1) 0 (simplexFace n i s) :=
-    congrArg (fun f : C(Simplex n, Simplex (n + 2)) ↦ f s)
-      (PeriodTorusLineBundle.ChernCocycle.simplexFace_comp (Fin.zero_le i))
-  have hv : simplexFace (n + 1) i.succ
-      (stdSimplex.vertex (S := ℝ) (0 : Fin (n + 2))) =
-        stdSimplex.vertex (S := ℝ) (0 : Fin (n + 3)) := by
-    rw [simplexFace_vertex]
-    simp
-  change segment (n + 2) (t, _) =
-    simplexFace (n + 1) i.succ (segment (n + 1) (t, _))
-  rw [segment_face, hf, hv]
 
 end NoExoticSixSphere.SimplexVertexCone

@@ -204,15 +204,5 @@ theorem homeomorph_inl (a : OldPiece E F) : homeomorph (Quot.mk _ (Sum.inl a)) =
 
 theorem homeomorph_inr (z : Handle E F) : homeomorph (Quot.mk _ (Sum.inr z)) = newMap z := rfl
 
-/-- The outer sphere-times-disk face is fixed pointwise in the original coordinates. -/
-theorem homeomorph_outer_face (u : Sphere E) (v : Disk F) :
-    homeomorph (Quot.mk _ (Sum.inl (u, (1 : I), v))) =
-      (⟨u, sphere_subset_closedBall u.property⟩, v) := by
-  rw [homeomorph_inl]
-  apply Prod.ext
-  · apply Subtype.ext
-    change collarRadius 1 • (u : E) = (u : E)
-    rw [collarRadius_one, one_smul]
-  · rfl
 
 end Wikipedia.SmoothSixDPoincare.CollaredDiskAttachment

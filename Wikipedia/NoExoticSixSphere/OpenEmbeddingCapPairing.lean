@@ -42,17 +42,5 @@ theorem pairing_openEmbedding (a b : ModHomology 2 X 3) :
     CompactManifoldOpenExtension.pullback_map]
   exact (pairing_cap (E := E) X α b).symm
 
-theorem pairing_disjoint_openEmbeddings {Z : Type} [TopologicalSpace Z]
-    [Subsingleton (SingularHomology Z 2)] (g : C(Z, Y))
-    (hd : Disjoint (Set.range f) (Set.range g))
-    (a : ModHomology 2 X 3) (b : ModHomology 2 Z 3) :
-    pairing (E := E) Y (modHomologyMap 2 f 3 a) (modHomologyMap 2 g 3 b) = 0 := by
-  obtain ⟨α, rfl⟩ := (ManifoldCapMap.dualityEquiv (E := E) 3 X 3 3 rfl).surjective a
-  change pairing (E := E) Y (modHomologyMap 2 f 3
-    (ManifoldCapMap.dualityMap (E := E) 3 X 3 3 rfl α)) (modHomologyMap 2 g 3 b) = 0
-  rw [← CompactManifoldOpenExtension.cap_map f hf 3 3 3 rfl α, pairing_cap,
-    ← ZeroSecondHomologyEvaluation.evaluation_naturality Z g,
-    CompactManifoldOpenExtension.pullback_map_disjoint f hf 3 g hd, map_zero]
-  rfl
 
 end NoExoticSixSphere.ZeroSecondHomologyCap

@@ -54,12 +54,5 @@ theorem chartCapNeck_fiber_right (q : Parameter) (hq : q.1 ∈ Icc (-R) R) (x : 
   rw [smul_eq_zero, or_iff_right hε.ne', capPair_fst_eq_zero_iff ha]
   simp only [capPair, smul_smul]
 
-theorem chartCapNeck_middle_avoids (q : Parameter) (hq : q.1 ∈ Icc (-R) R)
-    (hm : q.1 ∈ Ioo (-a) a) : chartCapNeck Φ ε (a, q) ∉ range F ∪ range G := by
-  rintro (⟨x, hx⟩ | ⟨x, hx⟩)
-  · exact (not_le_of_gt hm.2)
-      ((chartCapNeck_fiber_left Φ F G hε ha hR hprod hclean q hq x).mp hx).1
-  · exact (not_le_of_gt hm.1)
-      ((chartCapNeck_fiber_right Φ F G hε ha hR hprod hclean q hq x).mp hx).1
 
 end NoExoticSixSphere.SphereSumNeck

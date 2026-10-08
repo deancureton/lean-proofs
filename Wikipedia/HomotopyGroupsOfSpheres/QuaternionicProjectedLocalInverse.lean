@@ -90,16 +90,5 @@ theorem projectedLocalHomeomorph_symm_zero (z : UnitSphere)
     (zero_mem_projectedLocalHomeomorph_source z hz)
   simpa only [projectedLocalHomeomorph_apply, localCoordinateMap_zero] using he
 
-theorem contDiffAt_projectedLocalHomeomorph_symm (z : UnitSphere)
-    (hz : firstColumnFormula (Real.pi / 2) (Real.pi / 2) (symmetricMap z) = targetColumn)
-    {n : ℕ∞ω} : ContDiffAt ℝ n (projectedLocalHomeomorph z hz).symm 0 := by
-  apply (projectedLocalHomeomorph z hz).contDiffAt_symm
-    (zero_mem_projectedLocalHomeomorph_target z hz)
-    (f₀' := localCoordinateDerivativeEquiv z hz)
-  · rw [projectedLocalHomeomorph_symm_zero]
-    convert hasFDerivAt_localCoordinateDerivativeEquiv z hz using 1 <;> rfl
-  · rw [projectedLocalHomeomorph_symm_zero]
-    change ContDiffAt ℝ n (localCoordinateMap z) 0
-    exact contDiffAt_localCoordinateMap z
 
 end Wikipedia.HomotopyGroupsOfSpheres.ComplexCrossProductUnitary

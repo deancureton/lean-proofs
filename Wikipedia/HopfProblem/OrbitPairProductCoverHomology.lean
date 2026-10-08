@@ -99,24 +99,5 @@ theorem projection_inclusion (U V : Set Y) (hUV : U ⊆ V) (n : ℕ)
 
 variable {Z : Type} [TopologicalSpace Z]
 
-theorem snd_homology_bijective_homeomorph (e : Y ≃ₜ Z) (n : ℕ)
-    (h : Function.Bijective (singularHomologyMap (ContinuousMap.snd : C(Y × X, X)) n)) :
-    Function.Bijective (singularHomologyMap (ContinuousMap.snd : C(Z × X, X)) n) := by
-  let E := homeomorphHomologyEquiv (e.prodCongr (Homeomorph.refl X)) n
-  have he (a : SingularHomology (Y × X) n) :
-      singularHomologyMap (ContinuousMap.snd : C(Z × X, X)) n (E a) =
-        singularHomologyMap ContinuousMap.snd n a := by
-    change singularHomologyMap _ n (singularHomologyMap _ n a) = _
-    rw [← LinearMap.comp_apply, ← singularHomologyMap_comp]
-    rfl
-  constructor
-  · intro a b hab
-    apply E.symm.injective
-    apply h.1
-    rw [← he, ← he, E.apply_symm_apply, E.apply_symm_apply]
-    exact hab
-  · intro a
-    obtain ⟨b, hb⟩ := h.2 a
-    exact ⟨E b, (he b).trans hb⟩
 
 end Wikipedia.HopfProblem.OrbitPair.ProductCover

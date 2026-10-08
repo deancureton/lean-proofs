@@ -94,18 +94,5 @@ theorem timePairMap_injective {ρ : ℝ → ℝ} (hρ : Injective ρ) :
   have hs := congrArg (fun r : ℝ × (M × M) => r.2) heq
   exact Prod.ext (hρ ht) hs
 
-theorem finite_clock_doublePoints {F : ℝ × M → N} {τ : ℝ × M → ℝ} {ρ : ℝ → ℝ}
-    {J : Set ℝ} {U P : Set M} (hPU : P ⊆ U)
-    (hsep : HasProjectedSeparation F J U P)
-    (hrange : ∀ t ∈ J, ∀ x, τ (t, x) ∈ J)
-    (hfixed : ∀ t x, t ∉ J ∨ x ∉ U → τ (t, x) = t)
-    (hplateau : ∀ t x, x ∈ P → τ (t, x) = ρ t)
-    (hρ : Injective ρ) (hfinite : (FamilyDoublePoints.doublePoints F).Finite) :
-    (FamilyDoublePoints.doublePoints (clockFamily F τ)).Finite := by
-  apply (hfinite.union (hfinite.preimage (timePairMap_injective hρ).injOn)).subset
-  intro p hp
-  rcases (clock_doublePoints_iff hPU hsep hrange hfixed hplateau p).mp hp with h | h
-  · exact Or.inl h.2
-  · exact Or.inr h.2.2
 
 end Wikipedia.HopfProblem.OrbitPair.TimeRetiming

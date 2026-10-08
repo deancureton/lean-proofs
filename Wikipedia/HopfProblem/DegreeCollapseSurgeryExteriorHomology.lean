@@ -53,12 +53,6 @@ theorem oldHomologyEquiv_original_map (n : ℕ) (c : SingularHomology R n) :
   rw [oldHomologyEquiv_apply, ← LinearMap.comp_apply, ← singularHomologyMap_comp]
   rfl
 
-theorem newHomologyEquiv_original_map (n : ℕ) (c : SingularHomology R n) :
-    singularHomologyMap (⟨Subtype.val, continuous_subtype_val⟩ : C(d.NewComplement, Y)) n
-      (newHomologyEquiv d n c) =
-        singularHomologyMap ⟨d.newExterior, d.newExterior_closed.continuous⟩ n c := by
-  rw [newHomologyEquiv_apply, ← LinearMap.comp_apply, ← singularHomologyMap_comp]
-  rfl
 
 def radialSphereMap (r : Radius) : C(UnitSphere E × UnitSphere F, d.OldComplement) := by
   let q : C(UnitSphere F, PuncturedBall F) :=

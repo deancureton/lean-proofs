@@ -75,15 +75,5 @@ theorem exists_compact_lyapunov_residence {L : D → ℝ} {W : D → D}
   have hhi : L (γ 0) ≤ L q := hmax (hstay 0 h0)
   linarith
 
-/-- The modified cubic field cannot stay in any compact coordinate region indefinitely. -/
-theorem exists_cancelledDescent_residence_bound {m : ℕ} (σ : Fin m → ℝ)
-    (hσ : ∀ i, σ i ≠ 0) {a : ℝ} (ha : 0 < a)
-    {φ : Model m → ℝ} (hφ : ContDiff ℝ ∞ φ) (hφnonneg : ∀ p, 0 ≤ φ p)
-    (hone : ∀ s ∈ Icc (-a) a, φ (s, 0) = 1) {C : Set (Model m)} (hC : IsCompact C) :
-    ∃ T : ℝ, 0 < T ∧ ∀ γ : ℝ → Model m,
-      (∀ t ∈ Icc (0 : ℝ) T, γ t ∈ C → HasDerivAt γ (cancelledDescent σ a φ (γ t)) t) →
-      ∃ t ∈ Icc (0 : ℝ) T, γ t ∉ C := by
-  obtain ⟨k, -, hL, hneg⟩ := exists_compact_fieldLyapunov σ hσ ha hφ hφnonneg hone hC
-  exact exists_compact_lyapunov_residence hL (contDiff_cancelledDescent σ a hφ).continuous hC hneg
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

@@ -69,12 +69,5 @@ theorem exists_morseSurgeryData_smoothExterior_lt {f : M → ℝ}
   exact c.surgeryDataOfCollar_hasSmoothExterior ρ hρ hblock R hfronta hfrontb
     hlower hupper hmodel hf hforward hbackward
 
-theorem exists_morseSurgeryData_smoothExterior {f : M → ℝ}
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f) (hm : IsMorse E f)
-    {p : M} (hp : p ∈ criticalPoints E f)
-    (hunique : ∀ x ∈ criticalPoints E f, f x = f p → x = p) :
-    ∃ d : MorseSurgeryData E f p, d.HasSmoothExterior hf := by
-  obtain ⟨d, _, _, hd⟩ := exists_morseSurgeryData_smoothExterior_lt hf hm hp hunique zero_lt_one
-  exact ⟨d, hd⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse

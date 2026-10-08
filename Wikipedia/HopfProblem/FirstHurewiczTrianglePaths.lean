@@ -95,30 +95,9 @@ theorem triangleEdge02_eq_cast (σ : C(Simplex 2, X)) :
 @[simp] theorem triangleEdge02_apply (σ : C(Simplex 2, X)) (t : unitInterval) :
     triangleEdge02 σ t = σ (simplexFace 1 1 (stdSimplexHomeomorphUnitInterval.symm t)) := rfl
 
-/-- The actual face paths are natural under continuous maps. -/
-theorem triangleFacePath_map (σ : C(Simplex 2, X)) (f : C(X, Y)) (i : Fin 3) :
-    (triangleFacePath σ i).map f.continuous = triangleFacePath (f.comp σ) i := by
-  apply Path.ext
-  funext t
-  rfl
 
-theorem triangleEdge01_eq_map (σ : C(Simplex 2, X)) :
-    triangleEdge01 σ = (triangleEdge01 (ContinuousMap.id (Simplex 2))).map σ.continuous := by
-  apply Path.ext
-  funext t
-  rfl
 
-theorem triangleEdge12_eq_map (σ : C(Simplex 2, X)) :
-    triangleEdge12 σ = (triangleEdge12 (ContinuousMap.id (Simplex 2))).map σ.continuous := by
-  apply Path.ext
-  funext t
-  rfl
 
-theorem triangleEdge02_eq_map (σ : C(Simplex 2, X)) :
-    triangleEdge02 σ = (triangleEdge02 (ContinuousMap.id (Simplex 2))).map σ.continuous := by
-  apply Path.ext
-  funext t
-  rfl
 
 /-- The actual concatenation of edges `01` and `12` is homotopic relative
 endpoints to edge `02`; no triangle relation is postulated. -/

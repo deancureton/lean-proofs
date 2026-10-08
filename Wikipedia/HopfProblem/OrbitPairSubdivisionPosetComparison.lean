@@ -87,10 +87,5 @@ theorem subdivisionComparison_stdSimplex (n : SimplexCategory) :
   SSet.sd.descOfIsLeftKanExtension_fac_app SSet.stdSimplex.sdIso.inv nerveFunctor
     standardComparisonNat n
 
-theorem subdivisionComparison_simplex (X : SSet.{u}) (n : ℕ) (x : X _⦋n⦌) :
-    SSet.stdSimplex.sdIso.inv.app ⦋n⦌ ≫ SSet.sd.map (SSet.yonedaEquiv.symm x) ≫
-        subdivisionComparison.app X =
-      standardComparison ⦋n⦌ ≫ nerveFunctor.map (SSet.yonedaEquiv.symm x) := by
-  rw [subdivisionComparison.naturality, ← Category.assoc, subdivisionComparison_stdSimplex]
 
 end Wikipedia.HopfProblem.OrbitPair.NondegeneratePoset

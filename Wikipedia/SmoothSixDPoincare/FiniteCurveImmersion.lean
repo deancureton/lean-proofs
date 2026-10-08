@@ -69,21 +69,6 @@ theorem exists_curve_immersion_patch_step_within_target {ι : Type*} [Finite ι]
     · exact hKnew t ht
     · exact hplateau t (hLsub ht)
 
-/-- The original local immersion step, forgetting its controlled target. -/
-theorem exists_curve_immersion_patch_step {ι : Type*} [Finite ι]
-    (p : ι → MapSmoothingPatch 𝓘(ℝ, ℝ) J (X := ℝ) (N := N)) (i : ι)
-    (f : C(ℝ, N)) (hf : ContMDiff 𝓘(ℝ, ℝ) J ∞ f)
-    (hcompatible : ∀ j, (p j).Compatible f) (hdim : 3 ≤ Module.finrank ℝ G)
-    {K L C : Set ℝ} (hK : IsCompact K)
-    (hinj : ∀ t ∈ K, Function.Injective (mfderiv 𝓘(ℝ, ℝ) J f t))
-    (hLsub : L ⊆ (p i).plateau) (hfixed : ∀ t ∈ C, (p i).cutoff t = 0) :
-    ∃ g : C(ℝ, N), ContMDiff 𝓘(ℝ, ℝ) J ∞ g ∧
-      (∀ j, (p j).Compatible g) ∧ f.HomotopicRel g C ∧
-      ∀ t ∈ K ∪ L, Function.Injective (mfderiv 𝓘(ℝ, ℝ) J g t) := by
-  obtain ⟨g, hg, hc, hrel, hi⟩ :=
-    exists_curve_immersion_patch_step_within_target p i f hf hcompatible hdim hK hinj
-      hLsub hfixed (subset_univ _) (mapsTo_univ f univ)
-  exact ⟨g, hg, hc, hrel.homotopicRel, hi⟩
 
 /-- Finite immersion improvement with its complete trace in the prescribed target. -/
 theorem exists_finite_curve_patch_immersion_within_target {ι : Type*} [Finite ι]
@@ -121,21 +106,5 @@ theorem exists_finite_curve_patch_immersion_within_target {ι : Type*} [Finite �
       · exact Or.inr htj
       · exact Or.inl (Or.inr (mem_iUnion₂.mpr ⟨j, hjs, htj⟩))
 
-/-- The original finite immersion API, with target control forgotten. -/
-theorem exists_finite_curve_patch_immersion {ι : Type*} [Finite ι]
-    (p : ι → MapSmoothingPatch 𝓘(ℝ, ℝ) J (X := ℝ) (N := N))
-    (L : ι → Set ℝ) (hL : ∀ i, IsCompact (L i)) (hLsub : ∀ i, L i ⊆ (p i).plateau)
-    (f : C(ℝ, N)) (hf : ContMDiff 𝓘(ℝ, ℝ) J ∞ f)
-    (hcompatible : ∀ i, (p i).Compatible f) (hdim : 3 ≤ Module.finrank ℝ G)
-    {K C : Set ℝ} (hK : IsCompact K)
-    (hinj : ∀ t ∈ K, Function.Injective (mfderiv 𝓘(ℝ, ℝ) J f t))
-    (hfixed : ∀ i t, t ∈ C → (p i).cutoff t = 0) (s : Finset ι) :
-    ∃ g : C(ℝ, N), ContMDiff 𝓘(ℝ, ℝ) J ∞ g ∧
-      (∀ i, (p i).Compatible g) ∧ f.HomotopicRel g C ∧
-      ∀ t ∈ K ∪ ⋃ i ∈ s, L i, Function.Injective (mfderiv 𝓘(ℝ, ℝ) J g t) := by
-  obtain ⟨g, hg, hc, hrel, hi⟩ :=
-    exists_finite_curve_patch_immersion_within_target p L hL hLsub f hf hcompatible hdim
-      hK hinj hfixed (fun _ => subset_univ _) (mapsTo_univ f univ) s
-  exact ⟨g, hg, hc, hrel.homotopicRel, hi⟩
 
 end Wikipedia.SmoothSixDPoincare.ManifoldImmersion

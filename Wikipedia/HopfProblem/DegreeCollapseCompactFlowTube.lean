@@ -54,12 +54,6 @@ theorem mem_flowTube_of_signedTime (F : Flow ℝ X) (f : X → ℝ) (c : ℝ)
   · constructor <;> linarith [(abs_le.mp ht).1, (abs_le.mp ht).2]
   · simp only [← F.map_add, neg_add_cancel, F.map_zero_apply]
 
-theorem flowTube_subset_levelBasin (F : Flow ℝ X) (f : X → ℝ) (c ε : ℝ) :
-    flowTube F {y | f y = c} ε ⊆ levelBasin F f c := by
-  rintro y ⟨⟨t, x⟩, ⟨-, hx⟩, rfl⟩
-  change f x = c at hx
-  exact (levelBasin_flow_iff F f c t x).mpr
-    ⟨0, by simpa only [F.map_zero_apply] using hx⟩
 
 /-- A continuous strictly negative function on a compact set has a uniform
 strict negative margin, including when that compact set is empty. -/

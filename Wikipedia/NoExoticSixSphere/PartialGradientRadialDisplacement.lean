@@ -47,19 +47,5 @@ theorem exists_radial_displacement_bound (hU : IsOpen U) (hf : ContDiffOn ℝ �
     rw [hd]
   simpa only [one_smul, ← hw, ← hrad] using hh
 
-theorem exists_radial_small_of_small_energy_loss (hU : IsOpen U) (hf : ContDiffOn ℝ ∞ f U)
-    (ρ : ℝ) (hρ : 0 < ρ) :
-    ∃ δ > 0, ∀ (r : ℝ), 0 < r → Metric.ball (0 : E) (3 * r) ⊆ C.chart.source →
-      ∀ z ∈ C.radialDomain r, ∀ s : I,
-        f z - f (C.radial r (s, z)) < δ → dist (C.radial r (s, z)) z < ρ := by
-  obtain ⟨c, hc, hbound⟩ := C.exists_radial_displacement_bound hU hf
-  refine ⟨c * ρ ^ 2, mul_pos hc (sq_pos_of_pos hρ), ?_⟩
-  intro r hr hball z hz s hsmall
-  have hh := hbound r hr hball z hz s
-  by_contra hn
-  have hlarge : ρ ≤ dist (C.radial r (s, z)) z := le_of_not_gt hn
-  have hsquare := pow_le_pow_left₀ hρ.le hlarge 2
-  have hcost := mul_le_mul_of_nonneg_left hsquare hc.le
-  linarith
 
 end NoExoticSixSphere.PartialGradientCoordinates.LocalData

@@ -58,19 +58,6 @@ theorem eq_mul_exp_of_hasDerivAt (γ : ℝ → OrthogonalOperators n) (K : SkewO
       (inv_mul_cancel_right _ _).symm
     _ = γ 0 * exp (t • K) := by rw [hgroup]
 
-/-- A differentiable curve with constant actual body velocity is exponential. -/
-theorem eq_mul_exp_of_bodyVelocity (γ : ℝ → OrthogonalOperators n) (K : SkewOperators n)
-    (hγ : Differentiable ℝ (fun r ↦ (γ r).1.1))
-    (hK : ∀ t, (inverse (γ t)).1.1.comp (deriv (fun r ↦ (γ r).1.1) t) =
-      (K : Vector n →L[ℝ] Vector n)) (t : ℝ) :
-    γ t = γ 0 * exp (t • K) := by
-  apply eq_mul_exp_of_hasDerivAt γ K _ t
-  intro r
-  apply (hγ r).hasDerivAt.congr_deriv
-  rw [← hK r]
-  apply ContinuousLinearMap.ext
-  intro x
-  exact (self_apply_inverse (γ r) _).symm
 
 theorem eq_of_hasDerivAt_zero_Ioo {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     {f : ℝ → E} {l u : ℝ} (hlu : l < u) (hf : Continuous f)

@@ -47,16 +47,6 @@ def stabilizationMapCoordinates (C : Vector L ≃L[ℝ] (Vector N × ℝ))
     (Monomorphism.recoordinateHomeomorph (ContinuousLinearEquiv.refl ℝ (Vector L))
       (collarSourceChange Q R))
 
-theorem stabilizationMapCoordinates_operator (C : Vector L ≃L[ℝ] (Vector N × ℝ))
-    (Q : Vector k' ≃L[ℝ] Vector k) (R : Vector 4 ≃L[ℝ] Vector 4)
-    (F : Monomorphism.Space L (k + 4)) (A : Vector k →L[ℝ] Vector L)
-    (D : Vector 4 →L[ℝ] Vector L) (hF : F.val = OperatorSum.operator A D) :
-    (stabilizationMapCoordinates C Q R F).val =
-      combined (C.toContinuousLinearMap.comp (A.comp Q.toContinuousLinearMap))
-        (C.toContinuousLinearMap.comp (D.comp R.toContinuousLinearMap)) := by
-  apply stabilizationMap_operator C _ _ _
-  change F.val.comp (collarSourceChange Q R).toContinuousLinearMap = _
-  rw [hF, operator_comp_collarSourceChange]
 
 theorem extends_stabilizationMap_iff (hL : L = 3 + (k + 4))
     (C : Vector L ≃L[ℝ] (Vector N × ℝ)) (F : C(Sphere 3, Monomorphism.Space L (k + 4))) :
@@ -68,21 +58,5 @@ theorem extends_stabilizationMap_iff (hL : L = 3 + (k + 4))
       continuous_const continuous_const _ _ (fun _ ↦ rfl)
   exact h.trans (Monomorphism.extends_blockMap_iff (by omega) hL 5 F)
 
-theorem extends_stabilizationMapCoordinates_iff (hL : L = 3 + (k + 4))
-    (C : Vector L ≃L[ℝ] (Vector N × ℝ))
-    (Q : Vector k' ≃L[ℝ] Vector k) (R : Vector 4 ≃L[ℝ] Vector 4)
-    (F : C(Sphere 3, Monomorphism.Space L (k + 4))) :
-    Extends ((stabilizationMapCoordinates C Q R).comp F) ↔ Extends F := by
-  have hk : k' = k := by
-    simpa only [finrank_euclideanSpace_fin] using Q.toLinearEquiv.finrank_eq
-  let F' : C(Sphere 3, Monomorphism.Space L (k' + 4)) :=
-    (Monomorphism.recoordinateHomeomorph (ContinuousLinearEquiv.refl ℝ (Vector L))
-      (collarSourceChange Q R) :
-        C(Monomorphism.Space L (k + 4), Monomorphism.Space L (k' + 4))).comp F
-  change Extends ((stabilizationMap C).comp F') ↔ Extends F
-  rw [extends_stabilizationMap_iff (by simpa only [hk] using hL)]
-  exact Monomorphism.extends_recoordinate_iff
-    (fun _ ↦ ContinuousLinearEquiv.refl ℝ (Vector L)) (fun _ ↦ collarSourceChange Q R)
-    continuous_const continuous_const continuous_const continuous_const F F' (fun _ ↦ rfl)
 
 end NoExoticSixSphere.CollaredDiskFrame

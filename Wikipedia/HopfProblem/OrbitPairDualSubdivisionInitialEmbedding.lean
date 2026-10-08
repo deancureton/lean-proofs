@@ -74,14 +74,5 @@ theorem dual_map_injective_at_initial {l k : ℕ} (z : (dualSd.obj X) _⦋k⦌)
   rw [degreeParameters_projection, degreeParameters_projection, hp]
   exact h
 
-theorem dual_map_eq_imp_eq_or_omit_zero {l k : ℕ} (z : (dualSd.obj X) _⦋k⦌)
-    (hz : z ∈ (dualSd.obj X).nonDegenerate k) (f g : ⦋l⦌ ⟶ ⦋k⦌)
-    (h : (dualSd.obj X).map f.op z = (dualSd.obj X).map g.op z) :
-    f = g ∨ (f.toOrderHom 0 ≠ 0 ∧ g.toOrderHom 0 ≠ 0) := by
-  by_cases hf : f.toOrderHom 0 = 0
-  · exact Or.inl (dual_map_injective_at_initial X z hz f g hf h)
-  by_cases hg : g.toOrderHom 0 = 0
-  · exact Or.inl (dual_map_injective_at_initial X z hz g f hg h.symm).symm
-  exact Or.inr ⟨hf, hg⟩
 
 end Wikipedia.HopfProblem.OrbitPair.Subdivision

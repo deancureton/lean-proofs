@@ -45,12 +45,6 @@ theorem sphereCircleHomologyZeroEquiv_eq_connectedHomologyZeroEquiv :
   rw [sphereCircleHomologyZeroEquiv_eq_connectedHomologyZeroEquiv]
   exact connectedHomologyZeroEquiv_pointClass x
 
-/-- The inverse degree-zero marking is the genuine singular class of any actual point. -/
-theorem sphereCircleHomologyZeroEquiv_symm_one
-    (x : Metric.sphere (0 : EuclideanSpace ℝ (Fin 2)) 1) :
-    sphereCircleHomologyZeroEquiv.symm 1 = pointClass x := by
-  rw [sphereCircleHomologyZeroEquiv_eq_connectedHomologyZeroEquiv]
-  exact connectedHomologyZeroEquiv_symm_one x
 
 /-- Native degree-one homology of the original Euclidean unit sphere. -/
 def sphereCircleHomologyOneEquiv :
@@ -76,10 +70,6 @@ theorem sphereCircle_homology_subsingleton (n : ℕ) :
   let := unitCircle_homology_subsingleton n
   exact (sphereCircleHomologyEquiv (n + 2)).injective.subsingleton
 
-theorem sphereCircle_homology_isZero (n : ℕ) :
-    IsZero (SingularHomology (Metric.sphere (0 : EuclideanSpace ℝ (Fin 2)) 1) (n + 2)) := by
-  let := sphereCircle_homology_subsingleton n
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- The higher native homology groups are explicitly equivalent to the zero free module. -/
 def sphereCircleHomologyHigherEquivZero (n : ℕ) :
@@ -100,20 +90,6 @@ instance sphereCircle_homology_finite (n : ℕ) :
   exact Module.Finite.of_surjective (sphereCircleHomologyEquiv n).symm.toLinearMap
     (sphereCircleHomologyEquiv n).symm.surjective
 
-/-- The all-degree rank is one in degrees zero and one, and zero otherwise. -/
-theorem sphereCircle_homology_finrank (n : ℕ) :
-    Module.finrank ℤ
-      (SingularHomology (Metric.sphere (0 : EuclideanSpace ℝ (Fin 2)) 1) n) =
-        Nat.choose 1 n := by
-  cases n with
-  | zero => simpa using sphereCircleHomologyZeroEquiv.finrank_eq
-  | succ n =>
-    cases n with
-    | zero => simpa using sphereCircleHomologyOneEquiv.finrank_eq
-    | succ n =>
-      let := sphereCircle_homology_subsingleton n
-      rw [Module.finrank_zero_of_subsingleton,
-        Nat.choose_eq_zero_of_lt (by omega : 1 < n + 2)]
 
 /-- The complete native integral homology calculation of the original Euclidean unit circle. -/
 theorem sphereCircle_homology :

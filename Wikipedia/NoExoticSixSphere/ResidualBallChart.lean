@@ -38,8 +38,6 @@ def Data.ballChart (d : Data D) (ε : ℝ) (hε : 0 < ε) :
     PartialDiffeomorph (𝓡 4) 𝓘(ℝ, X) (Vector 4) X ∞ :=
   (scaledResidualEquiv ε hε).toDiffeomorph.toPartialDiffeomorph.trans d.coord.symm
 
-theorem Data.ballChart_apply (d : Data D) (ε : ℝ) (hε : 0 < ε) (z : Vector 4) :
-    d.ballChart ε hε z = d.ballMap ε z := by rfl
 
 theorem Data.closedBall_subset_ballChart_source (d : Data D) {ε : ℝ} (hε : 0 < ε)
     (hball : closedBall (0 : Vector 4) ε ⊆ d.coord.target) :

@@ -161,19 +161,6 @@ theorem formalEdgeCrossProduct_boundary_left_zero (c : FormalChains V 3)
       formalBoundary 2 (formalTriangleCrossProduct 0 c d) :=
   (formalBoundary_triangleCrossProduct_zero c d).symm
 
-/-- An edge boundary times a positive-degree cycle is a boundary. -/
-theorem formalEdgeCrossProduct_boundary_left (q : ℕ) (c : FormalChains V 3)
-    (d : FormalChains W (q + 2)) (hd : formalBoundary (q + 1) d = 0) :
-    formalEdgeCrossProduct (q + 1) (formalBoundary 2 c) d =
-      formalBoundary (q + 3) (formalTriangleCrossProduct (q + 1) c d) := by
-  rw [formalBoundary_triangleCrossProduct, hd, map_zero, add_zero]
 
-/-- A triangle cycle times a positive-degree cycle is a cycle. -/
-theorem formalTriangleCrossProduct_isCycle (q : ℕ) (c : FormalChains V 3)
-    (hc : formalBoundary 2 c = 0) (d : FormalChains W (q + 2))
-    (hd : formalBoundary (q + 1) d = 0) :
-    formalBoundary (q + 3) (formalTriangleCrossProduct (q + 1) c d) = 0 := by
-  rw [formalBoundary_triangleCrossProduct, hc, map_zero, LinearMap.zero_apply,
-    hd, map_zero, add_zero]
 
 end Wikipedia.HopfProblem.PeriodTorusHigherHomology

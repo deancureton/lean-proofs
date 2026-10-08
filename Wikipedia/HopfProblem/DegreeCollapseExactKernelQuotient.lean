@@ -111,8 +111,5 @@ theorem quotientEquiv_mk (hT : Surjective T) (x : LinearMap.ker p) :
       (Submodule.Quotient.mk x)) = _
   rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
-theorem quotientEquiv_trace (hT : Surjective T) (x : LinearMap.ker p) :
-    N (quotientEquiv T N p hN he a hker hT (Submodule.Quotient.mk x)) = T x := by
-  rw [quotientEquiv_mk, liftMap_spec]
 
 end Wikipedia.HopfProblem.DegreeCollapse.ExactKernelQuotient

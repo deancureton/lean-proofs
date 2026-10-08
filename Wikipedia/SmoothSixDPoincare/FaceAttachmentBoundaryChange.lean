@@ -22,12 +22,5 @@ theorem congrFaceMap_updateBoundary (h : b = c) (S U : Set X) (V : Set K) :
   change id '' updateBoundary b S U V = _
   exact image_id _
 
-theorem baseCongr_updateBoundary (b : C(B, X)) (e : X ≃ₜ Y)
-    (S U : Set X) (V : Set K) :
-    baseCongr b e '' updateBoundary b S U V =
-      updateBoundary (e.toHomotopyEquiv.toFun.comp b) (e '' S) (e '' U) V := by
-  unfold updateBoundary
-  rw [image_union, image_image, image_image, ← image_sdiff e.injective, image_image]
-  rfl
 
 end Wikipedia.SmoothSixDPoincare.FaceAttachment

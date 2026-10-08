@@ -48,11 +48,6 @@ theorem restrictChain_trans (A : ModuleCat.{0} ℤ) {K L N : Set M}
 abbrev restrict (A : ModuleCat.{0} ℤ) {K L : Set M} (h : K ⊆ L) (n : ℕ) :
     Homology A L n →ₗ[ℤ] Homology A K n := homologyLinearMap (restrictChain A h) n
 
-theorem restrict_refl (A : ModuleCat.{0} ℤ) (K : Set M) (n : ℕ) :
-    restrict A (Set.Subset.refl K) n = LinearMap.id := by
-  change homologyLinearMap _ n = _
-  rw [restrictChain_refl]
-  exact congrArg ModuleCat.Hom.hom (HomologicalComplex.homologyMap_id (Complex A K) n)
 
 theorem restrict_trans (A : ModuleCat.{0} ℤ) {K L N : Set M}
     (hKL : K ⊆ L) (hLN : L ⊆ N) (n : ℕ) :

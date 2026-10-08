@@ -62,16 +62,6 @@ theorem LongitudinalTubeMotion.fixed_outside_target (A : LongitudinalTubeMotion 
     (t : ℝ) (y : M) (hy : y ∉ Φ.target) : A.family (t, y) = y :=
   A.fixedOutside t y (fun h => hy (A.support_subset h))
 
-theorem LongitudinalTubeMotion.maps_target (A : LongitudinalTubeMotion Φ)
-    (t : ℝ) : MapsTo (fun y => A.family (t, y)) Φ.target Φ.target := by
-  intro y hy
-  change A.family (t, y) ∈ Φ.target
-  have heq : A.family (t, y) =
-      Φ (longitudinalBlend A.profile A.cutoff Real.smoothTransition (t, Φ.symm y)) :=
-    (congrArg (fun z => A.family (t, z)) (Φ.right_inv hy)).symm.trans
-      (A.formula t (Φ.symm y) (Φ.map_target hy))
-  rw [heq]
-  exact Φ.map_source (A.model_source t (Φ.symm y) (Φ.map_target hy))
 
 theorem LongitudinalTubeMotion.crossing_axis (A : LongitudinalTubeMotion Φ)
     (h0 : (0 : ℝ × V) ∈ Φ.source) : A.family (A.time, Φ 0) = Φ (1, 0) := by

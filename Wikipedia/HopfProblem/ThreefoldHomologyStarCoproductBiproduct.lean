@@ -132,16 +132,6 @@ theorem homologyBiproductEquiv_symm_apply (a : ∀ i, (K i).homology n) :
 
 variable {K}
 
-/-- A lift of actual chain maps has their genuine homology maps as coordinates. -/
-theorem homologyBiproductEquiv_lift {L : ChainComplex (ModuleCat.{0} ℤ) ℕ}
-    (f : ∀ i, L ⟶ K i) (a : L.homology n) :
-    homologyBiproductEquiv K n ((homologyMap (biproduct.lift f) n).hom a) =
-      fun i => (homologyMap (f i) n).hom a := by
-  funext i
-  rw [homologyBiproductEquiv_apply_apply]
-  have h := homologyMap_comp (biproduct.lift f) (biproduct.π K i) n
-  rw [biproduct.lift_π] at h
-  exact (congrArg (fun k => k.hom a) h).symm
 
 /-- A map descended from the finite biproduct becomes the sum of the actual
 induced homology maps under the inverse equivalence. -/
@@ -156,12 +146,5 @@ theorem homologyBiproductEquiv_desc {L : ChainComplex (ModuleCat.{0} ℤ) ℕ}
   rw [biproduct.ι_desc] at h
   exact (congrArg (fun k => k.hom (a i)) h).symm
 
-/-- The same descent formula on an arbitrary class of the biproduct homology. -/
-theorem homologyBiproductEquiv_desc_apply {L : ChainComplex (ModuleCat.{0} ℤ) ℕ}
-    (f : ∀ i, K i ⟶ L) (a : (⨁ K).homology n) :
-    (homologyMap (biproduct.desc f) n).hom a =
-      ∑ i, (homologyMap (f i) n).hom (homologyBiproductEquiv K n a i) := by
-  have h := homologyBiproductEquiv_desc n f (homologyBiproductEquiv K n a)
-  rwa [LinearEquiv.symm_apply_apply] at h
 
 end Wikipedia.HopfProblem.ThreefoldHomologyStarCoproduct

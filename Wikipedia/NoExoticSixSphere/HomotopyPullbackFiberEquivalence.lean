@@ -114,15 +114,5 @@ def projectionFiberEquiv : ProjectionFiber F x ≃ₕ HomotopyFiber.Space F (F x
   left_inv := ⟨(fiberRetractionHomotopy F x).symm⟩
   right_inv := ⟨(restrictedFiberHomotopy F x).symm⟩
 
-theorem fiberRetraction_basepoint :
-    fiberRetraction F x (HomotopyFiber.basepoint (left F) (diagonal F x)) =
-      HomotopyFiber.basepoint F x := by
-  apply Subtype.ext
-  apply Prod.ext
-  · rfl
-  · apply ContinuousMap.ext
-    intro t
-    change (if 2 * (unitInterval.symm t : ℝ) ≤ (1 : ℝ) then F x else F x) = F x
-    simp only [ite_self]
 
 end NoExoticSixSphere.HomotopyPullbackDiagonal

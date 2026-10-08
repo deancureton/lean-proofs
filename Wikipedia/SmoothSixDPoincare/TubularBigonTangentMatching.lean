@@ -33,22 +33,6 @@ theorem halfTimeDerivative_apply (v : (ℝ × A)) : halfTimeDerivative v = (v.1 
     ring
   · rfl
 
-theorem bijective_halfTimeDerivative : Bijective (halfTimeDerivative (A := A)) := by
-  have hleft : LeftInverse (fun p : (ℝ × A) => (2 * p.1, p.2)) halfTimeDerivative := by
-    intro p
-    rw [halfTimeDerivative_apply]
-    apply Prod.ext
-    · dsimp
-      ring
-    · rfl
-  have hright : RightInverse (fun p : (ℝ × A) => (2 * p.1, p.2)) halfTimeDerivative := by
-    intro p
-    rw [halfTimeDerivative_apply]
-    apply Prod.ext
-    · dsimp
-      ring
-    · rfl
-  exact ⟨hleft.injective, hright.surjective⟩
 
 end Wikipedia.SmoothSixDPoincare.WhitneyPairModel
 

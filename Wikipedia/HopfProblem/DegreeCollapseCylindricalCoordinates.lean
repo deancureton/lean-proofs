@@ -72,10 +72,6 @@ theorem transverseForm_smul (m : M) (c : ℝ) (v : Normal K) :
   change ‖c • v.snd‖ ^ 2 = c ^ 2 * ‖v.snd‖ ^ 2
   simp only [norm_smul, Real.norm_eq_abs, mul_pow, sq_abs]
 
-theorem longitudinalForm_smul (m : M) (c : ℝ) (v : Normal K) :
-    longitudinalForm (m, c • v) = c ^ 2 * longitudinalForm (m, v) := by
-  change ‖c • v.fst‖ ^ 2 = c ^ 2 * ‖v.fst‖ ^ 2
-  simp only [norm_smul, Real.norm_eq_abs, mul_pow, sq_abs]
 
 theorem forms_sum (p : M × Normal K) :
     transverseForm p + longitudinalForm p = ‖p.2‖ ^ 2 := by
@@ -83,20 +79,6 @@ theorem forms_sum (p : M × Normal K) :
   rw [WithLp.prod_norm_sq_eq_of_L2]
   ring
 
-theorem compress_forms (p : M × Normal K) :
-    NoExoticSixSphere.QuadraticRadialCompression.compress transverseForm
-      (NoExoticSixSphere.QuadraticRadialCompression.compress longitudinalForm p) =
-        NoExoticSixSphere.QuadraticRadialCompression.compress
-          (fun z : M × Normal K ↦ ‖z.2‖ ^ 2) p := by
-  have h := QuadraticCompression.compress_compress
-    (transverseForm (M := M) (K := K)) (longitudinalForm (M := M) (K := K))
-    (transverseForm_smul (M := M) (K := K))
-    (transverseForm_nonneg (M := M) (K := K))
-    (longitudinalForm_nonneg (M := M) (K := K)) p
-  have he : (fun z : M × Normal K ↦ transverseForm z + longitudinalForm z) =
-      (fun z ↦ ‖z.2‖ ^ 2) := funext forms_sum
-  rw [he] at h
-  exact h
 
 variable [TopologicalSpace M]
 

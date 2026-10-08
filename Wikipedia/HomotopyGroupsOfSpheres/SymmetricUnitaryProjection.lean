@@ -45,14 +45,6 @@ theorem unitaryProjection_eq_identity_of_real (U : unitary (Matrix N N ℂ))
   rw [ht]
   exact U.property.2
 
-theorem unitaryProjection_border {n : ℕ} (U : unitary (Matrix (Fin n) (Fin n) ℂ)) :
-    unitaryProjection (MatrixBorder.unitaryBorder (1, U)) =
-      stabilization n (unitaryProjection U) := by
-  apply Subtype.ext
-  apply Subtype.ext
-  rw [unitaryProjection_val, stabilization_val, unitaryProjection_val]
-  change MatrixBorder.border 1 U.val * (MatrixBorder.border 1 U.val).transpose = _
-  rw [MatrixBorder.transpose_border, ← MatrixBorder.border_mul, one_mul]
 
 def unitaryProjectionHomotopyRel {X : Type*} [TopologicalSpace X]
     {f g : C(X, unitary (Matrix N N ℂ))} (H : f.Homotopy g) (x : X)

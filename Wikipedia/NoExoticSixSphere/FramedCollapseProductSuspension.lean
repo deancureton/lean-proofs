@@ -29,13 +29,5 @@ variable {n : ℕ} {M : Type*} [TopologicalSpace M]
   {a : SmoothRangeFrame (𝓡 n) e.normalProjection e.NormalModel}
   (d : e.FramedTubeData a)
 
-theorem product_collapse_suspension (y : Sphere (e.ambientDimension + 1)) :
-    OpenFiberCollapse.collapseOnePoint (OpenFiberCollapse.productTube (T := ℝ) d.tube)
-      (SuspensionProductComparison.rightQuotient e.ambientDimension y) =
-    SuspensionProductComparison.rightQuotient (e.ambientDimension - n)
-      (SphereMapSuspension.map d.collapseData.sphereMap y) := by
-  rw [OpenFiberCollapse.productTube_collapseOnePoint d.tube d.isOpenEmbedding]
-  exact (SuspensionProductComparison.rightQuotient_suspension d.collapseData.map
-    d.collapseData.map_infty y).symm
 
 end NoExoticSixSphere.EuclideanEmbedding.FramedTubeData

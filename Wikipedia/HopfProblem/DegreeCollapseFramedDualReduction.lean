@@ -112,18 +112,5 @@ theorem exists_framed_single_dual_of_unit_count
     let Df : Vector 3 →L[ℝ] Vector 6 := mfderiv (𝓡 3) (𝓡 6) f q
     exact TransverseCoordinates.surjective_coprod_swap DF Df (hgood.2.2.2 u q hp)
 
-theorem compact_surgery_reduction_of_unit_count
-    [Subsingleton (SingularHomology M 2)]
-    (ht : ∀ x y, f y = FramedSurgery.coreMap (E := Vector 4) B x → Surjective
-      ((mfderiv (𝓡 3) (𝓡 6) (FramedSurgery.coreMap (E := Vector 4) B) x).coprod
-        (mfderiv (𝓡 3) (𝓡 6) f y)))
-    (hcount : (dualCount oS oM K f A hR B ht).natAbs = 1) :
-    SimplyConnectedSpace (UnitSurgery.Target A hR) ∧
-      (∀ x : UnitSurgery.Target A hR, Subsingleton (π_ 2 (UnitSurgery.Target A hR) x)) ∧
-      Module.finrank ℤ (SingularHomology (UnitSurgery.Target A hR) 3) + 2 ≤
-        Module.finrank ℤ (SingularHomology M 3) := by
-  obtain ⟨ψ, q, u, _, _, hcross, htrans⟩ :=
-    exists_framed_single_dual_of_unit_count oS oM K f A hR B ht hcount
-  exact TraceBody.compact_dual_surgery_reduction f A hR (B.postcompose ψ) q u hcross htrans
 
 end Wikipedia.HopfProblem.DegreeCollapse.FramedDual

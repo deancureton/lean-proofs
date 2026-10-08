@@ -69,9 +69,6 @@ def oldTopMap : C(M, UnroundedTrace.ambientSet A) :=
 
 theorem oldInclusion_comp_oldTopMap : (oldInclusion A).comp (oldTopMap A) = topMap A := rfl
 
-theorem retraction_comp_topMap : (retraction A).comp (topMap A) = oldTopMap A := by
-  rw [← oldInclusion_comp_oldTopMap, ← ContinuousMap.comp_assoc, retraction_comp_oldInclusion]
-  rfl
 
 end Wikipedia.HopfProblem.DegreeCollapse.TraceRetraction
 
@@ -87,17 +84,5 @@ variable {M : Type} [TopologicalSpace M] [ChartedSpace (Vector 6) M] [CompactSpa
   {a : SmoothRangeFrame (𝓡 6) e.normalProjection e.NormalModel} {f : Sphere 3 → M}
   (A : FramedAttachingProduct e a f)
 
-theorem topMap_homology_kernel (n : ℕ) :
-    LinearMap.ker (singularHomologyMap (topMap A) n) =
-      LinearMap.ker (singularHomologyMap (oldTopMap A) n) := by
-  ext v
-  change singularHomologyMap (topMap A) n v = 0 ↔ singularHomologyMap (oldTopMap A) n v = 0
-  rw [← oldInclusion_comp_oldTopMap, singularHomologyMap_comp, LinearMap.comp_apply]
-  constructor
-  · intro h
-    apply (oldInclusion_homology_bijective A n).injective
-    simpa only [map_zero] using h
-  · intro h
-    rw [h, map_zero]
 
 end Wikipedia.HopfProblem.DegreeCollapse.TraceRetraction

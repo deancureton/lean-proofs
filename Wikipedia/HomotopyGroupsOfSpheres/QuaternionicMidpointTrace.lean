@@ -63,12 +63,5 @@ theorem midpoint_squareSum (z : UnitSphere) (u : unitary ℂ) (hu : u.val ^ 3 = 
     _ = -star u.val * (-u.val * squareSum z.val) := by ring
     _ = -star u.val * traceRoot := by rw [hroot]
 
-theorem midpoint_preimage_squareSum (z : UnitSphere)
-    (h : firstColumnFormula (Real.pi / 2) (Real.pi / 2) (symmetricMap z) = targetColumn) :
-    ∃ u : unitary ℂ, u.val ^ 3 = -1 ∧
-      (symmetricMap z).val.val = u.val • targetMatrix targetAlpha targetBeta ∧
-      squareSum z.val = -star u.val * traceRoot := by
-  obtain ⟨u, hu, hB⟩ := midpoint_target_forward (symmetricMap z) (symmetricMap_det z) h
-  exact ⟨u, hu, hB, midpoint_squareSum z u hu hB⟩
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicBottMatrix

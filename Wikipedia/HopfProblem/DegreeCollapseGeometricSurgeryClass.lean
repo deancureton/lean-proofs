@@ -83,11 +83,6 @@ def geometricMiddleQuotientEquiv :
   (Submodule.quotEquivOfEq _ _ (geometricAttaching_span f A hR d hd)).trans
     (nativeMiddleQuotientEquiv f A hR d hd)
 
-theorem geometricMiddleQuotientEquiv_mk (x : LinearMap.ker (detector f A hR)) :
-    geometricMiddleQuotientEquiv f A hR d hd (Submodule.Quotient.mk x) = nativeLift f A hR d hd x := by
-  change nativeMiddleQuotientEquiv f A hR d hd
-    (Submodule.quotEquivOfEq _ _ (geometricAttaching_span f A hR d hd) (Submodule.Quotient.mk x)) = _
-  rw [Submodule.quotEquivOfEq_mk, nativeMiddleQuotientEquiv_mk]
 
 include A hR d hd in
 theorem attachingSphere_geometricParity_zero (r : TubularRetraction e) (m : M)

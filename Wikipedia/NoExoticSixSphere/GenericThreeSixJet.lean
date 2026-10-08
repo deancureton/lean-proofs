@@ -51,14 +51,5 @@ theorem ae_regular_jets [MeasurableSpace (V →L[ℝ] W)] [BorelSpace (V →L[�
     (fun q : ℝ × V ↦ fderiv ℝ (f q.1) q.2) (DiskHomotopy.contDiff_spatial_fderiv f hf)
     (by simp only [finrank_prod, finrank_self, hv]) hv hw
 
-theorem exists_small_regular_jets (f : ℝ → V → W) (hf : ContDiff ℝ ∞ (uncurry f))
-    (hv : finrank ℝ V = 3) (hw : finrank ℝ W = 6) {ε : ℝ} (hε : 0 < ε) :
-    ∃ A : V →L[ℝ] W, ‖A‖ < ε ∧ OperatorRank.RegularThreeSix
-      (fun q : ℝ × V ↦ fderiv ℝ (perturb f A q.1) q.2) := by
-  let : MeasurableSpace (V →L[ℝ] W) := borel (V →L[ℝ] W)
-  let : BorelSpace (V →L[ℝ] W) := ⟨rfl⟩
-  have hdense := Measure.dense_of_ae (ae_regular_jets addHaar f hf hv hw)
-  obtain ⟨A, hA, hsmall⟩ := hdense.exists_dist_lt 0 hε
-  exact ⟨A, by simpa only [dist_zero_left] using hsmall, hA⟩
 
 end NoExoticSixSphere.DoublePointPerturbation

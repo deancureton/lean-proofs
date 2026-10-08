@@ -78,17 +78,6 @@ theorem singularEvaluationEquiv_symm_evaluate (n : ℕ)
     singularEvaluation X n ((singularEvaluationEquiv X n).symm φ) b = φ b :=
   DFunLike.congr_fun ((singularEvaluationEquiv X n).apply_symm_apply φ) b
 
-/-- Actual cohomology classes are equal precisely when they evaluate
-equally on all actual cycles. -/
-theorem singularCohomology_eq_iff_evaluation (n : ℕ) (a b : SingularCohomology X n) :
-    a = b ↔ ∀ z : SingularHomology X n, singularEvaluation X n a z =
-      singularEvaluation X n b z := by
-  constructor
-  · rintro rfl z
-    rfl
-  · intro h
-    apply (singularEvaluationEquiv X n).injective
-    exact LinearMap.ext h
 
 section EquivalenceNaturality
 
@@ -103,16 +92,6 @@ theorem singularEvaluationEquiv_naturality (f : C(X, Y)) (n : ℕ)
       singularEvaluationEquiv Y n a (singularHomologyMap f n b) :=
   singularEvaluation_naturality f n a b
 
-/-- Inverting the evaluation equivalence still gives the literal cohomological pullback. -/
-theorem singularEvaluationEquiv_symm_naturality (f : C(X, Y)) (n : ℕ)
-    (φ : SingularHomology Y n →ₗ[ℤ] ℤ) :
-    singularCohomologyPullback f n ((singularEvaluationEquiv Y n).symm φ) =
-      (singularEvaluationEquiv X n).symm (φ.comp (singularHomologyMap f n)) := by
-  apply (singularEvaluationEquiv X n).injective
-  ext b
-  rw [singularEvaluationEquiv_naturality, LinearEquiv.apply_symm_apply,
-    LinearEquiv.apply_symm_apply]
-  rfl
 
 end EquivalenceNaturality
 

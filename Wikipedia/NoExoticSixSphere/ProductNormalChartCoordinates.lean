@@ -34,16 +34,8 @@ def productTargetChart : PartialDiffeomorph (𝓡 6) (𝓡 6) M (Vector 6) ∞ :
   Φ.symm.trans
     (EuclideanSpace.finAddEquivProd (n := 3) (m := 3)).symm.toDiffeomorph.toPartialDiffeomorph
 
-theorem productTargetChart_source : (productTargetChart Φ).source = Φ.target := by
-  ext x
-  change (x ∈ Φ.target ∧ Φ.symm x ∈ (univ : Set (Vector 3 × Vector 3))) ↔ x ∈ Φ.target
-  simp only [mem_univ, and_true]
 
-theorem productTargetChart_apply (x : M) :
-    productTargetChart Φ x = EuclideanSpace.finAddEquivProd.symm (Φ.symm x) := by rfl
 
-theorem productTargetChart_symm_apply (x : Vector 6) :
-    (productTargetChart Φ).symm x = Φ (EuclideanSpace.finAddEquivProd x) := by rfl
 
 theorem productChartPoint_mem (z : Φ.source) : Φ z.val ∈ (productTargetChart Φ).source := by
   exact ⟨Φ.map_source z.property, mem_univ _⟩
@@ -117,15 +109,6 @@ theorem chartEmbeddingDerivative_product (z : Φ.source) :
   rw [productTargetChart_point]
   exact h
 
-theorem normalProductCoordinates_tangent (z : Φ.source) (w : Vector 3 × Vector 3) :
-    e.normalProductCoordinates ν Φ z (EuclideanSpace.finAddEquivProd.symm
-      ((0 : Vector (e.ambientDimension - 6)), EuclideanSpace.finAddEquivProd.symm w)) =
-      fderiv ℝ (e.toFun ∘ Φ) z.val w := by
-  change e.normalChartOperator ν (productTargetChart Φ) (productChartPoint Φ z) _ = _
-  rw [e.normalChartOperator_apply, ContinuousLinearEquiv.apply_symm_apply, map_zero, zero_add,
-    e.chartEmbeddingDerivative_product, ContinuousLinearMap.comp_apply]
-  exact congrArg (fderiv ℝ (e.toFun ∘ Φ) z.val)
-    ((EuclideanSpace.finAddEquivProd (n := 3) (m := 3)).apply_symm_apply w)
 
 end EuclideanEmbedding
 end NoExoticSixSphere

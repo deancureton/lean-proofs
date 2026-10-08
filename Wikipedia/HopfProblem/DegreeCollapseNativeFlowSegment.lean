@@ -52,32 +52,5 @@ theorem native_flow_segment_endpoints
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
-/-- A genuine coordinate flow segment gives the exact native transition,
-provided its whole trajectory stays in the actual chart source. -/
-theorem native_chart_flow_at_time
-    (Φ : PartialDiffeomorph 𝓘(ℝ, E) 𝓘(ℝ, B) E M ∞)
-    (hV : ContMDiff 𝓘(ℝ, B) (𝓘(ℝ, B).tangent) 1
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, B) M)))
-    (G : Flow ℝ M) (hGcurve : ∀ x, IsMIntegralCurve (fun t => G t x) V)
-    (F : Flow ℝ E) (W : E → E)
-    (hFcurve : ∀ p t, HasDerivAt (fun s => F s p) (W (F t p)) t)
-    (hmodel : ∀ x ∈ Φ.target, V x = FlowConstruction.partialChartField Φ.symm W x)
-    {p : E} {T : ℝ} (hT : 0 < T) (hstay : ∀ t ∈ Icc (0 : ℝ) T, F t p ∈ Φ.source) :
-    G T (Φ p) = Φ (F T p) := by
-  let γ : ℝ → M := fun t => Φ (F t p)
-  have hcont : ContinuousOn γ (Icc (0 : ℝ) T) :=
-    Φ.contMDiffOn_toFun.continuousOn.comp
-      (F.continuous continuous_id continuous_const).continuousOn hstay
-  have hγ : IsMIntegralCurveOn γ V (Ioo (0 : ℝ) T) := by
-    intro t ht
-    have hs := hstay t ⟨ht.1.le, ht.2.le⟩
-    have hd := FlowConstruction.hasMFDerivAt_lift_partialChartCurve Φ.symm W (hFcurve p t) hs
-    have hy := Φ.map_source' hs
-    have hd' : HasMFDerivAt 𝓘(ℝ, ℝ) 𝓘(ℝ, B) γ t
-        ((1 : ℝ →L[ℝ] ℝ).smulRight (FlowConstruction.partialChartField Φ.symm W (γ t))) := hd
-    rw [← hmodel (γ t) hy] at hd'
-    exact hd'.hasMFDerivWithinAt
-  have hh := native_flow_segment_endpoints hV G hGcurve hT hcont hγ
-  simpa only [γ, sub_zero, F.map_zero_apply] using hh
 
 end Wikipedia.HopfProblem.DegreeCollapse.FlowSuspension

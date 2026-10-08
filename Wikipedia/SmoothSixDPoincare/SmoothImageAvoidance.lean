@@ -60,25 +60,5 @@ theorem exists_small_localized_image_avoidance {f : X → F} {g : Y → F} {β :
     change (β x)⁻¹ • (g y - f x) = a
     rw [← hxy, add_sub_cancel_left, smul_smul, inv_mul_cancel₀ hx, one_smul]
 
-/-- If the fixed part already avoids the obstacle, the whole perturbed map avoids it. -/
-theorem exists_small_relative_image_avoidance {f : X → F} {g : Y → F} {β : X → ℝ}
-    (hf : ContMDiff I 𝓘(ℝ, F) ∞ f) (hg : ContMDiff J 𝓘(ℝ, F) ∞ g)
-    (hβ : ContMDiff I 𝓘(ℝ, ℝ) ∞ β)
-    (hdim : Module.finrank ℝ E + Module.finrank ℝ E' < Module.finrank ℝ F)
-    (hfixed : ∀ x, β x = 0 → f x ∉ range g) {ε : ℝ} (hε : 0 < ε) :
-    ∃ a : F, ‖a‖ < ε ∧
-      ContMDiff I 𝓘(ℝ, F) ∞ (fun x => f x + β x • a) ∧
-      Disjoint (range (fun x => f x + β x • a)) (range g) ∧
-      ∀ x, β x = 0 → f x + β x • a = f x := by
-  obtain ⟨a, ha, havoid⟩ := exists_small_localized_image_avoidance hf hg hβ hdim hε
-  refine ⟨a, ha, hf.add (hβ.smul contMDiff_const), ?_, ?_⟩
-  · apply disjoint_left.mpr
-    rintro z ⟨x, rfl⟩ ⟨y, hy⟩
-    by_cases hx : β x = 0
-    · apply hfixed x hx
-      exact ⟨y, by simpa only [hx, zero_smul, add_zero] using hy⟩
-    · exact havoid x hx y hy.symm
-  · intro x hx
-    rw [hx, zero_smul, add_zero]
 
 end Wikipedia.SmoothSixDPoincare

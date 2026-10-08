@@ -29,8 +29,6 @@ variable {n m : ℕ}
 def normalCoordinates (v : Space n m) (W : Field v) : Model n m :=
   atVertices v (normalMap v W)
 
-theorem normalCoordinates_zero (v : Space n m) : normalCoordinates v 0 = atVertices v v := by
-  rw [normalCoordinates, normalMap_zero]
 
 theorem contDiffAt_normalCoordinates (v : Space n m) :
     ContDiffAt ℝ ∞ (normalCoordinates v) 0 := by

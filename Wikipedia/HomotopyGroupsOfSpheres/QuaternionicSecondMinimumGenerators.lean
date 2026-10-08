@@ -105,11 +105,6 @@ theorem generatorDirection_toSkew (P : Space a) :
     ComplexStructures.antiSkewToSkew a (generatorDirection P) =
       (generatorParameter P).val.val := rfl
 
-theorem exponentialCurve_generatorDirection (P : Space a) (t : ℝ) :
-    ComplexStructures.exponentialCurve a (generatorDirection P) t = rotation P t := by
-  apply ComplexStructures.toSymplectic_injective
-  rw [ComplexStructures.exponentialCurve_toSymplectic, generatorDirection_toSkew,
-    rotation_toSymplectic]
 
 def speed (P : Space a) : ComplexStructures.AntiSkewSpace a := Real.pi • generatorDirection P
 

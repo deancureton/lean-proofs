@@ -67,12 +67,5 @@ theorem sphereClass_square (f : Based 7 4)
   rw [← CubicalSphereSuspension.hom_sphereClass]
   exact suspended_twelfth_power_ne_one (sphereClass f) hf
 
-theorem stableClass_square (f : Based 7 4)
-    (hf : (hopfCoordinate (sphereClass f)).natAbs = 1) :
-    CubicalStableSix.ofNative (sphereClass
-      (SphereSmash.basedSquare (CubicalSphereSuspension.productBasedMap f))) =
-        SixthStemSmashSquare.stableClass := by
-  rw [sphereClass_square f hf]
-  rfl
 
 end NoExoticSixSphere.OriginalHopfSixthSquare

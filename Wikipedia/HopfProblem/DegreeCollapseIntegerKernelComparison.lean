@@ -57,9 +57,5 @@ theorem equal_or_negative (hq : Surjective q) : q = p ∨ q = -p := by
     rw [functional_eq_mul p q a ha hker x, hn, mul_neg_one]
     rfl
 
-theorem kernel_eq_of_surjective (hp : Surjective p) (hq : Surjective q)
-    (h : LinearMap.ker p ≤ LinearMap.ker q) : LinearMap.ker p = LinearMap.ker q := by
-  obtain ⟨a, ha⟩ := hp 1
-  exact kernel_eq p q a ha h hq
 
 end Wikipedia.HopfProblem.DegreeCollapse.IntegerKernelComparison

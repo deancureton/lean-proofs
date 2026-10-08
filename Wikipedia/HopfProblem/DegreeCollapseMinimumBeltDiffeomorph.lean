@@ -76,22 +76,5 @@ def native_index_zero_beltDiffeomorph {p : M} (d : MorseSurgeryData E f p)
     exact ⟨L, by ext w; rfl⟩
   exact hlocal.diffeomorphOfBijective ⟨d.belt_isClosedEmbedding.injective, hsurj⟩
 
-theorem AdaptedSurgeryWindows.nonempty_first_upper_sphereDiffeomorph
-    (S : AdaptedSurgeryWindows E f) (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hdim : Module.finrank ℝ E = 6) (h : 0 < S.toSurgeryWindows.count) :
-    let p := S.toSurgeryWindows.first h
-    letI := RegularLevel.chartedSpace hf (S.data p).upper_regular
-    Nonempty (Diffeomorph (𝓡 5) 𝓘(ℝ, RegularLevel.Model E)
-      (Hemisphere.Sphere 5) (S.data p).UpperLevel ∞) := by
-  let p := S.toSurgeryWindows.first h
-  let _ := RegularLevel.chartedSpace hf (S.data p).upper_regular
-  have hzero := S.toSurgeryWindows.first_index_zero hf h
-  have hpositive : Module.finrank ℝ (S.data p).chart.PositiveCoordinates = 5 + 1 := by
-    have hsum := (S.data p).chart.finrank_negative_add_positive
-    change Module.finrank ℝ (S.data p).chart.NegativeCoordinates = 0 at hzero
-    omega
-  let _ : Fact (Module.finrank ℝ (S.data p).chart.PositiveCoordinates = 5 + 1) := ⟨hpositive⟩
-  exact ⟨(SphereCoordinates.standardParametrization (S.data p).chart.PositiveCoordinates 5).trans
-    (native_index_zero_beltDiffeomorph (S.data p) hf hzero 5 (S.belt_surjective_at_first hf h))⟩
 
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation

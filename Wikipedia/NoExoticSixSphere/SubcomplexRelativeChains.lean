@@ -50,9 +50,6 @@ theorem mapChain_trans {A B D : X.Subcomplex} (h : A ≤ B) (k : B ≤ D) :
   apply (cancel_epi (projection R A)).mp
   rw [projection_mapChain_assoc, projection_mapChain, projection_mapChain]
 
-theorem mapChain_refl (A : X.Subcomplex) : mapChain R (le_refl A) = 𝟙 (complex R A) := by
-  apply (cancel_epi (projection R A)).mp
-  rw [projection_mapChain, Category.comp_id]
 
 variable (A B : X.Subcomplex)
 

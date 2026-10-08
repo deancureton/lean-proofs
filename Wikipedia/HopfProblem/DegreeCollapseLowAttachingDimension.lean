@@ -41,9 +41,6 @@ theorem tube_dimension : d + (7 - d) = 7 := by
   have h := L.toLinearEquiv.finrank_eq
   simpa only [Module.finrank_prod, finrank_euclideanSpace_fin] using h
 
-theorem sphere_dimension_le : d ≤ 7 := by
-  have h := A.tube_dimension
-  omega
 
 theorem handle_dimension : (d + 1) + (7 - d) = 8 := by
   have h := A.tube_dimension

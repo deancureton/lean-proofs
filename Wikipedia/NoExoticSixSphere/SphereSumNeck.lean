@@ -99,21 +99,6 @@ theorem injective_mfderiv_pairMap (q : Parameter) :
   apply hinj
   exact congrArg (mfderiv 𝓘(ℝ, Vector 3 × Vector 3) (𝓡 3) π (pairMap q)) hvw
 
-theorem injective_mfderiv_neck (q : Parameter) : Injective (mfderiv Model (𝓡 6) neck q) := by
-  have hpair : pairMap = EuclideanSpace.finAddEquivProd ∘ neck := by
-    funext w
-    exact (EuclideanSpace.finAddEquivProd.apply_symm_apply (pairMap w)).symm
-  have h := injective_mfderiv_pairMap q
-  let L : Vector 6 ≃L[ℝ] (Vector 3 × Vector 3) :=
-    EuclideanSpace.finAddEquivProd (𝕜 := ℝ) (n := 3) (m := 3)
-  have hL : ContMDiff (𝓡 6) 𝓘(ℝ, Vector 3 × Vector 3) ∞
-      (L : Vector 6 → Vector 3 × Vector 3) := L.contDiff.contMDiff
-  have hc := mfderiv_comp q (hL.mdifferentiableAt (by simp))
-    (contMDiff_neck.mdifferentiableAt (by simp))
-  rw [hpair, hc] at h
-  intro v w hvw
-  apply h
-  exact congrArg (mfderiv (𝓡 6) 𝓘(ℝ, Vector 3 × Vector 3) L (neck q)) hvw
 
 theorem pairMap_left_collar (t : ℝ) (s : Sphere 2) (ht : t ≤ -1) :
     pairMap (t, s) = (0, profile (-t) • s.val) := by
@@ -133,15 +118,5 @@ theorem pairMap_snd_eq_zero_iff (q : Parameter) : (pairMap q).2 = 0 ↔ 1 ≤ q.
   rw [smul_eq_zero, or_iff_left (ne_zero_of_mem_unit_sphere q.2), profile_zero_iff]
   constructor <;> intro h <;> linarith
 
-theorem closedCylinder_embedded (u v : ℝ) :
-    IsClosedEmbedding (fun q : Icc u v × Sphere 2 ↦ neck (q.1.val, q.2)) := by
-  have hc : Continuous (fun q : Icc u v × Sphere 2 ↦ neck (q.1.val, q.2)) :=
-    contMDiff_neck.continuous.comp
-      ((continuous_subtype_val.comp continuous_fst).prodMk continuous_snd)
-  apply hc.isClosedEmbedding
-  intro q w he
-  have h := neck_injective he
-  have hs := congrArg Prod.snd h
-  exact Prod.ext (Subtype.ext (congrArg Prod.fst h)) hs
 
 end NoExoticSixSphere.SphereSumNeck

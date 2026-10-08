@@ -52,13 +52,6 @@ theorem hasDerivAt_blended_height {f θ P Q : ℝ → ℝ} {t f' p' q' : ℝ}
   simp only [Pi.sub_apply]
   ring
 
-theorem blended_height_derivative_negative {f θ P Q : ℝ → ℝ} {t f' p' q' : ℝ}
-    (hf : HasDerivAt f f' t) (hθ : HasDerivAt θ 0 t)
-    (hP : HasDerivAt P p' (f t)) (hQ : HasDerivAt Q q' (f t))
-    (hw : θ t ∈ Icc 0 1) (hp : 0 < p') (hq : 0 < q') (hdesc : f' < 0) :
-    deriv (fun s => blendHeight (θ s) P Q (f s)) t < 0 := by
-  rw [(hasDerivAt_blended_height hf hθ hP hQ).deriv]
-  exact mul_neg_of_pos_of_neg (positive_blended_slope hw hp hq) hdesc
 
 variable {E H M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [TopologicalSpace H] {I : ModelWithCorners ℝ E H}

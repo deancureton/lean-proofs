@@ -99,10 +99,5 @@ theorem longitudinalDiffeomorph_apply {u : ℝ × V → ℝ}
   unfold longitudinalDiffeomorph IsLocalDiffeomorph.diffeomorphOfBijective
   rfl
 
-theorem longitudinalDiffeomorph_fixed {u : ℝ × V → ℝ}
-    (hu : ContDiff ℝ ∞ u) (hc : HasCompactSupport u)
-    (hpos : ∀ p, 0 < fderiv ℝ (displacedHeight u) p (1, 0))
-    {p : ℝ × V} (hp : p ∉ tsupport u) : longitudinalDiffeomorph hu hc hpos p = p := by
-  rw [longitudinalDiffeomorph_apply, image_eq_zero_of_notMem_tsupport hp, add_zero]
 
 end Wikipedia.HopfProblem.DegreeCollapse.RegularHeightCoordinates

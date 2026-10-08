@@ -71,19 +71,5 @@ theorem exists_fixed_column_representative (v : UnitSphere (Vector r))
   rw [G.apply_one, HR.apply_one] at h
   exact congrArg Subtype.val h
 
-theorem exists_rankReduction_of_column_homotopy
-    (v : UnitSphere (Vector (r + 1))) (c : UnitSphere (Vector (n + 1)))
-    (a : C(X, Space (n + 1) (r + 1)))
-    (H : ((column v).comp a).Homotopy (ContinuousMap.const X c)) :
-    ∃ q : C(X, Space n r), a.Homotopic ((ColumnFiber.reconstructionMap v c).comp q) := by
-  obtain ⟨b, Hab, hb⟩ := exists_fixed_column_representative v c a H
-  let q : C(X, Space n r) :=
-    ⟨fun x ↦ ColumnFiber.residual v c (b x) (hb x),
-      ColumnFiber.continuous_residual v c b b.continuous hb⟩
-  have he : (ColumnFiber.reconstructionMap v c).comp q = b := by
-    apply ContinuousMap.ext
-    intro x
-    exact ColumnFiber.reconstruct_residual v c (b x) (hb x)
-  exact ⟨q, he.symm ▸ Hab⟩
 
 end NoExoticSixSphere.Stiefel

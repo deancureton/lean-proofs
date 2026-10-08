@@ -47,11 +47,5 @@ theorem minimumCoordinate_eq_zero_of_mem_boundary {n : ℕ} {s : Simplex n}
   obtain ⟨i, hi⟩ := hs
   exact le_antisymm (hi ▸ minimumCoordinate_le s i) (minimumCoordinate_nonneg s)
 
-theorem mem_boundary_iff_minimumCoordinate_eq_zero {n : ℕ} (s : Simplex n) :
-    s ∈ simplexBoundary n ↔ minimumCoordinate s = 0 := by
-  refine ⟨minimumCoordinate_eq_zero_of_mem_boundary, ?_⟩
-  intro hs
-  obtain ⟨i, hi⟩ := exists_coordinate_eq_minimum s
-  exact ⟨i, hi.trans hs⟩
 
 end Wikipedia.HopfProblem.SecondHurewicz.SimplyConnected

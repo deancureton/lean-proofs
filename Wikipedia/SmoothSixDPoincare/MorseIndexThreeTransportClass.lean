@@ -45,20 +45,5 @@ theorem indexThreeAttachingClass_parametrized
   rw [singularHomologyMap_comp]
   rfl
 
-theorem bandHomology_transportedAttachingClass
-    [hindex : Fact (Module.finrank ℝ d'.chart.NegativeCoordinates = 2 + 1)]
-    (e : d.UpperLevel ≃ₜ d'.LowerLevel) (T : M ≃ₜ M)
-    (hT : T '' {y : M | f y ≤ f p + d.radius ^ 2} =
-      {y : M | f y ≤ f q - d'.radius ^ 2})
-    (he : ∀ x : d.UpperLevel, (e x : M) = T x) :
-    homeomorphHomologyEquiv (d.bandSublevelHomeomorph d' T hT) 2
-      (singularHomologyMap (d.transportedCoreBoundary d' 2 e) 2 (unitSphereTopClass 1)) =
-        d'.indexThreeAttachingClass hindex.out := by
-  change singularHomologyMap
-    (d.bandSublevelHomeomorph d' T hT).toHomotopyEquiv.toFun 2
-      (singularHomologyMap (d.transportedCoreBoundary d' 2 e) 2 (unitSphereTopClass 1)) = _
-  rw [← LinearMap.comp_apply, ← singularHomologyMap_comp,
-    d.bandSublevel_transportedCore d' 2 e T hT he,
-    d'.indexThreeAttachingClass_parametrized]
 
 end Wikipedia.SmoothSixDPoincare.ManifoldMorse.MorseSurgeryData

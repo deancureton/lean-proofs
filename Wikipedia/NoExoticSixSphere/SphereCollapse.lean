@@ -26,10 +26,6 @@ noncomputable def sphereInfinity (n : ℕ) : Sphere n :=
 noncomputable def sphereZero (n : ℕ) : Sphere n :=
   euclideanOnePointSphere n ((0 : EuclideanSpace ℝ (Fin n)) : OnePoint _)
 
-theorem sphereZero_ne_infinity (n : ℕ) : sphereZero n ≠ sphereInfinity n := by
-  intro h
-  exact OnePoint.coe_ne_infty (0 : EuclideanSpace ℝ (Fin n))
-    ((euclideanOnePointSphere n).injective h)
 
 namespace EuclideanEmbedding
 
@@ -79,18 +75,5 @@ theorem exists_sphereCollapse :
 
 end EuclideanEmbedding
 
-theorem exists_sixSphereCollapse {M : Type*} [TopologicalSpace M]
-    [ChartedSpace (EuclideanSpace ℝ (Fin 6)) M] [IsManifold (𝓡 6) ∞ M]
-    (h : M ≃ₜ Sphere 6) :
-    ∃ e : EuclideanEmbedding 6 M,
-      ∃ F : C(Sphere e.ambientDimension, Sphere (e.ambientDimension - 6)),
-        F (sphereInfinity e.ambientDimension) = sphereInfinity (e.ambientDimension - 6) ∧
-        ∀ y, F y = sphereZero (e.ambientDimension - 6) ↔
-          ∃ x, e.compactifiedEmbedding x = y := by
-  let : CompactSpace M := compactSpace_of_homeomorph h
-  let : Nonempty (Sphere 6) := NormedSpace.sphere_nonempty_rclike ℝ zero_le_one
-  let : Nonempty M := h.toEquiv.nonempty
-  obtain ⟨e, ⟨a⟩⟩ := exists_framedEmbedding h
-  exact ⟨e, e.exists_sphereCollapse a⟩
 
 end NoExoticSixSphere

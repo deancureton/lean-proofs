@@ -45,12 +45,5 @@ theorem simplexFace_intersection {n : ℕ} {i j : Fin (n + 2)} (hij : i ≤ j)
     _ = simplexFace (n + 1) j.succ s := congrArg (simplexFace (n + 1) j.succ) hu
     _ = simplexFace (n + 1) i.castSucc t := h
 
-/-- The common lower-dimensional face point is unique. -/
-theorem simplexFace_intersection_unique {n : ℕ} {i j : Fin (n + 2)} (hij : i ≤ j)
-    {s t : Simplex (n + 1)}
-    (h : simplexFace (n + 1) j.succ s = simplexFace (n + 1) i.castSucc t) :
-    ∃! u : Simplex n, simplexFace n i u = s ∧ simplexFace n j u = t := by
-  obtain ⟨u, hu, hv⟩ := simplexFace_intersection hij h
-  exact ⟨u, ⟨hu, hv⟩, fun v hv => simplexFace_injective n i (hv.1.trans hu.symm)⟩
 
 end Wikipedia.HopfProblem.SecondHurewicz.SimplyConnected

@@ -98,10 +98,5 @@ def orthogonalRepresentation (n : ℕ) :
 theorem continuous_orthogonalRepresentation (n : ℕ) : Continuous (orthogonalRepresentation n) :=
   (((continuous_realAction n).comp continuous_subtype_val).subtype_mk _).subtype_mk _
 
-theorem orthogonalRepresentation_injective (n : ℕ) :
-    Function.Injective (orthogonalRepresentation n) := by
-  intro A B h
-  exact Subtype.ext (realAction_injective n
-    (congrArg (fun C : OrthogonalOperators (4 * n + 4) => C.val.val) h))
 
 end Wikipedia.HomotopyGroupsOfSpheres.QuaternionicColumns

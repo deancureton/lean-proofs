@@ -114,11 +114,6 @@ theorem newHalf_surjective_three :
     SphereHomology.unitSphere_homology_subsingleton 2 2 (by decide) (by decide)
   exact (SurgeryPairBody.newHandleData (halfBoundaryPair A hR T)).old_surjective 2
 
-theorem oldHalf_injective_four :
-    Injective (singularHomologyMap (oldHalfInclusion A hR T) 4) := by
-  let : Subsingleton (SingularHomology (Sphere 3) 4) :=
-    SphereHomology.unitSphere_homology_subsingleton 2 4 (by decide) (by decide)
-  exact (SurgeryPairBody.oldHandleData (halfBoundaryPair A hR T)).old_injective 4 (by decide)
 
 theorem newHalf_injective_four :
     Injective (singularHomologyMap (newHalfInclusion A hR T) 4) := by

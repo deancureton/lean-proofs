@@ -28,10 +28,6 @@ variable {N n N' n' : ℕ}
 def hemisphereRecoordinate (F : C(Sphere 3, Space N n)) : C(Sphere 3, Space N' n') :=
   parameterRecoordinate U V hU hV retraction F
 
-theorem hemisphereRecoordinate_north (F : C(Sphere 3, Space N n)) (x : North) :
-    hemisphereRecoordinate U V hU hV F x.val = recoordinate (U x) (V x) (F x.val) := by
-  change recoordinate (U (retraction x.val)) (V (retraction x.val)) (F x.val) = _
-  rw [retraction_north]
 
 theorem sphereParityOfDimension_hemisphereRecoordinate
     (r s : ℕ) (hN : N = 3 + (r + 2)) (hn : n = r + 2)

@@ -44,10 +44,6 @@ def subdivisionSubMin (u v : I) : I :=
   apply Subtype.ext
   simp [subdivisionSubMin, u.property.2]
 
-theorem continuous_subdivisionSubMin :
-    Continuous fun u : I × I => subdivisionSubMin u.1 u.2 := by
-  unfold subdivisionSubMin
-  fun_prop
 
 def subdivisionLowerProductMap : C(SubdivisionSquare, SubdivisionSquare) where
   toFun u := ![u 0, u 0 * u 1]

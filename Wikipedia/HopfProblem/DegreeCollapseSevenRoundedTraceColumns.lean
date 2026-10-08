@@ -171,10 +171,5 @@ theorem columns_cylinder_range (p : UnroundedTrace.Cylinder A) :
     Vector (e.ambientDimension + 6) ↦ B.range) he).trans
       (UnroundedTrace.columns_cylinder_range A p)
 
-theorem columns_added_range (p : addedParameters A) :
-    (columns A ⟨addedMap A p, Or.inr ⟨p.val, p.property, rfl⟩⟩).range =
-      (A.collarSheetDerivative p.val).rangeᗮ := by
-  rw [columns_added]
-  exact A.collarSheetFrame_range (addedParameters_subset_source A p.property)
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery.FramedAttachingProduct.RoundedTrace

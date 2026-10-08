@@ -51,27 +51,5 @@ variable [Subsingleton (SingularHomology M 2)]
   (f : C(Sphere 3, M)) (A : FramedAttachingProduct e a f) (hR : A.radius = 2)
   (d : SingularHomology M 3) (hd : detector f A hR d = 1)
 
-theorem actualGeometricArf_preserved_by_unit_surgery :
-    letI := UnitSurgery.targetChartedSpace A hR;
-    letI := UnitSurgery.target_isManifold A hR;
-    letI := UnitSurgery.compactSpace_target A hR;
-    letI : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-      (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1;
-    ∀ (r' : TubularRetraction (UnitSurgery.inducedEmbedding A hR)) (m' : UnitSurgery.Target A hR),
-      letI : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-        (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m';
-      actualGeometricArf e a r m = actualGeometricArf (UnitSurgery.inducedEmbedding A hR)
-        (UnitSurgery.normalFraming A hR) r' m' := by
-  let := UnitSurgery.targetChartedSpace A hR
-  let := UnitSurgery.target_isManifold A hR
-  let := UnitSurgery.compactSpace_target A hR
-  let : SimplyConnectedSpace (UnitSurgery.Target A hR) :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).1
-  intro r' m'
-  let : Subsingleton (π_ 2 (UnitSurgery.Target A hR) m') :=
-    (FramedDual.compact_surgery_reduction_of_unit_homology f A hR d hd).2.1 m'
-  obtain ⟨-, -, hArf⟩ := native_quadratic_surgery_invariants e a r m f A hR d hd r' m'
-  obtain ⟨hq', he⟩ := hArf (geometric_quadratic_nondegenerate e a r m)
-  exact he
 
 end Wikipedia.HopfProblem.DegreeCollapse.SurgeryDetector

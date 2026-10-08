@@ -107,15 +107,6 @@ theorem squareCycle_basedTrianglesLoop (τ υ : BasedTriangle x) :
   rw [squareChain_basedTrianglesLoop]
   abel
 
-/-- The Hurewicz class of the glued square is the difference of the
-two corrected actual singular-triangle classes. -/
-theorem hurewiczMap_basedTrianglesLoop (τ υ : BasedTriangle x) :
-    hurewiczMap x (Additive.ofMul (⟦basedTrianglesLoop τ υ⟧ : π_ 2 X x)) =
-      ModuleHomology.cycleClass (singularComplex X) 2 (basedTriangleCycle τ) -
-      ModuleHomology.cycleClass (singularComplex X) 2 (basedTriangleCycle υ) := by
-  change ModuleHomology.cycleClass (singularComplex X) 2
-    (squareCycle (basedTrianglesLoop τ υ)) = _
-  rw [squareCycle_basedTrianglesLoop, map_sub]
 
 /-- The two terminal triangle homotopies produce both the terminal native
 square and a homotopy to it relative to the original square perimeter. -/

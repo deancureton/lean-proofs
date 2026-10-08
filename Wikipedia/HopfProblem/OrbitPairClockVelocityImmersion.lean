@@ -31,9 +31,6 @@ variable {E G : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 def perturb (f : ℝ × E → G) (κ : ℝ → ℝ) (a : G) (q : ℝ × E) : G :=
   f q + κ q.1 • a
 
-theorem perturb_fixed_time (f : ℝ × E → G) (κ : ℝ → ℝ) (a : G) {t : ℝ}
-    (ht : κ t = 0) (x : E) : perturb f κ a (t, x) = f (t, x) := by
-  simp [perturb, ht]
 
 theorem spatial_derivative_perturb (f : ℝ × E → G) (κ : ℝ → ℝ) (a : G)
     (t : ℝ) (x : E) :
@@ -111,28 +108,5 @@ variable {E G : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [NormedAddCommGroup G] [NormedSpace ℝ G]
   [FiniteDimensional ℝ E] [FiniteDimensional ℝ G]
 
-theorem exists_small_linear_clock_parameter (D : ℝ × E →L[ℝ] G)
-    (hi : Injective (D.comp (ContinuousLinearMap.inr ℝ ℝ E)))
-    (hdim : 1 + Module.finrank ℝ (ℝ × E) < Module.finrank ℝ G)
-    {ε : ℝ} (hε : 0 < ε) :
-    ∃ a : G, ‖a‖ < ε ∧ Injective (D + (ContinuousLinearMap.fst ℝ ℝ E).smulRight a) := by
-  have hin : HasFDerivAt (fun x : E => (0, x)) (ContinuousLinearMap.inr ℝ ℝ E) 0 :=
-    (hasFDerivAt_const (0 : ℝ) (0 : E)).prodMk (hasFDerivAt_id (0 : E))
-  have hsp : Injective (fderiv ℝ (fun x : E => D (0, x)) 0) := by
-    have he : fderiv ℝ (fun x : E => D (0, x)) 0 =
-        D.comp (ContinuousLinearMap.inr ℝ ℝ E) := (D.hasFDerivAt.comp 0 hin).fderiv
-    rw [he]
-    exact hi
-  obtain ⟨a, ha, -, hfull, -⟩ := exists_small_clock_velocity_immersion
-    (I := 𝓘(ℝ, ℝ))
-    (b := fun _ : ℝ => (0 : ℝ × E)) (f := D) (κ := id)
-    contMDiff_const D.contDiff contDiff_id (fun _ => hsp)
-    (fun _ => by simp) (by simpa only [Module.finrank_self] using hdim) hε
-  have hd : HasFDerivAt (perturb D id a)
-      (D + (ContinuousLinearMap.fst ℝ ℝ E).smulRight a) (0 : ℝ × E) :=
-    D.hasFDerivAt.add (hasFDerivAt_fst.smul_const a)
-  refine ⟨a, ha, ?_⟩
-  have hh := hfull 0
-  rwa [hd.fderiv] at hh
 
 end Wikipedia.HopfProblem.OrbitPair.ClockVelocity

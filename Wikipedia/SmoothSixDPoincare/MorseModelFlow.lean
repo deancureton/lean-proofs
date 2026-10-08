@@ -87,13 +87,5 @@ theorem mem_lower_union_handle_iff {ρ : ℝ} (hρ : 0 < ρ) (z : N × P) :
       · exact Or.inl hq
       · exact Or.inr ⟨h, le_of_not_ge hq⟩
 
-/-- Every forward trajectory stays in the lower sublevel with its handle adjoined. -/
-theorem descentFlow_mem_lower_union_handle {ρ t : ℝ} (hρ : 0 < ρ) (ht : 0 ≤ t)
-    {z : N × P} (hz : z ∈ {w | quadratic w ≤ -(ρ ^ 2)} ∪ range (modelMap ρ)) :
-    descentFlow t z ∈ {w | quadratic w ≤ -(ρ ^ 2)} ∪ range (modelMap ρ) := by
-  rw [mem_lower_union_handle_iff hρ] at hz ⊢
-  rcases hz with hq | hv
-  · exact Or.inl ((quadratic_descentFlow_le ht z).trans hq)
-  · exact Or.inr ((norm_snd_descentFlow_le ht z).trans hv)
 
 end Wikipedia.SmoothSixDPoincare.MorseHandle

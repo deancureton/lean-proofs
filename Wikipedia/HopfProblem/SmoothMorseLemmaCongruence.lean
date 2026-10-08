@@ -98,18 +98,5 @@ theorem exists_smooth_congruence_factor
         raiseSymmetricIndex H (e.invFun (A - referenceSymmetricForm H hH))) = A.val
     rw [← congruencePolynomial_add_reference H hH, hq, sub_add_cancel]
 
-/-- Pointwise spelling of the native bilinear factorization for direct use
-in the Morse coordinate identity. -/
-theorem exists_smooth_congruence_factor_apply
-    (H : E ≃L[ℝ] (E →L[ℝ] ℝ)) (hH : ∀ u v, H u v = H v u) :
-    ∃ U : Set (SymmetricForm E), IsOpen U ∧ referenceSymmetricForm H hH ∈ U ∧
-      ∃ L : SymmetricForm E → (E →L[ℝ] E),
-        ContDiffOn ℝ ∞ L U ∧
-        L (referenceSymmetricForm H hH) = ContinuousLinearMap.id ℝ E ∧
-        ∀ A ∈ U, ∀ u v, H (L A u) (L A v) = A.val u v := by
-  obtain ⟨U, hU, hHU, L, hL, hLH, hfactor⟩ := exists_smooth_congruence_factor H hH
-  refine ⟨U, hU, hHU, L, hL, hLH, ?_⟩
-  intro A hA u v
-  exact congrArg (fun B : Bilinear E => B u v) (hfactor A hA)
 
 end Wikipedia.HopfProblem.SmoothMorseLemma

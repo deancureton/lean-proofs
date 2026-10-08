@@ -65,12 +65,5 @@ theorem invariant_anisotropicPlane :
     invariant anisotropicPlane (plane_nondegenerate 1 1) = 1 := by
   rw [invariant_plane, one_mul]
 
-theorem hyperbolic_anisotropic_not_isometric :
-    ¬ Nonempty (hyperbolicPlane.IsometryEquiv anisotropicPlane) := by
-  rintro ⟨e⟩
-  have h := invariant_isometry hyperbolicPlane anisotropicPlane
-    (plane_nondegenerate 0 0) (plane_nondegenerate 1 1) e
-  rw [invariant_hyperbolicPlane, invariant_anisotropicPlane] at h
-  exact zero_ne_one h
 
 end NoExoticSixSphere.Arf

@@ -118,17 +118,6 @@ theorem closed_middle_pair_iff (p q : criticalPoints E D.function)
   · rintro ⟨rfl, rfl, rfl⟩
     rw [D.descendingSphere_pole, D.ascendingSphere_pole]
 
-theorem closed_middle_images_iff (p q : criticalPoints E D.function)
-    (hp : nativeMorseIndex E D.function p = 3) (hq : nativeMorseIndex E D.function q = 3)
-    (z : M) : z ∈ range (D.descendingSphere p hp) ∩ range (D.ascendingSphere q hq) ↔
-      z = p.val ∧ p = q := by
-  constructor
-  · rintro ⟨⟨x, rfl⟩, ⟨y, hy⟩⟩
-    obtain ⟨rfl, rfl, hpq⟩ := (D.closed_middle_pair_iff p q hp hq x y).mp hy.symm
-    exact ⟨D.descendingSphere_pole p hp, hpq⟩
-  · rintro ⟨rfl, rfl⟩
-    exact ⟨⟨middlePole, D.descendingSphere_pole p hp⟩,
-      ⟨middlePole, D.ascendingSphere_pole p hq⟩⟩
 
 end SeparatedSystem
 end Wikipedia.HopfProblem.DegreeCollapse.MorseCancellation.MiddleDuality

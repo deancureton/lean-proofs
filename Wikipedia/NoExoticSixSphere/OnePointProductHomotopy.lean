@@ -82,8 +82,5 @@ def productHomotopy :
     change homotopyMap A B hA hB (1, map p) = _
     rw [homotopyMap_apply, productMap_apply, A.apply_one, B.apply_one]
 
-theorem productHomotopy_infty (t : I) : productHomotopy A B hA hB (t, ∞) = ∞ := by
-  change homotopyMap A B hA hB (t, ∞) = ∞
-  simpa [hA t, hB t] using homotopyMap_apply A B hA hB t (∞, ∞)
 
 end NoExoticSixSphere.OnePointProduct

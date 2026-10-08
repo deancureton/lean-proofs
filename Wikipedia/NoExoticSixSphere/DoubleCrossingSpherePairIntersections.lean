@@ -98,9 +98,6 @@ theorem intersectionPairs_ncard : (MapIntersections.pairs left right).ncard = 2 
   rw [← Nat.card_congr intersectionPairEquiv]
   simp
 
-theorem intersectionParity_zero : MapIntersections.parity left right = 0 := by
-  rw [MapIntersections.parity, intersectionPairs_ncard]
-  decide
 
 theorem left_unorderedParity_zero : SphereSelfIntersections.unorderedParity left = 0 :=
   SphereSelfIntersections.unorderedParity_zero_of_injective left injective_left

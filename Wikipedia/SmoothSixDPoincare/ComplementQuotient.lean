@@ -124,14 +124,5 @@ theorem bijective_coprod_correctedComplement
 
 variable [FiniteDimensional ℝ Z]
 
-/-- Native corner complementarity gives an invertible quotient coefficient at that corner. -/
-theorem bijective_complementCoefficient (G : D →L[ℝ] F) (C L : Z →L[ℝ] F)
-    (h : (G.coprod C).IsInvertible) (hL : Surjective (G.coprod L)) :
-    Bijective ((complementQuotient G C).comp L) := by
-  apply TransverseCoordinates.bijective_normal_comp (complementQuotient G C) G L
-    (surjective_complementQuotient G C h) hL _ rfl
-  apply ContinuousLinearMap.ext
-  intro u
-  exact complementQuotient_left G C h u
 
 end Wikipedia.SmoothSixDPoincare.FrameField

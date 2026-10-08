@@ -143,49 +143,8 @@ theorem southPairNormalFrame_ambient (p : Sphere 3 × Sphere 3) :
     (southNormalEquations_surjective (southFiberPoint p.2) (first_southFiberPoint p.2))]
   rfl
 
-theorem southPairNormalFrame_transverse (p : Sphere 3 × Sphere 3) (w z : ℍ) :
-    southPairNormalFrame.ambient p
-      (WithLp.toLp 2 (WithLp.toLp 2 (0, (2 : ℝ) • w),
-        WithLp.toLp 2 (0, (2 : ℝ) • z))) =
-      WithLp.toLp 2 (firstAxis (w * Quaternion.linearIsometryEquivTuple.symm p.1.val),
-        firstAxis (z * Quaternion.linearIsometryEquivTuple.symm p.2.val)) := by
-  rw [southPairNormalFrame_ambient, HilbertProduct.map_apply]
-  change WithLp.toLp 2
-    (southNormalFrame.ambient p.1 (WithLp.toLp 2 (0, (2 : ℝ) • w)),
-      southNormalFrame.ambient p.2 (WithLp.toLp 2 (0, (2 : ℝ) • z))) = _
-  rw [southNormalFrame_transverse, southNormalFrame_transverse]
 
-theorem southPairNormalFrame_radial_left (p : Sphere 3 × Sphere 3) :
-    southPairNormalFrame.ambient p (WithLp.toLp 2 (WithLp.toLp 2 (2, (0 : ℍ)), 0)) =
-      WithLp.toLp 2 (southFiberAmbient p.1, (0 : V 8)) := by
-  rw [southPairNormalFrame_ambient, HilbertProduct.map_apply]
-  change WithLp.toLp 2 (southNormalFrame.ambient p.1 (WithLp.toLp 2 (2, (0 : ℍ))),
-    southNormalFrame.ambient p.2 0) = _
-  rw [southNormalFrame_radial, map_zero]
 
-theorem southPairNormalFrame_radial_right (p : Sphere 3 × Sphere 3) :
-    southPairNormalFrame.ambient p (WithLp.toLp 2 (0, WithLp.toLp 2 (2, (0 : ℍ)))) =
-      WithLp.toLp 2 ((0 : V 8), southFiberAmbient p.2) := by
-  rw [southPairNormalFrame_ambient, HilbertProduct.map_apply]
-  change WithLp.toLp 2 (southNormalFrame.ambient p.1 0,
-    southNormalFrame.ambient p.2 (WithLp.toLp 2 (2, (0 : ℍ)))) = _
-  rw [map_zero, southNormalFrame_radial]
 
-theorem southPairNormalFrame_original (a b : Sphere 7) (p : Sphere 3 × Sphere 3)
-    (v w : WithLp 2 (ℝ × V 4)) :
-    letI := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-      (by simp only [finrank_euclideanSpace_fin]);
-    southPairNormalFrame.ambient p
-      (WithLp.toLp 2 (augmentedTargetChange.symm v, augmentedTargetChange.symm w)) =
-      WithLp.toLp 2
-        ((SphereFiberNormalFrame.normalFrame sphereMap contMDiff_sphereMap south south_regular
-          3 (by decide) a).ambient (southFiberDiffeomorph p.1) v,
-        (SphereFiberNormalFrame.normalFrame sphereMap contMDiff_sphereMap south south_regular
-          3 (by decide) b).ambient (southFiberDiffeomorph p.2) w) := by
-  let := regularFiberAtlas sphereMap contMDiff_sphereMap south south_regular 3
-    (by simp only [finrank_euclideanSpace_fin])
-  rw [southPairNormalFrame_ambient, HilbertProduct.map_apply,
-    original_southNormalFrame_parametrized, original_southNormalFrame_parametrized]
-  rfl
 
 end NoExoticSixSphere.QuaternionicHopf

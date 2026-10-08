@@ -70,16 +70,6 @@ theorem meridianCharacter_oldInclusion (s : Sphere 3)
       RationalResidue.residue (meridianRationalCoordinate A hA T s c) :=
   CyclicExtensionCharacter.character_quotient _ _ _ _ _ _
 
-theorem meridianCharacter_attaching_of_relation (v s : Sphere 3) (l p : ℤ) (hl : l ≠ 0)
-    (hrel : l • halfSectionClass A hA T v + p • halfMeridianClass A hA T s = 0) :
-    meridianCharacter A hA T s
-      (singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3 (unitSphereTopClass 2)) =
-        RationalResidue.residue (-(p : ℚ) / (l : ℚ)) := by
-  have hq : singularHomologyMap (halfOldInclusion A hA T) 3 (halfSectionClass A hA T v) =
-      singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3 (unitSphereTopClass 2) :=
-    halfOldInclusion_section A hA T v (unitSphereTopClass 2)
-  refine (congrArg (meridianCharacter A hA T s) hq).symm.trans ?_
-  exact CyclicExtensionCharacter.character_of_relation _ _ _ _ _ _ l p hl hrel
 
 theorem meridianCharacter_nonzero_iff_nondivisible_relation (v s : Sphere 3) :
     meridianCharacter A hA T s

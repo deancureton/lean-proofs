@@ -67,19 +67,7 @@ def cohomologyDesc : K.homology n →ₗ[ℤ] M :=
   exact congrArg ((cohomologyBoundaries K n).liftQ f
     (cohomologyBoundaries_le_ker K n f hf)) h
 
-theorem cohomologyDesc_comp_cocycleClass :
-    (cohomologyDesc K n f hf).comp (cocycleClass K n) = f := by
-  apply LinearMap.ext
-  intro c
-  exact cohomologyDesc_cocycleClass K n f hf c
 
-/-- The actual cocycle-class formula uniquely specifies descent. -/
-theorem cohomologyDesc_unique (g : K.homology n →ₗ[ℤ] M)
-    (hg : ∀ c : Cocycle K n, g (cocycleClass K n c) = f c) :
-    g = cohomologyDesc K n f hf := by
-  apply cohomologyLinearMap_ext K n
-  intro c
-  rw [hg, cohomologyDesc_cocycleClass]
 
 section Bilinear
 
@@ -130,15 +118,6 @@ def bilinearCohomologyDesc : K.homology n →ₗ[ℤ] (L.homology m →ₗ[ℤ] 
   rw [bilinearCohomologyDesc, cohomologyDesc_cocycleClass,
     bilinearCohomologyDescRight_cocycleClass]
 
-/-- Equality on both genuine cocycle representatives proves equality on actual cohomology. -/
-theorem bilinearCohomologyMap_ext
-    {f g : K.homology n →ₗ[ℤ] L.homology m →ₗ[ℤ] M}
-    (h : ∀ (a : Cocycle K n) (b : Cocycle L m),
-      f (cocycleClass K n a) (cocycleClass L m b) =
-        g (cocycleClass K n a) (cocycleClass L m b)) : f = g := by
-  apply cohomologyLinearMap_ext K n
-  intro a
-  exact cohomologyLinearMap_ext L m (h a)
 
 end Bilinear
 end Wikipedia.HopfProblem.SingularCohomologyCup

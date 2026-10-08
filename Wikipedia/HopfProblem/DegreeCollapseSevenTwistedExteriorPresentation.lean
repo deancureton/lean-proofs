@@ -65,22 +65,6 @@ theorem halfNew_kernel_span (v : Sphere 3) :
   rw [← halfSection_range_eq_new_kernel A hA T v]
   exact sphere_linear_range _
 
-theorem exists_meridian_relation (v s : Sphere 3) (l : ℤ)
-    (hl : l • singularHomologyMap (halfBoundaryPair A hA T).attachingSphere 3
-      (unitSphereTopClass 2) = 0) :
-    ∃ l' : ℤ, l • halfSectionClass A hA T v + l' • halfMeridianClass A hA T s = 0 := by
-  have he : l • halfSectionClass A hA T v ∈
-      LinearMap.ker (singularHomologyMap (halfOldInclusion A hA T) 3) := by
-    change singularHomologyMap (halfOldInclusion A hA T) 3
-      (l • singularHomologyMap (halfSectionMap A hA T v) 3 (unitSphereTopClass 2)) = 0
-    rw [map_zsmul, halfOldInclusion_section]
-    exact hl
-  rw [halfOld_kernel_span A hA T s] at he
-  obtain ⟨k, hk⟩ := Submodule.mem_span_singleton.mp he
-  refine ⟨-k, ?_⟩
-  have hk' : k • halfMeridianClass A hA T s = l • halfSectionClass A hA T v :=
-    (int_smul_eq_zsmul (SingularHomology (HalfExterior A hA T) 3).isModule k _).symm.trans hk
-  rw [neg_zsmul, ← hk', add_neg_cancel]
 
 variable (B : FramedAttachingProduct e a f) (hB : B.radius = 2)
   (ρ : C(Sphere 3, OrthogonalOperators 4))
@@ -150,16 +134,6 @@ def halfTwistedNewQuotientEquiv (v s : Sphere 3) (j : ℤ)
     { toEquiv := q.toEquiv, map_add' := fun x y ↦ q.map_add' x y }
   exact qa.toIntLinearEquiv
 
-theorem halfTwistedNewQuotientEquiv_mk (v s : Sphere 3) (j : ℤ)
-    (hρ : ∀ c : SingularHomology (Sphere 3) 3, singularHomologyMap (column v ρ) 3 c = j • c)
-    (x : SingularHomology (HalfExterior A hA T) 3) :
-    halfTwistedNewQuotientEquiv A hA T B hB ρ ht v s j hρ (Submodule.Quotient.mk x) =
-      halfTwistedNewMap A hA T B hB ρ ht x := by
-  change (halfTwistedNewMap A hA T B hB ρ ht).quotKerEquivOfSurjective
-    (halfTwistedNewMap_surjective A hA T B hB ρ ht)
-    (Submodule.quotEquivOfEq _ _ (halfTwistedNewMap_kernel A hA T B hB ρ ht v s j hρ).symm
-      (Submodule.Quotient.mk x)) = _
-  rw [Submodule.quotEquivOfEq_mk, LinearMap.quotKerEquivOfSurjective_apply_mk]
 
 theorem twisted_meridian_relation (v s : Sphere 3) (l l' j : ℤ)
     (h : l • halfSectionClass A hA T v + l' • halfMeridianClass A hA T s = 0) :

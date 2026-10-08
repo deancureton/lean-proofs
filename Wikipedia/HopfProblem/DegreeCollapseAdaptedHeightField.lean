@@ -52,33 +52,6 @@ theorem contMDiff_supported_division {χ D : M → ℝ}
     filter_upwards [(isClosed_tsupport χ).isOpen_compl.mem_nhds hx] with y hy
     simp only [image_eq_zero_of_notMem_tsupport hy, zero_div]
 
-/-- Rescaling a given field retains its direction and gives exactly the desired height speed. -/
-theorem exists_rescaled_height_field
-    (hf : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ f)
-    (hV : ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, E) M)))
-    {χ : M → ℝ} (hχ : ContMDiff 𝓘(ℝ, E) 𝓘(ℝ, ℝ) ∞ χ)
-    (hsupp : ∀ x ∈ tsupport χ, mvfderiv 𝓘(ℝ, E) f x (V x) ≠ 0) :
-    ∃ W : (x : M) → TangentSpace 𝓘(ℝ, E) x,
-      ContMDiff 𝓘(ℝ, E) (𝓘(ℝ, E).tangent) ∞
-        (fun x => (⟨x, W x⟩ : TangentBundle 𝓘(ℝ, E) M)) ∧
-      (∀ x, W x = (χ x / mvfderiv 𝓘(ℝ, E) f x (V x)) • V x) ∧
-      (∀ x, mvfderiv 𝓘(ℝ, E) f x (W x) = χ x) ∧
-      ∀ x, x ∉ tsupport χ → W x = 0 := by
-  let D (x : M) := mvfderiv 𝓘(ℝ, E) f x (V x)
-  let W : (x : M) → TangentSpace 𝓘(ℝ, E) x := fun x => (χ x / D x) • V x
-  refine ⟨W, (contMDiff_supported_division hχ
-    (contMDiff_directionalDerivative hf hV) hsupp).smul_section hV,
-    fun _ => rfl, ?_, ?_⟩
-  · intro x
-    change mvfderiv 𝓘(ℝ, E) f x ((χ x / D x) • V x) = χ x
-    rw [map_smul, smul_eq_mul]
-    change χ x / D x * D x = χ x
-    by_cases hx : x ∈ tsupport χ
-    · exact div_mul_cancel₀ _ (hsupp x hx)
-    · simp only [image_eq_zero_of_notMem_tsupport hx, zero_div, zero_mul]
-  · intro x hx
-    simp only [W, image_eq_zero_of_notMem_tsupport hx, zero_div, zero_smul]
 
 variable [CompactSpace M]
 

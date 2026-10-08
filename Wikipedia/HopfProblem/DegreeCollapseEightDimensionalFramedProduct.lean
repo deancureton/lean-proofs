@@ -180,51 +180,6 @@ theorem nonempty_framedProduct {N k : ℕ} (D : Vector 4 → Vector N)
     C hCs hCn hCr
   exact ⟨A⟩
 
-theorem exists_framedProduct_of_boundary {N k : ℕ} (hN : k + 8 = N)
-    (D : Vector 4 → Vector N)
-    (hD : ∀ x ∈ closedBall (0 : Vector 4) 1, ContDiffAt ℝ ∞ D x)
-    (hinj : InjOn D (closedBall (0 : Vector 4) 1))
-    (hiD : ∀ x ∈ closedBall (0 : Vector 4) 1, Injective (fderiv ℝ D x))
-    (a : C(NoExoticSixSphere.Sphere 3, Space N k))
-    (has : ContMDiff (𝓡 3) 𝓘(ℝ, Vector k →L[ℝ] Vector N) ∞ (fun s ↦ (a s).val))
-    (ha : ∀ s, (a s).val.range ≤ (fderiv ℝ D s.val).rangeᗮ) :
-    ∃ T : Vector 4 → Vector k →L[ℝ] Vector N,
-      ∃ A : FramedProduct D T,
-        ∀ s : NoExoticSixSphere.Sphere 3, A.normalFrame (s.val, 0) = (a s).val := by
-  obtain ⟨T, hTs, hTn, hTr, hTb⟩ :=
-    FourDiskNormal.exists_smooth_extension hN.le D hD hiD a has ha
-  obtain ⟨A⟩ := nonempty_framedProduct D T hD hinj hiD hTs hTn hTr (by omega)
-  refine ⟨T, A, ?_⟩
-  intro s
-  exact (A.normalFrame_core s.val (sphere_subset_closedBall s.property)).trans (hTb s)
 
-theorem exists_framedProduct_of_collar {N k : ℕ} (hN : k + 8 = N)
-    (D : Vector 4 → Vector N)
-    (hD : ∀ x ∈ closedBall (0 : Vector 4) 1, ContDiffAt ℝ ∞ D x)
-    (hinj : InjOn D (closedBall (0 : Vector 4) 1))
-    (hiD : ∀ x ∈ closedBall (0 : Vector 4) 1, Injective (fderiv ℝ D x))
-    (a : C(NoExoticSixSphere.Sphere 3, Space N k))
-    (has : ContMDiff (𝓡 3) 𝓘(ℝ, Vector k →L[ℝ] Vector N) ∞ (fun s ↦ (a s).val))
-    (ha : ∀ s, (a s).val.range ≤ (fderiv ℝ D s.val).rangeᗮ)
-    (F : C(Vector 4, Vector k →L[ℝ] Vector N)) (hFs : ContDiff ℝ ∞ F)
-    (hFa : ∀ s : NoExoticSixSphere.Sphere 3, F s.val = (a s).val)
-    {V : Set (Vector 4)} (hV : IsOpen V) (hSV : sphere 0 1 ⊆ V)
-    (hFn : ∀ x ∈ closedBall (0 : Vector 4) 1 ∩ V, ∀ w, ‖F x w‖ = ‖w‖)
-    (hFr : ∀ x ∈ closedBall (0 : Vector 4) 1 ∩ V,
-      (F x).range ≤ (fderiv ℝ D x).rangeᗮ) :
-    ∃ r : ℝ, 0 < r ∧ r < 1 ∧ closedBall (0 : Vector 4) 1 ∩ {x | r ≤ ‖x‖} ⊆ V ∧
-      ∃ T : Vector 4 → Vector k →L[ℝ] Vector N,
-        ∃ A : FramedProduct D T,
-          (∀ s : NoExoticSixSphere.Sphere 3, A.normalFrame (s.val, 0) = (a s).val) ∧
-          ∀ x ∈ closedBall (0 : Vector 4) 1, r ≤ ‖x‖ → A.normalFrame (x, 0) = F x := by
-  obtain ⟨r, hr, hr1, hrV, T, hTs, hTn, hTr, hTb, hTF⟩ :=
-    FourDiskNormal.exists_smooth_collar_extension hN.le D hD hiD a has ha
-      F hFs hFa hV hSV hFn hFr
-  obtain ⟨A⟩ := nonempty_framedProduct D T hD hinj hiD hTs hTn hTr (by omega)
-  refine ⟨r, hr, hr1, hrV, T, A, ?_, ?_⟩
-  · intro s
-    exact (A.normalFrame_core s.val (sphere_subset_closedBall s.property)).trans (hTb s)
-  · intro x hx hxr
-    exact (A.normalFrame_core x hx).trans (hTF x hx hxr)
 
 end Wikipedia.HopfProblem.DegreeCollapse.EightDimensionalFramedProduct

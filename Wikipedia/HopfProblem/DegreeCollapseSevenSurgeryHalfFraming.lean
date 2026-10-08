@@ -97,31 +97,7 @@ theorem halfNormalFraming_ambient (p : PositiveHalf A hR T) :
     letI := targetChartedSpace A hR; letI := positiveHalfChartedSpace A hR T;
     (halfNormalFraming A hR T).ambient p = (normalFraming A hR).ambient p.val := rfl
 
-theorem halfNormalFraming_norm (p : PositiveHalf A hR T) :
-    letI := targetChartedSpace A hR; letI := positiveHalfChartedSpace A hR T;
-    ∀ v : (inducedEmbedding A hR).NormalModel, ‖(halfNormalFraming A hR T).ambient p v‖ = ‖v‖ := by
-  let := targetChartedSpace A hR
-  let := positiveHalfChartedSpace A hR T
-  intro v
-  rw [halfNormalFraming_ambient]
-  exact normalFraming_norm A hR p.val v
 
-theorem halfNormalFraming_range (p : PositiveHalf A hR T) :
-    letI := targetChartedSpace A hR; letI := positiveHalfChartedSpace A hR T;
-    ((halfNormalFraming A hR T).ambient p).range = (halfAmbientDerivative A hR T p).rangeᗮ := by
-  let := targetChartedSpace A hR
-  let := positiveHalfChartedSpace A hR T
-  exact ((halfNormalFraming A hR T).ambient_range p).trans (Submodule.range_starProjection _)
 
-theorem halfNormalFraming_on_retainedBand (p : retainedTimeBand A T)
-    (q : PositiveHalf A hR T) (hq : q.val = retainedTimeMap A hR T p) :
-    letI := targetChartedSpace A hR; letI := positiveHalfChartedSpace A hR T;
-    (halfNormalFraming A hR T).ambient q =
-      (OrthogonalFrameAppend.operator (boundaryFrameOperator (a.orthonormal p.val).val)
-        (-heightUnit e.ambientDimension)).comp
-          (normalModelCoordinates A hR).toContinuousLinearMap := by
-  let := targetChartedSpace A hR
-  let := positiveHalfChartedSpace A hR T
-  rw [halfNormalFraming_ambient, normalFraming_ambient, hq, inducedNormalFrame_retainedTimeMap]
 
 end Wikipedia.HopfProblem.DegreeCollapse.SevenSurgery.FramedAttachingProduct.UnitSurgery

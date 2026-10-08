@@ -95,16 +95,6 @@ theorem integralHomologyParity_add_two_zsmul (a b : SingularHomology M 3) :
     rw [two_zsmul, map_add, ← two_mul, show (2 : ZMod 2) = 0 from by decide, zero_mul]
   rw [hB, add_zero]
 
-theorem integralHomologyParity_retraction_independent (r' : TubularRetraction e) :
-    e.integralHomologyParity ν r m = e.integralHomologyParity ν r' m := by
-  funext a
-  exact e.geometricSphereParity_retraction_independent ν r r' _
 
-theorem integralHomologyParity_basepoint_independent
-    (m' : M) [Subsingleton (π_ 2 M m')] :
-    e.integralHomologyParity ν r m = e.integralHomologyParity ν r m' := by
-  funext a
-  rw [← integralSphereClass_representative m a,
-    integralHomologyParity_sphereClass, integralHomologyParity_sphereClass]
 
 end NoExoticSixSphere.EuclideanEmbedding

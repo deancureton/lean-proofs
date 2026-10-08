@@ -69,9 +69,6 @@ theorem identityPadding_val (B : Space Core) :
   rw [phasePair_zero, blockSum_identity]
   rfl
 
-theorem identityPadding_identity : identityPadding identity = identity := by
-  change reindex paddingIndex (blockSum (blockSum (phasePair 0) (phasePair 0)) identity) = _
-  rw [phasePair_zero, blockSum_identity, blockSum_identity, reindex_identity]
 
 variable {X : Type*} [TopologicalSpace X]
 

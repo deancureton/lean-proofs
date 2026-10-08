@@ -62,8 +62,6 @@ def correctedHopfRotation (q : EquatorSphere) (θ : ℝ) :
     unitary (Matrix (Fin 4) (Fin 4) ℂ) :=
   (hopfRotation equatorPole θ)⁻¹ * hopfRotation q θ
 
-theorem correctedHopfRotation_zero (q : EquatorSphere) : correctedHopfRotation q 0 = 1 := by
-  simp [correctedHopfRotation, hopfRotation_zero]
 
 theorem correctedHopfRotation_reference (θ : ℝ) : correctedHopfRotation equatorPole θ = 1 :=
   inv_mul_cancel _

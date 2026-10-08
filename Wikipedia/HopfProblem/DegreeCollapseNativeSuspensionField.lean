@@ -52,29 +52,5 @@ theorem mvfderiv_native_height_field
 
 variable [FiniteDimensional ℝ B] [IsManifold 𝓘(ℝ, B) ∞ M] [T2Space M]
 
-theorem exists_native_suspension_field
-    (Φ : PartialDiffeomorph 𝓘(ℝ, E × ℝ) 𝓘(ℝ, B) (E × ℝ) M ∞)
-    {f : M → ℝ} (hf : ContMDiff 𝓘(ℝ, B) 𝓘(ℝ, ℝ) ∞ f) {b : ℝ}
-    (hheight : ∀ p ∈ Φ.source, f (Φ p) = b - p.2)
-    (V : (x : M) → TangentSpace 𝓘(ℝ, B) x)
-    (hV : ContMDiff 𝓘(ℝ, B) (𝓘(ℝ, B).tangent) ∞
-      (fun x => (⟨x, V x⟩ : TangentBundle 𝓘(ℝ, B) M)))
-    (hmodel : ∀ x ∈ Φ.target, V x =
-      FlowConstruction.partialChartField Φ.symm (fun _ : E × ℝ => (0, 1)) x)
-    {W : (E × ℝ) → E × ℝ} (hW : ContDiff ℝ ∞ W) (hWheight : ∀ p, (W p).2 = 1)
-    {K : Set (E × ℝ)} (hK : IsCompact K) (hKΦ : K ⊆ Φ.source)
-    (hfix : ∀ p ∉ K, W p = (0, 1)) :
-    ∃ V' : (x : M) → TangentSpace 𝓘(ℝ, B) x,
-      ContMDiff 𝓘(ℝ, B) (𝓘(ℝ, B).tangent) ∞
-        (fun x => (⟨x, V' x⟩ : TangentBundle 𝓘(ℝ, B) M)) ∧
-      (∀ x ∈ Φ.target, V' x = FlowConstruction.partialChartField Φ.symm W x) ∧
-      (∀ x ∈ Φ.target, mvfderiv 𝓘(ℝ, B) f x (V' x) = -1) ∧
-      (∀ x, V' x = 0 ↔ V x = 0) ∧
-      ∀ x ∉ Φ '' K, ∀ᶠ y in 𝓝 x, V' y = V y := by
-  obtain ⟨V', hV', hnew, hzero, hgerm⟩ :=
-    exists_native_vertical_field_replacement Φ V hV hmodel hW hWheight hK hKΦ hfix
-  refine ⟨V', hV', hnew, ?_, hzero, hgerm⟩
-  intro x hx
-  rw [hnew x hx, mvfderiv_native_height_field Φ hf hheight W hx, hWheight]
 
 end Wikipedia.HopfProblem.DegreeCollapse.FlowSuspension

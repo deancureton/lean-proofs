@@ -66,17 +66,6 @@ theorem fundamentalClass_ne_zero (R : ℝ) (hR : 0 ≤ R) : fundamentalClass E n
   rw [he, map_zero] at h
   exact RelativeSingularHomology.localTopClass_ne_zero E n h.symm
 
-/-- The constructed class is primitive in the actual integral supported homology. -/
-theorem fundamentalClass_generates (R : ℝ) (hR : 0 ≤ R)
-    (a : RelativeSingularHomology.Homology (closedBall (0 : E) R)ᶜ (n + 2)) :
-    ∃ k : ℤ, k • fundamentalClass E n R hR = a := by
-  obtain ⟨k, hk⟩ := RelativeSingularHomology.localTopClass_generates E n
-    (evaluation R (0 : E) (mem_closedBall_self hR) (n + 2) a)
-  refine ⟨k, (evaluationEquiv R hR 0 (mem_closedBall_self hR) (n + 2)).injective ?_⟩
-  change evaluation R (0 : E) (mem_closedBall_self hR) (n + 2)
-    (k • fundamentalClass E n R hR) = _
-  rw [map_zsmul, fundamentalClass_evaluate_center]
-  exact hk
 
 theorem fundamentalClass_unique (R : ℝ) (hR : 0 ≤ R)
     (a : RelativeSingularHomology.Homology (closedBall (0 : E) R)ᶜ (n + 2))

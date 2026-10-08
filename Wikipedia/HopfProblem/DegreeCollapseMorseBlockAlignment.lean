@@ -37,15 +37,6 @@ theorem morse_block_change_descent (A : N ≃L[ℝ] N) (B : P ≃L[ℝ] P) (z : 
   · change B (-z.2) = -B z.2
     exact B.map_neg _
 
-/-- The complete model flow has the same time parameter after the block change. -/
-theorem morse_block_change_flow (A : N ≃L[ℝ] N) (B : P ≃L[ℝ] P) (t : ℝ) (z : N × P) :
-    (A.prodCongr B) (MorseHandle.descentFlow t z) =
-      MorseHandle.descentFlow t ((A.prodCongr B) z) := by
-  apply Prod.ext
-  · change A (Real.exp t • z.1) = Real.exp t • A z.1
-    exact A.map_smul _ _
-  · change B (Real.exp (-t) • z.2) = Real.exp (-t) • B z.2
-    exact B.map_smul _ _
 
 variable {E M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [TopologicalSpace M] [ChartedSpace E M]

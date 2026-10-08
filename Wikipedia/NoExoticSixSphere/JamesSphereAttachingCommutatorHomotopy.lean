@@ -144,15 +144,5 @@ def traceToSmashHomotopy (n : ℕ) :
     (traceMap n).HomotopyRel (factoredCommutator n) (baseParameters n) :=
   (normalizationHomotopy n).symm.trans (smashHomotopy n)
 
-theorem factoredCommutator_boundary (n : ℕ) (v : Parameter n)
-    (hv : ∃ i, v i ∈ Cube.boundary (Fin n)) :
-    factoredCommutator n v = Path.refl (spherePole (n + 1)) := by
-  have hp : sphereParameters n v ∈ SphereMooreCommutator.Boundary n := by
-    obtain ⟨i, hi⟩ := hv
-    exact ⟨i, SmoothCube.quotient_boundary n (v i) hi⟩
-  change reorderPaths n (Moore.Loop.toPath (MeridianCommutator.sphereMap n
-    (SecondStage.arrayPairing n (sphereParameters n v)))) = _
-  rw [(SphereMooreCommutator.arrayPairing_pole_iff n _).mpr hp,
-    MeridianCommutator.sphereMap_pole, Moore.Loop.toPath_one, reorderPaths_refl]
 
 end NoExoticSixSphere.JamesSphere.AttachingSquare

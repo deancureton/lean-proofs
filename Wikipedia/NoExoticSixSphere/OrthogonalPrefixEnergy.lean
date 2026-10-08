@@ -88,18 +88,5 @@ theorem prefixReplacement_eq_prefixCurve (x : X) (γ : ℝ → OrthogonalOperato
     have htr : ¬(t : ℝ) ≤ (s : ℝ) := ht
     simp only [prefixCurve, htr, if_false]
 
-/-- Every native homotopy stage has an exact real-line representative with
-energy bounded by the original smooth path. -/
-theorem prefixReplacement_stage_energy (x : X) (γ : ℝ → OrthogonalOperators n)
-    (hγ : ContDiff ℝ ∞ (fun t ↦ (γ t).1.1)) (hγH : ∀ t : I, H (t, x) = γ t)
-    (s : I) (hshort : ‖(logs H h (s, x) : Vector n →L[ℝ] Vector n)‖ ≤ Real.pi) :
-    (∀ t : I, prefixCurve γ (logs H h (s, x)) s t = prefixReplacement H h (s, (t, x))) ∧
-      energy (fun t ↦ (prefixCurve γ (logs H h (s, x)) s t).1.1) 0 1 ≤
-        energy (fun t ↦ (γ t).1.1) 0 1 := by
-  refine ⟨fun t ↦ (prefixReplacement_eq_prefixCurve H h x γ hγH s t).symm, ?_⟩
-  apply prefixCurve_energy_le hγ _ hshort s.2
-  have he : H (s, x) = H (0, x) * exp (logs H h (s, x)) := by
-    rw [exp_logs, ← mul_assoc, mul_inv_cancel, one_mul]
-  simpa only [hγH] using! he
 
 end NoExoticSixSphere.OrthogonalExponential.LocalSegment

@@ -27,11 +27,6 @@ open GLOrthonormalization Wikipedia.HopfProblem.SixSphereCube
 def vectorOfCube (n : ℕ) (u : Fin n → I) : Vector n :=
   WithLp.toLp 2 (fun i ↦ (u i : ℝ))
 
-theorem vectorOfCube_injective (n : ℕ) : Injective (vectorOfCube n) := by
-  intro u v h
-  funext i
-  apply Subtype.ext
-  exact congrArg (fun x : Vector n ↦ x i) h
 
 theorem vectorOfCube_mem_openCube (n : ℕ) (u : Fin n → I) :
     vectorOfCube n u ∈ openCube n ↔ u ∉ Cube.boundary (Fin n) :=
@@ -109,8 +104,5 @@ theorem sphereChart_quotient (n : ℕ) (u : Fin n → I)
   rw [quotient_interior n ⟨u, hu⟩]
   exact (sphereChart n).right_inv ((vectorOfCube_mem_openCube n u).mpr hu)
 
-theorem quotient_cubeOfVector (n : ℕ) (x : Vector n) (hx : x ∈ openCube n) :
-    quotient n (cubeOfVector n x hx) = (sphereChart n).symm x := by
-  rw [quotient_interior n ⟨_, cubeOfVector_not_boundary n x hx⟩, vector_cubeOfVector]
 
 end NoExoticSixSphere.SmoothCube

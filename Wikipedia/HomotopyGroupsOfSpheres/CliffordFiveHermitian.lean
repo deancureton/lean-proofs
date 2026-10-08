@@ -25,13 +25,6 @@ def matrix (v : Coordinates) : Matrix (Fin 4) (Fin 4) ℂ :=
      (v 2 : ℂ) - (v 1 : ℂ) * Complex.I, (v 4 : ℂ) + (v 3 : ℂ) * Complex.I, -v 0, 0;
      (v 4 : ℂ) - (v 3 : ℂ) * Complex.I, -(v 2 : ℂ) - (v 1 : ℂ) * Complex.I, 0, -v 0]
 
-theorem matrix_eq_clifford (v : Coordinates) :
-    matrix v = (-Complex.I) • ComplexCliffordFive.matrix (equator v) := by
-  apply Matrix.ext
-  intro i j
-  fin_cases i <;> fin_cases j <;> apply Complex.ext <;>
-    norm_num [matrix, equator, ComplexCliffordFive.matrix, Matrix.cons_val_two,
-      Matrix.cons_val_three, Complex.mul_re, Complex.mul_im]
 
 theorem matrix_hermitian (v : Coordinates) : (matrix v)ᴴ = matrix v := by
   apply Matrix.ext

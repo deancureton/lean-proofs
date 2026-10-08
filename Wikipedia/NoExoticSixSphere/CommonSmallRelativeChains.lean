@@ -143,37 +143,5 @@ theorem exists_representative (p : ℕ) (hp : p ≠ 0)
     (Subtype.ext hv.symm)).trans ((ModuleHomology.homologyMap_cycleClass f n z).symm.trans
       ((congrArg (HomologicalComplex.homologyMap f n).hom hz).trans ha'))
 
-/-- Two native small representatives of one relative class have the same ambient chain. -/
-theorem exists_two_small_representatives (p : ℕ) (hp : p ≠ 0)
-    (hU : IsOpen U) (hA : IsOpen A) (hUA : U ∪ A = Set.univ)
-    (hV : IsOpen V) (hB : IsOpen B) (hVB : V ∪ B = Set.univ)
-    (n : ℕ) (a : (RelativeCoefficients.complex (ModuleCat.of ℤ (ZMod p)) W).homology n) :
-    ∃ c : CoefficientChains.Chains (ModuleCat.of ℤ (ZMod p)) X n,
-      ∃ cU : SmallChains (ModuleCat.of ℤ (ZMod p)) U A n,
-      ∃ cV : SmallChains (ModuleCat.of ℤ (ZMod p)) V B n,
-      smallInclusionMap (ModuleCat.of ℤ (ZMod p)) U A n cU = c ∧
-      smallInclusionMap (ModuleCat.of ℤ (ZMod p)) V B n cV = c ∧
-      ((SphereHomologyCoefficients.coefficientComplex (ModuleCat.of ℤ (ZMod p)) X).d
-        n (n - 1)).hom c ∈
-        LinearMap.range ((RelativeCoefficients.inclusion (ModuleCat.of ℤ (ZMod p)) W).f
-          (n - 1)).hom ∧
-      ∃ hc : ((RelativeCoefficients.complex (ModuleCat.of ℤ (ZMod p)) W).d n (n - 1)).hom
-          (RelativeCoefficients.quotientMap (ModuleCat.of ℤ (ZMod p)) W n c) = 0,
-        ModuleHomology.cycleClass (RelativeCoefficients.complex (ModuleCat.of ℤ (ZMod p)) W) n
-          (ModuleHomology.mkCycle (RelativeCoefficients.complex (ModuleCat.of ℤ (ZMod p)) W) n
-            (RelativeCoefficients.quotientMap (ModuleCat.of ℤ (ZMod p)) W n c) hc) = a := by
-  let R := ModuleCat.of ℤ (ZMod p)
-  obtain ⟨z, hz, hclass⟩ :=
-    exists_representative U A V B W hWA hWB p hp hU hA hUA hV hB hVB n a
-  let c := ((commonSmallChainInclusion U A V B R).f n).hom z
-  have hsmall :
-      c ∈ LinearMap.range (smallInclusionMap R U A n) ⊓
-        LinearMap.range (smallInclusionMap R V B n) := by
-    exact (commonSmallInclusion_range U A V B R n).le ⟨z, rfl⟩
-  obtain ⟨cU, hcU⟩ := hsmall.1
-  obtain ⟨cV, hcV⟩ := hsmall.2
-  refine ⟨c, cU, cV, hcU, hcV, ?_, hz, hclass⟩
-  exact (RelativeCoefficients.quotientMap_eq_zero_iff R W (n - 1) _).mp
-    ((RelativeCoefficients.boundary_quotientMap R W n (n - 1) c).symm.trans hz)
 
 end NoExoticSixSphere.CommonSmallRelative

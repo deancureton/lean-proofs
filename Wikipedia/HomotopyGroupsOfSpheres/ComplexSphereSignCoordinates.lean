@@ -69,11 +69,6 @@ def signTangentEquiv (x y : Bool) (z : UnitSphere) :
   rw [sign_sphereIsometry] at e
   exact e
 
-theorem signTangentEquiv_val (x y : Bool) (z : UnitSphere)
-    (v : SphereCenteredCoordinates.Tangent z) (r : Fin 3) :
-    (signTangentEquiv x y z v).val r = signs x y r * v.val r := by
-  unfold signTangentEquiv
-  rfl
 
 theorem inverse_signTangentEquiv (x y : Bool) (z : UnitSphere)
     (v : SphereCenteredCoordinates.Tangent z) :

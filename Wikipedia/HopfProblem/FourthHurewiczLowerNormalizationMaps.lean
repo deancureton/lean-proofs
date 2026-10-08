@@ -34,13 +34,6 @@ theorem lowerNormalizedFourSimplexMap_face (smp : SingularSimplex X 4) (i : Fin 
   rw [timeSlice_face (lowerFourSimplexHomotopy_face x)]
   exact ThirdHurewicz.normalizationThreeSimplexHomotopy_endpoint x _
 
-theorem lowerNormalizedFourSimplexMap_face_boundary (smp : SingularSimplex X 4)
-    (i : Fin 5) (s : Simplex 3) (hs : s ∈ ThirdHurewicz.threeSimplexBoundary) :
-    lowerNormalizedFourSimplexMap x smp (simplexFace 3 i s) = x := by
-  have hf := congrArg (fun f : C(Simplex 3, X) => f s)
-    (lowerNormalizedFourSimplexMap_face x smp i)
-  exact hf.trans ((ThirdHurewicz.normalizedThreeSimplex x
-    (smp.comp (simplexFace 3 i))).property s hs)
 
 @[simp] theorem lowerNormalizedFourSimplexMap_const :
     lowerNormalizedFourSimplexMap x (ContinuousMap.const (Simplex 4) x) =
